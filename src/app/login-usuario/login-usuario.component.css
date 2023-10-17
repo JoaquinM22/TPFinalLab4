@@ -51,6 +51,11 @@
     margin-bottom: 16px;
 }
 
+.botones:hover
+{
+    background: #017bab9a;
+}
+
 .form_login p
 {
     height: 40px;
