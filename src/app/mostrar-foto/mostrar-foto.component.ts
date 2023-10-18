@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
-import { withFetch } from '@angular/common/http';
 
 @Component({
   selector: 'app-mostrar-foto',
@@ -11,16 +9,77 @@ import { withFetch } from '@angular/common/http';
 export class MostrarFotoComponent implements OnInit
 {
 
- 
-  ngOnInit(){}
-
   //FORMA PROPIA CON FETCH
   // LINK SALVADOR = https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b
+  
+  Juegos: any[] = [];
+  
+  foto: String = "url";
+
+
   constructor()
   {
-    const datosJuegos: any[] = [];
+    const estavacio = (this.Juegos == null);
+    console.log(estavacio);
+    console.log(this.Juegos);
+    if(this.Juegos.length == 0)
+    {
+      console.log("Entre al if");
+      this.getJuegos();
+    }
+    //const datosJuegos: any[] = [];
+
+    //FORMA QUE FUNCIONA Pokes
+    /*
+    class poke
+    {
+      // Atributos
+      id: number;
+      nombre: string;
+    
+      // Constructor
+      constructor(id: number, nombre: string)
+      {
+        this.id = id;
+        this.nombre = nombre;
+      }
+    }
+
+    let pokedex = new Array<Object>();
+    
+    fetch("https://pokeapi.co/api/v2/pokedex/1/")
+    .then(res => res.json())
+    .then(data =>
+    {
+      console.log(data);
+      for(const unPoke of data.pokemon_entries)
+      {
+        const unPokemon = new poke
+        (
+          unPoke.entry_number,
+          unPoke.pokemon_species.name,
+        );
+        pokedex.push(unPokemon);
+        
+      }
+      
+      console.log("El poke de la pos 0 es: ", pokedex[0]);
+      
+    })
+    .catch(e => console.error(new Error(e)));
+
+    function codigo()
+    {
+      console.log("Poke de pos 0, fuera del then: ", pokedex[0]);
+    }
+    
+    // Llama a la función después de un retraso de 3000 milisegundos (3 segundos).
+    setTimeout(codigo, 3000);
+    */
     
     
+    //FORMA COMPLETA, TIRA LOS 500 JUEGOS
+    /*
     for(let i = 1; i < 26; i++)
     {
       const API_Juegos = "https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page=" + i;
@@ -36,323 +95,143 @@ export class MostrarFotoComponent implements OnInit
       })
       .catch(e => console.error(new Error(e)));
     }
-    
+    */
+
+
     //FORMA DE EJEMPLO - Tira los 20 res de la PAGINA 1
     /*
     fetch("https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page=1")
     .then(res => res.json())
     .then(data =>
     {
-      console.log(data);
+      console.log("Respuesta data API: ", data);
       for(let i = 0; i < 20; i++)
       {
         datosJuegos.push(data.results[i]);
       }
+
+
+      const numeroRandom = Math.floor(Math.random() * 20);
+      const unJuegoRandom = datosJuegos[numeroRandom];
+      
+      const textoDeMiHTML = document.querySelector("#fotoJuego");
+
+      const imagenJuego = document.createElement("img");
+      imagenJuego.src = unJuegoRandom.short_screenshots[0].image;
+      imagenJuego.width = 400;
+      imagenJuego.height = 341;
+      imagenJuego.alt = "Imagen aleatoria";
+
+      if(textoDeMiHTML != null)
+      {
+        //textoDeMiHTML.replaceWith(imagenJuego);
+      }
+
+      this.foto = unJuegoRandom.short_screenshots[0].image;
+
+
     })
     .catch(e => console.error(new Error(e)));
     */
-
-    console.log("Los 500 juegos son: ", datosJuegos); 
-    
-  }
   
+    /*
+    const datosJuegos: any[] = [];
 
-
-  //FORMA QUE ENSEÑO EL PROFE
-  /*
-  constructor()
-  {
-    function PedidoAPI()
-    {
-      return new Promise((resolve, reject) =>
-      {
-        const data = null;
-      
-        const xhr = new XMLHttpRequest(); //1
-        xhr.withCredentials = true;
-
-        xhr.open('GET', 'https://rawg-video-games-database.p.rapidapi.com/games');
-        xhr.setRequestHeader('X-RapidAPI-Key', '9c7f75a955784bf9aa646f60ad51102b');
-        xhr.setRequestHeader('X-RapidAPI-Host', 'rawg-video-games-database.p.rapidapi.com');
-      
-
-        xhr.onload = function()
-        { //4
-          if(xhr.status == 200)
-          {
-            console.log('respuesta del servidor o API');
-            console.log(this.response);
-            let data = JSON.parse(this.response);
-            resolve(data);
-          }else
-          {
-            reject(new Error('error en la conexion'));
-          }
-        };
-      
-        xhr.send(data); //5
-      });
-    }
-
-    async function asyncCall()
-    {
-      console.log('calling');
-      try
-      { 
-          let result = await PedidoAPI();
-          console.log('respuesta JSON');
-          console.log(result); 
-          //console.log('joke');
-          //console.log(result.value); sacar para wwel no return
-          //aca llamaria a la funcion de agregar elementos
-          //document.getElementById('chuck').innerHTML = result.value;
-          //console.log(result.value);
-          //agregarElementos(result.value);
-      }catch(error)
-      {
-        console.log(error);
-      };
-    }
-      
-    //setInterval(asyncCall,5000);
-    asyncCall();
-  }
-  */
-
-
-  //FORMA DE LA PAGINA DE RAWG.IO
-  /*
-  constructor()
-  {
-    //const apiKey = '9c7f75a955784bf9aa646f60ad51102b';
-
-    fetch('https://rawg.io/api/games?key={9c7f75a955784bf9aa646f60ad51102b}')
+    fetch("https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page=1")
     .then(res => res.json())
     .then(data =>
     {
-      console.log(data);
+      console.log("Respuesta data API: ", data);
+      for(let i = 0; i < 20; i++)
+      {
+        datosJuegos.push(data.results[i]);
+      }
+
+      console.log(datosJuegos[0]);
+      this.Juegos = datosJuegos;
+
     })
     .catch(e => console.error(new Error(e)));
+    */
   }
-  */
 
 
-  //RAPID API - Node.js (fetch)
-  /*
-  constructor()
+  //LLAMA A LA API Y GUARDA LOS JUEGOS
+  getJuegos()
   {
-    const fetch = require('node-fetch');
+    //const datosJuegos: any[] = [];
 
-    const url = 'https://rawg-video-games-database.p.rapidapi.com/games';
-    const options =
-    {
-      method: 'GET',
-      headers:
-      {
-        'X-RapidAPI-Key': '9c7f75a955784bf9aa646f60ad51102b',
-        'X-RapidAPI-Host': 'rawg-video-games-database.p.rapidapi.com'
-      }
-    };
-
-    async function asyncCall()
-    {
-      try
-      {
-        const response = await fetch(url, options);
-        const result = await response.text();
-        console.log(result);
-      }catch(error)
-      {
-        console.error(error);
-      }
-    }
-
-    asyncCall();
-  }
-  */
-
-
-  //RAPID API - fetch con JS
-  /*
-  constructor()
-  {
-    const url = 'https://rawg-video-games-database.p.rapidapi.com/games';
-    const options =
-    {
-      method: 'GET',
-      headers:
-      {
-        'X-RapidAPI-Key': '9c7f75a955784bf9aa646f60ad51102b',
-        'X-RapidAPI-Host': 'rawg-video-games-database.p.rapidapi.com'
-      }
-    };
-
-    async function asyncCall()
-    {
-      try
-      {
-        const response = await fetch(url, options);
-        const result = await response.text();
-        console.log(result);
-      }catch(error)
-      {
-        console.error(error);
-      }
-    }
-
-    asyncCall();
-  }
-  */
-
-
-  //FORMA HTTP REQUEST
-  /*
-  constructor()
-  {
-    console.log("bocaaaaa 1");
-    async function asyncCall()
-    {
-      const url = 'https://api.rawg.io/api/games';
-      console.log("bocaaaaa 2");
-
-      const options =
-      {
-        method: 'GET',
-        headers:
-          {
-          'X-RapidAPI-Key': '9c7f75a955784bf9aa646f60ad51102b',
-          'X-RapidAPI-Host': 'https://api.rawg.io/api/games'
-        }
-      };
-
-      console.log("bocaaaaa 3");
-
-      try
-      {
-        console.log("bocaaaaa   4");
-        const response = await fetch(url, options);
-        console.log("bocaaaaa   5");
-        const result = await response.text();
-        console.log("bocaaaaa   6");
-        console.log(result);
-        console.log("bocaaaaa   funca");
-      }catch(error)
-      {
-        console.error(error);
-      }    
-      console.log("bocaaaaa 7");
-    }  
-
-    asyncCall();
-  }
-  */
-  
-
-  //EJEMPLO CON API POKEMON 
-  /*
-  constructor()
-  {
-    fetch("https://pokeapi.co/api/v2/pokemon/pikachu")
+    fetch("https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page=1")
     .then(res => res.json())
     .then(data =>
     {
-        console.log(data);
+      console.log("Respuesta data API: ", data);
+      for(let i = 0; i < 20; i++)
+      {
+        //datosJuegos.push(data.results[i]);
+        this.Juegos.push(data.results[i]);
+      }
+
+      //console.log(datosJuegos[0]);
+      //this.Juegos = datosJuegos;
+
+      console.log("Juego de la POS 0: ",this.Juegos[0]);
+
+      //const numeroRandom = Math.floor(Math.random() * 20);
+      //this.foto = this.Juegos[numeroRandom].short_screenshots[0].image;
+
     })
     .catch(e => console.error(new Error(e)));
-  }
-  */
   
+  }
 
-  //FORMA 1 DE CHATGPT
-  /*
-  games: any = {};
+  guardarDatosAPI()
+  {
+    localStorage.setItem('Juegos', JSON.stringify(this.Juegos));
+  }
 
-  constructor(private http: HttpClient) {}
+  recuperarDatosAPI()
+  {
+    //this.Juegos = JSON.parse(localStorage.getItem("Juegos"));
+  }
 
+  generarFoto()
+  {
+    const botonGenerarFoto = document.querySelector("#botonGenerarFoto");
+    if(botonGenerarFoto)
+    {
+        botonGenerarFoto.addEventListener("click", (evento) =>
+        {
+            evento.preventDefault();
+
+            const texto = document.querySelector("#texto");
+            if(texto)
+            {
+                const numeroRandom = Math.floor(Math.random() * 20);
+
+                const imagen = document.createElement("img");
+                imagen.src = this.Juegos[numeroRandom].short_screenshots[0].image;
+                imagen.width = 400;
+                imagen.height = 341;
+                imagen.alt = "Imagen aleatoria"
+                imagen.title = "Imagen aleatoria";
+
+                texto.replaceChildren(imagen);
+            }
+        });
+    }
+  }
+
+  
+  
   ngOnInit()
   {
-    this.getGames();
+    //this.getJuegos();
+    //this.guardarDatosAPI();
+    this.generarFoto();
+
   }
 
-  getGames()
-  {
-    this.http.get('https://api.rawg.io/api/games',
-    {
-      params:
-      {
-        apiKey: '9c7f75a955784bf9aa646f60ad51102b',
-      },
-    })
-    .subscribe((response) =>
-    {
-      this.games = response;
-    },(error) =>
-    {
-      console.error(error);
-    });
-  }
-  */
 
-
-  //FORMA 2 DE CHATGPT
-  /*
-  games: any = {};
-
-  constructor(private http: HttpClient)
-  {
-    const apiKey = '9c7f75a955784bf9aa646f60ad51102b';
-  }
-
-  ngOnInit()
-  {
-    this.getGames();
-  }
-
-  getGames()
-  {
-    this.http.get('https://rawg.io/api/games?tken&key={apiKey}')
-    .subscribe((response) =>
-    {
-      this.games = response;
-    },(error) =>
-    {
-      console.error(error);
-    });
-  }
-  */
-
-
-  //FORMA 3 DE CHATGPT
-  /*
-  //games: any[] = [];
-  games: any = {};
-
-  constructor(private http: HttpClient) {}
-
-  ngOnInit()
-  {
-    this.getGames();
-  }
-
-  getGames()
-  {
-    this.http.get('https://api.rawg.io/api/games',
-    {
-      params:
-      {
-        api_key: '9c7f75a955784bf9aa646f60ad51102b',
-      },
-    })
-    .subscribe((response) =>
-    {
-      console.log(response);
-      //this.games = response.json().results;
-    },(error) =>
-    {
-      console.error(error);
-    });
-  }
-  */
  
-  
 }
