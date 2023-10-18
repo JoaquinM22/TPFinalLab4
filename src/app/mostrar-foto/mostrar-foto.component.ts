@@ -12,20 +12,20 @@ export class MostrarFotoComponent implements OnInit
   //FORMA PROPIA CON FETCH
   // LINK SALVADOR = https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b
   
-  Juegos: any[] = [];
+  datosJuegos: any[] = [];
   
   foto: String = "url";
 
 
   constructor()
   {
-    const estavacio = (this.Juegos == null);
+    const estavacio = (this.datosJuegos == null);
     console.log(estavacio);
-    console.log(this.Juegos);
-    if(this.Juegos.length == 0)
+    console.log(this.datosJuegos);
+    if(this.datosJuegos.length == 0)
     {
       console.log("Entre al if");
-      this.getJuegos();
+      //this.getJuegos();
     }
     //const datosJuegos: any[] = [];
 
@@ -79,6 +79,7 @@ export class MostrarFotoComponent implements OnInit
     
     
     //FORMA COMPLETA, TIRA LOS 500 JUEGOS
+    
     /*
     for(let i = 1; i < 26; i++)
     {
@@ -90,7 +91,7 @@ export class MostrarFotoComponent implements OnInit
       {
         for(let i = 0; i < 20; i++)
         {
-          datosJuegos.push(data.results[i]);
+          this.datosJuegos.push(data.results[i]);
         }
       })
       .catch(e => console.error(new Error(e)));
@@ -169,13 +170,13 @@ export class MostrarFotoComponent implements OnInit
       for(let i = 0; i < 20; i++)
       {
         //datosJuegos.push(data.results[i]);
-        this.Juegos.push(data.results[i]);
+        this.datosJuegos.push(data.results[i]);
       }
 
       //console.log(datosJuegos[0]);
       //this.Juegos = datosJuegos;
 
-      console.log("Juego de la POS 0: ",this.Juegos[0]);
+      console.log("Juego de la POS 0: ",this.datosJuegos[0]);
 
       //const numeroRandom = Math.floor(Math.random() * 20);
       //this.foto = this.Juegos[numeroRandom].short_screenshots[0].image;
@@ -187,7 +188,7 @@ export class MostrarFotoComponent implements OnInit
 
   guardarDatosAPI()
   {
-    localStorage.setItem('Juegos', JSON.stringify(this.Juegos));
+    localStorage.setItem('Juegos', JSON.stringify(this.datosJuegos));
   }
 
   recuperarDatosAPI()
@@ -210,9 +211,9 @@ export class MostrarFotoComponent implements OnInit
                 const numeroRandom = Math.floor(Math.random() * 20);
 
                 const imagen = document.createElement("img");
-                imagen.src = this.Juegos[numeroRandom].short_screenshots[0].image;
-                imagen.width = 400;
-                imagen.height = 341;
+                imagen.src = this.datosJuegos[numeroRandom].short_screenshots[0].image;
+                imagen.width = 1000;
+                imagen.height = 500;
                 imagen.alt = "Imagen aleatoria"
                 imagen.title = "Imagen aleatoria";
 
