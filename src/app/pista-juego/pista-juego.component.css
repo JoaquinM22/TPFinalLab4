@@ -1,15 +1,59 @@
 .contenedor{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
+    display: grid ;
+    grid-template-columns: repeat(3, 33.3%);
     grid-template-rows: 2;
+    margin: auto;
+    width: 60%;
+
 }
-.viewpista{
-    grid-column: 1/4 ;
-    height: 100px;
+.viewPista{
+    grid-column: 1/4;
+    grid-row: 1;
+    height: 100px;   
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    margin: auto;
+    
+}
+.viewPista div{
+    width: 200px;
+    height: 50px;
+    text-align: center  ;
+    background: #705cb8;
+    margin: auto;   
+}
+.options{
+    grid-column: 2 ;
+    grid-row: 2;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+
+}
+.options button{
+    height: 30px;
+    background: #705cb8;              
 }
 #left{
+    grid-column: 1 ;
+    grid-row: 2;
+    display: grid ;
+    gap: 5px;
+    grid-template-columns: repeat(2, 50%);
+    grid-template-rows: 2;
     
+}
+#rigth{
+    grid-column: 3 ;
+    grid-row: 2;
+    display: grid ;
+    gap: 5px;
+    grid-template-columns: repeat(2, 50%);
+    grid-template-rows: 2;
+    align-items: center;
 }
 .pistas button{
     width: 150px;
@@ -18,10 +62,11 @@
     -webkit-border-radius: 50%;
     border-radius: 50%;
     background: #705cb8;
+    margin: auto; 
 }
-.pista1{
+ .pista1{
     grid-column: 1 ;
-    grid-row: 1;
+    grid-row: 1;   
 }
 .pista2{
     grid-column: 2 ;
@@ -36,18 +81,18 @@
     grid-row: 2;
 }
 .pista5{
-    grid-column: 4 ;
+    grid-column: 1 ;
     grid-row: 1;
 }
 .pista6{
-    grid-column: 5 ;
+    grid-column: 2 ;
     grid-row: 1;
 }
 .pista7{
-    grid-column: 4 ;
+    grid-column: 1 ;
     grid-row: 2;
 }
 .pista8{
-    grid-column: 5 ;
-    grid-row: 2;    
-}
+    grid-column: 2 ;
+    grid-row: 2;  
+} 
