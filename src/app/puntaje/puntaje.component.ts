@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './puntaje.component.html',
   styleUrls: ['./puntaje.component.css']
 })
-export class PuntajeComponent
+export class PuntajeComponent implements OnInit
 {
   puntaje: number = 0;
 
@@ -14,7 +14,6 @@ export class PuntajeComponent
     console.log(this.puntaje);
   }
 
-  
   sumarPuntos()
   {
     const botonSumar = document.querySelector("#botonSumar");

@@ -16,7 +16,7 @@ import { TemporizadorComponent } from './temporizador/temporizador.component';
     PistaJuegoComponent,
     MostrarFotoComponent,
     PuntajeComponent,
-    TemporizadorComponent
+    TemporizadorComponent,
   ],
   imports: [
     BrowserModule,
