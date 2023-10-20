@@ -79,7 +79,7 @@ export class MostrarFotoComponent implements OnInit
 
         let nuevoNombre = juego.name;
 
-        let nuevasFotos =[];
+        let nuevasFotos: any[] =[];
         for(const unaFoto of juego.short_screenshots)
         {
           nuevasFotos.push(unaFoto.image);
@@ -87,13 +87,13 @@ export class MostrarFotoComponent implements OnInit
 
         let nuevaFecha = juego.released;
 
-        let nuevosGeneros =[];
+        let nuevosGeneros: any[] =[];
         for(const unGenero of juego.genres)
         {
           nuevosGeneros.push(unGenero.name);
         }
 
-        let nuevasPlataformas =[];
+        let nuevasPlataformas: any[] =[];
         for(const unaPlataforma of juego.platforms)
         {
           let nombreDeLaPlataforma = unaPlataforma.platform.name;
