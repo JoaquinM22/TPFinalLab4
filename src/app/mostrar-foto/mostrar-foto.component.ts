@@ -14,225 +14,153 @@ export class MostrarFotoComponent implements OnInit
   
   datosJuegos: any[] = [];
   
-  foto: String = "url";
-
+  //foto: String = "url";
 
   constructor()
   {
-    const estavacio = (this.datosJuegos == null);
-    console.log(estavacio);
-    console.log(this.datosJuegos);
-    if(this.datosJuegos.length == 0)
+
+  }
+
+
+  //BOTON LLAMA A LA API
+  llamarAPI()
+  {
+    const botonLlamarAPI = document.querySelector("#botonLlamarAPI");
+    if(botonLlamarAPI)
     {
-      console.log("Entre al if");
-      //this.getJuegos();
+      botonLlamarAPI.addEventListener("click", (evento) =>
+      {
+        evento.preventDefault();
+
+        const numeroRandom = Math.floor(Math.random() * 100);
+
+        this.getJuegos(numeroRandom);
+ 
+      });
+      console.log("Llamada de la API exitosa");
     }
-    //const datosJuegos: any[] = [];
-
-    //FORMA QUE FUNCIONA Pokes
-    /*
-    class poke
-    {
-      // Atributos
-      id: number;
-      nombre: string;
-    
-      // Constructor
-      constructor(id: number, nombre: string)
-      {
-        this.id = id;
-        this.nombre = nombre;
-      }
-    }
-
-    let pokedex = new Array<Object>();
-    
-    fetch("https://pokeapi.co/api/v2/pokedex/1/")
-    .then(res => res.json())
-    .then(data =>
-    {
-      console.log(data);
-      for(const unPoke of data.pokemon_entries)
-      {
-        const unPokemon = new poke
-        (
-          unPoke.entry_number,
-          unPoke.pokemon_species.name,
-        );
-        pokedex.push(unPokemon);
-        
-      }
-      
-      console.log("El poke de la pos 0 es: ", pokedex[0]);
-      
-    })
-    .catch(e => console.error(new Error(e)));
-
-    function codigo()
-    {
-      console.log("Poke de pos 0, fuera del then: ", pokedex[0]);
-    }
-    
-    // Llama a la función después de un retraso de 3000 milisegundos (3 segundos).
-    setTimeout(codigo, 3000);
-    */
-    
-    
-    //FORMA COMPLETA, TIRA LOS 500 JUEGOS
-    
-    /*
-    for(let i = 1; i < 26; i++)
-    {
-      const API_Juegos = "https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page=" + i;
-
-      fetch(API_Juegos)
-      .then(res => res.json())
-      .then(data =>
-      {
-        for(let i = 0; i < 20; i++)
-        {
-          this.datosJuegos.push(data.results[i]);
-        }
-      })
-      .catch(e => console.error(new Error(e)));
-    }
-    */
-
-
-    //FORMA DE EJEMPLO - Tira los 20 res de la PAGINA 1
-    /*
-    fetch("https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page=1")
-    .then(res => res.json())
-    .then(data =>
-    {
-      console.log("Respuesta data API: ", data);
-      for(let i = 0; i < 20; i++)
-      {
-        datosJuegos.push(data.results[i]);
-      }
-
-
-      const numeroRandom = Math.floor(Math.random() * 20);
-      const unJuegoRandom = datosJuegos[numeroRandom];
-      
-      const textoDeMiHTML = document.querySelector("#fotoJuego");
-
-      const imagenJuego = document.createElement("img");
-      imagenJuego.src = unJuegoRandom.short_screenshots[0].image;
-      imagenJuego.width = 400;
-      imagenJuego.height = 341;
-      imagenJuego.alt = "Imagen aleatoria";
-
-      if(textoDeMiHTML != null)
-      {
-        //textoDeMiHTML.replaceWith(imagenJuego);
-      }
-
-      this.foto = unJuegoRandom.short_screenshots[0].image;
-
-
-    })
-    .catch(e => console.error(new Error(e)));
-    */
-  
-    /*
-    const datosJuegos: any[] = [];
-
-    fetch("https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page=1")
-    .then(res => res.json())
-    .then(data =>
-    {
-      console.log("Respuesta data API: ", data);
-      for(let i = 0; i < 20; i++)
-      {
-        datosJuegos.push(data.results[i]);
-      }
-
-      console.log(datosJuegos[0]);
-      this.Juegos = datosJuegos;
-
-    })
-    .catch(e => console.error(new Error(e)));
-    */
   }
 
 
   //LLAMA A LA API Y GUARDA LOS JUEGOS
-  getJuegos()
+  getJuegos(i: number)
   {
-    //const datosJuegos: any[] = [];
+    class Juego
+    {
+      // Atributos
+      nombre: String;
+      fotos: String[];
+      fecha: String;
+      generos: String[];
+      plataformas: String[];
+    
+      // Constructor
+      constructor(nombre: String, fotos: String[], fecha: String, generos: String[], plataformas: String[])
+      {
+        this.nombre = nombre;
+        this.fotos = fotos;
+        this.fecha = fecha;
+        this.generos = generos;
+        this.plataformas = plataformas;
+      }
+    }
 
-    fetch("https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page=1")
+    const API_Juegos =
+    "https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page_size=40&page=" + i;
+
+    fetch(API_Juegos)
     .then(res => res.json())
     .then(data =>
     {
       console.log("Respuesta data API: ", data);
-      for(let i = 0; i < 20; i++)
+
+      for(const juego of data.results)
       {
-        //datosJuegos.push(data.results[i]);
-        this.datosJuegos.push(data.results[i]);
+
+        let nuevoNombre = juego.name;
+
+        let nuevasFotos =[];
+        for(const unaFoto of juego.short_screenshots)
+        {
+          nuevasFotos.push(unaFoto.image);
+        }
+
+        let nuevaFecha = juego.released;
+
+        let nuevosGeneros =[];
+        for(const unGenero of juego.genres)
+        {
+          nuevosGeneros.push(unGenero.name);
+        }
+
+        let nuevasPlataformas =[];
+        for(const unaPlataforma of juego.platforms)
+        {
+          let nombreDeLaPlataforma = unaPlataforma.platform.name;
+          if(nombreDeLaPlataforma == 'macOS' || nombreDeLaPlataforma == 'Linux')
+          {
+            nuevasPlataformas.push('PC');
+          }else
+          {
+            nuevasPlataformas.push(nombreDeLaPlataforma);
+          }
+        }
+
+        const nuevoJuego = new Juego
+        (
+          nuevoNombre,
+          nuevasFotos,
+          nuevaFecha,
+          nuevosGeneros,
+          nuevasPlataformas
+        );
+        this.datosJuegos.push(nuevoJuego);
       }
 
-      //console.log(datosJuegos[0]);
-      //this.Juegos = datosJuegos;
-
       console.log("Juego de la POS 0: ",this.datosJuegos[0]);
-
-      //const numeroRandom = Math.floor(Math.random() * 20);
-      //this.foto = this.Juegos[numeroRandom].short_screenshots[0].image;
+      
 
     })
     .catch(e => console.error(new Error(e)));
   
   }
 
-  guardarDatosAPI()
-  {
-    localStorage.setItem('Juegos', JSON.stringify(this.datosJuegos));
-  }
 
-  recuperarDatosAPI()
-  {
-    //this.Juegos = JSON.parse(localStorage.getItem("Juegos"));
-  }
-
+  //BOTON MUESTRA FOTO RANDOM DEL ARREGLO
   generarFoto()
   {
     const botonGenerarFoto = document.querySelector("#botonGenerarFoto");
     if(botonGenerarFoto)
     {
-        botonGenerarFoto.addEventListener("click", (evento) =>
+      botonGenerarFoto.addEventListener("click", (evento) =>
+      {
+        evento.preventDefault();
+
+        const texto = document.querySelector("#texto");
+        if(texto)
         {
-            evento.preventDefault();
+          const numeroRandom = Math.floor(Math.random() * 40);
+          const posRandom = Math.floor(Math.random() * 6);
 
-            const texto = document.querySelector("#texto");
-            if(texto)
-            {
-                const numeroRandom = Math.floor(Math.random() * 20);
+          const imagen = document.createElement("img");
 
-                const imagen = document.createElement("img");
-                imagen.src = this.datosJuegos[numeroRandom].short_screenshots[0].image;
-                imagen.width = 1000;
-                imagen.height = 500;
-                imagen.alt = "Imagen aleatoria"
-                imagen.title = "Imagen aleatoria";
+          imagen.src = this.datosJuegos[numeroRandom].fotos[posRandom];
+          imagen.width = 800;
+          imagen.height = 500;
+          imagen.alt = "Imagen aleatoria"
+          imagen.title = "Imagen aleatoria";
 
-                texto.replaceChildren(imagen);
-            }
-        });
+          texto.replaceChildren(imagen);
+        }
+      });
     }
   }
+  
 
-  
-  
   ngOnInit()
   {
-    //this.getJuegos();
-    //this.guardarDatosAPI();
+    this.llamarAPI();
     this.generarFoto();
-
   }
 
-
- 
 }
