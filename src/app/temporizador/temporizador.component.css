@@ -1,0 +1,15 @@
+.Temporizador
+{
+    border-radius: 9px;
+    text-decoration: none;
+    color: #ffff;
+    background-color: rgb(153, 0, 255);
+    font-family: Arial;
+    font-weight: bold;
+    border: 3px solid;
+    padding: 15px 35px;
+    font-size: 25px;
+    box-shadow: 0 0 2px black;
+    margin: 10px; 
+}
+
