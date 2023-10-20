@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./pista-juego.component.css']
 })
 export class PistaJuegoComponent {
-
+  
 }
