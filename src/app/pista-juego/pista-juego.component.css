@@ -2,25 +2,24 @@
     display: grid ;
     grid-template-columns: repeat(3, 33.3%);
     grid-template-rows: 2;
-    margin: auto;
-    width: 60%;
-
+    margin: 3% 20%;
+    background-image: url(./Recuadro.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .viewPista{
+    margin-top: 51%;
     grid-column: 1/4;
     grid-row: 1;
     height: 100px;   
     display: flex;
-    gap: 30px;
-    width: 100%;
-    margin: auto;
-    
+    flex-direction: column;
+    width: 95%;  
 }
 .viewPista div{
-    width: 200px;
+    width: 80%;
     height: 50px;
     text-align: center  ;
-    background: #705cb8;
     margin: auto;   
 }
 .options{
@@ -35,8 +34,12 @@
 }
 .options button{
     height: 30px;
-    background: #705cb8;              
+    background: #ff0000;              
 }
+.options button:hover{
+    background: #8a4141;
+}
+
 #left{
     grid-column: 1 ;
     grid-row: 2;
@@ -61,20 +64,15 @@
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     border-radius: 50%;
-    margin: auto; 
+    margin: auto;
+    
 }
+
  .pista1{
     grid-column: 1 ;
     grid-row: 1;
-    
 }
-#tercio{
-    width: 150px;
-    height: 75px;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%; 
-}
+
 .pista2{
     grid-column: 2 ;
     grid-row: 1;
