@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+html
+{
+    background-image: url('../src/12804207_5073414.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
