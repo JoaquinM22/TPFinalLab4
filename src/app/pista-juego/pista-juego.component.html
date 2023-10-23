@@ -1,5 +1,5 @@
 
-<div class="contenedor">
+<div id="tablero" class="contenedor">
     
     <div class="viewPista">
         <div class="VP1">Vista pista</div>
@@ -8,21 +8,30 @@
         <div class="VP4">vista pista 4</div>
     </div>
     <div id="left" class="pistas">
-        <button class="pista1">50/50</button>
-        <button class="pista2">33%</button>
-        <button class="pista3">Agrandar Imagen</button>
-        <button class="pista4">Saltear imagen</button>
+        <button id="50%" class="pista1" (click)="handlePistaButtonClick('50%')">50%</button>
+        <button id="33%" class="pista2" (click)="handlePistaButtonClick('33%')">33%</button>
+        <button id="imgP" class="pista3" (click)="handlePistaButtonClick('imgP')">Agrandar Imagen</button>
+        <button id="jump" class="pista4" (click)="handlePistaButtonClick('jump')">Saltear imagen</button>
     </div>
     <div class="options">
-        <button class="option1">Opcion1</button>
-        <button class="option2">Opcion2</button>
-        <button class="option3">Opcion3</button>
-        <button class="option4">Opcion4</button>
+        <button  class="option1" (click)="handleOptionButtonClick('Opcion1')">{{juegos[0].nombre}}</button>
+        <button  class="option2" (click)="handleOptionButtonClick('Opcion2')">{{juegos[1].nombre}}</button>
+        <button  class="option3" (click)="handleOptionButtonClick('Opcion3')">{{juegos[2].nombre}}</button>
+        <button  class="option4" (click)="handleOptionButtonClick('Opcion4')">{{juegos[3].nombre}}</button>
     </div>
     <div id="rigth" class="pistas">
-        <button class="pista5">Creadores</button>
-        <button class="pista6">Fecha</button>
-        <button class="pista7">Genero</button>
-        <button class="pista8">Consola</button>
+        <button id="consola" class="pista5" (click)="handlePistaButtonClick('consola')">consola</button>
+        <button id="creadores" class="pista6" (click)="handlePistaButtonClick('creadores')">creadores</button>
+        <button id="fecha" class="pista7" (click)="handlePistaButtonClick('fecha')">fecha</button>
+        <button id="genero" class="pista8" (click)="handlePistaButtonClick('genero')">genero</button>
     </div>
 </div>
+<p>puntaje works!</p>
+<br>
+<div>
+    <span class = "Puntaje">{{puntaje}} Puntos</span>
+</div>
+<br><br>
+<button id="botonSumar">Sumar Puntos</button> <br>
+<button id="botonRestar">Restar Puntos</button> <br>
+<br><span></span><br>
