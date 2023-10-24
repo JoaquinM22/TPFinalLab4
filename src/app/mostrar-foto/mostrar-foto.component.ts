@@ -114,6 +114,7 @@ export class MostrarFotoComponent implements OnInit
           }
         }
 
+
         //Del arreglo nombres, cambia el orden de los datos, de manera que pese a que
         //siempre cargue las posiciones 0, 1, 2 y 3. Los datos seran siempre al azar
         function randomizarNombres(arregloNombres: String[])
@@ -159,7 +160,8 @@ export class MostrarFotoComponent implements OnInit
 
       console.log("El juego de la pos 0 tiene: ", this.datosJuegos[0].fotos.length);
       console.log("Arreglo juegos Completo: ",this.datosJuegos);
-
+      console.log("Consola:", this.datosJuegos[0].plataformas);
+      
     })
     .catch(e => console.error(new Error(e)));
   

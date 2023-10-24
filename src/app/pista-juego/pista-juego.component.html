@@ -1,11 +1,14 @@
 
 <div id="tablero" class="contenedor">
-    
+    <div class="imagen">
+        <!-- <img id="fotoA" src="{{}}" alt=""> -->
+    </div>
     <div class="viewPista">
-        <div class="VP1">Vista pista</div>
-        <div class="VP2">Vista pista 2</div>
-        <div class="VP3">Vista Pista 3</div>
-        <div class="VP4">vista pista 4</div>
+        <div class="VP1">{{juegos[i].plataformas}}</div>
+        <div class="VP2">{{juegos[i].creadores}}</div>
+        <div class="VP3">{{juegos[i].fecha}}</div>
+        <div id="VP4">{{juegos[i].generos}}</div>
+       
     </div>
     <div id="left" class="pistas">
         <button id="50%" class="pista1" (click)="handlePistaButtonClick('50%')">50%</button>
@@ -14,10 +17,11 @@
         <button id="jump" class="pista4" (click)="handlePistaButtonClick('jump')">Saltear imagen</button>
     </div>
     <div class="options">
-        <button  class="option1" (click)="handleOptionButtonClick('Opcion1')">{{juegos[0].nombre}}</button>
-        <button  class="option2" (click)="handleOptionButtonClick('Opcion2')">{{juegos[1].nombre}}</button>
-        <button  class="option3" (click)="handleOptionButtonClick('Opcion3')">{{juegos[2].nombre}}</button>
-        <button  class="option4" (click)="handleOptionButtonClick('Opcion4')">{{juegos[3].nombre}}</button>
+        <p>{{juegos[i].nombre}}</p>
+        <button  class="option1" (click)="handleOptionButtonClick(juegos[i].nombresOpciones[0])">{{juegos[i].nombresOpciones[0]}}</button>
+        <button  class="option2" (click)="handleOptionButtonClick(juegos[i].nombresOpciones[1])">{{juegos[i].nombresOpciones[1]}}</button>
+        <button  class="option3" (click)="handleOptionButtonClick(juegos[i].nombresOpciones[2])">{{juegos[i].nombresOpciones[2]}}</button>
+        <button  class="option4" (click)="handleOptionButtonClick(juegos[i].nombresOpciones[3])">{{juegos[i].nombresOpciones[3]}}</button>
     </div>
     <div id="rigth" class="pistas">
         <button id="consola" class="pista5" (click)="handlePistaButtonClick('consola')">consola</button>

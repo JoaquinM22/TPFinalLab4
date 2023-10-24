@@ -8,21 +8,23 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PistaJuegoComponent {
   
   @Input() juegos: any;
-  nombres: any[] = [];
-  verdadero: String ="";
   posicion:number = Math.floor(Math.random()*4);
   puntaje: number = 0;
-  
+  i: number = 0;
   constructor()
   {
   }
+
+  generarFoto(){
+    const fotoA= document.getElementById('fotoA');
+    
+        
+    }
 
   handlePistaButtonClick(buttonText: string): void {
     switch (buttonText) {
       case '50%':
         this.puntaje=this.puntaje + 50;
-        
-
         break;
       case '33%':
         // Lógica para el botón 33%
@@ -55,18 +57,31 @@ export class PistaJuegoComponent {
         break;
       
       case 'genero':
-        // Lógica para el botón genero
-        console.log('Click en 33%');
+        /* const pGenero = document.getElementById('VP4');
+        if(pGenero){
+          pGenero.style.visibility = 'visible';
+        } */
         break;
     }
   }
 
   handleOptionButtonClick(optionText: string): void {
-    if (optionText === this.juegos.nombre) {
+    if (optionText === this.juegos[this.i].nombre) {
       this.puntaje = this.puntaje + 100;
+
       //marcar como no visible
     }else{
+      this.puntaje = this.puntaje + 10;
       //marcar como no visible
     }
+    if(this.i<9)
+      {
+        this.i=this.i+1;
+      }
+  }
+
+  ngOnInit()
+  {
+    this.generarFoto();
   }
 }

@@ -1,16 +1,29 @@
 .contenedor{
     display: grid ;
     grid-template-columns: repeat(3, 33.3%);
-    grid-template-rows: 2;
-    margin: 3% 20%;
+    grid-template-rows: 3;
+     margin: 0% 20%; 
     background-image: url(./Recuadro.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
-.viewPista{
-    margin-top: 51%;
+.imagen{
     grid-column: 1/4;
     grid-row: 1;
+    justify-content: center;
+    align-items: center;
+    margin: 7px;
+    height: 91%;
+    width: 99%;
+}
+.imagen img{
+    height: 100%;
+    width: 100%;
+}
+.viewPista{
+    /* margin-top: 51%; */
+    grid-column: 1/4;
+    grid-row: 2;
     height: 100px;   
     display: flex;
     flex-direction: column;
@@ -22,9 +35,12 @@
     text-align: center  ;
     margin: auto;   
 }
+/* #VP4{
+    visibility: visible;
+} */
 .options{
     grid-column: 2 ;
-    grid-row: 2;
+    grid-row: 3;
     display: flex;
     gap: 10px;
     flex-direction: column;
@@ -42,7 +58,7 @@
 
 #left{
     grid-column: 1 ;
-    grid-row: 2;
+    grid-row: 3;
     display: grid ;
     gap: 5px;
     grid-template-columns: repeat(2, 50%);
@@ -51,7 +67,7 @@
 }
 #rigth{
     grid-column: 3 ;
-    grid-row: 2;
+    grid-row: 3;
     display: grid ;
     gap: 5px;
     grid-template-columns: repeat(2, 50%);
