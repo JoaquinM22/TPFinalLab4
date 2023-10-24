@@ -5,11 +5,6 @@ import { Component, OnInit} from '@angular/core';
   templateUrl: './login-usuario.component.html',
   styleUrls: ['./login-usuario.component.css']
 })
-<<<<<<< HEAD
-export class LoginUsuarioComponent {
-  
-=======
-
 export class LoginUsuarioComponent implements OnInit{
   
   constructor()
@@ -163,6 +158,5 @@ export class LoginUsuarioComponent implements OnInit{
     this.logueo_Usuario();
     this.creacion_Usuario();
   }
-
->>>>>>> 4403ae9e8b780bccba206638075371cb10ff1212
+  
 }
