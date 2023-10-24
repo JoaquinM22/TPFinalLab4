@@ -185,16 +185,8 @@ export class MostrarFotoComponent implements OnInit
       console.log(this.datosJuegos[0].nombresOpciones[3]);
 
       console.log("Arreglo juegos Completo: ",this.datosJuegos);
-<<<<<<< HEAD
       console.log("Consola:", this.datosJuegos[0].plataformas);
-      
-=======
-
-      console.log("Juego de la POS 1: ",this.datosJuegos[1]);
-      console.log("Juego de la POS 2: ",this.datosJuegos[2]);
-      console.log("Juego de la POS 3: ",this.datosJuegos[3]);
-
->>>>>>> 4403ae9e8b780bccba206638075371cb10ff1212
+     
     })
     .catch(e => console.error(new Error(e)));
   
