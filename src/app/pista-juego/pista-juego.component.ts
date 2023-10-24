@@ -10,12 +10,13 @@ export class PistaJuegoComponent {
   @Input() juegos: any;
   nombres: any[] = [];
   verdadero: String ="";
+  posicion:number = Math.floor(Math.random()*4);
   puntaje: number = 0;
   
   constructor()
   {
   }
-  
+
   handlePistaButtonClick(buttonText: string): void {
     switch (buttonText) {
       case '50%':
@@ -61,24 +62,11 @@ export class PistaJuegoComponent {
   }
 
   handleOptionButtonClick(optionText: string): void {
-    switch (optionText) {
-      case 'Opcion1':
-        // Lógica para la opción 1
-        console.log('Click en Opcion1');
-        break;
-      case 'Opcion1':
-        // Lógica para la opción 1
-        console.log('Click en Opcion1');
-        break;
-      case 'Opcion1':
-          // Lógica para la opción 1
-          console.log('Click en Opcion1');
-          break;
-      case 'Opcion1':
-        // Lógica para la opción 1
-        console.log('Click en Opcion1');
-        break;
+    if (optionText === this.juegos.nombre) {
+      this.puntaje = this.puntaje + 100;
+      //marcar como no visible
+    }else{
+      //marcar como no visible
     }
   }
-
 }
