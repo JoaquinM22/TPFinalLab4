@@ -52,7 +52,7 @@ export class MostrarFotoComponent implements OnInit
     {
       // Atributos
       nombre: String;
-      fotos: String[];
+      foto: String;
       fecha: String;
       generos: String[];
       plataformas: String[];
@@ -60,10 +60,10 @@ export class MostrarFotoComponent implements OnInit
       visible: boolean;
     
       // Constructor
-      constructor(nombre: String, fotos: String[], fecha: String, generos: String[], plataformas: String[], nombresOpciones: String[])
+      constructor(nombre: String, foto: String, fecha: String, generos: String[], plataformas: String[], nombresOpciones: String[])
       {
         this.nombre = nombre;
-        this.fotos = fotos;
+        this.foto = foto;
         this.fecha = fecha;
         this.generos = generos;
         this.plataformas = plataformas;
@@ -85,32 +85,58 @@ export class MostrarFotoComponent implements OnInit
       for(const juego of data.results)
       {
 
-        const nuevoNombre = juego.name;
+        //Carga nombre Juego
+        const nuevoNombre: String = juego.name;
 
-        const nuevasFotos: any[] = [];
+        //Carga URL fotos en un arreglo auxiliar
+        const nuevasFotos: String[] = [];
         for(const unaFoto of juego.short_screenshots)
         {
           nuevasFotos.push(unaFoto.image);
         }
 
-        const nuevaFecha = juego.released;
+        //Como hay juegos que tienen menos de 7 fotos, con el do while
+        //me aseguro que tome una posicion valida
+        let posRandom;
+        do
+        {
 
-        const nuevosGeneros: any[] = [];
+          posRandom = Math.floor(Math.random() * 6);
+
+        }while(posRandom >= nuevasFotos.length);
+
+        //Cargo esa URL random valida en nuevaFoto
+        const nuevaFoto: String = nuevasFotos[posRandom];
+
+        //Carga la fecha del juego
+        const nuevaFecha: String = juego.released;
+
+        //Carga los generos del juego
+        const nuevosGeneros: String[] = [];
         for(const unGenero of juego.genres)
         {
           nuevosGeneros.push(unGenero.name);
         }
 
-        const nuevasPlataformas: any[] = [];
+        //Carga las plataformas del juego, evita cargar plataformas repetidas
+        const nuevasPlataformas: String[] = [];
         for(const unaPlataforma of juego.platforms)
         {
           const nombreDeLaPlataforma = unaPlataforma.platform.name;
           if(nombreDeLaPlataforma == 'macOS' || nombreDeLaPlataforma == 'Linux')
           {
-            nuevasPlataformas.push('PC');
+            let existe = nuevasPlataformas.includes('PC')
+            if(existe == false)
+            {
+              nuevasPlataformas.push('PC');
+            }
           }else
           {
-            nuevasPlataformas.push(nombreDeLaPlataforma);
+            let existe = nuevasPlataformas.includes(nombreDeLaPlataforma)
+            if(existe == false)
+            {
+              nuevasPlataformas.push(nombreDeLaPlataforma);
+            }
           }
         }
 
@@ -126,7 +152,7 @@ export class MostrarFotoComponent implements OnInit
           }
         }
 
-        const nuevosNombresOpciones: any[] = [];
+        const nuevosNombresOpciones = [];
         randomizarNombres(this.nombresJuegos);
         nuevosNombresOpciones.push(this.nombresJuegos[0]);
         nuevosNombresOpciones.push(this.nombresJuegos[1]);
@@ -140,7 +166,7 @@ export class MostrarFotoComponent implements OnInit
         const nuevoJuego = new Juego
         (
           nuevoNombre,
-          nuevasFotos,
+          nuevaFoto,
           nuevaFecha,
           nuevosGeneros,
           nuevasPlataformas,
@@ -158,10 +184,17 @@ export class MostrarFotoComponent implements OnInit
       console.log(this.datosJuegos[0].nombresOpciones[2]);
       console.log(this.datosJuegos[0].nombresOpciones[3]);
 
-      console.log("El juego de la pos 0 tiene: ", this.datosJuegos[0].fotos.length);
       console.log("Arreglo juegos Completo: ",this.datosJuegos);
+<<<<<<< HEAD
       console.log("Consola:", this.datosJuegos[0].plataformas);
       
+=======
+
+      console.log("Juego de la POS 1: ",this.datosJuegos[1]);
+      console.log("Juego de la POS 2: ",this.datosJuegos[2]);
+      console.log("Juego de la POS 3: ",this.datosJuegos[3]);
+
+>>>>>>> 4403ae9e8b780bccba206638075371cb10ff1212
     })
     .catch(e => console.error(new Error(e)));
   
@@ -206,18 +239,8 @@ export class MostrarFotoComponent implements OnInit
           //validas del arreglo de juegos
           let numeroRandom = Math.floor(Math.random() * 10);
           
-          //Como hay juegos que tienen menos de 7 fotos, con el do while
-          //me aseguro que tome una posicion valida
-          let posRandom;
-          do
-          {
-
-            posRandom = Math.floor(Math.random() * 6);
-
-          }while(posRandom >= this.datosJuegos[numeroRandom].fotos.length);
-
           const imagen = document.createElement("img");
-          imagen.src = this.datosJuegos[numeroRandom].fotos[posRandom];
+          imagen.src = this.datosJuegos[numeroRandom].foto;
           imagen.width = 800;
           imagen.height = 500;
           imagen.alt = "Imagen aleatoria"

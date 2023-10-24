@@ -8,6 +8,11 @@
 
 .full{
     margin: auto;
+<<<<<<< HEAD
+=======
+    width: 100%;
+    height: 100%;
+>>>>>>> 4403ae9e8b780bccba206638075371cb10ff1212
     display: table;
     top: 0;
 }
