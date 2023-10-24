@@ -1,10 +1,23 @@
 <section class="logueo">
-    <section class="form_login">
+    <form action="" class="form_login">
         <h3>Iniciar Sesión</h3>
-        <input class="control" type="text" value="" name="usuario" id="Usuario" placeholder="Nombre de Usuario">
-        <input class="control" type="password" value="" name="password" id="Password" placeholder="Password">
-        <input class="botones" type="submit" value="Ingresar">
+        <input class="control" type="text" value="" name="usuario" id="Usuario" placeholder="Nombre de Usuario"required>
+        <input class="control" type="password" value="" name="password" id="Password" placeholder="Password" required>
+        <button class="botones" id="ingresar">Ingresar</button>
     
-        <p><a href="#">¿Olvidaste tu contraseña?</a></p>
-    </section>
+        <p id="txt_login"></p>
+    </form>
+</section>
+
+
+<section class="creacion">
+    <form action="" class="form_create">
+        <h3>Crear Cuenta</h3>
+        <input class="control" type="text" value="" name="usuario" id="UsuarioNuevo" placeholder="Nombre de Usuario"required>
+        <input class="control" type="password" value="" name="password" id="PasswordNuevo" placeholder="Password" required>
+        <input class="control" type="password" value="" name="passwordC" id="PasswordConfirm" placeholder="Confirme su password" required>
+        <button class="botones" id="crear">Ingresar</button>
+
+        <p id="texto"></p>
+    </form>
 </section>

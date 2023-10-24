@@ -19,7 +19,21 @@
     font-family: arial;
 }
 
-.form_login h3
+.form_create
+{
+    width: 400px;
+    height: 380px;
+    background: #4e4d4d;
+    margin: auto;
+    margin-top: 180px;
+    box-shadow: 7px 13px 37px #000;
+    border-top: 4px solid #017bab;
+    padding: 20px 30px;
+    color:white;
+    font-family: arial;
+}
+
+.form_login h3, .form_create h3
 {
     margin: 0;
     text-align: center;
@@ -56,21 +70,17 @@
     background: #017bab9a;
 }
 
-.form_login p
+.form_login p, .form_create p
 {
     height: 40px;
     text-align: center;
     border-bottom: 1px solid;
 }
 
-.form_login a
+.form_login #txt_login
 {
     text-decoration: none;
     font-size: 12px;
     color: white;
 }
 
-.form_login a:hover
-{
-    text-decoration: underline;
-}
