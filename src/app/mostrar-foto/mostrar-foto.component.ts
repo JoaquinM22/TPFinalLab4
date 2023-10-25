@@ -189,6 +189,7 @@ export class MostrarFotoComponent implements OnInit
       console.log("Juego de la POS 2: ",this.datosJuegos[2]);
       console.log("Juego de la POS 3: ",this.datosJuegos[3]);
 
+      
     })
     .catch(e => console.error(new Error(e)));
   
