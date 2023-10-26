@@ -125,7 +125,11 @@ export class MostrarFotoComponent implements OnInit
           const nombreDeLaPlataforma = unaPlataforma.platform.name;
           if(nombreDeLaPlataforma == 'macOS' || nombreDeLaPlataforma == 'Linux')
           {
-            nuevasPlataformas.push('PC');
+            let existe = nuevasPlataformas.includes('PC')
+            if(existe == false)
+            {
+              nuevasPlataformas.push('PC');
+            }
           }else
           {
             let existe = nuevasPlataformas.includes(nombreDeLaPlataforma)

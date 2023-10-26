@@ -76,7 +76,7 @@ export class TemporizadorComponent implements OnInit
         {
             evento.preventDefault();
 
-            this.iniciarTemporizador(2, 45);
+            this.iniciarTemporizador(2, 46);
         });
     }
   }
