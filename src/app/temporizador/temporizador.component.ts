@@ -83,7 +83,7 @@ export class TemporizadorComponent implements OnInit
 
   ngOnInit()
   {
-    this.botonIniciar();
+    this.iniciarTemporizador(2, 45);
   }
 
 }
