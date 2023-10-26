@@ -4,11 +4,12 @@
         <img id="fotoA" src="{{juegos[i].foto}}" alt="Foto Juego">
     </div>
     <div class="viewPista">
-        <div class="VP1">{{juegos[i].plataformas}}</div>
-        <div class="VP2">{{juegos[i].creadores}}</div>
-        <div class="VP3">{{juegos[i].fecha}}</div>
-        <div id="VP4">{{juegos[i].generos}}</div>
-       
+        <div><span class = "Puntaje">{{puntaje}} Puntos</span></div>
+        <div id="VP1" class="VP" style="visibility: hidden;" >{{juegos[i].plataformas}}</div>
+        <div id="VP2" class="VP" style="visibility: hidden;">{{juegos[i].creadores}}</div>
+        <div id="VP3" class="VP" style="visibility: hidden;">{{juegos[i].fecha}}</div>
+        <div id="VP4" class="VP" style="visibility: hidden;">{{juegos[i].generos}}</div>
+        <div><app-temporizador class="tempo"></app-temporizador></div>
     </div>
     <div id="left" class="pistas">
         <button id="50%" class="pista1" (click)="handlePistaButtonClick('50%')">50%</button>
@@ -30,12 +31,3 @@
         <button id="genero" class="pista8" (click)="handlePistaButtonClick('genero')">genero</button>
     </div>
 </div>
-<p>puntaje works!</p>
-<br>
-<div>
-    <span class = "Puntaje">{{puntaje}} Puntos</span>
-</div>
-<br><br>
-<button id="botonSumar">Sumar Puntos</button> <br>
-<button id="botonRestar">Restar Puntos</button> <br>
-<br><span></span><br>

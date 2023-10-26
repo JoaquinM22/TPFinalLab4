@@ -26,7 +26,7 @@ export class MostrarFotoComponent implements OnInit
   //BOTON LLAMA A LA API
   llamarAPI()
   {
-    const botonLlamarAPI = document.querySelector("#botonLlamarAPI");
+    const botonLlamarAPI = document.querySelector("#iniciar");
     if(botonLlamarAPI)
     {
       botonLlamarAPI.addEventListener("click", (evento) =>
@@ -43,7 +43,6 @@ export class MostrarFotoComponent implements OnInit
       console.log("Llamada de la API exitosa");
     }
   }
-
 
   //LLAMA A LA API Y GUARDA LOS JUEGOS
   getJuegos(i: number)

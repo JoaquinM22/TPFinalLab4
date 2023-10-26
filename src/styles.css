@@ -1,12 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 html
 {
-<<<<<<< HEAD
-    background-image: url('./assets/Mass_Effect_2.jpg');
-=======
+
     background-image: url('../src/12804207_5073414.jpg');
     background-position: center;
->>>>>>> 4403ae9e8b780bccba206638075371cb10ff1212
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;

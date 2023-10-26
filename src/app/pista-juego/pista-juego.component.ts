@@ -8,18 +8,13 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PistaJuegoComponent {
   
   @Input() juegos: any;
-  posicion:number = Math.floor(Math.random()*4);
   puntaje: number = 0;
   i: number = 0;
+
   constructor()
   {
   }
 
-  generarFoto(){
-    const fotoA= document.getElementById('fotoA');
-    
-        
-    }
 
   handlePistaButtonClick(buttonText: string): void {
     switch (buttonText) {
@@ -32,56 +27,84 @@ export class PistaJuegoComponent {
         break;
       
       case 'imgP':
-        // Lógica para el botón imgP
-        console.log('Click en 33%');
+        const foto = document.getElementById('fotoA');
+        if(foto){
+          foto.style.clipPath = 'inset(0% 0% 0% 0%)';
+        }
         break;
      
       case 'jump':
-        // Lógica para el botón jump
-        console.log('Click en 33%');
+        this.reset();
+        this.moverPorArreglo();
         break;
      
       case 'consola':
-        // Lógica para el botón consola
-        console.log('Click en 33%');
+        const VP1 = document.getElementById('VP1');
+          // Haciendo que el div no sea visible
+          if (VP1) {
+            VP1.style.visibility = 'visible';
+          }
         break;
      
       case 'creadores':
-        // Lógica para el botón creadores
-        console.log('Click en 33%');
+        const VP2 = document.getElementById('VP2');
+          // Haciendo que el div no sea visible
+          if (VP2) {
+            VP2.style.visibility = 'visible';
+          }
         break;
       
       case 'fecha':
-        // Lógica para el botón fecha
-        console.log('Click en 33%');
+        const VP3 = document.getElementById('VP3');
+          // Haciendo que el div no sea visible
+          if (VP3) {
+            VP3.style.visibility = 'visible';
+          }
         break;
       
       case 'genero':
-        /* const pGenero = document.getElementById('VP4');
-        if(pGenero){
-          pGenero.style.visibility = 'visible';
-        } */
+        const VP4 = document.getElementById('VP4');
+          // Haciendo que el div no sea visible
+          if (VP4) {
+            VP4.style.visibility = 'visible';
+          }
         break;
     }
   }
 
   handleOptionButtonClick(optionText: string): void {
+    this.juegos[this.i].visible=false;
+    this.reset();
     if (optionText === this.juegos[this.i].nombre) {
       this.puntaje = this.puntaje + 100;
-
-      //marcar como no visible
     }else{
       this.puntaje = this.puntaje + 10;
-      //marcar como no visible
     }
+    this.moverPorArreglo();
+     
+  }
+  moverPorArreglo(){
     if(this.i<9)
       {
         this.i=this.i+1;
-      }
+      }else{
+        this.i=0;
+        while(!this.juegos[this.i].visible){
+          this.i=this.i+1;
+        }
+      } 
   }
+  reset(){
+    // reseteo el corte de la imagen
+    const foto = document.getElementById('fotoA');
+        if(foto){
+          foto.style.clipPath = 'inset(3% 5% 47% 48%)';
+        }
 
-  ngOnInit()
-  {
-    this.generarFoto();
+    const elementosConClase = document.querySelectorAll('.VP');
+
+    elementosConClase.forEach((elemento) => {
+    (elemento as HTMLElement).style.visibility = 'hidden'; 
+    });
   }
 }
