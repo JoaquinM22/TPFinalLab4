@@ -5,7 +5,6 @@ import { Component, OnInit} from '@angular/core';
   templateUrl: './login-usuario.component.html',
   styleUrls: ['./login-usuario.component.css']
 })
-
 export class LoginUsuarioComponent implements OnInit{
   
   constructor()
@@ -159,5 +158,5 @@ export class LoginUsuarioComponent implements OnInit{
     this.logueo_Usuario();
     this.creacion_Usuario();
   }
-
+  
 }

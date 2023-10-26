@@ -26,7 +26,7 @@ export class MostrarFotoComponent implements OnInit
   //BOTON LLAMA A LA API
   llamarAPI()
   {
-    const botonLlamarAPI = document.querySelector("#botonLlamarAPI");
+    const botonLlamarAPI = document.querySelector("#iniciar");
     if(botonLlamarAPI)
     {
       botonLlamarAPI.addEventListener("click", (evento) =>
@@ -43,7 +43,6 @@ export class MostrarFotoComponent implements OnInit
       console.log("Llamada de la API exitosa");
     }
   }
-
 
   //LLAMA A LA API Y GUARDA LOS JUEGOS
   getJuegos(i: number)
@@ -140,6 +139,7 @@ export class MostrarFotoComponent implements OnInit
           }
         }
 
+
         //Del arreglo nombres, cambia el orden de los datos, de manera que pese a que
         //siempre cargue las posiciones 0, 1, 2 y 3. Los datos seran siempre al azar
         function randomizarNombres(arregloNombres: String[])
@@ -176,6 +176,8 @@ export class MostrarFotoComponent implements OnInit
 
       //Diferentes console.log() para ver si hay errores
       console.log("Juego de la POS 0: ",this.datosJuegos[0]);
+      console.log("Consola:", this.datosJuegos[0].plataformas);
+
       console.log("Se termino de ejecutar segundo fetch");
 
       console.log(this.datosJuegos[0].nombresOpciones[0]);
@@ -189,7 +191,6 @@ export class MostrarFotoComponent implements OnInit
       console.log("Juego de la POS 2: ",this.datosJuegos[2]);
       console.log("Juego de la POS 3: ",this.datosJuegos[3]);
 
-      
     })
     .catch(e => console.error(new Error(e)));
   
