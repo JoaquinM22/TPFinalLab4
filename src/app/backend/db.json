@@ -1,20 +1,25 @@
 {
-    "users": 
-    [
-        {
-            "id": 1,
-            "usuario": "Franco",
-            "password": "Gitana06"
-        },
-        {
-            "id": 2,
-            "usuario": "Joaquin",
-            "password": "Unpassword03"
-        },
-        {
-            "id": 3,
-            "usuario": "Emanuel",
-            "password": "Otropassword_2"
-        }
-    ]
+  "users": [
+    {
+      "id": 1,
+      "usuario": "Franco",
+      "password": "Gitana06"
+    },
+    {
+      "id": 2,
+      "usuario": "Joaquin",
+      "password": "Unpassword03"
+    },
+    {
+      "id": 3,
+      "usuario": "Emanuel",
+      "password": "Otropassword_2"
+    },
+    {
+      "id": 4,
+      "usuario": "Geronimo",
+      "password": "Gero123",
+      "puntos": 0
+    }
+  ]
 }

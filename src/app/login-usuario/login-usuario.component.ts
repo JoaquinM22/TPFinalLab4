@@ -67,7 +67,7 @@ export class LoginUsuarioComponent implements OnInit{
   }
 
 
-  creacion_Usuario()
+  async creacion_Usuario()
   {
     class usuarioCre
     {
@@ -85,7 +85,7 @@ export class LoginUsuarioComponent implements OnInit{
 
     if(botonCrearCuenta)
     {
-      botonCrearCuenta.addEventListener("click", (evento) => 
+      botonCrearCuenta.addEventListener("click", async (evento) => 
       {
         evento.preventDefault();
 
@@ -104,7 +104,22 @@ export class LoginUsuarioComponent implements OnInit{
         }else if(passwordNew === confPassword)
         {
           //Crea el usuario y lo manda a la funcion que lo carga en el server
-          this.usuarioCreado = new usuarioCre(nombreNew, passwordNew);
+          var validacion = await this.validarUsuario(nombreNew, passwordNew);
+
+          if(validacion)
+          {
+            var mensaje = document.getElementById("texto");
+            this.usuarioLogueado = null;
+            if(mensaje)
+            {
+              mensaje.innerHTML = "Usuario ya existente";
+            }
+          }else
+          {
+            //aca deberia subir los datos a la bdd
+            this.cargarUsuario(nombreNew, passwordNew);
+            this.usuarioLogueado = new usuarioCre(nombreNew, passwordNew);
+          }
           //Aca va la funcion que lo carga en la "BDD"
         }else
         {
@@ -117,6 +132,38 @@ export class LoginUsuarioComponent implements OnInit{
 
       });
     }
+  }
+
+  cargarUsuario(nombre: string, password: string)
+  {
+
+    const update = 
+    {
+      id: 4,
+      usuario: nombre,
+      password: password,
+      puntos: 0,
+    };
+
+    const options = 
+    {
+      method: 'POST',
+      headers: 
+      {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(update),
+    }
+
+    fetch("http://localhost:3000/users", options)
+    .then(data => data)
+    .then(update => {
+      console.log(update)
+    })
+    .catch(e => {
+      console.log(e);
+    });
+
   }
 
   async validarUsuario(nombre: string, contra: string) {
