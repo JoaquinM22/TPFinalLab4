@@ -11,6 +11,7 @@ import { PuntajeComponent } from './puntaje/puntaje.component';
 import { TemporizadorComponent } from './temporizador/temporizador.component';
 import { LoginUsuarioComponent } from './login-usuario/login-usuario.component';
 import { MenuInicioComponent } from './menu-inicio/menu-inicio.component';
+import { MenuPrincipalComponent } from './menu-principal/menu-principal.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MenuInicioComponent } from './menu-inicio/menu-inicio.component';
     PuntajeComponent,
     TemporizadorComponent,
     LoginUsuarioComponent,
-    MenuInicioComponent
+    MenuInicioComponent,
+    MenuPrincipalComponent
   ],
   imports: [
     BrowserModule,

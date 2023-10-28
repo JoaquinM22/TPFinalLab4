@@ -107,6 +107,7 @@ export class LoginUsuarioComponent implements OnInit{
 
           if(validacion)
           {
+            //Si el usuario ya existe crea un mensaje
             var mensaje = document.getElementById("texto");
             this.usuarioLogueado = null;
             if(mensaje)
@@ -115,7 +116,7 @@ export class LoginUsuarioComponent implements OnInit{
             }
           }else
           {
-            //aca deberia subir los datos a la bdd
+            //Aca sube los datos al server
             this.cargarUsuario(nombreNew, passwordNew);
             this.usuarioLogueado = new usuarioCre(nombreNew, passwordNew);
           }
