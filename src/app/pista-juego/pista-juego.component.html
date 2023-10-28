@@ -19,10 +19,10 @@
     </div>
     <div class="options">
         <p>{{juegos[i].nombre}}</p>
-        <button  class="option1" (click)="handleOptionButtonClick(juegos[i].nombresOpciones[0])">{{juegos[i].nombresOpciones[0]}}</button>
-        <button  class="option2" (click)="handleOptionButtonClick(juegos[i].nombresOpciones[1])">{{juegos[i].nombresOpciones[1]}}</button>
-        <button  class="option3" (click)="handleOptionButtonClick(juegos[i].nombresOpciones[2])">{{juegos[i].nombresOpciones[2]}}</button>
-        <button  class="option4" (click)="handleOptionButtonClick(juegos[i].nombresOpciones[3])">{{juegos[i].nombresOpciones[3]}}</button>
+        <button id="opcion0" class="option" (click)="handleOptionButtonClick(juegos[i].nombresOpciones[0])">{{juegos[i].nombresOpciones[0]}}</button>
+        <button id="opcion1" class="option" (click)="handleOptionButtonClick(juegos[i].nombresOpciones[1])">{{juegos[i].nombresOpciones[1]}}</button>
+        <button id="opcion2" class="option" (click)="handleOptionButtonClick(juegos[i].nombresOpciones[2])">{{juegos[i].nombresOpciones[2]}}</button>
+        <button id="opcion3" class="option" (click)="handleOptionButtonClick(juegos[i].nombresOpciones[3])">{{juegos[i].nombresOpciones[3]}}</button>
     </div>
     <div id="rigth" class="pistas">
         <button id="consola" class="pista5" (click)="handlePistaButtonClick('consola')">consola</button>

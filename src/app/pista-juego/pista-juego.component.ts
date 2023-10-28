@@ -10,6 +10,7 @@ export class PistaJuegoComponent {
   @Input() juegos: any;
   puntaje: number = 0;
   i: number = 0;
+  p33: number=0;
 
   constructor()
   {
@@ -22,8 +23,29 @@ export class PistaJuegoComponent {
         this.puntaje=this.puntaje + 50;
         break;
       case '33%':
-        // Lógica para el botón 33%
-        console.log('Click en 33%');
+        let bien: boolean= false;
+        while(!bien){
+          let np: number = Math.floor(Math.random() * 4);
+          if(this.juegos[this.i].nombresOpciones[np]!=this.juegos[this.i].nombre)
+            {
+              const miBoton = document.getElementById('opcion' + np) as HTMLButtonElement;
+              if(miBoton && !miBoton.disabled){
+                if (miBoton) {
+                  miBoton.disabled = true;
+                  miBoton.style.background ='white';
+                  this.p33=this.p33+1;
+                  bien=true;
+                }
+              }
+            }
+        }
+        if(this.p33==2){
+          const miBoton = document.getElementById('33%') as HTMLButtonElement;
+          if (miBoton) {
+            miBoton.disabled = true;
+            miBoton.style.background ='white';
+          }
+        }
         break;
       
       case 'imgP':
@@ -40,7 +62,6 @@ export class PistaJuegoComponent {
      
       case 'consola':
         const VP1 = document.getElementById('VP1');
-          // Haciendo que el div no sea visible
           if (VP1) {
             VP1.style.visibility = 'visible';
           }
@@ -48,7 +69,6 @@ export class PistaJuegoComponent {
      
       case 'creadores':
         const VP2 = document.getElementById('VP2');
-          // Haciendo que el div no sea visible
           if (VP2) {
             VP2.style.visibility = 'visible';
           }
@@ -56,7 +76,6 @@ export class PistaJuegoComponent {
       
       case 'fecha':
         const VP3 = document.getElementById('VP3');
-          // Haciendo que el div no sea visible
           if (VP3) {
             VP3.style.visibility = 'visible';
           }
@@ -64,7 +83,6 @@ export class PistaJuegoComponent {
       
       case 'genero':
         const VP4 = document.getElementById('VP4');
-          // Haciendo que el div no sea visible
           if (VP4) {
             VP4.style.visibility = 'visible';
           }
@@ -76,23 +94,21 @@ export class PistaJuegoComponent {
     this.juegos[this.i].visible=false;
     this.reset();
     if (optionText === this.juegos[this.i].nombre) {
-      this.puntaje = this.puntaje + 100;
-    }else{
-      this.puntaje = this.puntaje + 10;
+      this.sumarPuntos(100);
     }
-    this.moverPorArreglo();
-     
+    this.moverPorArreglo();   
   }
+
   moverPorArreglo(){
     if(this.i<9)
       {
         this.i=this.i+1;
       }else{
         this.i=0;
-        while(!this.juegos[this.i].visible){
+        while(!this.juegos[this.i].visible &&this.i<10){
           this.i=this.i+1;
         }
-      } 
+      }
   }
   reset(){
     // reseteo el corte de la imagen
@@ -106,5 +122,23 @@ export class PistaJuegoComponent {
     elementosConClase.forEach((elemento) => {
     (elemento as HTMLElement).style.visibility = 'hidden'; 
     });
+    const elementosConClase2 = document.querySelectorAll('.option');
+
+    elementosConClase2.forEach((elemento) => {
+    (elemento as HTMLButtonElement).disabled = false;
+    (elemento as HTMLButtonElement).style.background = 'red';
+    });
+    const miBoton = document.getElementById('33%') as HTMLButtonElement;
+        if (miBoton) {
+          miBoton.disabled = false;
+          miBoton.style.background ='red';
+        }
+    this.p33=0;
+  }
+  sumarPuntos(puntos: number){
+    this.puntaje=this.puntaje+puntos;
+  }
+  restarPuntos(puntos: number){
+    this.puntaje=this.puntaje-puntos;
   }
 }
