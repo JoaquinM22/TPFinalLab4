@@ -120,7 +120,6 @@ export class LoginUsuarioComponent implements OnInit{
             this.cargarUsuario(nombreNew, passwordNew);
             this.usuarioLogueado = new usuarioCre(nombreNew, passwordNew);
           }
-          //Aca va la funcion que lo carga en la "BDD"
         }else
         {
           var mensaje = document.getElementById("texto");
