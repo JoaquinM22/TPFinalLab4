@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-temporizador',
@@ -8,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class TemporizadorComponent implements OnInit
 {
 
-  minutosString: String = '00';
-  segundosString: String = '00';
+ @Input() minutosString: String = '00';
+ @Input() segundosString: String = '00';
   
   constructor()
   {
