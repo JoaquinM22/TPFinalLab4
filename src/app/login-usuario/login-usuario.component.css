@@ -5,6 +5,12 @@
     box-sizing: border-box;
 }
 
+.formularios
+{
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
 .form_login
 {
     width: 400px;
@@ -17,6 +23,8 @@
     padding: 20px 30px;
     color:white;
     font-family: arial;
+    /*Esto es una manera de que se muestren de lado*/
+    /*float: left;*/
 }
 
 .form_create
@@ -31,6 +39,8 @@
     padding: 20px 30px;
     color:white;
     font-family: arial;
+    /*Esto es una manera de que se muestren de lado*/
+    /*float: left;*/
 }
 
 .form_login h3, .form_create h3
