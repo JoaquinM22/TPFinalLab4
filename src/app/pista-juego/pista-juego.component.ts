@@ -1,5 +1,5 @@
-import { Component, Input, Output } from '@angular/core';
-import { timeout } from 'rxjs';
+import { Component, Input, ViewChild } from '@angular/core';
+import { TemporizadorComponent } from '../temporizador/temporizador.component';
 
 
 enum valores {
@@ -11,6 +11,7 @@ enum valores {
   creadores=10,
   fecha = 5,
   acierto = 150,
+  fallo = 25,
   tiempoSobrante = 10,
 }
 
@@ -21,6 +22,7 @@ enum valores {
 })
 export class PistaJuegoComponent {
   //datos de otros componentes
+  /* @ViewChild('TemporizadorComponent') TemporizadorComponent = new TemporizadorComponent; */
   @Input() juegos: any;
   terminar: boolean = true;
   puntaje: number = 200 ;
@@ -34,9 +36,15 @@ export class PistaJuegoComponent {
   fecha: boolean=false;
   constructor()
   {
+    this.iniciarPartida();
   }
-  
-
+  iniciarPartida(){
+    if(confirm("Quieres empezar la partida"))
+    {
+      /* this.TemporizadorComponent.iniciarComponente(); */
+    }
+  } 
+  // maneja los botones de las pistas
   handlePistaButtonClick(buttonText: string): void {
     switch (buttonText) {
       case '50%':
@@ -47,6 +55,7 @@ export class PistaJuegoComponent {
         this.restarPuntos(valores.eliminaOp);
         break;
       case 'imgP':
+        this.imgP=true;
         this.fotoCompleta();
         this.restarPuntos(valores.imgP);
         break;
@@ -56,6 +65,7 @@ export class PistaJuegoComponent {
         break;
      
       case 'consola':
+        this.consola=true;
         this.mostrarPista('VP1',valores.consola);
         break;
      
@@ -64,10 +74,12 @@ export class PistaJuegoComponent {
         break;
       
       case 'fecha':
+        this.fecha=true;
         this.mostrarPista('VP3',valores.fecha);
         break;
       
       case 'genero':
+        this.genero=true;
         this.mostrarPista('VP4',valores.genero);
         break;
     }
@@ -78,6 +90,8 @@ export class PistaJuegoComponent {
     this.reset();
     if (optionText === this.juegos[this.contJuego].nombre) {
       this.sumarPuntos(valores.acierto);
+    }else{
+      this.restarPuntos(valores.fallo);
     }
     this.moverPorArreglo();   
   }
@@ -114,7 +128,12 @@ export class PistaJuegoComponent {
     });
 
     this.desabilitarYhablitarBoton('eliminaOp',false);
+    //reseteo los valores para chequear las pistas
     this.eliminaOP=0;
+    this.imgP=false;
+    this.consola=false;
+    this.genero=false;
+    this.fecha=false;
 
   }
 

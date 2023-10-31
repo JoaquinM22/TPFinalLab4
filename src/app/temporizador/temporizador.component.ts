@@ -19,10 +19,13 @@ export class TemporizadorComponent
  segundosString: String = '00';
   
   constructor()
-  {
+  {  
     this.iniciarTemporizador(valores.minutos, valores.segundos);
   }
-
+  /* iniciarComponente() {
+    this.iniciarTemporizador(valores.minutos, valores.segundos);
+    console.log('El componente se está iniciando...');
+  } */
   enviarDatos(mensaje : string) {
     this.mensajeEnviado.emit(mensaje);
   }
