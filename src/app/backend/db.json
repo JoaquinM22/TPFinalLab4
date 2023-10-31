@@ -3,23 +3,26 @@
     {
       "id": 1,
       "usuario": "Franco",
-      "password": "Gitana06"
+      "password": "Gitana06",
+      "puntos": 200
     },
     {
       "id": 2,
       "usuario": "Joaquin",
-      "password": "Unpassword03"
+      "password": "Unpassword03",
+      "puntos": 200
     },
     {
       "id": 3,
       "usuario": "Emanuel",
-      "password": "Otropassword_2"
+      "password": "Otropassword_2",
+      "puntos": 200
     },
     {
       "id": 4,
       "usuario": "Geronimo",
       "password": "Gero123",
-      "puntos": 0
+      "puntos": 200
     }
   ]
 }

@@ -12,6 +12,8 @@ import { TemporizadorComponent } from './temporizador/temporizador.component';
 import { LoginUsuarioComponent } from './login-usuario/login-usuario.component';
 import { MenuInicioComponent } from './menu-inicio/menu-inicio.component';
 import { MenuPrincipalComponent } from './menu-principal/menu-principal.component';
+import { RankingComponent } from './ranking/ranking.component';
+import { RankingPageComponent } from './paginas/ranking-page/ranking-page.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { MenuPrincipalComponent } from './menu-principal/menu-principal.componen
     TemporizadorComponent,
     LoginUsuarioComponent,
     MenuInicioComponent,
-    MenuPrincipalComponent
+    MenuPrincipalComponent,
+    RankingComponent,
+    RankingPageComponent
   ],
   imports: [
     BrowserModule,
