@@ -11,7 +11,7 @@ export class MostrarFotoComponent implements OnInit
 
   //FORMA PROPIA CON FETCH
   // LINK SALVADOR = https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b
-  isComponentDisabled:boolean=false;
+
   datosJuegos: any[] = [];
   nombresJuegos: String[] = [];
   
@@ -38,10 +38,6 @@ export class MostrarFotoComponent implements OnInit
         this.getNombresJuegos((numeroRandom+5));
         //Hace un timeout para que se carge completamente el arreglo de nombres
         setTimeout(() => {this.getJuegos(numeroRandom)}, 1000);
-        const empezar=document.getElementById("empezar");
-        if(empezar){
-          (empezar as Component).
-        }
       });
       console.log("Llamada de la API exitosa");
     }
