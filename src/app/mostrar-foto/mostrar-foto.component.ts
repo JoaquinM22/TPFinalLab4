@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-mostrar-foto',
   templateUrl: './mostrar-foto.component.html',
@@ -14,12 +15,14 @@ export class MostrarFotoComponent implements OnInit
   
   datosJuegos: any[] = [];
   nombresJuegos: String[] = [];
+  modoSeleccionado: String = 'modoNormal';
+
   
   //foto: String = "url";
 
   constructor()
   {
-
+    
   }
 
 
@@ -33,12 +36,33 @@ export class MostrarFotoComponent implements OnInit
       {
         evento.preventDefault();
 
-        let numeroRandom = Math.floor(Math.random() * 100) + 1;
+        let numeroRandom: number;
+        switch(this.modoSeleccionado)
+        {
+          case "modoNormal":
+            numeroRandom = Math.floor(Math.random() * 25) + 1;
+            this.getNombresJuegos((numeroRandom+5));
+            //Hace un timeout para que se carge completamente el arreglo de nombres
+            setTimeout(() => {this.getJuegos(numeroRandom)}, 1000);
+            console.log("Modo Normal");
+          break;
+          case "modoMedio":
+            numeroRandom = Math.floor(Math.random() * 50) + 1;
+            this.getNombresJuegos((numeroRandom+5));
+            //Hace un timeout para que se carge completamente el arreglo de nombres
+            setTimeout(() => {this.getJuegos(numeroRandom)}, 1000);
+            console.log("Modo Medio");
+          break;
+          case "modoDificil":
+            numeroRandom = Math.floor(Math.random() * 500) + 1;
+            this.getNombresJuegos((numeroRandom+5));
+            //Hace un timeout para que se carge completamente el arreglo de nombres
+            setTimeout(() => {this.getJuegos(numeroRandom)}, 1000);
+            console.log("Modo Dificil");
+          break;
+        }
 
-        this.getNombresJuegos((numeroRandom+5));
-        //Hace un timeout para que se carge completamente el arreglo de nombres
-        setTimeout(() => {this.getJuegos(numeroRandom)}, 1000);
- 
+      
       });
       console.log("Llamada de la API exitosa");
     }

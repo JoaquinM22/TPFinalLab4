@@ -1,12 +1,15 @@
 <p>mostrar-foto works!</p>
 
 <p> Aca abajo se va a mostrar las fotos de la API </p>
+<select [(ngModel)]="modoSeleccionado" id="modoJuego" name="opcionJuego">
+    <option value="modoNormal">Normal</option>
+    <option value="modoMedio">Medio</option>
+    <option value="modoDificil">Dificil</option>
+</select>
+
 <button id="botonLlamarAPI">Llamar API</button> <br><br>
 <button id="botonGenerarFoto">Generar Foto</button> <br><br>
 
 <div class = "AspectoFoto">
     <p id="texto">Aca va a aparecer una imagen aleatoria</p>
 </div>
-
-<!--  <img src="{{foto}}" title="Imagen Aleatoria" width="400" height="340"> -->
-
