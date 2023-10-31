@@ -1,15 +1,15 @@
 
 <div id="tablero" class="contenedor">
     <div class="imagen">
-        <img id="fotoA" src="{{juegos[i].foto}}" alt="Foto Juego">
+        <img id="fotoA" src="{{juegos[contJuego].foto}}" alt="Foto Juego">
     </div>
     <div class="viewPista">
         <div id="blockPuntaje"><span class = "puntaje">{{puntaje}}</span></div>
-        <div id="VP1" class="VP" style="visibility: hidden;" >{{juegos[i].plataformas}}</div>
-        <div id="VP2" class="VP" style="visibility: hidden;">{{juegos[i].creadores}}</div>
-        <div id="VP3" class="VP" style="visibility: hidden;">{{juegos[i].fecha}}</div>
-        <div id="VP4" class="VP" style="visibility: hidden;">{{juegos[i].generos}}</div>
-        <div id="blockTempo"><app-temporizador [minutosString]="minutos" [segundosString]="segundos" class="tempo"></app-temporizador></div>
+        <div id="VP1" class="VP" style="visibility: hidden;" >{{juegos[contJuego].plataformas}}</div>
+        <div id="VP2" class="VP" style="visibility: hidden;">{{juegos[contJuego].creadores}}</div>
+        <div id="VP3" class="VP" style="visibility: hidden;">{{juegos[contJuego].fecha}}</div>
+        <div id="VP4" class="VP" style="visibility: hidden;">{{juegos[contJuego].generos}}</div>
+        <div id="blockTempo"><app-temporizador [terminar]="terminar" (mensajeEnviado)="recibindoDatosDesdeTemporizador($event)" class="tempo"></app-temporizador></div>
     </div>
     <div id="left" class="pistas">
         <button id="50%" class="pista" (click)="handlePistaButtonClick('50%')">50%</button>
@@ -18,11 +18,10 @@
         <button id="jump" class="pista" (click)="handlePistaButtonClick('jump')">Saltear imagen</button>
     </div>
     <div class="options">
-        <!-- <p>{{juegos[i].nombre}}</p> -->
-        <button id="opcion0" class="option" (click)="handleOptionButtonClick(juegos[i].nombresOpciones[0])">{{juegos[i].nombresOpciones[0]}}</button>
-        <button id="opcion1" class="option" (click)="handleOptionButtonClick(juegos[i].nombresOpciones[1])">{{juegos[i].nombresOpciones[1]}}</button>
-        <button id="opcion2" class="option" (click)="handleOptionButtonClick(juegos[i].nombresOpciones[2])">{{juegos[i].nombresOpciones[2]}}</button>
-        <button id="opcion3" class="option" (click)="handleOptionButtonClick(juegos[i].nombresOpciones[3])">{{juegos[i].nombresOpciones[3]}}</button>
+        <button id="opcion0" class="option" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[0])">{{juegos[contJuego].nombresOpciones[0]}}</button>
+        <button id="opcion1" class="option" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[1])">{{juegos[contJuego].nombresOpciones[1]}}</button>
+        <button id="opcion2" class="option" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[2])">{{juegos[contJuego].nombresOpciones[2]}}</button>
+        <button id="opcion3" class="option" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[3])">{{juegos[contJuego].nombresOpciones[3]}}</button>
     </div>
     <div id="rigth" class="pistas">
         <button id="consola" class="pista" (click)="handlePistaButtonClick('consola')">consola</button>
