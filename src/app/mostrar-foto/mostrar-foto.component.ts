@@ -16,6 +16,7 @@ export class MostrarFotoComponent implements OnInit
   datosJuegos: any[] = [];
   nombresJuegos: String[] = [];
   modoSeleccionado: String = 'modoNormal';
+  generoSeleccionado: String = 'porDefecto';
 
   
   //foto: String = "url";
@@ -37,30 +38,100 @@ export class MostrarFotoComponent implements OnInit
         evento.preventDefault();
 
         let numeroRandom: number;
+
         switch(this.modoSeleccionado)
         {
           case "modoNormal":
             numeroRandom = Math.floor(Math.random() * 25) + 1;
-            this.getNombresJuegos((numeroRandom+5));
-            //Hace un timeout para que se carge completamente el arreglo de nombres
-            setTimeout(() => {this.getJuegos(numeroRandom)}, 1000);
             console.log("Modo Normal");
+
+            this.getNombresJuegos((numeroRandom + 5));
+            //Hace un timeout para que se carge completamente el arreglo de nombres
+            setTimeout(() => {this.getJuegos(numeroRandom, this.generoSeleccionado)}, 1000);
           break;
           case "modoMedio":
             numeroRandom = Math.floor(Math.random() * 50) + 1;
-            this.getNombresJuegos((numeroRandom+5));
-            //Hace un timeout para que se carge completamente el arreglo de nombres
-            setTimeout(() => {this.getJuegos(numeroRandom)}, 1000);
             console.log("Modo Medio");
+
+            this.getNombresJuegos((numeroRandom + 5));
+            //Hace un timeout para que se carge completamente el arreglo de nombres
+            setTimeout(() => {this.getJuegos(numeroRandom, this.generoSeleccionado)}, 1000);
           break;
           case "modoDificil":
             numeroRandom = Math.floor(Math.random() * 500) + 1;
-            this.getNombresJuegos((numeroRandom+5));
-            //Hace un timeout para que se carge completamente el arreglo de nombres
-            setTimeout(() => {this.getJuegos(numeroRandom)}, 1000);
             console.log("Modo Dificil");
+
+            this.getNombresJuegos((numeroRandom + 5));
+            //Hace un timeout para que se carge completamente el arreglo de nombres
+            setTimeout(() => {this.getJuegos(numeroRandom, this.generoSeleccionado)}, 1000);
           break;
         }
+
+        /*
+        switch(this.generoSeleccionado)
+        {
+          case "porDefecto":
+            console.log("porDefecto");
+          break;
+          case "generoAccion":
+            console.log("generoAccion");
+          break;
+          case "generoIndie":
+            console.log("generoIndie");
+          break;
+          case "generoAventura":
+            console.log("generoAventura");
+          break;
+          case "generoRPG":
+            console.log("generoRPG");
+          break;
+          case "generoEstrategia":
+            console.log("generoEstrategia");
+          break;
+          case "generoShooter":
+            console.log("generoShooter");
+          break;
+          case "generoCasual":
+            console.log("generoCasual");
+          break;
+          case "generoSimulacion":
+            console.log("generoSimulacion");
+          break;
+          case "generoPuzzle":
+            console.log("generoPuzzle");
+          break;
+          case "generoArcade":
+            console.log("generoArcade");
+          break;
+          case "generoPlataformas":
+            console.log("generoPlataformas");
+          break;
+          case "generoMultijugadorMasivo":
+            console.log("generoMultijugadorMasivo");
+          break;
+          case "generoCarreras":
+            console.log("generoCarreras");
+          break;
+          case "generoDeportes":
+            console.log("generoDeportes");
+          break;
+          case "generoLucha":
+            console.log("generoLucha");
+          break;
+          case "generoFamiliar":
+            console.log("generoFamiliar");
+          break;
+          case "generoJuegosDeMesa":
+            console.log("generoJuegosDeMesa");
+          break;
+          case "generoEducativos":
+            console.log("generoEducativos");
+          break;
+          case "generoDeCartas":
+            console.log("generoDeCartas");
+          break;
+        }
+        */
 
       
       });
@@ -70,7 +141,7 @@ export class MostrarFotoComponent implements OnInit
 
 
   //LLAMA A LA API Y GUARDA LOS JUEGOS
-  getJuegos(i: number)
+  getJuegos(i: number, genero: String)
   {
     class Juego
     {
@@ -96,8 +167,16 @@ export class MostrarFotoComponent implements OnInit
       }
     }
 
-    let API_Juegos =
+    let API_Juegos;
+    if(genero == 'porDefecto')
+    {
+      API_Juegos =
     "https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page_size=10&page=" + i;
+    }else
+    {
+      API_Juegos =
+    "https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page_size=10&page=" + i + "&genres=" + genero;
+    }
 
     fetch(API_Juegos)
     .then(res => res.json())
@@ -139,7 +218,65 @@ export class MostrarFotoComponent implements OnInit
         const nuevosGeneros: String[] = [];
         for(const unGenero of juego.genres)
         {
-          nuevosGeneros.push(unGenero.name);
+          //nuevosGeneros.push(unGenero.name);
+          if(unGenero.name == 'Action')
+          {
+            nuevosGeneros.push('Accion');
+          }else if(unGenero.name == 'Indie')
+          {
+            nuevosGeneros.push(unGenero.name);
+          }else if(unGenero.name == 'Adventure')
+          {
+            nuevosGeneros.push('Aventura');
+          }else if(unGenero.name == 'RPG')
+          {
+            nuevosGeneros.push(unGenero.name);
+          }else if(unGenero.name == 'Strategy')
+          {
+            nuevosGeneros.push('Estrategia');
+          }else if(unGenero.name == 'Shooter')
+          {
+            nuevosGeneros.push(unGenero.name);
+          }else if(unGenero.name == 'Casual')
+          {
+            nuevosGeneros.push(unGenero.name);
+          }else if(unGenero.name == 'Simulation')
+          {
+            nuevosGeneros.push('Simulacion');
+          }else if(unGenero.name == 'Puzzle')
+          {
+            nuevosGeneros.push(unGenero.name);
+          }else if(unGenero.name == 'Arcade')
+          {
+            nuevosGeneros.push(unGenero.name);
+          }else if(unGenero.name == 'Platformer')
+          {
+            nuevosGeneros.push('Plataformas');
+          }else if(unGenero.name == 'Massively Multiplayer')
+          {
+            nuevosGeneros.push('Multijugador masivo');
+          }else if(unGenero.name == 'Racing')
+          {
+            nuevosGeneros.push('Carreras');
+          }else if(unGenero.name == 'Sports')
+          {
+            nuevosGeneros.push('Deportes');
+          }else if(unGenero.name == 'Fighting')
+          {
+            nuevosGeneros.push('Lucha');
+          }else if(unGenero.name == 'Family')
+          {
+            nuevosGeneros.push('Familiar');
+          }else if(unGenero.name == 'Board Games')
+          {
+            nuevosGeneros.push('Juegos de Mesa');
+          }else if(unGenero.name == 'Educational')
+          {
+            nuevosGeneros.push('Educativos');
+          }else if(unGenero.name == 'Card')
+          {
+            nuevosGeneros.push('De Cartas');
+          }
         }
 
         //Carga las plataformas del juego, evita cargar plataformas repetidas
@@ -198,20 +335,19 @@ export class MostrarFotoComponent implements OnInit
         this.datosJuegos.push(nuevoJuego);
       }
 
-      //Diferentes console.log() para ver si hay errores
-      console.log("Juego de la POS 0: ",this.datosJuegos[0]);
+      
       console.log("Se termino de ejecutar segundo fetch");
 
-      console.log(this.datosJuegos[0].nombresOpciones[0]);
-      console.log(this.datosJuegos[0].nombresOpciones[1]);
-      console.log(this.datosJuegos[0].nombresOpciones[2]);
-      console.log(this.datosJuegos[0].nombresOpciones[3]);
-
-      console.log("Arreglo juegos Completo: ",this.datosJuegos);
-
-      console.log("Juego de la POS 1: ",this.datosJuegos[1]);
-      console.log("Juego de la POS 2: ",this.datosJuegos[2]);
-      console.log("Juego de la POS 3: ",this.datosJuegos[3]);
+      console.log("Juego de la POS 0: ",this.datosJuegos[0].generos);
+      console.log("Juego de la POS 1: ",this.datosJuegos[1].generos);
+      console.log("Juego de la POS 2: ",this.datosJuegos[2].generos);
+      console.log("Juego de la POS 3: ",this.datosJuegos[3].generos);
+      console.log("Juego de la POS 4: ",this.datosJuegos[4].generos);
+      console.log("Juego de la POS 5: ",this.datosJuegos[5].generos);
+      console.log("Juego de la POS 6: ",this.datosJuegos[6].generos);
+      console.log("Juego de la POS 7: ",this.datosJuegos[7].generos);
+      console.log("Juego de la POS 8: ",this.datosJuegos[8].generos);
+      console.log("Juego de la POS 9: ",this.datosJuegos[9].generos);
 
     })
     .catch(e => console.error(new Error(e)));
