@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 
-@Component({
+@Component
+({
   selector: 'app-mostrar-foto',
   templateUrl: './mostrar-foto.component.html',
   styleUrls: ['./mostrar-foto.component.css']
@@ -10,16 +11,10 @@ import { Component, OnInit } from '@angular/core';
 export class MostrarFotoComponent
 {
 
-  //FORMA PROPIA CON FETCH
-  // LINK SALVADOR = https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b
-
   datosJuegos: any[] = [];
   nombresJuegos: string[] = [];
   modoSeleccionado: string = 'modoNormal';
   generoSeleccionado: string = 'porDefecto';
-
-  
-  //foto: String = "url";
 
   constructor()
   {
@@ -30,52 +25,38 @@ export class MostrarFotoComponent
   //BOTON LLAMA A LA API
   llamarAPI()
   {
-    /* const botonLlamarAPI = document.querySelector("#iniciar");
-    if(botonLlamarAPI)
+    let numeroRandom: number;
+
+    switch (this.modoSeleccionado)
     {
-      botonLlamarAPI.addEventListener("click", (evento) =>
-      {
-        evento.preventDefault(); */
+      case "modoNormal":
+        numeroRandom = Math.floor(Math.random() * 25) + 1;
+        console.log("Modo Normal");
 
-        /*let numeroRandom = Math.floor(Math.random() * 100) + 1;
-
-        this.getNombresJuegos((numeroRandom+5));
+        this.getNombresJuegos((numeroRandom + 5));
         //Hace un timeout para que se carge completamente el arreglo de nombres
-        setTimeout(() => {this.getJuegos(numeroRandom)}, 1000);*/
+        setTimeout(() => { this.getJuegos(numeroRandom, this.generoSeleccionado) }, 1000);
+      break;
+      case "modoMedio":
+        numeroRandom = Math.floor(Math.random() * 50) + 1;
+        console.log("Modo Medio");
 
-        let numeroRandom: number;
+        this.getNombresJuegos((numeroRandom + 5));
+        //Hace un timeout para que se carge completamente el arreglo de nombres
+        setTimeout(() => { this.getJuegos(numeroRandom, this.generoSeleccionado) }, 1000);
+      break;
+      case "modoDificil":
+        numeroRandom = Math.floor(Math.random() * 500) + 1;
+        console.log("Modo Dificil");
 
-        switch(this.modoSeleccionado)
-        {
-          case "modoNormal":
-            numeroRandom = Math.floor(Math.random() * 25) + 1;
-            console.log("Modo Normal");
-
-            this.getNombresJuegos((numeroRandom + 5));
-            //Hace un timeout para que se carge completamente el arreglo de nombres
-            setTimeout(() => {this.getJuegos(numeroRandom, this.generoSeleccionado)}, 1000);
-          break;
-          case "modoMedio":
-            numeroRandom = Math.floor(Math.random() * 50) + 1;
-            console.log("Modo Medio");
-
-            this.getNombresJuegos((numeroRandom + 5));
-            //Hace un timeout para que se carge completamente el arreglo de nombres
-            setTimeout(() => {this.getJuegos(numeroRandom, this.generoSeleccionado)}, 1000);
-          break;
-          case "modoDificil":
-            numeroRandom = Math.floor(Math.random() * 500) + 1;
-            console.log("Modo Dificil");
-
-            this.getNombresJuegos((numeroRandom + 5));
-            //Hace un timeout para que se carge completamente el arreglo de nombres
-            setTimeout(() => {this.getJuegos(numeroRandom, this.generoSeleccionado)}, 1000);
-          break;
-        }
- 
-      //});
-      console.log("Llamada de la API exitosa");
+        this.getNombresJuegos((numeroRandom + 5));
+        //Hace un timeout para que se carge completamente el arreglo de nombres
+        setTimeout(() => { this.getJuegos(numeroRandom, this.generoSeleccionado) }, 1000);
+      break;
     }
+    
+    console.log("Llamada de la API exitosa");
+  }
   
 
   //LLAMA A LA API Y GUARDA LOS JUEGOS
@@ -156,7 +137,6 @@ export class MostrarFotoComponent
         const nuevosGeneros: string[] = [];
         for(const unGenero of juego.genres)
         {
-          //nuevosGeneros.push(unGenero.name);
           if(unGenero.name == 'Action')
           {
             nuevosGeneros.push('Accion');
