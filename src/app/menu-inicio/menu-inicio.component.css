@@ -3,9 +3,11 @@
     margin: 0;
     padding: 0;
 }
-#iniciar{
+#iniciar
+{
     justify-content: center;
     background-color: aqua;
+}
 
 .content
 {
