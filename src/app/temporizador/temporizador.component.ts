@@ -1,18 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,Input,Output,EventEmitter, OnInit } from '@angular/core';
 
+enum valores{
+  minutos = 2,
+  segundos = 30
+}
 @Component({
   selector: 'app-temporizador',
   templateUrl: './temporizador.component.html',
   styleUrls: ['./temporizador.component.css']
 })
-export class TemporizadorComponent implements OnInit
+export class TemporizadorComponent
 {
+  
+ @Output() mensajeEnviado: EventEmitter<string> = new EventEmitter<string>();
+ @Input() terminar: boolean = true;
 
-  minutosString: String = '00';
-  segundosString: String = '00';
+ minutosString: String = '00';
+ segundosString: String = '00';
   
   constructor()
-  {
+  {  
+    this.iniciarTemporizador(valores.minutos, valores.segundos);
+  }
+  /* iniciarComponente() {
+    this.iniciarTemporizador(valores.minutos, valores.segundos);
+    console.log('El componente se está iniciando...');
+  } */
+  enviarDatos(mensaje : string) {
+    this.mensajeEnviado.emit(mensaje);
   }
 
   // Crea una función que inicializa el temporizador
@@ -41,23 +56,17 @@ export class TemporizadorComponent implements OnInit
       }
 
       // Añade un 0 a la izquierda de los segundos si es necesario
-      if((segundos/1000) < 10)
-      {
-        this.segundosString = "0" + this.segundosString;
-      }
-
-      if(minutos < 10)
-      {
-        this.minutosString = "0" + this.minutosString;
-      }
+      this.minutosString = minutos < 10 ? '0' + minutos : minutos.toString();
+      this.segundosString = segundos < 10 ? '0' + (segundos / 1000) : (segundos / 1000).toString();
 
       // Actualiza el elemento DOM
       //document.getElementById("timer").innerHTML = minutosString + ":" + segundosString;
       console.log(this.minutosString + ":" + this.segundosString);
 
       // Si el tiempo es 0, detiene el temporizador
-      if(minutos === 0 && segundos === 0)
+      if((minutos === 0 && segundos === 0) || !this.terminar)
       {
+        this.enviarDatos(String(Number(this.minutosString)*60+Number(this.segundosString)))
         console.log("Ya termino el Temporizador");
         clearInterval(intervalId);
       }
@@ -65,25 +74,6 @@ export class TemporizadorComponent implements OnInit
 
     // Inicia el temporizador
     const intervalId = setInterval(actualizarTemporizador, 1000);
-  }
-
-  botonIniciar()
-  {
-    const botonIniciar = document.querySelector("#botonIniciar");
-    if(botonIniciar)
-    {
-      botonIniciar.addEventListener("click", (evento) =>
-        {
-            evento.preventDefault();
-
-            this.iniciarTemporizador(2, 45);
-        });
-    }
-  }
-
-  ngOnInit()
-  {
-    this.iniciarTemporizador(2, 45);
   }
 
 }

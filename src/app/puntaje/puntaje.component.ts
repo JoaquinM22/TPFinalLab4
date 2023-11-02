@@ -5,13 +5,12 @@ import { Component, OnInit, Input} from '@angular/core';
   templateUrl: './puntaje.component.html',
   styleUrls: ['./puntaje.component.css']
 })
-export class PuntajeComponent implements OnInit
+export class PuntajeComponent
 {
-  puntaje: number = 0;
+  puntos: number = 200;
 
   constructor()
   {
-    console.log(this.puntaje);
   }
 
   sumarPuntos()
@@ -23,7 +22,7 @@ export class PuntajeComponent implements OnInit
         {
             evento.preventDefault();
 
-            this.puntaje = this.puntaje + 50;
+            this.puntos = this.puntos + 50;
         });
     }
   }
@@ -37,15 +36,8 @@ export class PuntajeComponent implements OnInit
         {
             evento.preventDefault();
 
-            this.puntaje = this.puntaje - 10;
+            this.puntos = this.puntos - 10;
         });
     }
-  }
-
-  ngOnInit()
-  {
-    this.sumarPuntos();
-    this.restarPuntos();
-  }
-
+  } 
 }

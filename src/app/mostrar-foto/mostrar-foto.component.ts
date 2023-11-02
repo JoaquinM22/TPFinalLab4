@@ -6,12 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mostrar-foto.component.css']
 })
 
-export class MostrarFotoComponent implements OnInit
+export class MostrarFotoComponent
 {
 
   //FORMA PROPIA CON FETCH
   // LINK SALVADOR = https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b
-  
+
   datosJuegos: any[] = [];
   nombresJuegos: String[] = [];
   
@@ -19,30 +19,29 @@ export class MostrarFotoComponent implements OnInit
 
   constructor()
   {
-
+    this.llamarAPI()
   }
 
 
   //BOTON LLAMA A LA API
   llamarAPI()
   {
-    const botonLlamarAPI = document.querySelector("#iniciar");
+    /* const botonLlamarAPI = document.querySelector("#iniciar");
     if(botonLlamarAPI)
     {
       botonLlamarAPI.addEventListener("click", (evento) =>
       {
-        evento.preventDefault();
+        evento.preventDefault(); */
 
         let numeroRandom = Math.floor(Math.random() * 100) + 1;
 
         this.getNombresJuegos((numeroRandom+5));
         //Hace un timeout para que se carge completamente el arreglo de nombres
         setTimeout(() => {this.getJuegos(numeroRandom)}, 1000);
- 
-      });
+      /* }); */
       console.log("Llamada de la API exitosa");
     }
-  }
+  
 
   //LLAMA A LA API Y GUARDA LOS JUEGOS
   getJuegos(i: number)
@@ -243,11 +242,4 @@ export class MostrarFotoComponent implements OnInit
     }
   }
   
-
-  ngOnInit()
-  {
-    this.llamarAPI();
-    this.generarFoto();
-  }
-
 }
