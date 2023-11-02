@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./menu-principal.component.css']
 })
 export class MenuPrincipalComponent {
-  
+  mostrarBotones(){
+    const componente = document.getElementById("creacion");
+    if(componente){
+      componente.style.visibility = "visible";
+    }
+  }
+
 }
