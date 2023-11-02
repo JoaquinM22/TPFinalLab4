@@ -44,4 +44,5 @@ import { GamePageComponent } from './paginas/game-page/game-page.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+}

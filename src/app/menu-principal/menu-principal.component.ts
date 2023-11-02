@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./menu-principal.component.css']
 })
 export class MenuPrincipalComponent {
-
+  
 }

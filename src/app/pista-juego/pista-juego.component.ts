@@ -1,5 +1,6 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { TemporizadorComponent } from '../temporizador/temporizador.component';
+import { JuegoInt } from '../interfaces/juegoInt';
 
 
 enum valores {
@@ -20,10 +21,10 @@ enum valores {
   templateUrl: './pista-juego.component.html',
   styleUrls: ['./pista-juego.component.css']
 })
-export class PistaJuegoComponent {
+export class PistaJuegoComponent  {
   //datos de otros componentes
   /* @ViewChild('TemporizadorComponent') TemporizadorComponent = new TemporizadorComponent; */
-  @Input() juegos: any;
+  @Input() juegos: JuegoInt[] = [];
   terminar: boolean = true;
   puntaje: number = 200 ;
   //contador del arreglo de juegos

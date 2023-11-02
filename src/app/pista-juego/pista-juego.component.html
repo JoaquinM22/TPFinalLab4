@@ -6,7 +6,7 @@
     <div class="viewPista">
         <div id="blockPuntaje"><span class = "puntaje">{{puntaje}}</span></div>
         <div id="VP1" class="VP" style="visibility: hidden;" >{{juegos[contJuego].plataformas}}</div>
-        <div id="VP2" class="VP" style="visibility: hidden;">{{juegos[contJuego].creadores}}</div>
+        <div id="VP2" class="VP" style="visibility: hidden;"></div>
         <div id="VP3" class="VP" style="visibility: hidden;">{{juegos[contJuego].fecha}}</div>
         <div id="VP4" class="VP" style="visibility: hidden;">{{juegos[contJuego].generos}}</div>
         <div id="blockTempo"><app-temporizador  [terminar]="terminar" (mensajeEnviado)="recibindoDatosDesdeTemporizador($event)" class="tempo"></app-temporizador></div>
