@@ -19,7 +19,29 @@ export class RankingComponent implements OnInit
 
   async mostrarRanking()
   {
+    const tabla = document.getElementById("cuerpo");
     this.listaUsuarios = await this.usuariosService.getUsuarios();
-    console.log(this.listaUsuarios);
+
+    if(this.listaUsuarios)
+    {
+      for(const datos of this.listaUsuarios)
+      {
+        const fila = document.createElement("tr");
+        fila.className = "posicion";
+        
+        const usuario = document.createElement("td");
+        usuario.innerHTML = datos.usuario;
+        fila.appendChild(usuario);
+
+        const puntaje = document.createElement("td");
+        puntaje.innerHTML = "Puntos:" + datos.puntos;
+        fila.appendChild(puntaje)
+
+        if(tabla)
+        {
+          tabla.appendChild(fila);
+        }
+      }
+    }
   }
 }

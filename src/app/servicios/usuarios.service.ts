@@ -7,7 +7,7 @@ import { Usuario } from '../interfaces/usuario';
 export class UsuariosService 
 {
 
-  url:string = "http://localhost:3000/users";
+  url:string = "http://localhost:3000/users?_sort=puntos&_order=desc";
 
   constructor() { }
 

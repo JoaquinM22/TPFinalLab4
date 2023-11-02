@@ -4,13 +4,13 @@
       "id": 1,
       "usuario": "Franco",
       "password": "Gitana06",
-      "puntos": 200
+      "puntos": 125
     },
     {
       "id": 2,
       "usuario": "Joaquin",
       "password": "Unpassword03",
-      "puntos": 200
+      "puntos": 100
     },
     {
       "id": 3,
@@ -22,7 +22,7 @@
       "id": 4,
       "usuario": "Geronimo",
       "password": "Gero123",
-      "puntos": 200
+      "puntos": 175
     }
   ]
 }

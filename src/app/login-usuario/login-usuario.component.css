@@ -9,6 +9,7 @@
 {
     display: grid;
     grid-template-columns: auto auto;
+    grid-template-rows: auto;
 }
 
 .form_login
@@ -23,8 +24,6 @@
     padding: 20px 30px;
     color:white;
     font-family: arial;
-    /*Esto es una manera de que se muestren de lado*/
-    /*float: left;*/
 }
 
 .form_create
@@ -39,8 +38,6 @@
     padding: 20px 30px;
     color:white;
     font-family: arial;
-    /*Esto es una manera de que se muestren de lado*/
-    /*float: left;*/
 }
 
 .form_login h3, .form_create h3
