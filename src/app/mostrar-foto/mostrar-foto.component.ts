@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-mostrar-foto',
   templateUrl: './mostrar-foto.component.html',
@@ -13,7 +14,10 @@ export class MostrarFotoComponent
   // LINK SALVADOR = https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b
 
   datosJuegos: any[] = [];
-  nombresJuegos: String[] = [];
+  nombresJuegos: string[] = [];
+  modoSeleccionado: string = 'modoNormal';
+  generoSeleccionado: string = 'porDefecto';
+
   
   //foto: String = "url";
 
@@ -33,32 +37,63 @@ export class MostrarFotoComponent
       {
         evento.preventDefault(); */
 
-        let numeroRandom = Math.floor(Math.random() * 100) + 1;
+        /*let numeroRandom = Math.floor(Math.random() * 100) + 1;
 
         this.getNombresJuegos((numeroRandom+5));
         //Hace un timeout para que se carge completamente el arreglo de nombres
-        setTimeout(() => {this.getJuegos(numeroRandom)}, 1000);
-      /* }); */
+        setTimeout(() => {this.getJuegos(numeroRandom)}, 1000);*/
+
+        let numeroRandom: number;
+
+        switch(this.modoSeleccionado)
+        {
+          case "modoNormal":
+            numeroRandom = Math.floor(Math.random() * 25) + 1;
+            console.log("Modo Normal");
+
+            this.getNombresJuegos((numeroRandom + 5));
+            //Hace un timeout para que se carge completamente el arreglo de nombres
+            setTimeout(() => {this.getJuegos(numeroRandom, this.generoSeleccionado)}, 1000);
+          break;
+          case "modoMedio":
+            numeroRandom = Math.floor(Math.random() * 50) + 1;
+            console.log("Modo Medio");
+
+            this.getNombresJuegos((numeroRandom + 5));
+            //Hace un timeout para que se carge completamente el arreglo de nombres
+            setTimeout(() => {this.getJuegos(numeroRandom, this.generoSeleccionado)}, 1000);
+          break;
+          case "modoDificil":
+            numeroRandom = Math.floor(Math.random() * 500) + 1;
+            console.log("Modo Dificil");
+
+            this.getNombresJuegos((numeroRandom + 5));
+            //Hace un timeout para que se carge completamente el arreglo de nombres
+            setTimeout(() => {this.getJuegos(numeroRandom, this.generoSeleccionado)}, 1000);
+          break;
+        }
+ 
+      //});
       console.log("Llamada de la API exitosa");
     }
   
 
   //LLAMA A LA API Y GUARDA LOS JUEGOS
-  getJuegos(i: number)
+  getJuegos(i: number, genero: string)
   {
     class Juego
     {
       // Atributos
-      nombre: String;
-      foto: String;
-      fecha: String;
-      generos: String[];
-      plataformas: String[];
-      nombresOpciones: String[];
+      nombre: string;
+      foto: string;
+      fecha: string;
+      generos: string[];
+      plataformas: string[];
+      nombresOpciones: string[];
       visible: boolean;
     
       // Constructor
-      constructor(nombre: String, foto: String, fecha: String, generos: String[], plataformas: String[], nombresOpciones: String[])
+      constructor(nombre: string, foto: string, fecha: string, generos: string[], plataformas: string[], nombresOpciones: string[])
       {
         this.nombre = nombre;
         this.foto = foto;
@@ -70,8 +105,16 @@ export class MostrarFotoComponent
       }
     }
 
-    let API_Juegos =
+    let API_Juegos;
+    if(genero == 'porDefecto')
+    {
+      API_Juegos =
     "https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page_size=10&page=" + i;
+    }else
+    {
+      API_Juegos =
+    "https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page_size=10&page=" + i + "&genres=" + genero;
+    }
 
     fetch(API_Juegos)
     .then(res => res.json())
@@ -84,10 +127,10 @@ export class MostrarFotoComponent
       {
 
         //Carga nombre Juego
-        const nuevoNombre: String = juego.name;
+        const nuevoNombre: string = juego.name;
 
         //Carga URL fotos en un arreglo auxiliar
-        const nuevasFotos: String[] = [];
+        const nuevasFotos: string[] = [];
         for(const unaFoto of juego.short_screenshots)
         {
           nuevasFotos.push(unaFoto.image);
@@ -104,20 +147,78 @@ export class MostrarFotoComponent
         }while(posRandom >= nuevasFotos.length);
 
         //Cargo esa URL random valida en nuevaFoto
-        const nuevaFoto: String = nuevasFotos[posRandom];
+        const nuevaFoto: string = nuevasFotos[posRandom];
 
         //Carga la fecha del juego
-        const nuevaFecha: String = juego.released;
+        const nuevaFecha: string = juego.released;
 
         //Carga los generos del juego
-        const nuevosGeneros: String[] = [];
+        const nuevosGeneros: string[] = [];
         for(const unGenero of juego.genres)
         {
-          nuevosGeneros.push(unGenero.name);
+          //nuevosGeneros.push(unGenero.name);
+          if(unGenero.name == 'Action')
+          {
+            nuevosGeneros.push('Accion');
+          }else if(unGenero.name == 'Indie')
+          {
+            nuevosGeneros.push(unGenero.name);
+          }else if(unGenero.name == 'Adventure')
+          {
+            nuevosGeneros.push('Aventura');
+          }else if(unGenero.name == 'RPG')
+          {
+            nuevosGeneros.push(unGenero.name);
+          }else if(unGenero.name == 'Strategy')
+          {
+            nuevosGeneros.push('Estrategia');
+          }else if(unGenero.name == 'Shooter')
+          {
+            nuevosGeneros.push(unGenero.name);
+          }else if(unGenero.name == 'Casual')
+          {
+            nuevosGeneros.push(unGenero.name);
+          }else if(unGenero.name == 'Simulation')
+          {
+            nuevosGeneros.push('Simulacion');
+          }else if(unGenero.name == 'Puzzle')
+          {
+            nuevosGeneros.push(unGenero.name);
+          }else if(unGenero.name == 'Arcade')
+          {
+            nuevosGeneros.push(unGenero.name);
+          }else if(unGenero.name == 'Platformer')
+          {
+            nuevosGeneros.push('Plataformas');
+          }else if(unGenero.name == 'Massively Multiplayer')
+          {
+            nuevosGeneros.push('Multijugador masivo');
+          }else if(unGenero.name == 'Racing')
+          {
+            nuevosGeneros.push('Carreras');
+          }else if(unGenero.name == 'Sports')
+          {
+            nuevosGeneros.push('Deportes');
+          }else if(unGenero.name == 'Fighting')
+          {
+            nuevosGeneros.push('Lucha');
+          }else if(unGenero.name == 'Family')
+          {
+            nuevosGeneros.push('Familiar');
+          }else if(unGenero.name == 'Board Games')
+          {
+            nuevosGeneros.push('Juegos de Mesa');
+          }else if(unGenero.name == 'Educational')
+          {
+            nuevosGeneros.push('Educativos');
+          }else if(unGenero.name == 'Card')
+          {
+            nuevosGeneros.push('De Cartas');
+          }
         }
 
         //Carga las plataformas del juego, evita cargar plataformas repetidas
-        const nuevasPlataformas: String[] = [];
+        const nuevasPlataformas: string[] = [];
         for(const unaPlataforma of juego.platforms)
         {
           const nombreDeLaPlataforma = unaPlataforma.platform.name;
@@ -141,7 +242,7 @@ export class MostrarFotoComponent
 
         //Del arreglo nombres, cambia el orden de los datos, de manera que pese a que
         //siempre cargue las posiciones 0, 1, 2 y 3. Los datos seran siempre al azar
-        function randomizarNombres(arregloNombres: String[])
+        function randomizarNombres(arregloNombres: string[])
         {
           for(let i = arregloNombres.length - 1; i > 0; i--)
           {
@@ -175,20 +276,18 @@ export class MostrarFotoComponent
 
       //Diferentes console.log() para ver si hay errores
       console.log("Juego de la POS 0: ",this.datosJuegos[0]);
-      console.log("Consola:", this.datosJuegos[0].plataformas);
-
       console.log("Se termino de ejecutar segundo fetch");
 
-      console.log(this.datosJuegos[0].nombresOpciones[0]);
-      console.log(this.datosJuegos[0].nombresOpciones[1]);
-      console.log(this.datosJuegos[0].nombresOpciones[2]);
-      console.log(this.datosJuegos[0].nombresOpciones[3]);
-
-      console.log("Arreglo juegos Completo: ",this.datosJuegos);
-
-      console.log("Juego de la POS 1: ",this.datosJuegos[1]);
-      console.log("Juego de la POS 2: ",this.datosJuegos[2]);
-      console.log("Juego de la POS 3: ",this.datosJuegos[3]);
+      console.log("Juego de la POS 0: ",this.datosJuegos[0].generos);
+      console.log("Juego de la POS 1: ",this.datosJuegos[1].generos);
+      console.log("Juego de la POS 2: ",this.datosJuegos[2].generos);
+      console.log("Juego de la POS 3: ",this.datosJuegos[3].generos);
+      console.log("Juego de la POS 4: ",this.datosJuegos[4].generos);
+      console.log("Juego de la POS 5: ",this.datosJuegos[5].generos);
+      console.log("Juego de la POS 6: ",this.datosJuegos[6].generos);
+      console.log("Juego de la POS 7: ",this.datosJuegos[7].generos);
+      console.log("Juego de la POS 8: ",this.datosJuegos[8].generos);
+      console.log("Juego de la POS 9: ",this.datosJuegos[9].generos);
 
     })
     .catch(e => console.error(new Error(e)));
