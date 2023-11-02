@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { PasarDatosAPIService } from '../servicios/pasar-datos-api.service';
 
 
 @Component
@@ -16,9 +18,10 @@ export class MostrarFotoComponent
   modoSeleccionado: string = 'modoNormal';
   generoSeleccionado: string = 'porDefecto';
 
-  constructor()
+  constructor(private router: Router, private pasarDatosAPIService: PasarDatosAPIService)
   {
-    this.llamarAPI()
+    //const router: Router = ['/game'];
+    //this.llamarAPI()
   }
 
 
@@ -36,6 +39,7 @@ export class MostrarFotoComponent
         this.getNombresJuegos((numeroRandom + 5));
         //Hace un timeout para que se carge completamente el arreglo de nombres
         setTimeout(() => { this.getJuegos(numeroRandom, this.generoSeleccionado) }, 1000);
+        console.log("Entre al PorDefecto, Estoy debajo del setInterval");
       break;
       case "modoMedio":
         numeroRandom = Math.floor(Math.random() * 50) + 1;
@@ -56,12 +60,14 @@ export class MostrarFotoComponent
     }
     
     console.log("Llamada de la API exitosa");
+    console.log("Genero Elegido", this.generoSeleccionado);
   }
   
 
   //LLAMA A LA API Y GUARDA LOS JUEGOS
   getJuegos(i: number, genero: string)
   {
+    console.log("Entre a GetJuegos");
     class Juego
     {
       // Atributos
@@ -85,6 +91,8 @@ export class MostrarFotoComponent
         this.visible = true;
       }
     }
+
+    let arregloDeJuegos: Juego[] = [];
 
     let API_Juegos;
     if(genero == 'porDefecto')
@@ -251,8 +259,10 @@ export class MostrarFotoComponent
           nuevasPlataformas,
           nuevosNombresOpciones
         );
-        this.datosJuegos.push(nuevoJuego);
+        arregloDeJuegos.push(nuevoJuego);
       }
+
+      this.datosJuegos = arregloDeJuegos;
 
       //Diferentes console.log() para ver si hay errores
       console.log("Juego de la POS 0: ",this.datosJuegos[0]);
@@ -269,6 +279,11 @@ export class MostrarFotoComponent
       console.log("Juego de la POS 8: ",this.datosJuegos[8].generos);
       console.log("Juego de la POS 9: ",this.datosJuegos[9].generos);
 
+      console.log("Los 10 juego son", this.datosJuegos);
+
+      console.log("Se cargo correctamente this.datosJuegos");
+      this.asignarValor();
+      console.log("Le pase los datos a Pista component");
     })
     .catch(e => console.error(new Error(e)));
   
@@ -277,6 +292,7 @@ export class MostrarFotoComponent
 
   getNombresJuegos(i: number)
   {
+    let arregloDeNombres: string[] = [];
     let nombres =
     "https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page_size=40&page=" + i;
 
@@ -287,10 +303,14 @@ export class MostrarFotoComponent
       console.log("Cargando solo nombres");
       for(const juego of data.results)
       {
-        this.nombresJuegos.push(juego.name);
+        arregloDeNombres.push(juego.name);
       }
       console.log("Se cargaron todos los nombres");
 
+      this.nombresJuegos = arregloDeNombres;
+
+      console.log("Los 40 nombres son", this.nombresJuegos);
+      console.log("Se cargo correctamente this.nombresJuegos");
     })
     .catch(e => console.error(new Error(e)));
   }
@@ -325,5 +345,36 @@ export class MostrarFotoComponent
       });
     }
   }
+
+  //Hace que inicie la partida
+  iniciarPartida()
+  {
+    this.llamarAPI();
+    /*.then(() =>
+    {
+        // Navega al componente /game solo después de que la operación haya finalizado
+        this.router.navigate(['/game']);
+    })
+    .catch(error =>
+    {
+        // Maneja errores si es necesario
+        console.error('Error en llamarAPI:', error);
+    });*/
+    setTimeout(() => { this.router.navigate(['/game']); }, 3000);
+  }
+
+  asignarValor()
+  {
+    this.pasarDatosAPIService.asignarValorCompartido(this.datosJuegos);
+  }
+
+
+
+
+
+
+
+
+
   
 }

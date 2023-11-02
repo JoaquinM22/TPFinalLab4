@@ -1,14 +1,23 @@
 <h1 class="page_title" id="titulo">MENU PRINCIPAL</h1>
 
 <section class="menu">
-    <a class="boton" id="crear" href="#" (click)="crearPartida()">Crear Partida</a>
+    <!-- <a class="boton" id="crear" (click)="crearPartida()">Crear Partida</a>
     <a class="boton" id="ranking" href="http://localhost:4200/ranking">Ranking</a>
     <a class="boton" id="perfil" href="#">Ver Perfil</a>
     <a class="boton" id="opciones" href="#">Opciones</a>
-    <a class="boton" id="historial" href="#">Historial</a>
-    <a class="boton" id="" href="http://localhost:4200/login">Cerrar Sesion</a>
+    <a class="boton" id="historial" href="#">Historial</a> -->
+    <!-- <a class="boton" id="" href="http://localhost:4200/login">Cerrar Sesion</a> -->
+    
+    <button class="botonNuevo" (click)="crearPartida()">Crear Partida</button>
+    <button class="botonNuevo" routerLink="/ranking">Ranking</button>
+    <button class="botonNuevo" routerLink="/landing">Ver Perfil</button>
+    <button class="botonNuevo" routerLink="/landing">Opciones</button>
+    <button class="botonNuevo" routerLink="/landing">Historial</button>
+    <button class="botonNuevo" routerLink="/login">Cerrar Sesion</button>
+
 </section>
 
-<div id="crearPartida" style="visibility: hidden;">
+<div id="opcionesPartida" style="visibility: hidden;">
     <app-mostrar-foto></app-mostrar-foto>
 </div>
+ 
