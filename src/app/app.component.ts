@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MostrarFotoComponent } from './mostrar-foto/mostrar-foto.component';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'TPFinal_Lab4';
+
+ /*  @ViewChild('miComponente') miComponente: MostrarFotoComponent;
+
+  iniciarMiComponente() {
+    // Llama al método iniciarComponente del componente hijo
+    this.miComponente.iniciarComponente();
+  } */
 }

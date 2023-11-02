@@ -8,3 +8,13 @@ html
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
+
+.page_title
+{
+    text-align: center;
+
+    color: greenyellow;
+
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 90px;
+}

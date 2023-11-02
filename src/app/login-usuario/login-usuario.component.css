@@ -5,6 +5,13 @@
     box-sizing: border-box;
 }
 
+.formularios
+{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto;
+}
+
 .form_login
 {
     width: 400px;
