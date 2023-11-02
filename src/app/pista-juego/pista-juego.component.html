@@ -9,7 +9,6 @@
         <div id="VP2" class="VP" style="visibility: hidden;">{{juegos[contJuego].creadores}}</div>
         <div id="VP3" class="VP" style="visibility: hidden;">{{juegos[contJuego].fecha}}</div>
         <div id="VP4" class="VP" style="visibility: hidden;">{{juegos[contJuego].generos}}</div>
-        <!-- #TemporizadorComponent -->
         <div id="blockTempo"><app-temporizador  [terminar]="terminar" (mensajeEnviado)="recibindoDatosDesdeTemporizador($event)" class="tempo"></app-temporizador></div>
     </div>
     <div id="left" class="pistas">
