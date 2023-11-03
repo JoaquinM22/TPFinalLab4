@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PistaJuegoComponent } from './pista-juego/pista-juego.component';
 import { MostrarFotoComponent } from './mostrar-foto/mostrar-foto.component';
-import { PuntajeComponent } from './puntaje/puntaje.component';
 import { TemporizadorComponent } from './temporizador/temporizador.component';
 import { LoginUsuarioComponent } from './login-usuario/login-usuario.component';
 import { MenuInicioComponent } from './menu-inicio/menu-inicio.component';
@@ -24,7 +23,6 @@ import { GamePageComponent } from './paginas/game-page/game-page.component';
     AppComponent,
     PistaJuegoComponent,
     MostrarFotoComponent,
-    PuntajeComponent,
     TemporizadorComponent,
     LoginUsuarioComponent,
     MenuInicioComponent,

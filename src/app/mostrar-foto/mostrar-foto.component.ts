@@ -19,7 +19,7 @@ export class MostrarFotoComponent
 
   constructor()
   {
-    this.llamarAPI()
+    this.llamarAPI();
   }
 
 
@@ -241,5 +241,15 @@ export class MostrarFotoComponent
       });
     }
   }
-  
+  recibindoDatosDesdeTemporizador(mensaje: string) {
+    switch(mensaje){
+      case 'otra':
+        this.datosJuegos=[];
+        this.llamarAPI();
+        this.empezar=false;
+        break;
+      case 'terminar':
+        break;
+    }
+ }
 }

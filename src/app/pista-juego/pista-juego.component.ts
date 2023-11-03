@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { TemporizadorComponent } from '../temporizador/temporizador.component';
 import { JuegoInt } from '../interfaces/juegoInt';
 
@@ -24,9 +24,14 @@ enum valores {
 export class PistaJuegoComponent  {
   //datos de otros componentes
   /* @ViewChild('TemporizadorComponent') TemporizadorComponent = new TemporizadorComponent; */
+  @Output() mensajeEnviado: EventEmitter<string> = new EventEmitter<string>();
   @Input() juegos: JuegoInt[] = [];
   terminar: boolean = true;
   puntaje: number = 200 ;
+  //controlador de inicio y fin
+  empezar: boolean = false;
+  cartelInicio: boolean = true;
+  cartelFinal: boolean = false;
   //contador del arreglo de juegos
   contJuego: number = 0;
   //estados de las pistas
@@ -37,14 +42,22 @@ export class PistaJuegoComponent  {
   fecha: boolean=false;
   constructor()
   {
-    this.iniciarPartida();
+
   }
   iniciarPartida(){
-    if(confirm("Quieres empezar la partida"))
-    {
-      /* this.TemporizadorComponent.iniciarComponente(); */
-    }
-  } 
+    this.cartelInicio=false;
+    this.empezar=true;
+  }
+  finalizarPartida(){
+
+  }
+  empezarOtra(){
+    this.enviarDatos('otra');
+  }
+
+  enviarDatos(mensaje : string) {
+    this.mensajeEnviado.emit(mensaje);
+  }
   // maneja los botones de las pistas
   handlePistaButtonClick(buttonText: string): void {
     switch (buttonText) {
@@ -110,6 +123,7 @@ export class PistaJuegoComponent  {
     if(this.juegos.length == this.contJuego){
        this.terminar = false;
        this.contJuego=0;
+       this.cartelFinal=true;
       }
   }
 
