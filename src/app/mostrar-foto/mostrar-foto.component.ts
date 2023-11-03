@@ -11,7 +11,7 @@ export class MostrarFotoComponent
 
   //FORMA PROPIA CON FETCH
   // LINK SALVADOR = https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b
-
+  empezar: boolean =false;
   datosJuegos: any[] = [];
   nombresJuegos: String[] = [];
   
