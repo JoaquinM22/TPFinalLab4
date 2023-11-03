@@ -1,7 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { PasarDatosAPIService } from '../servicios/pasar-datos-api.service';
-
 
 @Component
 ({
@@ -19,10 +16,8 @@ export class MostrarFotoComponent
   modoSeleccionado: string = 'modoNormal';
   generoSeleccionado: string = 'porDefecto';
 
-  constructor(private router: Router, private pasarDatosAPIService: PasarDatosAPIService)
+  constructor()
   {
-    //const router: Router = ['/game'];
-    //this.llamarAPI()
   }
 
 
@@ -283,7 +278,7 @@ export class MostrarFotoComponent
       console.log("Los 10 juego son", this.datosJuegos);
 
       console.log("Se cargo correctamente this.datosJuegos");
-      this.asignarValor();
+
       console.log("Le pase los datos a Pista component");
     })
     .catch(e => console.error(new Error(e)));
@@ -316,65 +311,16 @@ export class MostrarFotoComponent
     .catch(e => console.error(new Error(e)));
   }
 
-
-  //BOTON MUESTRA FOTO RANDOM DEL ARREGLO
-  generarFoto()
-  {
-    const botonGenerarFoto = document.querySelector("#botonGenerarFoto");
-    if(botonGenerarFoto)
-    {
-      botonGenerarFoto.addEventListener("click", (evento) =>
-      {
-        evento.preventDefault();
-
-        const texto = document.querySelector("#texto");
-        if(texto)
-        {
-          //Genera numeros del 0 al 9, que son las posiciones
-          //validas del arreglo de juegos
-          let numeroRandom = Math.floor(Math.random() * 10);
-          
-          const imagen = document.createElement("img");
-          imagen.src = this.datosJuegos[numeroRandom].foto;
-          imagen.width = 800;
-          imagen.height = 500;
-          imagen.alt = "Imagen aleatoria"
-          imagen.title = "Imagen aleatoria";
-
-          texto.replaceChildren(imagen);
-        }
-      });
-    }
-  }
-
-  //Hace que inicie la partida
-  iniciarPartida()
-  {
+  iniciarPartida(){
     this.llamarAPI();
-    /*.then(() =>
-    {
-        // Navega al componente /game solo después de que la operación haya finalizado
-        this.router.navigate(['/game']);
-    })
-    .catch(error =>
-    {
-        // Maneja errores si es necesario
-        console.error('Error en llamarAPI:', error);
-    });*/
-    setTimeout(() => { this.router.navigate(['/game']); }, 3000);
+    this.empezar=true;
   }
-
-  asignarValor()
-  {
-    this.pasarDatosAPIService.asignarValorCompartido(this.datosJuegos);
-  }
-
+  
   recibindoDatosDesdeTemporizador(mensaje: string) {
     switch(mensaje){
       case 'otra':
         this.datosJuegos=[];
-        this.llamarAPI();
-        this.empezar=false;
+        this.iniciarPartida();
         break;
       case 'terminar':
         break;

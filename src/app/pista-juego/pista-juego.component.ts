@@ -51,6 +51,7 @@ export class PistaJuegoComponent  {
   }
   
   iniciarPartida(){
+
     this.cartelInicio=false;
     this.empezar=true;
   }
@@ -58,6 +59,7 @@ export class PistaJuegoComponent  {
 
   }
   empezarOtra(){
+    this.cartelFinal=false;
     this.enviarDatos('otra');
   }
 
@@ -138,6 +140,7 @@ export class PistaJuegoComponent  {
     {
       this.terminar = false;
       this.contJuego=0;
+      this.cartelFinal=true;
     }
   }
 
