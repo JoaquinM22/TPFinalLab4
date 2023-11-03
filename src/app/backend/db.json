@@ -23,6 +23,18 @@
       "usuario": "Geronimo",
       "password": "Gero123",
       "puntos": 175
+    },
+    {
+      "id": 7,
+      "usuario": "Pepe",
+      "password": "Messi",
+      "puntos": 200
+    },
+    {
+      "id": 6,
+      "usuario": "Carlos",
+      "password": "Hola",
+      "puntos": 200
     }
   ]
 }
