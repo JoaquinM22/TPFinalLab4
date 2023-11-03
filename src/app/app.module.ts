@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PistaJuegoComponent } from './pista-juego/pista-juego.component';
@@ -17,6 +16,7 @@ import { LandingPageComponent } from './paginas/landing-page/landing-page.compon
 import { LoginPageComponent } from './paginas/login-page/login-page.component';
 import { MenuPageComponent } from './paginas/menu-page/menu-page.component';
 import { GamePageComponent } from './paginas/game-page/game-page.component';
+import { PasarDatosAPIService } from './servicios/pasar-datos-api.service';
 
 @NgModule({
   declarations: [
@@ -38,8 +38,9 @@ import { GamePageComponent } from './paginas/game-page/game-page.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
   ],
-  providers: [],
+  providers: [PasarDatosAPIService],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

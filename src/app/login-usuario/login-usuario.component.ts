@@ -1,4 +1,6 @@
 import { Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
+import { Usuario } from '../interfaces/usuario';
 
 @Component({
   selector: 'app-login-usuario',
@@ -7,31 +9,22 @@ import { Component, OnInit} from '@angular/core';
 })
 export class LoginUsuarioComponent implements OnInit{
   
-  constructor()
+  constructor(private router: Router)
   {
 
   }
 
-  usuarioLogueado: any;
-  usuarioaValidar: any;
-  usuarioCreado: any;
-  
+  usuarioLogueado: Usuario = 
+  { 
+    id: 0,
+    usuario: "",
+    password: "",
+    puntos:0
+  };
 
   //Funcion de guardar los datos de usuario
   async logueo_Usuario()
   {
-    class usuario
-    {
-      nombreUsuario: String;
-      password: String;
-
-      constructor(nombreUsuario: String, password: String)
-      {
-        this.nombreUsuario = nombreUsuario;
-        this.password = password;
-      }
-    }
-
     const botonInicioSesion = document.querySelector("#ingresar");
 
     if(botonInicioSesion)
@@ -40,18 +33,17 @@ export class LoginUsuarioComponent implements OnInit{
       {
         evento.preventDefault();
 
-        const nombre = (<HTMLInputElement>document.getElementById("Usuario")).value;
-        const password = (<HTMLInputElement>document.getElementById("Password")).value;
-
-        this.usuarioaValidar = new usuario(nombre, password);
+        const usuarioL = (<HTMLInputElement>document.getElementById("Usuario")).value;
+        const pass = (<HTMLInputElement>document.getElementById("Password")).value;
 
         //Falta agregar la funcion que lo compare con los registros
 
-        const validado = await this.validarUsuario(nombre, password);
+        const validado = await this.validarUsuario(usuarioL, pass);
 
         if(validado)
         {
           console.log(this.usuarioLogueado);
+          this.router.navigate(['/menu']);
         }else
         {
           var mensaje = document.getElementById("txt_login");
@@ -68,18 +60,6 @@ export class LoginUsuarioComponent implements OnInit{
 
   async creacion_Usuario()
   {
-    class usuarioCre
-    {
-      nombreUsuario: String;
-      password: String;
-
-      constructor(nombreUsuario: String, password: String)
-      {
-        this.nombreUsuario = nombreUsuario;
-        this.password = password;
-      }
-    }
-
     const botonCrearCuenta = document.querySelector("#crear");
 
     if(botonCrearCuenta)
@@ -88,28 +68,33 @@ export class LoginUsuarioComponent implements OnInit{
       {
         evento.preventDefault();
 
-        const nombreNew = (<HTMLInputElement>document.getElementById("UsuarioNuevo")).value;
-        const passwordNew = (<HTMLInputElement>document.getElementById("PasswordNuevo")).value;
+        const nombreCre = (<HTMLInputElement>document.getElementById("UsuarioNuevo")).value;
+        const passCre = (<HTMLInputElement>document.getElementById("PasswordNuevo")).value;
         const confPassword = (<HTMLInputElement>document.getElementById("PasswordConfirm")).value;
 
         //Confirmacion de password
-        if(passwordNew !== confPassword)
+        if(passCre !== confPassword)
         {
           var mensaje = document.getElementById("texto");
           if(mensaje)
           {
             mensaje.innerHTML = "Los passwords no coinciden";
           }
-        }else if(passwordNew === confPassword)
+        }else if(passCre === confPassword)
         {
           //Crea el usuario y lo manda a la funcion que lo carga en el server
-          var validacion = await this.validarUsuario(nombreNew, passwordNew);
+          var validacion = await this.validarUsuario(nombreCre, passCre);
 
           if(validacion)
           {
             //Si el usuario ya existe crea un mensaje
             var mensaje = document.getElementById("texto");
-            this.usuarioLogueado = null;
+            this.usuarioLogueado = { 
+              id: 0,
+              usuario: "",
+              password: "",
+              puntos:0
+            };
             if(mensaje)
             {
               mensaje.innerHTML = "Usuario ya existente";
@@ -117,8 +102,9 @@ export class LoginUsuarioComponent implements OnInit{
           }else
           {
             //Aca sube los datos al server
-            this.cargarUsuario(nombreNew, passwordNew);
-            this.usuarioLogueado = new usuarioCre(nombreNew, passwordNew);
+            this.cargarUsuario(nombreCre, passCre);
+            console.log(this.usuarioLogueado);
+            this.router.navigate(['/menu']);
           }
         }else
         {
@@ -136,12 +122,12 @@ export class LoginUsuarioComponent implements OnInit{
   cargarUsuario(nombre: string, password: string)
   {
 
-    const update = 
+    const update: Usuario = 
     {
-      id: 4,
+      id: 6,
       usuario: nombre,
       password: password,
-      puntos: 0,
+      puntos: 200,
     };
 
     const options = 
@@ -163,21 +149,13 @@ export class LoginUsuarioComponent implements OnInit{
       console.log(e);
     });
 
+    this.usuarioLogueado = update;
+
   }
 
   async validarUsuario(nombre: string, contra: string) {
     var validacion: boolean = false;
-  
-    class registrado {
-      nombreUsuario: string;
-      password: string;
-  
-      constructor(nombreUsuario: string, password: string) {
-        this.nombreUsuario = nombreUsuario;
-        this.password = password;
-      }
-    }
-  
+
     const servidor = "http://localhost:3000/users";
   
     try {
@@ -187,7 +165,14 @@ export class LoginUsuarioComponent implements OnInit{
       for (const datos of json) {
         if (datos.usuario === nombre) {
           if (datos.password === contra) {
-            this.usuarioLogueado = new registrado(datos.usuario, datos.password);
+            this.usuarioLogueado = 
+            { 
+              id: datos.id,
+              usuario: nombre,
+              password: contra,
+              puntos: datos.puntos
+            };
+
             validacion = true;
           }
         }

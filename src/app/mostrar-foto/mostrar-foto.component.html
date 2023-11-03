@@ -1,3 +1,41 @@
-<button id="iniciar" (click)="empezar=true">Iniciar Partida</button>
-<app-pista-juego *ngIf="empezar"  [juegos]="datosJuegos" (mensajeEnviado)="recibindoDatosDesdeTemporizador($event)"></app-pista-juego>
+<!-- <button id="iniciar" (click)="llamarAPI()">Iniciar Partida</button> -->
+<!-- <app-pista-juego id="empezar" [juegos]="datosJuegos"></app-pista-juego> -->
 
+<select class="botonOpciones" [(ngModel)]="modoSeleccionado" id="modoJuego" name="opcionJuego">
+    <option value="modoNormal">Normal</option>
+    <option value="modoMedio">Medio</option>
+    <option value="modoDificil">Dificil</option>
+</select>
+
+<select class="botonOpciones" [(ngModel)]="generoSeleccionado" id="generoJuego" name="opcionGenero">
+    <option value="porDefecto">Todos</option>
+    <option value="action">Accion</option>
+    <option value="indie">Indie</option>
+    <option value="adventure">Aventura</option>
+    <option value="role-playing-games-rpg">RPG</option>
+    <option value="strategy">Estrategia</option>
+    <option value="shooter">Shooter</option>
+    <option value="casual">Casual</option>
+    <option value="simulation">Simulacion</option>
+    <option value="puzzle">Puzzle</option>
+    <option value="arcade">Arcade</option>
+    <option value="platformer">Plataformas</option>
+    <option value="massively-multiplayer">Multijugador masivo</option>
+    <option value="racing">Carreras</option>
+    <option value="sports">Deportes</option>
+    <option value="fighting">Lucha</option>
+    <option value="family">Familiar</option>
+    <option value="board-games">Juegos de Mesa</option>
+    <option value="educational">Educativos</option>
+    <option value="card">De Cartas</option>
+</select>
+
+<!-- <a class="botonNuevo" id="iniciar" href="#" (click)="iniciarPartida()">Iniciar Partida</a>
+ -->
+
+<!--  <app-pista-juego [juegos]="datosJuegos"></app-pista-juego>
+ -->
+ 
+<!--  <button id="comenzarPartida" class="botonNuevo" (click)="llamarAPI()" routerLink="/game">Iniciar Partida</button>
+ --> 
+ <button class="botonNuevo" (click)="iniciarPartida()">Iniciar Partida</button>
