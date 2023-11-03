@@ -13,6 +13,7 @@ import { PasarDatosAPIService } from '../servicios/pasar-datos-api.service';
 export class MostrarFotoComponent
 {
 
+  empezar: boolean =false;
   datosJuegos: any[] = [];
   nombresJuegos: string[] = [];
   modoSeleccionado: string = 'modoNormal';
@@ -368,13 +369,15 @@ export class MostrarFotoComponent
     this.pasarDatosAPIService.asignarValorCompartido(this.datosJuegos);
   }
 
-
-
-
-
-
-
-
-
-  
+  recibindoDatosDesdeTemporizador(mensaje: string) {
+    switch(mensaje){
+      case 'otra':
+        this.datosJuegos=[];
+        this.llamarAPI();
+        this.empezar=false;
+        break;
+      case 'terminar':
+        break;
+    }
+  }
 }
