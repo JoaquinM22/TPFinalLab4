@@ -10,6 +10,7 @@ import { Component } from '@angular/core';
 export class MostrarFotoComponent
 {
 
+  cartelInicio: boolean = true;
   empezar: boolean =false;
   datosJuegos: any[] = [];
   nombresJuegos: string[] = [];
@@ -58,9 +59,8 @@ export class MostrarFotoComponent
     console.log("Llamada de la API exitosa");
     console.log("Genero Elegido", this.generoSeleccionado);
   }
-  
-
   //LLAMA A LA API Y GUARDA LOS JUEGOS
+  
   getJuegos(i: number, genero: string)
   {
     console.log("Entre a GetJuegos");
@@ -314,13 +314,14 @@ export class MostrarFotoComponent
   iniciarPartida(){
     this.llamarAPI();
     this.empezar=true;
+    this.cartelInicio=false;
   }
-  
+
   recibindoDatosDesdeTemporizador(mensaje: string) {
     switch(mensaje){
       case 'otra':
-        this.datosJuegos=[];
-        this.iniciarPartida();
+        this.empezar=false;
+        this.cartelInicio=true;
         break;
       case 'terminar':
         break;
