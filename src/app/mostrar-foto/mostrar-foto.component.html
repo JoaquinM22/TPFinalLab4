@@ -1,6 +1,6 @@
-<button id="iniciar" (click)="empezar=true">Iniciar Partida</button>
-<app-pista-juego *ngIf="empezar"  [juegos]="datosJuegos" (mensajeEnviado)="recibindoDatosDesdeTemporizador($event)"></app-pista-juego>
-
+<!-- <button id="iniciar" (click)="empezar=true">Iniciar Partida</button>
+ --><!-- <app-pista-juego *ngIf="empezar"  [juegos]="datosJuegos" (mensajeEnviado)="recibindoDatosDesdeTemporizador($event)"></app-pista-juego>
+ -->
 <select class="botonOpciones" [(ngModel)]="modoSeleccionado" id="modoJuego" name="opcionJuego">
     <option value="modoNormal">Normal</option>
     <option value="modoMedio">Medio</option>
@@ -29,9 +29,5 @@
     <option value="educational">Educativos</option>
     <option value="card">De Cartas</option>
 </select>
-
-<!--  <button class="botonNuevo" (click)="iniciarPartida()">Iniciar Partida</button> -->
-
- 
 
  <button class="botonNuevo" (click)="obtenerJuegosYRedirigir()">Iniciar Partida NEW</button>
