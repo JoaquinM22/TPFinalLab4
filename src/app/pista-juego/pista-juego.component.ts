@@ -1,6 +1,6 @@
-import { Component, Input, ViewChild, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { TemporizadorComponent } from '../temporizador/temporizador.component';
-import { PasarDatosAPIService } from '../servicios/pasar-datos-api.service';
+import { JuegoInt } from '../interfaces/juegoInt';
 
 
 enum valores
@@ -24,14 +24,18 @@ enum valores
   styleUrls: ['./pista-juego.component.css']
 })
 
-export class PistaJuegoComponent implements OnInit
-{
+export class PistaJuegoComponent  {
   //datos de otros componentes
   /* @ViewChild('TemporizadorComponent') TemporizadorComponent = new TemporizadorComponent; */
-  @Input() juegos: any;
+  @Output() mensajeEnviado: EventEmitter<string> = new EventEmitter<string>();
+  @Input() juegos: JuegoInt[] = [];
   terminar: boolean = true;
   puntaje: number = 200 ;
 
+  //controlador de inicio y fin
+  empezar: boolean = false;
+  cartelInicio: boolean = true;
+  cartelFinal: boolean = false;
   //contador del arreglo de juegos
   contJuego: number = 0;
 
@@ -42,32 +46,24 @@ export class PistaJuegoComponent implements OnInit
   genero: boolean=false;
   fecha: boolean=false;
 
-  constructor(private pasarDatosAPIService: PasarDatosAPIService)
+  constructor()
   {
-    console.log("Los juegos en pista component son:", this.juegos);
-    console.log("Inicio partida en pista component");
-    this.iniciarPartida();
-    //setTimeout(() => { this.iniciarPartida() }, 7000);
   }
-
-  ngOnInit()
-  {
-    this.pasarDatosAPIService.valorCompartido$.subscribe((valor) =>
-    {
-      this.juegos = valor;
-      console.log("Los juegos en pista component son En ngOnInit:", this.juegos);
-    });
-  }
-
-  iniciarPartida()
-  {
-    if(confirm("Quieres empezar la partida"))
-    {
-      /* this.TemporizadorComponent.iniciarComponente(); */
-      console.log("Arranco posta");
-    }
-  } 
   
+  iniciarPartida(){
+    this.cartelInicio=false;
+    this.empezar=true;
+  }
+  finalizarPartida(){
+
+  }
+  empezarOtra(){
+    this.enviarDatos('otra');
+  }
+
+  enviarDatos(mensaje : string) {
+    this.mensajeEnviado.emit(mensaje);
+  }
   // maneja los botones de las pistas
   handlePistaButtonClick(buttonText: string): void
   {

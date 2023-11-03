@@ -22,10 +22,7 @@ export class TemporizadorComponent
   {  
     this.iniciarTemporizador(valores.minutos, valores.segundos);
   }
-  /* iniciarComponente() {
-    this.iniciarTemporizador(valores.minutos, valores.segundos);
-    console.log('El componente se está iniciando...');
-  } */
+
   enviarDatos(mensaje : string) {
     this.mensajeEnviado.emit(mensaje);
   }
@@ -45,22 +42,13 @@ export class TemporizadorComponent
 
       // Obtén el tiempo transcurrido en minutos y segundos
       let minutos = Math.floor(tiempoTotal / 60000);
-      let segundos = tiempoTotal % 60000;
-
-      // Convierte los minutos y los segundos a cadenas
-      this.minutosString = minutos.toString();
-
-      if(segundos % 1000 == 0)
-      {
-        this.segundosString = (segundos/1000).toString();
-      }
+      let segundos = Math.floor(tiempoTotal % 60000 / 1000);
 
       // Añade un 0 a la izquierda de los segundos si es necesario
       this.minutosString = minutos < 10 ? '0' + minutos : minutos.toString();
-      this.segundosString = segundos < 10 ? '0' + (segundos / 1000) : (segundos / 1000).toString();
+      this.segundosString = segundos < 10 ? '0' + segundos : segundos.toString();
 
       // Actualiza el elemento DOM
-      //document.getElementById("timer").innerHTML = minutosString + ":" + segundosString;
       console.log(this.minutosString + ":" + this.segundosString);
 
       // Si el tiempo es 0, detiene el temporizador
@@ -71,7 +59,6 @@ export class TemporizadorComponent
         clearInterval(intervalId);
       }
     }
-
     // Inicia el temporizador
     const intervalId = setInterval(actualizarTemporizador, 1000);
   }

@@ -1,25 +1,26 @@
 
 <div id="tablero" class="contenedor">
-
+    <div *ngIf="cartelInicio" class="cartelContenedor">
+        <div class="cartel">
+          <h2>Bienvenido</h2>
+          <p>Presiona "Empezar" para continuar</p>
+          <button (click)="iniciarPartida()">Empezar</button>
+        </div>
+    </div>
     <div class="imagen">
         <img id="fotoA" src="{{juegos[contJuego].foto}}" alt="Foto Juego">
     </div>
 
     <div class="viewPista">
-
-        <!-- #PuntajeComponent -->
         <div id="blockPuntaje">
-            <span class = "puntajeNuevo">{{puntaje}}</span>
+            <span class = "puntaje">{{puntaje}}</span>
         </div>
-
         <div id="VP1" class="VP" style="visibility: hidden;" >{{juegos[contJuego].plataformas}}</div>
-        <div id="VP2" class="VP" style="visibility: hidden;">{{juegos[contJuego].creadores}}</div>
+        <div id="VP2" class="VP" style="visibility: hidden;"></div>
         <div id="VP3" class="VP" style="visibility: hidden;">{{juegos[contJuego].fecha}}</div>
         <div id="VP4" class="VP" style="visibility: hidden;">{{juegos[contJuego].generos}}</div>
-
-        <!-- #TemporizadorComponent -->
         <div id="blockTempo">
-            <app-temporizador  [terminar]="terminar" (mensajeEnviado)="recibindoDatosDesdeTemporizador($event)" class=".Temporizador"></app-temporizador>
+            <app-temporizador *ngIf="empezar" [terminar]="terminar" (mensajeEnviado)="recibindoDatosDesdeTemporizador($event)" class="tempo"></app-temporizador>
         </div>
     </div>
 
@@ -43,7 +44,15 @@
         <button id="fecha" class="pista" (click)="handlePistaButtonClick('fecha')">fecha</button>
         <button id="genero" class="pista" (click)="handlePistaButtonClick('genero')">genero</button>
     </div>
-
+    <div *ngIf="cartelFinal" class="cartelContenedor">
+        <div class="cartel">
+          <h2>Felicidades tus puntos son : {{puntaje}}</h2>
+          <p>Presiona "Continuar" para volver terminar la partida</p>
+          <p>Presiona "Nueva Partida" para empezar otra</p>
+          <button (click)="iniciarPartida()">Empezar</button>
+          <button (click)="empezarOtra()">Jugar otra</button>
+        </div>
+    </div>
 </div>
 
 

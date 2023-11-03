@@ -1,6 +1,6 @@
 export interface Usuario
 {
-    id:string,
+    id:number,
     usuario:string,
     password:string,
     puntos: number
