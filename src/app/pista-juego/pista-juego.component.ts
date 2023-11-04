@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { TemporizadorComponent } from '../temporizador/temporizador.component';
 import { JuegoInt } from '../interfaces/juegoInt';
+import { PasarDatosAPIService } from '../servicios/pasar-datos-api.service';
 
 
 enum valores
@@ -24,7 +25,18 @@ enum valores
   styleUrls: ['./pista-juego.component.css']
 })
 
-export class PistaJuegoComponent  {
+export class PistaJuegoComponent implements OnInit
+{
+
+
+  ngOnInit()
+  {
+    this.pasarDatosAPIService.valorCompartido$.subscribe((valor) =>
+    {
+      this.juegos = valor;
+    });
+  }
+
   //datos de otros componentes
   /* @ViewChild('TemporizadorComponent') TemporizadorComponent = new TemporizadorComponent; */
   @Output() mensajeEnviado: EventEmitter<string> = new EventEmitter<string>();
@@ -46,7 +58,7 @@ export class PistaJuegoComponent  {
   genero: boolean=false;
   fecha: boolean=false;
 
-  constructor()
+  constructor(private pasarDatosAPIService: PasarDatosAPIService)
   {
   }
   
@@ -144,7 +156,7 @@ export class PistaJuegoComponent  {
     elementosConClase2.forEach((elemento) =>
     {
       (elemento as HTMLButtonElement).disabled = false;
-      (elemento as HTMLButtonElement).style.background = 'red';
+      (elemento as HTMLButtonElement).style.background = '#0073ff';
     });
 
     this.desabilitarYhablitarBoton('eliminaOp',false);
