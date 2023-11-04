@@ -23,10 +23,10 @@
         </div>
     </div>
     <div id="left" class="pistas">
-        <button id="50%" class="pista" (click)="handlePistaButtonClick('50%')">50%</button>
-        <button id="eliminaOp" class="pista" (click)="handlePistaButtonClick('eliminaOp')">33%</button>
-        <button id="imgP" class="pista" (click)="handlePistaButtonClick('imgP')">Agrandar Imagen</button>
-        <button id="jump" class="pista" (click)="handlePistaButtonClick('jump')">Saltear imagen</button>
+        <button id="50%" class="pista"  (click)="handlePistaButtonClick('50%')">50%</button>
+        <button id="eliminaOp" class="pista" (click)="pistaEliminaOp()">33%</button>
+        <button id="imgP" class="pista" (click)="fotoCompleta()">Agrandar Imagen</button>
+        <button id="jump" class="pista" (click)="saltarFoto()">Saltear imagen</button>
     </div>
     <div class="options">
         <button id="opcion0" class="option" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[0])">{{juegos[contJuego].nombresOpciones[0]}}</button>

@@ -29,7 +29,7 @@ export class PistaJuegoComponent  {
   /* @ViewChild('TemporizadorComponent') TemporizadorComponent = new TemporizadorComponent; */
   @Output() mensajeEnviado: EventEmitter<string> = new EventEmitter<string>();
   @Input() juegos: JuegoInt[] = [];
-  terminar: boolean = true;
+  terminar: boolean = false;
   puntaje: number = 200 ;
 
   //controlador de inicio y fin
@@ -71,23 +71,6 @@ export class PistaJuegoComponent  {
   {
     switch (buttonText)
     {
-      case '50%':
-        this.puntaje=this.puntaje + 50;
-        break;
-      case 'eliminaOp':
-        this.pistaEliminaOp();
-        this.restarPuntos(valores.eliminaOp);
-        break;
-      case 'imgP':
-        this.imgP=true;
-        this.fotoCompleta();
-        this.restarPuntos(valores.imgP);
-        break;
-     
-      case 'jump':
-        this.saltarFoto();
-        break;
-     
       case 'consola':
         this.consola=true;
         this.mostrarPista('VP1',valores.consola);
@@ -291,21 +274,24 @@ export class PistaJuegoComponent  {
           bien=true;
         }
       }
+      
     }
-
     if(this.eliminaOP==2)
     {
       this.desabilitarYhablitarBoton('eliminaOp',true);
     }
+    this.restarPuntos(valores.eliminaOp);
   }
 
   fotoCompleta()
   {
+    this.imgP=true;
     const foto = document.getElementById('fotoA');
     if(foto)
     {
       foto.style.clipPath = 'none';
     }
+    this.restarPuntos(valores.imgP);
   }
 
   saltarFoto()

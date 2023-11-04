@@ -13,7 +13,7 @@ export class TemporizadorComponent
 {
   
  @Output() mensajeEnviado: EventEmitter<string> = new EventEmitter<string>();
- @Input() terminar: boolean = true;
+ @Input() terminar: boolean = false;
 
  minutosString: String = '00';
  segundosString: String = '00';
