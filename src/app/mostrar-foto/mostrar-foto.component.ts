@@ -12,6 +12,7 @@ import { PasarDatosAPIService } from '../servicios/pasar-datos-api.service';
 
 export class MostrarFotoComponent
 {
+  cartelInicio: boolean = true;
   empezar: boolean =false;
   datosJuegos: any[] = [];
   nombresJuegos: string[] = [];
@@ -22,6 +23,8 @@ export class MostrarFotoComponent
   {
   }
 
+  //FORMA VIEJA
+  /*
   recibindoDatosDesdeTemporizador(mensaje: string)
   {
     switch(mensaje)
@@ -30,6 +33,21 @@ export class MostrarFotoComponent
         this.datosJuegos=[];
         this.obtenerJuegosYRedirigir();
         this.empezar=false;
+        break;
+      case 'terminar':
+        break;
+    }
+  }
+  */
+
+   //FORMA NUEVA DE EMA
+  recibindoDatosDesdeTemporizador(mensaje: string)
+  {
+    switch(mensaje)
+    {
+      case 'otra':
+        this.empezar=false;
+        this.cartelInicio=true;
         break;
       case 'terminar':
         break;

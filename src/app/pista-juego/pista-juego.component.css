@@ -3,10 +3,6 @@
     grid-template-columns: repeat(3, 33.3%);
     grid-template-rows: 3;
     gap: 5px;
-    margin: 0% 20%; 
-    background-image: url(./Recuadro.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 
 .cartelContenedor {

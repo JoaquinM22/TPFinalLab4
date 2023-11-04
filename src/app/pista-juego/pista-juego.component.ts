@@ -63,6 +63,7 @@ export class PistaJuegoComponent implements OnInit
   }
   
   iniciarPartida(){
+
     this.cartelInicio=false;
     this.empezar=true;
   }
@@ -70,6 +71,7 @@ export class PistaJuegoComponent implements OnInit
 
   }
   empezarOtra(){
+    this.cartelFinal=false;
     this.enviarDatos('otra');
   }
 
@@ -150,6 +152,7 @@ export class PistaJuegoComponent implements OnInit
     {
       this.terminar = false;
       this.contJuego=0;
+      this.cartelFinal=true;
     }
   }
 
