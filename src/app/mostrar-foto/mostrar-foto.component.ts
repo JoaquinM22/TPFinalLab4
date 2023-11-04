@@ -40,20 +40,6 @@ export class MostrarFotoComponent
   }
   */
 
-  //FORMA NUEVA DE EMA
-  recibindoDatosDesdeTemporizador(mensaje: string)
-  {
-    switch(mensaje)
-    {
-      case 'otra':
-        this.empezar=false;
-        this.cartelInicio=true;
-        break;
-      case 'terminar':
-        break;
-    }
-  }
-
   //Envia el arreglo de Juegos por el servicio
   asignarValor()
   {
@@ -370,10 +356,31 @@ export class MostrarFotoComponent
     }
   }
 
-
-  iniciarPartida()
+  //FORMA NUEVA DE EMA
+  recibindoDatosDesdeTemporizador(mensaje: string)
   {
-    
+    switch(mensaje)
+    {
+      case 'otra':
+        this.empezar=false;
+        this.cartelInicio=true;
+        break;
+      case 'terminar':
+        break;
+    }
+  }
+
+  async iniciarPartida()
+  {
+    try
+    {
+      await this.obtenerJuegosYRedirigir();
+      this.empezar=true;
+      this.cartelInicio=false;
+    }catch(error)
+    {
+      console.error("Error en iniciarPartida():", error);
+    }
   }
 
 }
