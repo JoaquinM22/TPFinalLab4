@@ -40,7 +40,7 @@ export class MostrarFotoComponent
   }
   */
 
-   //FORMA NUEVA DE EMA
+  //FORMA NUEVA DE EMA
   recibindoDatosDesdeTemporizador(mensaje: string)
   {
     switch(mensaje)
@@ -368,6 +368,12 @@ export class MostrarFotoComponent
       // Maneja los errores si es necesario
       console.error("Error al obtener juegos y redirigir:", error);
     }
+  }
+
+
+  iniciarPartida()
+  {
+    
   }
 
 }
