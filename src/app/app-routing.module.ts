@@ -5,7 +5,7 @@ import { LandingPageComponent } from './paginas/landing-page/landing-page.compon
 import { LoginPageComponent } from './paginas/login-page/login-page.component';
 import { MenuPageComponent } from './paginas/menu-page/menu-page.component';
 import { GamePageComponent } from './paginas/game-page/game-page.component';
-import { PistaJuegoComponent } from './pista-juego/pista-juego.component';
+import { PistaJuegoComponent } from './components/game-components/pista-juego/pista-juego.component';
 
 const routes: Routes = [
   {path: 'landing', component:LandingPageComponent},

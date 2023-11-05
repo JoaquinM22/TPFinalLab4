@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { TemporizadorComponent } from '../temporizador/temporizador.component';
-import { JuegoInt } from '../interfaces/juegoInt';
-import { PasarDatosAPIService } from '../servicios/pasar-datos-api.service';
+import { JuegoInt } from '../../../interfaces/juegoInt';
+import { PasarDatosAPIService } from '../../../servicios/pasar-datos-api.service';
 
 
 enum valores
@@ -25,23 +25,13 @@ enum valores
   styleUrls: ['./pista-juego.component.css']
 })
 
-export class PistaJuegoComponent implements OnInit
+export class PistaJuegoComponent 
 {
 
-
-  ngOnInit()
-  {
-    this.pasarDatosAPIService.valorCompartido$.subscribe((valor) =>
-    {
-      this.juegos = valor;
-    });
-  }
-
   //datos de otros componentes
-  /* @ViewChild('TemporizadorComponent') TemporizadorComponent = new TemporizadorComponent; */
   @Output() mensajeEnviado: EventEmitter<string> = new EventEmitter<string>();
   @Input() juegos: JuegoInt[] = [];
-  terminar: boolean = false;
+  terminar: boolean = true;
   puntaje: number = 200 ;
 
   //controlador de inicio y fin
@@ -58,12 +48,11 @@ export class PistaJuegoComponent implements OnInit
   genero: boolean=false;
   fecha: boolean=false;
 
-  constructor(private pasarDatosAPIService: PasarDatosAPIService)
+  constructor()
   {
   }
   
   iniciarPartida(){
-
     this.cartelInicio=false;
     this.empezar=true;
   }
@@ -338,6 +327,5 @@ export class PistaJuegoComponent implements OnInit
   recibindoDatosDesdeTemporizador(mensaje: string)
   {
     this.puntaje= this.puntaje + Number(mensaje) * valores.tiempoSobrante;
-    console.log(this.puntaje);
   }
 }
