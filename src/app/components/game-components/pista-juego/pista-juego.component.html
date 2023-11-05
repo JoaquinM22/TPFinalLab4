@@ -53,12 +53,17 @@
     <div *ngIf="cartelFinal" class="cartelContenedor">
         <div class="cartel">
           <h2>Felicidades tus puntos son : {{puntaje}}</h2>
-          <p>Presiona "Continuar" para volver terminar la partida</p>
+          <p>Presiona "Continuar" para volver al menu principal</p>
           <p>Presiona "Jugar otra" para empezar otra</p>
-          <button (click)="iniciarPartida()">Empezar</button>
+          <button (click)="finalizarPartida()">Continuar</button>
           <button (click)="empezarOtra()">Jugar otra</button>
         </div>
     </div>
 </div>
-
-
+<div *ngIf="cartelAdvertencia" class="cartelContenedor">
+    <div class="cartel">
+      <h2>Si saltas pierdes tus pistas</h2>
+      <button (click)="saltarFotoPerdiendoPuntos()">Aceptar</button>
+      <button (click)="cartelAdvertencia=false">Cancelar</button>
+    </div>
+</div>

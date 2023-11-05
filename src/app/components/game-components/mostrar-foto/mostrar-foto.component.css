@@ -4,7 +4,7 @@
 .contenedorJuego{
     height: 850px;
     width: 1120px;
-    background-image: url(./Recuadro.jpg);
+    background-image: url(../mostrar-foto/Recuadro.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     margin: 0% 20%; 

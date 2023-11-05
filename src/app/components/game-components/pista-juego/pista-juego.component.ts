@@ -1,8 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { TemporizadorComponent } from '../temporizador/temporizador.component';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { JuegoInt } from '../../../interfaces/juegoInt';
-import { PasarDatosAPIService } from '../../../servicios/pasar-datos-api.service';
-
+import { timeout } from 'rxjs';
 
 enum valores
 {
@@ -32,15 +30,18 @@ export class PistaJuegoComponent
   @Output() mensajeEnviado: EventEmitter<string> = new EventEmitter<string>();
   @Input() juegos: JuegoInt[] = [];
   terminar: boolean = true;
-  puntaje: number = 200 ;
+  puntaje: number = 5000 ;
 
-  //controlador de inicio y fin
+  //controlador de inicio, fin y advertencia
   empezar: boolean = false;
   cartelInicio: boolean = true;
   cartelFinal: boolean = false;
+  cartelAdvertencia:boolean=false;
   //contador del arreglo de juegos
   contJuego: number = 0;
-
+  //respuestas correctas y incorrectas
+  correctas: number=0;
+  incorrectas: number=0;
   //estados de las pistas
   eliminaOP: number=0;
   imgP: boolean=false;
@@ -57,7 +58,8 @@ export class PistaJuegoComponent
     this.empezar=true;
   }
   finalizarPartida(){
-
+    this.cartelFinal=false;
+    this.enviarDatos('finalizar');
   }
   empezarOtra(){
     this.cartelFinal=false;
@@ -92,7 +94,7 @@ export class PistaJuegoComponent
         break;
     }
   }
-
+  // manejo de respuestas
   handleOptionButtonClick(optionText: string): void
   {
     this.juegos[this.contJuego].visible=false;
@@ -100,27 +102,29 @@ export class PistaJuegoComponent
     if(optionText === this.juegos[this.contJuego].nombre)
     {
       this.sumarPuntos(valores.acierto);
+      this.correctas=this.correctas+ 1;
     }else
     {
       this.restarPuntos(valores.fallo);
+      this.incorrectas = this.incorrectas + 1;
     }
     this.moverPorArreglo();   
   }
-
+  // recorre el arreglo
   moverPorArreglo()
   {
-    if(this.contJuego<this.juegos.length)
+    if(this.contJuego<this.juegos.length-1)
     {
       this.contJuego=this.contJuego+1;
     }else
     {
       this.contJuego = 0;
-      while(!this.juegos[this.contJuego].visible && this.contJuego<this.juegos.length+1)
+      while(!this.juegos[this.contJuego].visible && this.contJuego<this.juegos.length)
       {
         this.contJuego=this.contJuego+1;
       }
     }
-    if(this.juegos.length == this.contJuego)
+    if(this.juegos.length == this.correctas+this.incorrectas)
     {
       this.terminar = false;
       this.contJuego=0;
@@ -299,16 +303,20 @@ export class PistaJuegoComponent
   {
     if(this.verificarPistas('.pista'))
     {
-      if(confirm("Si saltas pierdes las pistas usadas"))
-      {
-        this.reset();
-        this.moverPorArreglo();  
-      }
-    }else
+      this.cartelAdvertencia=true;
+    }
+    else
     {
       this.moverPorArreglo();
       this.generarValoresAleatoriosImagen();
+      this.restarPuntos(valores.jump);
     }
+   
+  }
+  saltarFotoPerdiendoPuntos(){
+    this.reset();
+    this.moverPorArreglo();
+    this.cartelAdvertencia=false
     this.restarPuntos(valores.jump);
   }
 
@@ -328,4 +336,15 @@ export class PistaJuegoComponent
   {
     this.puntaje= this.puntaje + Number(mensaje) * valores.tiempoSobrante;
   }
+ /*  precargarImagenes(){
+    const div=document.getElementById('cargaImagenes');
+    if(div){
+      for (const foto of this.juegos) {
+        const img = new Image();
+        img.src = foto.foto;
+        img.style.display = 'none';
+        div.appendChild(img);
+      }
+    }
+  } */
 }
