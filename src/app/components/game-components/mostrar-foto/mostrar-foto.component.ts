@@ -21,9 +21,12 @@ export class MostrarFotoComponent
   constructor()
   {
   }
-  enviarDatos(mensaje : string) {
+
+  enviarDatos(mensaje : string)
+  {
     this.mensajeEnviado.emit(mensaje);
   }
+  
   recibindoDatosDesdeJuego(mensaje: string)
   {
     switch(mensaje)
