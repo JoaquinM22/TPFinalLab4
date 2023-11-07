@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { TemporizadorComponent } from '../temporizador/temporizador.component';
-import { JuegoInt } from '../interfaces/juegoInt';
-import { PasarDatosAPIService } from '../servicios/pasar-datos-api.service';
+import { JuegoInt } from '../../../interfaces/juegoInt';
+import { PasarDatosAPIService } from '../../../servicios/pasar-datos-api.service';
 
 
 enum valores
@@ -25,20 +25,10 @@ enum valores
   styleUrls: ['./pista-juego.component.css']
 })
 
-export class PistaJuegoComponent implements OnInit
+export class PistaJuegoComponent 
 {
 
-
-  ngOnInit()
-  {
-    this.pasarDatosAPIService.valorCompartido$.subscribe((valor) =>
-    {
-      this.juegos = valor;
-    });
-  }
-
   //datos de otros componentes
-  /* @ViewChild('TemporizadorComponent') TemporizadorComponent = new TemporizadorComponent; */
   @Output() mensajeEnviado: EventEmitter<string> = new EventEmitter<string>();
   @Input() juegos: JuegoInt[] = [];
   terminar: boolean = true;
@@ -58,12 +48,11 @@ export class PistaJuegoComponent implements OnInit
   genero: boolean=false;
   fecha: boolean=false;
 
-  constructor(private pasarDatosAPIService: PasarDatosAPIService)
+  constructor()
   {
   }
   
   iniciarPartida(){
-
     this.cartelInicio=false;
     this.empezar=true;
   }
@@ -83,23 +72,6 @@ export class PistaJuegoComponent implements OnInit
   {
     switch (buttonText)
     {
-      case '50%':
-        this.puntaje=this.puntaje + 50;
-        break;
-      case 'eliminaOp':
-        this.pistaEliminaOp();
-        this.restarPuntos(valores.eliminaOp);
-        break;
-      case 'imgP':
-        this.imgP=true;
-        this.fotoCompleta();
-        this.restarPuntos(valores.imgP);
-        break;
-     
-      case 'jump':
-        this.saltarFoto();
-        break;
-     
       case 'consola':
         this.consola=true;
         this.mostrarPista('VP1',valores.consola);
@@ -303,21 +275,24 @@ export class PistaJuegoComponent implements OnInit
           bien=true;
         }
       }
+      
     }
-
     if(this.eliminaOP==2)
     {
       this.desabilitarYhablitarBoton('eliminaOp',true);
     }
+    this.restarPuntos(valores.eliminaOp);
   }
 
   fotoCompleta()
   {
+    this.imgP=true;
     const foto = document.getElementById('fotoA');
     if(foto)
     {
       foto.style.clipPath = 'none';
     }
+    this.restarPuntos(valores.imgP);
   }
 
   saltarFoto()
@@ -352,6 +327,5 @@ export class PistaJuegoComponent implements OnInit
   recibindoDatosDesdeTemporizador(mensaje: string)
   {
     this.puntaje= this.puntaje + Number(mensaje) * valores.tiempoSobrante;
-    console.log(this.puntaje);
   }
 }

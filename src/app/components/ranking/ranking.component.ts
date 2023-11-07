@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuariosService } from '../servicios/usuarios.service';
-import { Usuario } from '../interfaces/usuario';
+import { UsuariosService } from '../../servicios/usuarios.service';
+import { Usuario } from '../../interfaces/usuario';
 
 @Component({
   selector: 'app-ranking',

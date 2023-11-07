@@ -13,13 +13,17 @@ export class MenuPrincipalComponent
   su html es el boton de elegir genero y modo de dificultad, y el
   boton que llama al componente "mostrarPista" que es el que empieza 
   la partida*/
-  crearPartida()
-  {
-    const opcionesPartida = document.getElementById("opcionesPartida");
-    if(opcionesPartida)
-    {
-      opcionesPartida.style.visibility = "visible";
+  crearPartida:boolean=false;
+  ranking:boolean=false;
+  recibiendoDatosDesdeCreadorPartida(mensaje : string){
+    if(mensaje=='false'){
+      this.crearPartida= false;
     }
   }
-  
+
+  desabilitarTodosLosComponentes(){
+    this.crearPartida=false;
+    this.ranking=false;
+  }
+
 }

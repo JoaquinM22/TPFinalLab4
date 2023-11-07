@@ -1,0 +1,41 @@
+<div class="contenedorJuego">
+    <div *ngIf="cartelInicio" class="cartelContenedor">
+        <div class="cartel">
+          <h2>Bienvenido</h2>
+          <p>Presiona "Empezar" para continuar</p>
+          <p>Presiona "Cancelar" para salir</p>
+          <select class="botonOpciones" [(ngModel)]="modoSeleccionado" id="modoJuego" name="opcionJuego">
+              <option value="modoNormal">Normal</option>
+              <option value="modoMedio">Medio</option>
+              <option value="modoDificil">Dificil</option>
+          </select>
+          <select class="botonOpciones" [(ngModel)]="generoSeleccionado" id="generoJuego" name="opcionGenero">
+              <option value="porDefecto">Todos</option>
+              <option value="action">Accion</option>
+              <option value="indie">Indie</option>
+              <option value="adventure">Aventura</option>
+              <option value="role-playing-games-rpg">RPG</option>
+              <option value="strategy">Estrategia</option>
+              <option value="shooter">Shooter</option>
+              <option value="casual">Casual</option>
+              <option value="simulation">Simulacion</option>
+              <option value="puzzle">Puzzle</option>
+              <option value="arcade">Arcade</option>
+              <option value="platformer">Plataformas</option>
+              <option value="massively-multiplayer">Multijugador masivo</option>
+              <option value="racing">Carreras</option>
+              <option value="sports">Deportes</option>
+              <option value="fighting">Lucha</option>
+              <option value="family">Familiar</option>
+              <option value="board-games">Juegos de Mesa</option>
+              <option value="educational">Educativos</option>
+              <option value="card">De Cartas</option>
+          </select>
+          <br>
+          <button class="botonOpciones" (click)="crearPartida()">Empezar</button>
+          <button class="botonOpciones" (click)="enviarDatos('false')">Cancelar</button>
+        </div>
+    </div>
+    <app-pista-juego *ngIf="empezar"  [juegos]="datosJuegos" (mensajeEnviado)="recibindoDatosDesdeJuego($event)"></app-pista-juego>
+</div>
+<app-loading *ngIf="loading"></app-loading>

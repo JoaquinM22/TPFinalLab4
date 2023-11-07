@@ -4,19 +4,20 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PistaJuegoComponent } from './pista-juego/pista-juego.component';
-import { MostrarFotoComponent } from './mostrar-foto/mostrar-foto.component';
-import { TemporizadorComponent } from './temporizador/temporizador.component';
-import { LoginUsuarioComponent } from './login-usuario/login-usuario.component';
-import { MenuInicioComponent } from './menu-inicio/menu-inicio.component';
-import { MenuPrincipalComponent } from './menu-principal/menu-principal.component';
-import { RankingComponent } from './ranking/ranking.component';
+import { PistaJuegoComponent } from './components/game-components/pista-juego/pista-juego.component';
+import { MostrarFotoComponent } from './components/game-components/mostrar-foto/mostrar-foto.component';
+import { TemporizadorComponent } from './components/game-components/temporizador/temporizador.component';
+import { LoginUsuarioComponent } from './components/login-usuario/login-usuario.component';
+import { MenuInicioComponent } from './components/menu-inicio/menu-inicio.component';
+import { MenuPrincipalComponent } from './components/menu-principal/menu-principal.component';
+import { RankingComponent } from './components/ranking/ranking.component';
 import { RankingPageComponent } from './paginas/ranking-page/ranking-page.component';
 import { LandingPageComponent } from './paginas/landing-page/landing-page.component';
 import { LoginPageComponent } from './paginas/login-page/login-page.component';
 import { MenuPageComponent } from './paginas/menu-page/menu-page.component';
 import { GamePageComponent } from './paginas/game-page/game-page.component';
 import { PasarDatosAPIService } from './servicios/pasar-datos-api.service';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { PasarDatosAPIService } from './servicios/pasar-datos-api.service';
     LandingPageComponent,
     LoginPageComponent,
     MenuPageComponent,
-    GamePageComponent
+    GamePageComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
