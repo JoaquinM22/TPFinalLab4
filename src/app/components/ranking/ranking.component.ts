@@ -35,7 +35,7 @@ export class RankingComponent implements OnInit
 
         const puntaje = document.createElement("td");
         puntaje.innerHTML = "Puntos:" + datos.puntos;
-        fila.appendChild(puntaje)
+        fila.appendChild(puntaje);
 
         if(tabla)
         {

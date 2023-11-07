@@ -18,6 +18,7 @@ import { MenuPageComponent } from './paginas/menu-page/menu-page.component';
 import { GamePageComponent } from './paginas/game-page/game-page.component';
 import { PasarDatosAPIService } from './servicios/pasar-datos-api.service';
 import { LoadingComponent } from './components/loading/loading.component';
+import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuario.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { LoadingComponent } from './components/loading/loading.component';
     LoginPageComponent,
     MenuPageComponent,
     GamePageComponent,
-    LoadingComponent
+    LoadingComponent,
+    PerfilUsuarioComponent
   ],
   imports: [
     BrowserModule,

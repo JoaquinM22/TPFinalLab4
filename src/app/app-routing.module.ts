@@ -6,13 +6,14 @@ import { LoginPageComponent } from './paginas/login-page/login-page.component';
 import { MenuPageComponent } from './paginas/menu-page/menu-page.component';
 import { GamePageComponent } from './paginas/game-page/game-page.component';
 import { PistaJuegoComponent } from './components/game-components/pista-juego/pista-juego.component';
+import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuario.component';
 
 const routes: Routes = [
   {path: 'landing', component:LandingPageComponent},
   {path: 'game', component:PistaJuegoComponent},
   {path: 'login', component:LoginPageComponent},
+  {path: 'perfil', component:PerfilUsuarioComponent},
   {path: 'menu', component:MenuPageComponent},
-  {path: 'game', component:GamePageComponent},
   {path: 'ranking', component:RankingPageComponent},
   {path: '**', component:LandingPageComponent}
 ];

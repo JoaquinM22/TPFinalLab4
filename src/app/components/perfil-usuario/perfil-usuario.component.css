@@ -1,0 +1,54 @@
+.titulo
+{
+    text-align: center;
+
+    color: greenyellow;
+
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 70px;
+}
+
+.subtitulo
+{
+    /* text-align:left; */
+
+    color: greenyellow;
+
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 55px;
+    text-decoration: underline;
+
+}
+
+.texto
+{
+    /* text-align:left; */
+
+    color: greenyellow;
+
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 55px;
+
+}
+
+.subtitulo, .texto
+{
+    display: inline; /* También puedes usar "inline-block" según tus necesidades */
+    margin-right: 10px; /* Esto agrega un espacio entre las etiquetas si es necesario */
+}
+
+.contenedorUser
+{  
+    background-color: rgba(77, 255, 0, 0.212);
+    display: inline-block; 
+    padding: 10px; 
+    border: 3px solid black; 
+    border-radius: 10px; 
+    text-align: left; 
+}
+
+.contenedorPrincipal
+{
+    text-align: center;
+}
+

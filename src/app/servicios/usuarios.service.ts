@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../interfaces/usuario';
 
-@Injectable({
+@Injectable
+({
   providedIn: 'root'
 })
+
 export class UsuariosService 
 {
 
@@ -22,11 +24,12 @@ export class UsuariosService
 
   async getUsuarios(): Promise<Usuario[] | undefined>
   {
-    try {
+    try
+    {
       const resultado = await fetch(this.url);
       const usuarios = resultado.json();
       return usuarios;
-    } catch (error) 
+    }catch(error) 
     {
       console.log(error);  
     }

@@ -20,6 +20,7 @@ export class MenuPrincipalComponent
   la partida*/
   crearPartida:boolean=false;
   ranking:boolean=false;
+  perfil:boolean=false;
   recibiendoDatosDesdeCreadorPartida(mensaje : string){
     if(mensaje=='false'){
       this.crearPartida= false;
@@ -29,6 +30,7 @@ export class MenuPrincipalComponent
   desabilitarTodosLosComponentes(){
     this.crearPartida=false;
     this.ranking=false;
+    this.perfil = false;
   }
 
   cerrarSesion()
