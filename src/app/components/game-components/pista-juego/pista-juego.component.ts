@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { TemporizadorComponent } from '../temporizador/temporizador.component';
 import { JuegoInt } from '../../../interfaces/juegoInt';
 import { PasarDatosAPIService } from '../../../servicios/pasar-datos-api.service';
+import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
 
 enum valores
@@ -32,7 +33,9 @@ export class PistaJuegoComponent
   @Output() mensajeEnviado: EventEmitter<string> = new EventEmitter<string>();
   @Input() juegos: JuegoInt[] = [];
   terminar: boolean = true;
-  puntaje: number = 200 ;
+
+  //carga los puntos del usuario en sesion
+  puntaje: number = this.usuariosService.login.puntos;
 
   //controlador de inicio y fin
   empezar: boolean = false;
@@ -48,7 +51,7 @@ export class PistaJuegoComponent
   genero: boolean=false;
   fecha: boolean=false;
 
-  constructor()
+  constructor(private usuariosService: UsuariosService)
   {
   }
   
@@ -56,8 +59,10 @@ export class PistaJuegoComponent
     this.cartelInicio=false;
     this.empezar=true;
   }
-  finalizarPartida(){
-
+  finalizarPartida()
+  {
+    //Suponiendo que esto sea para un tercer boton, cargo los datos en el servidor
+    
   }
   empezarOtra(){
     this.cartelFinal=false;
@@ -323,9 +328,10 @@ export class PistaJuegoComponent
     this.restarPuntos(coste);
   }
 
-  // recibindo datos desde componente temporizador
+  // recibindo datos desde componente temporizador y actualiza los puntos totales en el servidor
   recibindoDatosDesdeTemporizador(mensaje: string)
   {
     this.puntaje= this.puntaje + Number(mensaje) * valores.tiempoSobrante;
+    this.usuariosService.actualizarPuntos(this.usuariosService.login.id, this.puntaje);
   }
 }
