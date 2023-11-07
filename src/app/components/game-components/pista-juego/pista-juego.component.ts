@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { TemporizadorComponent } from '../temporizador/temporizador.component';
-import { JuegoInt } from '../interfaces/juegoInt';
-import { PasarDatosAPIService } from '../servicios/pasar-datos-api.service';
+import { JuegoInt } from '../../../interfaces/juegoInt';
+import { PasarDatosAPIService } from '../../../servicios/pasar-datos-api.service';
+import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
 
 enum valores
@@ -25,24 +26,16 @@ enum valores
   styleUrls: ['./pista-juego.component.css']
 })
 
-export class PistaJuegoComponent implements OnInit
+export class PistaJuegoComponent 
 {
 
-
-  ngOnInit()
-  {
-    this.pasarDatosAPIService.valorCompartido$.subscribe((valor) =>
-    {
-      this.juegos = valor;
-    });
-  }
-
   //datos de otros componentes
-  /* @ViewChild('TemporizadorComponent') TemporizadorComponent = new TemporizadorComponent; */
   @Output() mensajeEnviado: EventEmitter<string> = new EventEmitter<string>();
   @Input() juegos: JuegoInt[] = [];
   terminar: boolean = true;
-  puntaje: number = 200 ;
+
+  //carga los puntos del usuario en sesion
+  puntaje: number = this.usuariosService.login.puntos;
 
   //controlador de inicio y fin
   empezar: boolean = false;
@@ -58,17 +51,18 @@ export class PistaJuegoComponent implements OnInit
   genero: boolean=false;
   fecha: boolean=false;
 
-  constructor(private pasarDatosAPIService: PasarDatosAPIService)
+  constructor(private usuariosService: UsuariosService)
   {
   }
   
   iniciarPartida(){
-
     this.cartelInicio=false;
     this.empezar=true;
   }
-  finalizarPartida(){
-
+  finalizarPartida()
+  {
+    //Suponiendo que esto sea para un tercer boton, cargo los datos en el servidor
+    
   }
   empezarOtra(){
     this.cartelFinal=false;
@@ -83,23 +77,6 @@ export class PistaJuegoComponent implements OnInit
   {
     switch (buttonText)
     {
-      case '50%':
-        this.puntaje=this.puntaje + 50;
-        break;
-      case 'eliminaOp':
-        this.pistaEliminaOp();
-        this.restarPuntos(valores.eliminaOp);
-        break;
-      case 'imgP':
-        this.imgP=true;
-        this.fotoCompleta();
-        this.restarPuntos(valores.imgP);
-        break;
-     
-      case 'jump':
-        this.saltarFoto();
-        break;
-     
       case 'consola':
         this.consola=true;
         this.mostrarPista('VP1',valores.consola);
@@ -303,21 +280,24 @@ export class PistaJuegoComponent implements OnInit
           bien=true;
         }
       }
+      
     }
-
     if(this.eliminaOP==2)
     {
       this.desabilitarYhablitarBoton('eliminaOp',true);
     }
+    this.restarPuntos(valores.eliminaOp);
   }
 
   fotoCompleta()
   {
+    this.imgP=true;
     const foto = document.getElementById('fotoA');
     if(foto)
     {
       foto.style.clipPath = 'none';
     }
+    this.restarPuntos(valores.imgP);
   }
 
   saltarFoto()
@@ -348,10 +328,10 @@ export class PistaJuegoComponent implements OnInit
     this.restarPuntos(coste);
   }
 
-  // recibindo datos desde componente temporizador
+  // recibindo datos desde componente temporizador y actualiza los puntos totales en el servidor
   recibindoDatosDesdeTemporizador(mensaje: string)
   {
     this.puntaje= this.puntaje + Number(mensaje) * valores.tiempoSobrante;
-    console.log(this.puntaje);
+    this.usuariosService.actualizarPuntos(this.usuariosService.login.id, this.puntaje);
   }
 }

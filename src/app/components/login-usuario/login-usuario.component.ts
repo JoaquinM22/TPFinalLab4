@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import { Usuario } from '../interfaces/usuario';
+import { Usuario } from '../../interfaces/usuario';
+import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
 @Component({
   selector: 'app-login-usuario',
@@ -9,7 +10,7 @@ import { Usuario } from '../interfaces/usuario';
 })
 export class LoginUsuarioComponent implements OnInit{
   
-  constructor(private router: Router)
+  constructor(private router: Router, private usuariosService: UsuariosService)
   {
 
   }
@@ -43,6 +44,8 @@ export class LoginUsuarioComponent implements OnInit{
         if(validado)
         {
           console.log(this.usuarioLogueado);
+          this.usuariosService.login = this.usuarioLogueado;
+          
           this.router.navigate(['/menu']);
         }else
         {
@@ -103,7 +106,10 @@ export class LoginUsuarioComponent implements OnInit{
           {
             //Aca sube los datos al server
             this.cargarUsuario(nombreCre, passCre);
+
             console.log(this.usuarioLogueado);
+            this.usuariosService.login = this.usuarioLogueado;
+
             this.router.navigate(['/menu']);
           }
         }else

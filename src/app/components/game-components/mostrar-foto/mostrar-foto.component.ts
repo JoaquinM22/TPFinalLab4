@@ -1,7 +1,4 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { PasarDatosAPIService } from '../servicios/pasar-datos-api.service';
-
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component
 ({
@@ -12,38 +9,32 @@ import { PasarDatosAPIService } from '../servicios/pasar-datos-api.service';
 
 export class MostrarFotoComponent
 {
+  @Output() mensajeEnviado: EventEmitter<string> = new EventEmitter<string>();
   cartelInicio: boolean = true;
   empezar: boolean =false;
+  loading: boolean =false;
   datosJuegos: any[] = [];
   nombresJuegos: string[] = [];
   modoSeleccionado: string = 'modoNormal';
   generoSeleccionado: string = 'porDefecto';
 
-  constructor(private router: Router, private pasarDatosAPIService: PasarDatosAPIService)
+  constructor()
   {
   }
-
-  //FORMA VIEJA
-  /*
-  recibindoDatosDesdeTemporizador(mensaje: string)
+  enviarDatos(mensaje : string) {
+    this.mensajeEnviado.emit(mensaje);
+  }
+  recibindoDatosDesdeJuego(mensaje: string)
   {
     switch(mensaje)
     {
       case 'otra':
         this.datosJuegos=[];
-        this.obtenerJuegosYRedirigir();
         this.empezar=false;
         break;
       case 'terminar':
         break;
     }
-  }
-  */
-
-  //Envia el arreglo de Juegos por el servicio
-  asignarValor()
-  {
-    this.pasarDatosAPIService.asignarValorCompartido(this.datosJuegos);
   }
 
   //Llama a la API y carga el arreglo de nombres de los juegos
@@ -122,15 +113,8 @@ export class MostrarFotoComponent
         nuevasFotos.push(unaFoto.image);
       }
 
-      //Como hay juegos que tienen menos de 7 fotos, con el do while
-      //me aseguro que tome una posicion valida
-      let posRandom;
-      do
-      {
-
-        posRandom = Math.floor(Math.random() * 6);
-
-      }while(posRandom >= nuevasFotos.length);
+      //seleciono dentro del arreglo
+      let posRandom= Math.floor(Math.random() * nuevasFotos.length - 1);
 
       //Cargo esa URL random valida en nuevaFoto
       const nuevaFoto: string = nuevasFotos[posRandom];
@@ -296,7 +280,7 @@ export class MostrarFotoComponent
           // ...
           let arregloDeJuegos: any[] = [];
           arregloDeJuegos = this.cargarArregloJuegos(data);
-          this.asignarValor();
+          /* this.asignarValor(); */
   
           // Resuelve la promesa con el arreglo de juegos cargados
           console.log("Fin fetch Juegos");
@@ -318,7 +302,7 @@ export class MostrarFotoComponent
 
   //Llama a getJuegos cargando el arreglo "datosJuegos", despues
   //llama a asignarValor() y finalmente cammbia la vista a "pista-juego" component
-  async obtenerJuegosYRedirigir()
+  async crearPartida()
   {
     try
     {
@@ -338,7 +322,11 @@ export class MostrarFotoComponent
       }
 
       console.log("Genero: ", this.generoSeleccionado);
-      this.datosJuegos = await this.getJuegosAPI(numeroRandom, this.generoSeleccionado); // Obtiene los juegos
+      // Obtiene los juegos
+      this.cartelInicio=false;
+      this.loading=true;
+      this.datosJuegos = await this.getJuegosAPI(numeroRandom, this.generoSeleccionado); 
+      
       console.log("Estoy en la ultima funcion");
 
       console.log("Los 40 nombres", this.nombresJuegos);
@@ -346,40 +334,12 @@ export class MostrarFotoComponent
 
       console.log("Los 10 juegos", this.datosJuegos);
       console.log("La pos 5 de juegos", this.datosJuegos[5]);
-      
-      this.asignarValor(); // Asigna el valor
-      this.router.navigate(['/game']); // Navega a la ruta '/game'
+      this.loading=false;
+      this.empezar=true;
     }catch(error)
     {
       // Maneja los errores si es necesario
       console.error("Error al obtener juegos y redirigir:", error);
-    }
-  }
-
-  //FORMA NUEVA DE EMA
-  recibindoDatosDesdeTemporizador(mensaje: string)
-  {
-    switch(mensaje)
-    {
-      case 'otra':
-        this.empezar=false;
-        this.cartelInicio=true;
-        break;
-      case 'terminar':
-        break;
-    }
-  }
-
-  async iniciarPartida()
-  {
-    try
-    {
-      await this.obtenerJuegosYRedirigir();
-      this.empezar=true;
-      this.cartelInicio=false;
-    }catch(error)
-    {
-      console.error("Error en iniciarPartida():", error);
     }
   }
 

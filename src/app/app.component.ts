@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MostrarFotoComponent } from './mostrar-foto/mostrar-foto.component';
+import { MostrarFotoComponent } from './components/game-components/mostrar-foto/mostrar-foto.component';
 
 @Component({
   selector: 'app-root',
