@@ -4,12 +4,14 @@
 .contenedorJuego{
     height: 850px;
     width: 1120px;
-    background-image: url(./Recuadro.jpg);
+    /* background-image: url(src\assets\Recuadro.jpg);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover; */
     margin: 0% 20%; 
 }
-.cartelContenedor {
+
+.cartelContenedor 
+{
     position: fixed;
     top: 0;
     left: 0;
@@ -18,14 +20,33 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5); 
 }
   
-.cartel {
+.cartel
+{
+    /*
     background-color: white;
     padding: 20px;
     border-radius: 8px;
     text-align: center;
+    */
+    background-color: #0073ff;
+    color: white;
+
+    font-size: 25px;
+    font-weight: bold;
+    font-family: Arial;
+    text-decoration: none;
+    text-align: center;
+
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: #0022ff;
+
+    padding: 15px 35px;
+    box-shadow: 10px 10px 5px black;
+    margin: 10px auto;
 }
 /*
 .boton
@@ -49,7 +70,7 @@
 .botonOpciones
 {
     color: black;
-    background-color: rgba(172, 255, 47, 0.784);
+    background-color: rgba(0, 221, 255, 0.671);
 
     font-size: 25px;
     font-weight: bold;
@@ -58,11 +79,11 @@
 
     border: 5px solid;
     border-radius: 20px;
-    border-color: rgba(51, 255, 0, 0.709);
+    border-color: #1100ff;
 
     padding: 15px 35px;
     box-shadow: 10px 10px 5px black;
-    margin: 10px auto;  
+    margin: auto;  
 
     width: 250px;
     height: 75px;

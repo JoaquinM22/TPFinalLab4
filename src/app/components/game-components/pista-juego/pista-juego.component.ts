@@ -1,12 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { TemporizadorComponent } from '../temporizador/temporizador.component';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { JuegoInt } from '../../../interfaces/juegoInt';
-import { PasarDatosAPIService } from '../../../servicios/pasar-datos-api.service';
+import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
 
 enum valores
 {
-  eliminaOp = 25,
+  eliminaOp = 50,
   imgP = 25,
   jump = 5,
   consola = 10,
@@ -15,7 +14,7 @@ enum valores
   fecha = 5,
   acierto = 150,
   fallo = 25,
-  tiempoSobrante = 10,
+  tiempoSobrante = 1,
 }
 
 @Component
@@ -25,106 +24,104 @@ enum valores
   styleUrls: ['./pista-juego.component.css']
 })
 
-export class PistaJuegoComponent 
+export class PistaJuegoComponent implements OnInit
 {
 
-  //datos de otros componentes
+  //envia a componente mostrar foto
   @Output() mensajeEnviado: EventEmitter<string> = new EventEmitter<string>();
+  // recibe de mostrar foto
   @Input() juegos: JuegoInt[] = [];
+  // envia al temporizador para cortar el timepo
   terminar: boolean = true;
-  puntaje: number = 200 ;
+
+  //carga los puntos del usuario en sesion
+  puntaje: number = this.usuariosService.login.puntos +5000;
 
   //controlador de inicio y fin
   empezar: boolean = false;
+  //controlador de inicio, fin y advertencia
   cartelInicio: boolean = true;
   cartelFinal: boolean = false;
+  cartelAdvertencia:boolean=false;
   //contador del arreglo de juegos
   contJuego: number = 0;
-
-  //estados de las pistas
-  eliminaOP: number=0;
+  //respuestas correctas y incorrectas
+  correctas: number=0;
+  incorrectas: number=0;
+  // uso de pistas
+  pistaUsos: number = 0;
+  //control estados de las pistas
+  eliminaOp: boolean=false; 
   imgP: boolean=false;
   consola: boolean=false;
   genero: boolean=false;
   fecha: boolean=false;
 
-  constructor()
+  constructor(private usuariosService: UsuariosService)
   {
   }
-  
+  ngOnInit(): void {
+    this.chequeoCosto();
+    this.generarValoresAleatoriosImagen();
+  }
+
   iniciarPartida(){
     this.cartelInicio=false;
     this.empezar=true;
+    /* this.mostrarYocultar("fotoB",false); */
+    this.mostrarYocultar("fotoA",true);
   }
-  finalizarPartida(){
 
+  finalizarPartida(){
+    this.cartelFinal=false;
+    this.enviarDatos('finalizar');
   }
+
   empezarOtra(){
     this.cartelFinal=false;
     this.enviarDatos('otra');
   }
-
+  // envia al componente padre
   enviarDatos(mensaje : string) {
     this.mensajeEnviado.emit(mensaje);
   }
-  // maneja los botones de las pistas
-  handlePistaButtonClick(buttonText: string): void
-  {
-    switch (buttonText)
-    {
-      case 'consola':
-        this.consola=true;
-        this.mostrarPista('VP1',valores.consola);
-        break;
-     
-      case 'creadores':
-        this.mostrarPista('VP2',valores.creadores);
-        break;
-      
-      case 'fecha':
-        this.fecha=true;
-        this.mostrarPista('VP3',valores.fecha);
-        break;
-      
-      case 'genero':
-        this.genero=true;
-        this.mostrarPista('VP4',valores.genero);
-        break;
-    }
-  }
-
+  
+  // manejo de respuestas
   handleOptionButtonClick(optionText: string): void
   {
-    this.juegos[this.contJuego].visible=false;
+    this.juegos[this.contJuego].visible = false;
     this.reset();
-    if(optionText === this.juegos[this.contJuego].nombre)
+    if(optionText == this.juegos[this.contJuego].nombre)
     {
+      this.correctas=this.correctas + 1;
+
       this.sumarPuntos(valores.acierto);
     }else
     {
+      this.incorrectas = this.incorrectas + 1;
       this.restarPuntos(valores.fallo);
     }
     this.moverPorArreglo();   
   }
-
+  // recorre el arreglo
   moverPorArreglo()
   {
-    if(this.contJuego<this.juegos.length)
+    if(this.contJuego<this.juegos.length-1)
     {
       this.contJuego=this.contJuego+1;
     }else
     {
       this.contJuego = 0;
-      while(!this.juegos[this.contJuego].visible && this.contJuego<this.juegos.length+1)
+      while(!this.juegos[this.contJuego].visible && this.contJuego < this.juegos.length)
       {
         this.contJuego=this.contJuego+1;
       }
     }
-    if(this.juegos.length == this.contJuego)
+
+    if(this.juegos.length == this.correctas + this.incorrectas)
     {
       this.terminar = false;
       this.contJuego=0;
-      this.cartelFinal=true;
     }
   }
 
@@ -150,7 +147,7 @@ export class PistaJuegoComponent
 
     this.desabilitarYhablitarBoton('eliminaOp',false);
     //reseteo los valores para chequear las pistas
-    this.eliminaOP=0;
+    this.eliminaOp=false;
     this.imgP=false;
     this.consola=false;
     this.genero=false;
@@ -161,7 +158,8 @@ export class PistaJuegoComponent
   sumarPuntos(puntos: number)
   {
     this.puntaje=this.puntaje+puntos;
-    this.chequeoCosto('.pista'); 
+    this.usuariosService.actualizarPuntos(this.usuariosService.login.id, this.puntaje);
+    this.chequeoCosto(); 
   }
 
   restarPuntos(puntos: number)
@@ -170,7 +168,8 @@ export class PistaJuegoComponent
     {
       this.puntaje=this.puntaje-puntos;
     }
-    this.chequeoCosto('.pista'); 
+    this.usuariosService.actualizarPuntos(this.usuariosService.login.id, this.puntaje);
+    this.chequeoCosto(); 
   }
 
   desabilitarYhablitarBoton(boton:string,estado:boolean)
@@ -179,7 +178,11 @@ export class PistaJuegoComponent
     if(miBoton)
     {
       miBoton.disabled = estado;
-      miBoton.style.background ='white';
+      if(estado){
+        miBoton.style.background ='red';
+      }else{
+        miBoton.style.background ='rgba(172, 255, 47, 0.784)';
+      }
     }
   }
   
@@ -194,40 +197,73 @@ export class PistaJuegoComponent
         usada  = true;
       }
     });
-
-    if(this.eliminaOP>0)
-    {
-      usada  = true;
-    }
     return usada;
   }
 
-  chequeoCosto(clase:string)
+  chequeoCosto()
   {
-    const elementosConClase = document.querySelectorAll(clase);
+    const elementosConClase = document.querySelectorAll(".pista");
     elementosConClase.forEach((elemento) =>
     {
       switch (elemento.id)
       {
         case 'eliminaOp':
-          (elemento as HTMLButtonElement).disabled = this.puntaje < valores.eliminaOp || this.eliminaOP > 1;
+          if(this.puntaje < valores.eliminaOp || this.eliminaOp){
+            this.desabilitarYhablitarBoton(elemento.id,true);
+          }
+        else
+        {
+          this.desabilitarYhablitarBoton(elemento.id,false);
+        }
           break;
         case 'imgP':
-          (elemento as HTMLButtonElement).disabled = this.puntaje < valores.imgP || this.imgP;
+          if(this.puntaje < valores.imgP || this.imgP){
+
+            this.desabilitarYhablitarBoton(elemento.id,true);
+          }
+          else
+          {
+            this.desabilitarYhablitarBoton(elemento.id,false);
+          }
           break;
         case 'jump':
-          (elemento as HTMLButtonElement).disabled = this.puntaje < valores.jump;
+          if(this.puntaje < valores.jump){
+
+            this.desabilitarYhablitarBoton(elemento.id,true);
+          }
+          else
+          {
+            this.desabilitarYhablitarBoton(elemento.id,false);
+          }
           break;
         case 'consola':
-          (elemento as HTMLButtonElement).disabled = this.puntaje < valores.consola || this.consola;
+          if(this.puntaje < valores.consola || this.consola)
+          {this.desabilitarYhablitarBoton(elemento.id,true);}
+          else
+        {
+          this.desabilitarYhablitarBoton(elemento.id,false);
+        }
           break;
         case 'fecha':
-          (elemento as HTMLButtonElement).disabled = this.puntaje < valores.fecha || this.fecha;
+          if(this.puntaje < valores.fecha || this.fecha){
+
+            this.desabilitarYhablitarBoton(elemento.id,true);
+          }
+          else
+          {
+            this.desabilitarYhablitarBoton(elemento.id,false);
+          }
           break;
         case 'genero':
-          (elemento as HTMLButtonElement).disabled = this.puntaje < valores.genero || this.genero;
+          if(this.puntaje < valores.genero || this.genero){
+
+            this.desabilitarYhablitarBoton(elemento.id,true);
+          }
+          else
+        {
+          this.desabilitarYhablitarBoton(elemento.id,false);
+        }
           break;
-          
       }
     })
   }
@@ -235,34 +271,81 @@ export class PistaJuegoComponent
   //funciones de imagen
   generarValoresAleatoriosImagen()
   {
-    // Selecciona valores aleatorios para los puntos, garantizando que el área visible sea aproximadamente el 33%
-    const x1 = 50;
-    const y1 = 0
-    const x2 = Math.floor(Math.random() * 100)  // Ajusta según sea necesario
-    const y2 =  100  // Ajusta según sea necesario
-    const x3 = 0  // Ajusta según sea necesario
-    const y3 = Math.floor(Math.random() * 100) // Ajusta según sea necesario
-    const x4 = 100  // Ajusta según sea necesario
-    const y4 = Math.floor(Math.random() * 100)  // Ajusta según sea necesario
-    const x5 = Math.floor(Math.random() * 100)  // Ajusta según sea necesario
-    const y5 = 100  // Ajusta según sea necesario
-      
-    // Formatea los valores en el formato requerido para clip-path
-    const clipPathValue = `polygon(${x1}% ${y1}%, ${x2}% ${y2}%, ${x3}% ${y3}%, ${x4}% ${y4}%, ${x5}% ${y5}%)`;
-    // Aplica el nuevo valor a la propiedad clip-path de la imagen
+    var clipPathValue=""
+    switch(Math.floor(Math.random()*10)){
+      case 0 :
+        clipPathValue = "polygon(100% 0, 90% 0, 100% 100%, 100% 10%, 0 100%, 10% 100%, 0 0, 0 90%)";
+      break;
+      case 1 :
+        clipPathValue = "polygon(0 35%, 90% 0, 0 100%, 100% 65%, 10% 100%, 100% 0);";
+      break;
+      case 2 :
+        clipPathValue = "circle(20.0% at 21% 21%);";
+      break;
+      case 3 :
+        clipPathValue = "polygon(5% 0, 0 5%, 45% 50%, 0 95%, 5% 100%, 50% 55%, 95% 100%, 100% 95%, 55% 50%, 100% 5%, 95% 0, 50% 45%)";
+      break;
+      case 4 :
+        clipPathValue = "polygon(50% 85%, 100% 0, 50% 100%, 0 0);";
+      break;
+      case 5 :
+        clipPathValue = "polygon(50% 0%, 55% 45%, 98% 35%, 55% 55%, 79% 91%, 50% 60%, 21% 91%, 45% 55%, 2% 35%, 45% 45%)";
+      break;
+      case 6 :
+        clipPathValue = "polygon(0% 0%, 0% 100%, 10% 100%, 10% 10%, 90% 10%, 90% 90%, 0 90%, 0 100%, 100% 100%, 100% 0%)";
+      break;
+      case 7 :
+        clipPathValue = "polygon(40% 0%, 10% 45%, 100% 45%, 100% 55%, 10% 55%, 40% 100%, 0% 50%)";
+      break;
+      case 8 :
+        clipPathValue = "polygon(0 45%, 90% 45%, 60% 0%, 100% 50%, 60% 100%, 90% 55%, 0 55%)";
+      break;
+      case 9 :
+        clipPathValue = "polygon(50% 25%, 100% 0, 75% 0, 100% 100%, 100% 75%, 50% 0, 0 75%, 0 100%, 25% 0, 0 0)";
+      break;
+      case 10 :
+        clipPathValue = "ellipse(10% 20% at 50% 25%)";
+      break;
+    }
     const foto = document.getElementById('fotoA');
     if(foto)
     {
       foto.style.clipPath = clipPathValue; 
-      /* foto.style.clipPath = 'polygon(100% 0, 35% 24%, 0 100%, 100% 100%, 79% 50%)'; */
     }
   }
       
   //funciones de las pistas
+
+  // maneja los botones de las pistas de texto
+  handlePistaButtonClick(buttonText: string): void
+  {
+    switch (buttonText)
+    {
+      case 'consola':
+        this.consola=true;
+        this.mostrarPista('VP1',valores.consola);
+        break;
+     
+/*       case 'creadores':
+        this.mostrarPista('VP2',valores.creadores);
+        break;
+       */
+      case 'fecha':
+        this.fecha=true;
+        this.mostrarPista('VP3',valores.fecha);
+        break;
+      
+      case 'genero':
+        this.genero=true;
+        this.mostrarPista('VP4',valores.genero);
+        break;
+    }
+  }
+
   pistaEliminaOp()
   {
-    let bien: boolean= false;
-    while(!bien)
+    let i:number=0;
+    while(i<2)
     {
       let np: number = Math.floor(Math.random() * 4);
       if(this.juegos[this.contJuego].nombresOpciones[np]!=this.juegos[this.contJuego].nombre)
@@ -271,44 +354,43 @@ export class PistaJuegoComponent
         if(miBoton && !miBoton.disabled)
         {
           this.desabilitarYhablitarBoton('opcion' + np,true)
-          this.eliminaOP=this.eliminaOP+1;
-          bien=true;
+          i=i+1;
         }
       }
-      
     }
-    if(this.eliminaOP==2)
-    {
-      this.desabilitarYhablitarBoton('eliminaOp',true);
-    }
+    this.eliminaOp=true;
     this.restarPuntos(valores.eliminaOp);
   }
 
   fotoCompleta()
   {
-    this.imgP=true;
     const foto = document.getElementById('fotoA');
     if(foto)
     {
       foto.style.clipPath = 'none';
     }
+    this.imgP=true;
     this.restarPuntos(valores.imgP);
   }
 
   saltarFoto()
   {
-    if(this.verificarPistas('.pista'))
+    if(this.verificarPistas('.pista') && this.puntaje>=50)
     {
-      if(confirm("Si saltas pierdes las pistas usadas"))
-      {
-        this.reset();
-        this.moverPorArreglo();  
-      }
-    }else
+      this.cartelAdvertencia=true;
+    }
+    else
     {
       this.moverPorArreglo();
       this.generarValoresAleatoriosImagen();
+      this.restarPuntos(valores.jump);
     }
+  }
+  
+  saltarFotoPerdiendoPuntos(){
+    this.reset();
+    this.moverPorArreglo();
+    this.cartelAdvertencia=false
     this.restarPuntos(valores.jump);
   }
 
@@ -319,13 +401,40 @@ export class PistaJuegoComponent
     {
       pista.style.visibility = 'visible';
     }
-    this.desabilitarYhablitarBoton(id,true)
     this.restarPuntos(coste);
   }
-
-  // recibindo datos desde componente temporizador
+  mostrarYocultar(id:string,estado:boolean)
+  {
+    const pista = document.getElementById(id);
+    if(pista)
+    {
+      if(estado){
+        pista.style.visibility = 'visible';
+      }else{
+        pista.style.visibility = 'hidden';
+      }
+    }
+  }
+  
+  usoPista(){
+    this.pistaUsos=this.pistaUsos+1;
+  }
+  // recibindo datos desde componente temporizador y actualiza los puntos totales en el servidor
   recibindoDatosDesdeTemporizador(mensaje: string)
   {
     this.puntaje= this.puntaje + Number(mensaje) * valores.tiempoSobrante;
+    this.cartelFinal = true;
+    this.usuariosService.actualizarPuntos(this.usuariosService.login.id, this.puntaje);
   }
+ /*  precargarImagenes(){
+    const div=document.getElementById('cargaImagenes');
+    if(div){
+      for (const foto of this.juegos) {
+        const img = new Image();
+        img.src = foto.foto;
+        img.style.display = 'none';
+        div.appendChild(img);
+      }
+    }
+  } */
 }
