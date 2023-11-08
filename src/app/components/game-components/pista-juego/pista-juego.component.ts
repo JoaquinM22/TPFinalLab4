@@ -35,7 +35,7 @@ export class PistaJuegoComponent implements OnInit
   terminar: boolean = true;
 
   //carga los puntos del usuario en sesion
-  puntaje: number = this.usuariosService.login.puntos +5000;
+  puntaje: number = this.usuariosService.login.puntos;
 
   //controlador de inicio y fin
   empezar: boolean = false;
@@ -60,6 +60,7 @@ export class PistaJuegoComponent implements OnInit
   constructor(private usuariosService: UsuariosService)
   {
   }
+
   ngOnInit(): void {
     this.chequeoCosto();
     this.generarValoresAleatoriosImagen();
@@ -111,10 +112,16 @@ export class PistaJuegoComponent implements OnInit
       this.contJuego=this.contJuego+1;
     }else
     {
-      this.contJuego = 0;
-      while(!this.juegos[this.contJuego].visible && this.contJuego < this.juegos.length)
+      if(this.juegos.length == this.correctas + this.incorrectas)
       {
-        this.contJuego=this.contJuego+1;
+        this.terminar = false;
+      }else
+      {
+        this.contJuego = 0;
+        while(!this.juegos[this.contJuego].visible && this.contJuego < this.juegos.length)
+        {
+          this.contJuego=this.contJuego+1;
+        }
       }
     }
 
@@ -403,6 +410,7 @@ export class PistaJuegoComponent implements OnInit
     }
     this.restarPuntos(coste);
   }
+
   mostrarYocultar(id:string,estado:boolean)
   {
     const pista = document.getElementById(id);
@@ -426,6 +434,7 @@ export class PistaJuegoComponent implements OnInit
     this.cartelFinal = true;
     this.usuariosService.actualizarPuntos(this.usuariosService.login.id, this.puntaje);
   }
+
  /*  precargarImagenes(){
     const div=document.getElementById('cargaImagenes');
     if(div){
@@ -437,4 +446,5 @@ export class PistaJuegoComponent implements OnInit
       }
     }
   } */
+
 }
