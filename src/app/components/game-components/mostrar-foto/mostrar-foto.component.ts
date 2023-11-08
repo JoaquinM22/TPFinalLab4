@@ -21,9 +21,12 @@ export class MostrarFotoComponent
   constructor()
   {
   }
-  enviarDatos(mensaje : string) {
+
+  enviarDatos(mensaje : string)
+  {
     this.mensajeEnviado.emit(mensaje);
   }
+  
   recibindoDatosDesdeJuego(mensaje: string)
   {
     switch(mensaje)
@@ -118,7 +121,6 @@ export class MostrarFotoComponent
       let posRandom = Math.floor(Math.random() * nuevasFotos.length);
       //seleciono dentro del arreglo
       
-
       //Cargo esa URL random valida en nuevaFoto
       const nuevaFoto: string = nuevasFotos[posRandom];
 

@@ -4,10 +4,10 @@
 .contenedorJuego{
     height: 850px;
     width: 1120px;
-    background-image: url(src\assets\Recuadro.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin: 0% 20%; 
+    /* background-image: url(src\assets\Recuadro.jpg); */ 
+    background-repeat: no-repeat; 
+    margin: 0% 20%;  
+ 
 }
 
 .cartelContenedor 

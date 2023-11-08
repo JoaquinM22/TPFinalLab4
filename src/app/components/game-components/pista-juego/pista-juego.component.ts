@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, Renderer2, ElementRef } from '@angular/core';
 import { JuegoInt } from '../../../interfaces/juegoInt';
 import { PasarDatosAPIService } from '../../../servicios/pasar-datos-api.service';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
@@ -58,7 +58,7 @@ export class PistaJuegoComponent
   genero: boolean=false;
   fecha: boolean=false;
 
-  constructor(private usuariosService: UsuariosService)
+  constructor(private usuariosService: UsuariosService, private renderer: Renderer2, private el: ElementRef)
   {
   }
   
@@ -361,4 +361,23 @@ export class PistaJuegoComponent
       }
     }
   } */
+
+
+
+
+  //Cambia con el mouse Hover
+  handleMouseEnter(buttonId: string)
+  {
+    const button = this.el.nativeElement.querySelector('#' + buttonId);
+    this.renderer.setStyle(button, 'background', '#7300ff');
+  }
+  
+  //Vuelve a la normalidad
+  handleMouseLeave(buttonId: string)
+  {
+    const button = this.el.nativeElement.querySelector('#' + buttonId);
+    this.renderer.setStyle(button, 'background', '#0073ff');
+  }
+
+
 }

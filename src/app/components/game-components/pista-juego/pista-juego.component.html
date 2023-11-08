@@ -8,8 +8,10 @@
         </div>
     </div>
 
-    <div class="imagen">
-        <img id="fotoA" src="{{juegos[contJuego].foto}}" alt="Foto Juego">
+    <div class="centrarFoto">
+        <div class="imagen">
+            <img id="fotoA" src="{{juegos[contJuego].foto}}" alt="Foto Juego">
+        </div>
     </div>
 
     <div class="viewPista">
@@ -37,10 +39,14 @@
     </div>
 
     <div class="options">
-        <button id="opcion0" class="option" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[0])">{{juegos[contJuego].nombresOpciones[0]}}</button>
-        <button id="opcion1" class="option" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[1])">{{juegos[contJuego].nombresOpciones[1]}}</button>
-        <button id="opcion2" class="option" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[2])">{{juegos[contJuego].nombresOpciones[2]}}</button>
-        <button id="opcion3" class="option" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[3])">{{juegos[contJuego].nombresOpciones[3]}}</button>
+        <button id="opcion0" class="option" (mouseenter)="handleMouseEnter('opcion0')"
+        (mouseleave)="handleMouseLeave('opcion0')" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[0])">{{juegos[contJuego].nombresOpciones[0]}}</button>
+        <button id="opcion1" class="option" (mouseenter)="handleMouseEnter('opcion1')"
+        (mouseleave)="handleMouseLeave('opcion1')" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[1])">{{juegos[contJuego].nombresOpciones[1]}}</button>
+        <button id="opcion2" class="option" (mouseenter)="handleMouseEnter('opcion2')"
+        (mouseleave)="handleMouseLeave('opcion2')" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[2])">{{juegos[contJuego].nombresOpciones[2]}}</button>
+        <button id="opcion3" class="option" (mouseenter)="handleMouseEnter('opcion3')"
+        (mouseleave)="handleMouseLeave('opcion3')" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[3])">{{juegos[contJuego].nombresOpciones[3]}}</button>
     </div>
 
     <div id="rigth" class="pistas">
