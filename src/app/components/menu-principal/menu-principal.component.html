@@ -1,14 +1,6 @@
-<h1 class="page_title" id="titulo">MENU PRINCIPAL</h1>
-
-<section class="menu">
-    <!-- <a class="boton" id="crear" (click)="crearPartida()">Crear Partida</a>
-    <a class="boton" id="ranking" href="http://localhost:4200/ranking">Ranking</a>
-    <a class="boton" id="perfil" href="#">Ver Perfil</a>
-    <a class="boton" id="opciones" href="#">Opciones</a>
-    <a class="boton" id="historial" href="#">Historial</a> -->
-    <!-- <a class="boton" id="" href="http://localhost:4200/login">Cerrar Sesion</a> -->
-    
-    <button class="botonNuevo" (click)="desabilitarTodosLosComponentes();crearPartida=true">Crear Partida</button>
+<section *ngIf="menu" class="menu">
+ 
+    <button class="botonNuevo" (click)="desabilitarTodosLosComponentes();menu=false;crearPartida=true">Crear Partida</button>
     <button class="botonNuevo" (click)="desabilitarTodosLosComponentes();ranking=true">Ranking</button>
     <!-- <button class="botonNuevo" routerLink="/perfil">Ver Perfil</button> -->
     <button class="botonNuevo" (click)="desabilitarTodosLosComponentes();perfil=true">Ver Perfil</button>

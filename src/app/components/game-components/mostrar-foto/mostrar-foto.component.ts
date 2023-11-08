@@ -31,8 +31,10 @@ export class MostrarFotoComponent
       case 'otra':
         this.datosJuegos=[];
         this.empezar=false;
+        this.cartelInicio=true;
         break;
-      case 'terminar':
+      case 'finalizar':
+        this.enviarDatos('false');
         break;
     }
   }
@@ -112,9 +114,10 @@ export class MostrarFotoComponent
       {
         nuevasFotos.push(unaFoto.image);
       }
-
+      
+      let posRandom = Math.floor(Math.random() * nuevasFotos.length);
       //seleciono dentro del arreglo
-      let posRandom= Math.floor(Math.random() * nuevasFotos.length - 1);
+      
 
       //Cargo esa URL random valida en nuevaFoto
       const nuevaFoto: string = nuevasFotos[posRandom];
@@ -342,5 +345,7 @@ export class MostrarFotoComponent
       console.error("Error al obtener juegos y redirigir:", error);
     }
   }
+
+  
 
 }
