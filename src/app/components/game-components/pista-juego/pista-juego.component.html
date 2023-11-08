@@ -1,15 +1,15 @@
-<div id="tablero" class="contenedor">
-
-    <div *ngIf="cartelInicio" class="cartelContenedor">
-        <div class="cartel">
-          <h2>Bienvenido</h2>
-          <p>Presiona "Empezar" para iniciar el temporizador</p>
-          <button class="botonEmpezar" (click)="iniciarPartida()">Empezar</button>
-        </div>
+<div *ngIf="cartelInicio" class="cartelContenedor">
+    <div class="cartel">
+      <h2>Bienvenido</h2>
+      <p>Presiona "Empezar" para iniciar el temporizador</p>
+      <button class="botonEmpezar" (click)="iniciarPartida()">Empezar</button>
     </div>
+</div>
 
+<div id="tablero" class="contenedor">
     <div class="imagen">
-        <img id="fotoA" src="{{juegos[contJuego].foto}}" alt="Foto Juego">
+        <img id="fotoA" class="foto" src="{{juegos[contJuego].foto}}" alt="Foto Juego" style="visibility: hidden;">
+        <!-- <img id="fotoB" class="foto" src="assets\GifDicaproMordiendoMano.gif" alt="Foto Juego" style="visibility: visible;" style="position: absolute;"> -->
     </div>
 
     <div class="viewPista">
@@ -17,9 +17,8 @@
         <div id="blockPuntaje">
             <span class = "puntajeNuevo">{{puntaje}}</span>
         </div>
-
         <div id="VP1" class="VP" style="visibility: hidden;" >{{juegos[contJuego].plataformas}}</div>
-        <div id="VP2" class="VP" style="visibility: hidden;"></div>
+        <!-- <div id="VP2" class="VP" style="visibility: hidden;"></div> -->
         <div id="VP3" class="VP" style="visibility: hidden;">{{juegos[contJuego].fecha}}</div>
         <div id="VP4" class="VP" style="visibility: hidden;">{{juegos[contJuego].generos}}</div>
 
@@ -30,10 +29,13 @@
     </div>
 
     <div id="left" class="pistas">
-        <button id="50%" class="pista"  (click)="handlePistaButtonClick('50%')">Invetntar</button>
-        <button id="eliminaOp" class="pista" (click)="pistaEliminaOp()">50%</button>
-        <button id="imgP" class="pista" (click)="fotoCompleta()">Agrandar Imagen</button>
-        <button id="jump" class="pista" (click)="saltarFoto()">Saltear imagen</button>
+        <!-- <button id="50%" class="pista"  (click)="handlePistaButtonClick('50%')">Invetntar</button> -->
+        <p class="parrafo">50% =></p>
+        <button id="eliminaOp" class="pista" (click)="pistaEliminaOp()">50 Puntos</button>
+        <p class="parrafo">Agrandar Imagen =></p>
+        <button id="imgP" class="pista" (click)="fotoCompleta()">25 Puntos</button>
+        <p class="parrafo">Saltear imagen =></p>
+        <button id="jump" class="pista" (click)="saltarFoto()">5 Puntos</button>
     </div>
 
     <div class="options">
@@ -44,22 +46,27 @@
     </div>
 
     <div id="rigth" class="pistas">
-        <button id="consola" class="pista" (click)="handlePistaButtonClick('consola')">Consolas</button>
-        <button id="creadores" class="pista" (click)="handlePistaButtonClick('creadores')">Creadores</button>
-        <button id="fecha" class="pista" (click)="handlePistaButtonClick('fecha')">Fecha</button>
-        <button id="genero" class="pista" (click)="handlePistaButtonClick('genero')">Generos</button>
+        <p class="parrafo">Mostrar consola => </p>
+        <button id="consola" class="pista" (click)="handlePistaButtonClick('consola')">10 Puntos</button>
+        <!-- <button id="creadores" class="pista" (click)="handlePistaButtonClick('creadores')">Creadores</button> -->
+        <p class="parrafo">Mostrar fecha =></p>
+        <button id="fecha" class="pista" (click)="handlePistaButtonClick('fecha')">5 Puntos</button>
+        <p class="parrafo">Mostrar genero =></p>
+        <button id="genero" class="pista" (click)="handlePistaButtonClick('genero')">15 Puntos</button>
     </div>
     
-    <div *ngIf="cartelFinal" class="cartelContenedor">
-        <div class="cartel">
-          <h2>Felicidades tus puntos son : {{puntaje}}</h2>
-          <p>Presiona "Continuar" para volver al menu principal</p>
-          <p>Presiona "Jugar otra" para empezar otra</p>
-          <button (click)="finalizarPartida()">Continuar</button>
-          <button (click)="empezarOtra()">Jugar otra</button>
-        </div>
+</div>
+
+<div *ngIf="cartelFinal" class="cartelContenedor">
+    <div class="cartel">
+      <h2>Felicidades tus puntos son : {{puntaje}}</h2>
+      <p>Presiona "Continuar" para volver al menu principal</p>
+      <p>Presiona "Jugar otra" para empezar otra</p>
+      <button (click)="finalizarPartida()">Continuar</button>
+      <button (click)="empezarOtra()">Jugar otra</button>
     </div>
 </div>
+
 <div *ngIf="cartelAdvertencia" class="cartelContenedor">
     <div class="cartel">
       <h2>Si saltas pierdes tus pistas</h2>

@@ -115,8 +115,8 @@ export class MostrarFotoComponent
         nuevasFotos.push(unaFoto.image);
       }
       
-      let posRandom = Math.floor(Math.random() * nuevasFotos.length);
       //seleciono dentro del arreglo
+      let posRandom = Math.floor(Math.random() * nuevasFotos.length);
       
 
       //Cargo esa URL random valida en nuevaFoto
@@ -337,6 +337,8 @@ export class MostrarFotoComponent
 
       console.log("Los 10 juegos", this.datosJuegos);
       console.log("La pos 5 de juegos", this.datosJuegos[5]);
+      console.log("Tamaño arreglo: ", this.datosJuegos.length);
+
       this.loading=false;
       this.empezar=true;
     }catch(error)
