@@ -126,7 +126,7 @@
     font-size: 11px;
     box-shadow: 0 0 2px black;            
 }
-.options button:hover
+.options button:hover   
 {
     background: #7300ff;
 }

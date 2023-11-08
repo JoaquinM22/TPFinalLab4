@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { JuegoInt } from '../../../interfaces/juegoInt';
-import { timeout } from 'rxjs';
 
 enum valores
 {
@@ -26,14 +25,17 @@ enum valores
 export class PistaJuegoComponent 
 {
 
-  //datos de otros componentes
+  //envia a componente mostrar foto
   @Output() mensajeEnviado: EventEmitter<string> = new EventEmitter<string>();
+  // recibe de mostrar foto
   @Input() juegos: JuegoInt[] = [];
+  // envia al temporizador para cortar el timepo
   terminar: boolean = true;
+  //se comunica con servicio
   puntaje: number = 5000 ;
-
-  //controlador de inicio, fin y advertencia
+  // comienza el temporizador
   empezar: boolean = false;
+  //controlador de inicio, fin y advertencia
   cartelInicio: boolean = true;
   cartelFinal: boolean = false;
   cartelAdvertencia:boolean=false;
@@ -42,8 +44,10 @@ export class PistaJuegoComponent
   //respuestas correctas y incorrectas
   correctas: number=0;
   incorrectas: number=0;
-  //estados de las pistas
-  eliminaOP: number=0;
+  // uso de pistas
+  pistaUsos: number = 0;
+  //control estados de las pistas
+  eliminaOp: boolean=false; 
   imgP: boolean=false;
   consola: boolean=false;
   genero: boolean=false;
@@ -57,43 +61,21 @@ export class PistaJuegoComponent
     this.cartelInicio=false;
     this.empezar=true;
   }
+
   finalizarPartida(){
     this.cartelFinal=false;
     this.enviarDatos('finalizar');
   }
+
   empezarOtra(){
     this.cartelFinal=false;
     this.enviarDatos('otra');
   }
-
+  // envia al componente padre
   enviarDatos(mensaje : string) {
     this.mensajeEnviado.emit(mensaje);
   }
-  // maneja los botones de las pistas
-  handlePistaButtonClick(buttonText: string): void
-  {
-    switch (buttonText)
-    {
-      case 'consola':
-        this.consola=true;
-        this.mostrarPista('VP1',valores.consola);
-        break;
-     
-      case 'creadores':
-        this.mostrarPista('VP2',valores.creadores);
-        break;
-      
-      case 'fecha':
-        this.fecha=true;
-        this.mostrarPista('VP3',valores.fecha);
-        break;
-      
-      case 'genero':
-        this.genero=true;
-        this.mostrarPista('VP4',valores.genero);
-        break;
-    }
-  }
+  
   // manejo de respuestas
   handleOptionButtonClick(optionText: string): void
   {
@@ -154,11 +136,12 @@ export class PistaJuegoComponent
 
     this.desabilitarYhablitarBoton('eliminaOp',false);
     //reseteo los valores para chequear las pistas
-    this.eliminaOP=0;
+    this.eliminaOp=false;
     this.imgP=false;
     this.consola=false;
     this.genero=false;
     this.fecha=false;
+    /* this.eliminaOpBool=false; */
 
   }
 
@@ -183,7 +166,7 @@ export class PistaJuegoComponent
     if(miBoton)
     {
       miBoton.disabled = estado;
-      miBoton.style.background ='white';
+      miBoton.style.background ='red';
     }
   }
   
@@ -198,11 +181,6 @@ export class PistaJuegoComponent
         usada  = true;
       }
     });
-
-    if(this.eliminaOP>0)
-    {
-      usada  = true;
-    }
     return usada;
   }
 
@@ -214,24 +192,30 @@ export class PistaJuegoComponent
       switch (elemento.id)
       {
         case 'eliminaOp':
-          (elemento as HTMLButtonElement).disabled = this.puntaje < valores.eliminaOp || this.eliminaOP > 1;
+          this.desabilitarYhablitarBoton(elemento.id,this.puntaje < valores.eliminaOp || this.eliminaOp);
+          /* (elemento as HTMLButtonElement).disabled = this.puntaje < valores.eliminaOp || this.eliminaOP > 1; */
           break;
         case 'imgP':
-          (elemento as HTMLButtonElement).disabled = this.puntaje < valores.imgP || this.imgP;
+          if(this.puntaje < valores.imgP || this.imgP)
+          this.desabilitarYhablitarBoton(elemento.id,false);
+          /* (elemento as HTMLButtonElement).disabled = this.puntaje < valores.imgP || this.imgP; */
           break;
         case 'jump':
-          (elemento as HTMLButtonElement).disabled = this.puntaje < valores.jump;
+          this.desabilitarYhablitarBoton(elemento.id,this.puntaje < valores.jump);
+          /* (elemento as HTMLButtonElement).disabled = this.puntaje < valores.jump; */
           break;
         case 'consola':
-          (elemento as HTMLButtonElement).disabled = this.puntaje < valores.consola || this.consola;
+          this.desabilitarYhablitarBoton(elemento.id,this.puntaje < valores.consola || this.consola);
+          /* (elemento as HTMLButtonElement).disabled = this.puntaje < valores.consola || this.consola; */
           break;
         case 'fecha':
-          (elemento as HTMLButtonElement).disabled = this.puntaje < valores.fecha || this.fecha;
+          this.desabilitarYhablitarBoton(elemento.id,this.puntaje < valores.fecha || this.fecha);
+          /* (elemento as HTMLButtonElement).disabled = this.puntaje < valores.fecha || this.fecha; */
           break;
         case 'genero':
-          (elemento as HTMLButtonElement).disabled = this.puntaje < valores.genero || this.genero;
+          this.desabilitarYhablitarBoton(elemento.id,this.puntaje < valores.genero || this.genero);
+          /* (elemento as HTMLButtonElement).disabled = this.puntaje < valores.genero || this.genero; */
           break;
-          
       }
     })
   }
@@ -263,10 +247,37 @@ export class PistaJuegoComponent
   }
       
   //funciones de las pistas
+
+  // maneja los botones de las pistas de texto
+  handlePistaButtonClick(buttonText: string): void
+  {
+    switch (buttonText)
+    {
+      case 'consola':
+        this.consola=true;
+        this.mostrarPista('VP1',valores.consola);
+        break;
+     
+      case 'creadores':
+        this.mostrarPista('VP2',valores.creadores);
+        break;
+      
+      case 'fecha':
+        this.fecha=true;
+        this.mostrarPista('VP3',valores.fecha);
+        break;
+      
+      case 'genero':
+        this.genero=true;
+        this.mostrarPista('VP4',valores.genero);
+        break;
+    }
+  }
+
   pistaEliminaOp()
   {
-    let bien: boolean= false;
-    while(!bien)
+    let i:number=0;
+    while(i<2)
     {
       let np: number = Math.floor(Math.random() * 4);
       if(this.juegos[this.contJuego].nombresOpciones[np]!=this.juegos[this.contJuego].nombre)
@@ -275,27 +286,24 @@ export class PistaJuegoComponent
         if(miBoton && !miBoton.disabled)
         {
           this.desabilitarYhablitarBoton('opcion' + np,true)
-          this.eliminaOP=this.eliminaOP+1;
-          bien=true;
+          i=i+1;
         }
       }
-      
     }
-    if(this.eliminaOP==2)
-    {
-      this.desabilitarYhablitarBoton('eliminaOp',true);
-    }
+    this.eliminaOp=true;
+    this.desabilitarYhablitarBoton('eliminaOp',true);
     this.restarPuntos(valores.eliminaOp);
   }
 
   fotoCompleta()
   {
-    this.imgP=true;
     const foto = document.getElementById('fotoA');
     if(foto)
     {
       foto.style.clipPath = 'none';
     }
+    this.imgP=true;
+    this.desabilitarYhablitarBoton('imgP',true);
     this.restarPuntos(valores.imgP);
   }
 
@@ -313,6 +321,7 @@ export class PistaJuegoComponent
     }
    
   }
+  
   saltarFotoPerdiendoPuntos(){
     this.reset();
     this.moverPorArreglo();
@@ -327,7 +336,6 @@ export class PistaJuegoComponent
     {
       pista.style.visibility = 'visible';
     }
-    this.desabilitarYhablitarBoton(id,true)
     this.restarPuntos(coste);
   }
 
