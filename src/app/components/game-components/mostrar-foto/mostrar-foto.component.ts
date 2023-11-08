@@ -43,14 +43,22 @@ export class MostrarFotoComponent
   }
 
   //Llama a la API y carga el arreglo de nombres de los juegos
-  getNombresJuegosAPI(i: number): Promise<void>
+  getNombresJuegosAPI(i: number, genero: string): Promise<void>
   {
     return new Promise((resolve, reject) =>
     {
       let arregloDeNombres: string[] = [];
-  
-      const nombresURL = "https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page_size=40&page=" + i;
-  
+    
+      let nombresURL;
+      if(genero == 'porDefecto')
+      {
+        nombresURL =
+      "https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page_size=40&page=" + i;
+      }else
+      {
+        nombresURL = "https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page_size=40&page=" + i + "&genres=" + genero;
+      }
+
       fetch(nombresURL)
       .then(res => res.json())
       .then(data =>
@@ -118,8 +126,8 @@ export class MostrarFotoComponent
         nuevasFotos.push(unaFoto.image);
       }
       
-      let posRandom = Math.floor(Math.random() * nuevasFotos.length);
       //seleciono dentro del arreglo
+      let posRandom = Math.floor(Math.random() * nuevasFotos.length);
       
       //Cargo esa URL random valida en nuevaFoto
       const nuevaFoto: string = nuevasFotos[posRandom];
@@ -258,7 +266,7 @@ export class MostrarFotoComponent
       console.log("Entre a GetJuegos");
   
       // Primero, espera a que se carguen los nombres
-      this.getNombresJuegosAPI(i)
+      this.getNombresJuegosAPI(i, genero)
       .then(() =>
       {
         // Ahora que los nombres están disponibles, carga los juegos
@@ -322,7 +330,7 @@ export class MostrarFotoComponent
         console.log("Modo Medio");
       }else
       {
-        numeroRandom = Math.floor(Math.random() * 500) + 1;
+        numeroRandom = Math.floor(Math.random() * 200) + 1;
         console.log("Modo Dificil");
       }
 
@@ -339,6 +347,8 @@ export class MostrarFotoComponent
 
       console.log("Los 10 juegos", this.datosJuegos);
       console.log("La pos 5 de juegos", this.datosJuegos[5]);
+      console.log("Tamaño arreglo: ", this.datosJuegos.length);
+
       this.loading=false;
       this.empezar=true;
     }catch(error)

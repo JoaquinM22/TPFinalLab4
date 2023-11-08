@@ -1,6 +1,4 @@
-
-.contenedor
-{
+/* .contenedor {
     position: fixed;
     top: 0;
     left: 0;
@@ -22,12 +20,4 @@
     font-family: Arial;
     text-decoration: none;
     text-align: center;
-
-    border: 5px solid;
-    border-radius: 20px;
-    border-color: #0022ff;
-
-    padding: 15px 35px;
-    box-shadow: 10px 10px 5px black;
-    margin: auto;
 }

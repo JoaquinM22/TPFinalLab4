@@ -178,15 +178,6 @@
     background: #7300ff;
 }
 
-/*ESTILOS FUNCION MOUSE HOVER*/
-#opcion0:hover, #opcion1:hover, #opcion2:hover, #opcion3:hover
-{
-    background: #7300ff;
-}
-
-  
-
-
 #left{
     grid-column: 1 ;
     grid-row: 3;
@@ -262,10 +253,4 @@
     align-items: center;
     justify-content: center;
 }
-
-.centrarFoto
-{
-    text-align: center;
-}
-
 
