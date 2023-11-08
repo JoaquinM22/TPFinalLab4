@@ -6,7 +6,7 @@ import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
 enum valores
 {
-  eliminaOp = 25,
+  eliminaOp = 50,
   imgP = 25,
   jump = 5,
   consola = 10,
