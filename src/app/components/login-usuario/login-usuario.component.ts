@@ -22,6 +22,7 @@ export class LoginUsuarioComponent implements OnInit
 
   }
 
+  
   initFormLogin(): FormGroup 
   {
     return this.fb.group
@@ -136,9 +137,12 @@ export class LoginUsuarioComponent implements OnInit
           }else
           {
             //Aca sube los datos al server
+            console.log("Cargo user nuevo");
             await this.cargarUsuario(nombreCre, passCre);
 
             console.log("Tercer consoleLog", this.usuarioLogueado);
+            //NUEVO AL CREAR
+            this.usuariosService.guardarDatos(this.usuarioLogueado);
             this.usuariosService.login = this.usuarioLogueado;
             this.router.navigate(['/menu']);
           }

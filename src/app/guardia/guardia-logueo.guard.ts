@@ -30,7 +30,7 @@ export class GuardiaLogueoGuard implements CanActivate
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree
   {
     //Verifica si el usuario esta logueado
-    if(this.usuariosService.login)
+    if(localStorage.getItem('misDatos'))
     {
       return true;
     }else

@@ -41,6 +41,20 @@
       "password": "Hola",
       "puntos": 200,
       "partidas": 0
+    },
+    {
+      "id": 7,
+      "usuario": "El_Pepe",
+      "password": "Messi123",
+      "puntos": 200,
+      "partidas": 0
+    },
+    {
+      "id": 8,
+      "usuario": "ElMesias10",
+      "password": "Messi4545",
+      "puntos": 200,
+      "partidas": 0
     }
   ],
   "partida": [
