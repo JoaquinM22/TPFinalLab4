@@ -122,17 +122,18 @@ export class PistaJuegoComponent implements OnInit
       this.contJuego=this.contJuego+1;
     }else
     {
-      if(this.juegos.length == this.correctas + this.incorrectas)
+      this.contJuego = 0;
+      while(!this.juegos[this.contJuego].visible && this.contJuego < this.juegos.length)
       {
-        this.terminar = false;
-      }else{
-        this.contJuego = 0;
-        while(!this.juegos[this.contJuego].visible && this.contJuego < this.juegos.length)
-        {
-          this.contJuego=this.contJuego+1;
-        }
+        this.contJuego=this.contJuego+1;
       }
-    }   
+    }
+
+    if(this.juegos.length == this.correctas + this.incorrectas)
+    {
+      this.terminar = false;
+      this.contJuego=0;
+    }
   }
 
   reset()
@@ -413,6 +414,7 @@ export class PistaJuegoComponent implements OnInit
     }
     this.restarPuntos(coste);
   }
+
   mostrarYocultar(id:string,estado:boolean)
   {
     const pista = document.getElementById(id);

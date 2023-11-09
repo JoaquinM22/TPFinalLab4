@@ -6,8 +6,11 @@ import { MostrarFotoComponent } from './components/game-components/mostrar-foto/
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent
+{
   title = 'TPFinal_Lab4';
+
+  constructor(){}
 
  /*  @ViewChild('miComponente') miComponente: MostrarFotoComponent;
 
