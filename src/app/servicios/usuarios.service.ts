@@ -54,28 +54,6 @@ export class UsuariosService
     return undefined;
   }
 
-  traerPuntosUsuario(): number{
-    const url = "http://localhost:3000/users/" + this.obtenerDatos();
-    var punt=-1;
-    const options = 
-    {
-      method: 'GET',
-      headers: 
-      {
-        'Content-Type': 'application/json',
-      },
-    }
-    fetch(url, options)
-    .then(response => response.json())
-    .then(data=>{
-      punt = data.puntos;
-    })
-    .catch(error => 
-    {
-      console.error('Hubo un error en la solicitud:', error);
-    });
-    return punt;
-  }
 
   actualizarPuntos ( new_puntos: number)
   {
@@ -153,5 +131,32 @@ export class UsuariosService
     });
   }
 
+  traerPartidasUsuario(){
+    var partidas:Partida[]=[];
+    const url = "http://localhost:3000/partida";
+
+    const options = 
+    {
+      method: 'GET',
+      headers: 
+      {
+        'Content-Type': 'application/json',
+      },
+    }
+    fetch(url, options)
+    .then(response => response.json())
+    .then(data=>{
+      for(const ele of data){
+        if(ele.idUsuario===this.obtenerDatos().id){
+          partidas.push(ele);
+        }
+      }
+    })
+    .catch(error => 
+    {
+      console.error('Hubo un error en la solicitud:', error);
+    });
+    return partidas;
+  }
 
 }

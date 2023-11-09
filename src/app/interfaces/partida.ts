@@ -1,8 +1,8 @@
 export interface Partida{
-    idUsuario:Number,
-    puntos:Number,
-    incorrectas:Number,
-    correctas:Number,
+    idUsuario:number,
+    puntos:number,
+    incorrectas:number,
+    correctas:number,
     pistaUsada:number,
     fechaPartida:Date
 }
