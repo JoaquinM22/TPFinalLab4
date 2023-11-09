@@ -42,7 +42,8 @@ export class LoginUsuarioComponent implements OnInit
     id: 0,
     usuario: "",
     password: "",
-    puntos:0
+    puntos:0,
+    partidas:0
   };
 
   //Funcion de guardar los datos de usuario
@@ -66,15 +67,15 @@ export class LoginUsuarioComponent implements OnInit
         if(validado)
         {
           console.log(this.usuarioLogueado);
-          this.usuariosService.login = this.usuarioLogueado;
-          
+          this.usuariosService.guardarDatos(this.usuarioLogueado);
+          console.log("Usuario Logueado" + this.usuariosService.obtenerDatos());
           this.router.navigate(['/menu']);
         }else
         {
           var mensaje = document.getElementById("txt_login");
           if(mensaje)
           {
-            mensaje.innerHTML = "Password incorrecto"
+            mensaje.innerHTML = "Nombre o password incorrecto"
           }
         }
 
@@ -118,7 +119,8 @@ export class LoginUsuarioComponent implements OnInit
               id: 0,
               usuario: "",
               password: "",
-              puntos:0
+              puntos:0,
+              partidas: 0
             };
             if(mensaje)
             {
@@ -159,6 +161,7 @@ export class LoginUsuarioComponent implements OnInit
       usuario: nombre,
       password: password,
       puntos: 200,
+      partidas:0
     };
 
     const options = 
@@ -221,7 +224,8 @@ export class LoginUsuarioComponent implements OnInit
               id: datos.id,
               usuario: nombre,
               password: "",
-              puntos: datos.puntos
+              puntos: datos.puntos,
+              partidas: datos.partidas
             };
 
             validacion = true;
