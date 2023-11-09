@@ -11,6 +11,7 @@
 <div *ngIf="crearPartida">
     <app-mostrar-foto (mensajeEnviado)="recibiendoDatosDesdeCreadorPartida($event)"></app-mostrar-foto>
 </div>
+
 <div *ngIf="ranking">
     <app-ranking></app-ranking>
 </div>
@@ -18,6 +19,7 @@
 <div *ngIf="perfil">
     <app-perfil-usuario></app-perfil-usuario>
 </div>
+
 <div *ngIf="historial">
     <app-historial></app-historial>
 </div>

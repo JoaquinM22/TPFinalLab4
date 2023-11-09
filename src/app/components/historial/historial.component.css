@@ -5,7 +5,7 @@
     color: rgb(178, 253, 64);
     background-color: rgb(32, 32, 32);
     
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial;
     font-size:x-large;
 
     border: 1px solid rgb(178, 253, 64);
@@ -14,7 +14,7 @@
     text-align: center;
 }
 
-.cuadro
+tr, td, th
 {
     border: 1px solid rgb(178, 253, 64);
 }

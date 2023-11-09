@@ -9,7 +9,6 @@ import { Partida } from '../interfaces/partida';
 
 export class UsuariosService 
 {
-  
   url:string = "http://localhost:3000/users?_sort=puntos&_order=desc";
   urlPartida:string = "http://localhost:3000/partida";
   //Variable que se va a usar en las funciones
@@ -19,23 +18,27 @@ export class UsuariosService
     usuario: "",
     password: "",
     puntos: 0,
-    partidas:0
+    partidas: 0
   }
-  //Sesion en el storage
-   private readonly STORAGE_KEY = 'misDatos';
 
-   guardarDatos(datos: Usuario): void {
-     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(datos));
-   }
- 
-   obtenerDatos(): Usuario {
-     const datosString = localStorage.getItem(this.STORAGE_KEY);
-     return datosString ? JSON.parse(datosString) : null;
-   }
- 
-   limpiarDatos(): void {
-     localStorage.removeItem(this.STORAGE_KEY);
-   }
+  //Sesion en el storage
+  private readonly STORAGE_KEY = 'misDatos';
+
+  guardarDatos(datos: Usuario): void
+  {
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(datos));
+  }
+
+  obtenerDatos(): Usuario
+  {
+    const datosString = localStorage.getItem(this.STORAGE_KEY);
+    return datosString ? JSON.parse(datosString) : null;
+  }
+
+  limpiarDatos(): void
+  {
+    localStorage.removeItem(this.STORAGE_KEY);
+  }
 
    modificarDatoPuntos(nuevoDato: number): void {
     const datosActuales = this.obtenerDatos();
@@ -45,10 +48,10 @@ export class UsuariosService
       this.guardarDatos(datosActuales);
     }
   }
-   constructor() { 
+  constructor() { 
    }
  
-   async getUsuarios(): Promise<Usuario[] | undefined>
+  async getUsuarios(): Promise<Usuario[] | undefined>
   {
     try
     {
@@ -83,10 +86,14 @@ export class UsuariosService
       body: JSON.stringify(aCambiar),
     }
 
+    //EJEMPLO
+    this.login.puntos = new_puntos;
+
     fetch(url, options)
     .then(response => 
     {
-      if (response.ok) 
+      console.log("response user:", response);
+      if(response.ok) 
       {
         console.log('Los puntos del usuario han sido actualizados con éxito.');
       }else 
@@ -121,7 +128,8 @@ export class UsuariosService
     });
     
   }
-  guardarPartidaHistorial(puntos:Number,incorrectas:Number,correctas:Number,pistaUsada:number,fechaPartida:Date)
+
+  guardarPartidaHistorial(puntos: number, incorrectas: number, correctas: number, pistaUsada: number, fechaPartida: Date)
   {
     const agregar = {
       idUsuario:this.obtenerDatos().id,

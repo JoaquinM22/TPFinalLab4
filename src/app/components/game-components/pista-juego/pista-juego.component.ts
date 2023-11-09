@@ -61,12 +61,15 @@ export class PistaJuegoComponent implements OnInit
   constructor(private usuariosService: UsuariosService,)
   {
   }
-  ngOnInit(){
-      this.chequeoCosto();
+
+  ngOnInit()
+  {
+    this.chequeoCosto();
   };
 
 
-  iniciarPartida(){
+  iniciarPartida()
+  {
     this.cartelInicio=false;
     this.empezar=true;
     /* this.mostrarYocultar("fotoB",false); */
@@ -74,19 +77,22 @@ export class PistaJuegoComponent implements OnInit
     this.generarValoresAleatoriosImagen();
   }
 
-  finalizarPartida(){
+  finalizarPartida()
+  {
     this.usuariosService.guardarPartidaHistorial(this.puntaje,this.incorrectas,this.correctas,this.pistaUsos,new Date());
     this.mostrarYocultar("fotoA",false);
     this.cartelFinal=false;
     this.enviarDatos('finalizar');
   }
 
-  empezarOtra(){
+  empezarOtra()
+  {
     this.cartelFinal=false;
     this.enviarDatos('otra');
   }
   // envia al componente padre
-  enviarDatos(mensaje : string) {
+  enviarDatos(mensaje : string)
+  {
     this.mensajeEnviado.emit(mensaje);
   }
   
@@ -107,6 +113,7 @@ export class PistaJuegoComponent implements OnInit
     }
     this.moverPorArreglo();   
   }
+
   // recorre el arreglo
   moverPorArreglo()
   {
@@ -120,12 +127,13 @@ export class PistaJuegoComponent implements OnInit
       if(this.juegos.length == this.correctas + this.incorrectas)
       {
         this.terminar = false;
-        this.contJuego=0;
-      }else{
+        this.contJuego = 0;
+      }else
+      {
         this.contJuego = 0;
         while(!this.juegos[this.contJuego].visible && this.contJuego < this.juegos.length)
         {
-          this.contJuego=this.contJuego+1;
+          this.contJuego = this.contJuego+1;
         }
       }
     }
