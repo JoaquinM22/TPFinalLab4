@@ -10,7 +10,7 @@ import { Partida } from '../interfaces/partida';
 export class UsuariosService 
 {
   url:string = "http://localhost:3000/users?_sort=puntos&_order=desc";
-  
+  urlPartida:string = "http://localhost:3000/partida";
   //Variable que se va a usar en las funciones
   login: Usuario = 
   {
@@ -40,7 +40,16 @@ export class UsuariosService
     localStorage.removeItem(this.STORAGE_KEY);
   }
 
-  constructor() { }
+   modificarDatoPuntos(nuevoDato: number): void {
+    const datosActuales = this.obtenerDatos();
+
+    if (datosActuales) {
+      datosActuales.puntos = nuevoDato;
+      this.guardarDatos(datosActuales);
+    }
+  }
+  constructor() { 
+   }
  
   async getUsuarios(): Promise<Usuario[] | undefined>
   {
@@ -57,11 +66,12 @@ export class UsuariosService
     return undefined;
   }
 
-  actualizarPuntos(new_puntos: number)
+  actualizarPuntos ( nuevosPuntos: number)
   {
+    this.modificarDatoPuntos(nuevosPuntos)
     const aCambiar = 
     {
-      puntos: new_puntos
+      puntos: nuevosPuntos
     };
 
     const url = "http://localhost:3000/users/" + this.obtenerDatos().id;
@@ -121,14 +131,13 @@ export class UsuariosService
 
   guardarPartidaHistorial(puntos: number, incorrectas: number, correctas: number, pistaUsada: number, fechaPartida: Date)
   {
-    const agregar =
-    {
-      idUsuario: this.obtenerDatos().id,
-      puntos: puntos,
-      incorrectas: incorrectas,
-      correctas: correctas,
-      pistaUsada: pistaUsada,
-      fechaPartida: fechaPartida
+    const agregar = {
+      idUsuario:this.obtenerDatos().id,
+      puntos:puntos,
+      incorrectas:incorrectas,
+      correctas:correctas,
+      pistaUsada:pistaUsada,
+      fechaPartida:fechaPartida
     };
 
     const url = "http://localhost:3000/partida";
@@ -160,37 +169,25 @@ export class UsuariosService
     });
   }
 
-  traerPartidasUsuario()
+  async getPartidaUsuario(): Promise<Partida[] | undefined>
   {
-    var partidas: Partida[] = [];
-    const url = "http://localhost:3000/partida";
-
-    const options = 
+    var partidass:Partida[]=[];
+    try
     {
-      method: 'GET',
-      headers: 
-      {
-        'Content-Type': 'application/json',
-      },
-    }
-
-    fetch(url, options)
-    .then(response => response.json())
-    .then(data=>
-    {
-      for(const ele of data)
-      {
-        if(ele.idUsuario === this.obtenerDatos().id)
-        {
-          partidas.push(ele);
+      const resultado = await fetch(this.urlPartida);
+      const partidas = resultado.json(); 
+      for(const ele of await partidas){
+        if(ele.idUsuario===this.obtenerDatos().id){
+          partidass.push(ele);
         }
       }
-    })
-    .catch(error => 
+      return partidass;
+    }catch(error) 
     {
-      console.error('Hubo un error en la solicitud:', error);
-    });
-    return partidas;
+      console.log(error);  
+    }
+
+    return undefined;
   }
 
 }
