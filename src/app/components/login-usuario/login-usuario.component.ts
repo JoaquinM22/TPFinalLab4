@@ -61,7 +61,7 @@ export class LoginUsuarioComponent implements OnInit
 
         //Falta agregar la funcion que lo compare con los registros
 
-        const validado = await this.validarUsuario(usuarioL, pass);
+        const validado = await this.validarUsuario(usuarioL, pass, 1);
 
         if(validado)
         {
@@ -107,7 +107,7 @@ export class LoginUsuarioComponent implements OnInit
         }else if(passCre === confPassword)
         {
           //Crea el usuario y lo manda a la funcion que lo carga en el server
-          var validacion = await this.validarUsuario(nombreCre, passCre);
+          var validacion = await this.validarUsuario(nombreCre, passCre, 0);
 
           if(validacion)
           {
@@ -127,9 +127,9 @@ export class LoginUsuarioComponent implements OnInit
           }else
           {
             //Aca sube los datos al server
-            this.cargarUsuario(nombreCre, passCre);
+            await this.cargarUsuario(nombreCre, passCre);
 
-            console.log(this.usuarioLogueado);
+            console.log("Tercero consoleLog", this.usuarioLogueado);
             this.usuariosService.login = this.usuarioLogueado;
 
             this.router.navigate(['/menu']);
@@ -147,12 +147,15 @@ export class LoginUsuarioComponent implements OnInit
     }
   }
 
-  cargarUsuario(nombre: string, password: string)
+  async cargarUsuario(nombre: string, password: string)
   {
+    
+    let idnuevo = await this.usuariosService.getUltimoID();
+    idnuevo = idnuevo +1; 
 
     const update: Usuario = 
     {
-      id: 6,
+      id: idnuevo,
       usuario: nombre,
       password: password,
       puntos: 200,
@@ -172,7 +175,7 @@ export class LoginUsuarioComponent implements OnInit
     .then(data => data)
     .then(update =>
     {
-      console.log(update)
+      console.log("Segundo consoleLog", update)
     })
     .catch(e =>
     {
@@ -183,7 +186,7 @@ export class LoginUsuarioComponent implements OnInit
 
   }
 
-  async validarUsuario(nombre: string, contra: string)
+  async validarUsuario(nombre: string, contra: string, tipo: number)
   {
     var validacion: boolean = false;
 
@@ -198,13 +201,26 @@ export class LoginUsuarioComponent implements OnInit
       {
         if(datos.usuario === nombre)
         {
+          if(tipo == 0)
+          {
+            this.usuarioLogueado = 
+            { 
+              id: datos.id,
+              usuario: nombre,
+              password: "",
+              puntos: datos.puntos
+            };
+
+            validacion = true;
+          }
+          
           if(datos.password === contra)
           {
             this.usuarioLogueado = 
             { 
               id: datos.id,
               usuario: nombre,
-              password: contra,
+              password: "",
               puntos: datos.puntos
             };
 
@@ -220,10 +236,10 @@ export class LoginUsuarioComponent implements OnInit
     return validacion;
   }
   
-  ngOnInit()
+  async ngOnInit()
   {
     this.logueo_Usuario();
-    this.creacion_Usuario();
+    await this.creacion_Usuario();
     this.login = this.initFormLogin();
     this.creacion = this.initFormCreacion();
   }
