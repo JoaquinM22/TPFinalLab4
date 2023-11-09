@@ -87,7 +87,7 @@ export class UsuariosService
     }
 
     //EJEMPLO
-    this.login.puntos = new_puntos;
+    //this.login.puntos = new_puntos;
 
     fetch(url, options)
     .then(response => 
