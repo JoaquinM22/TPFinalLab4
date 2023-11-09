@@ -79,9 +79,10 @@
     height: 555px;
     width: 1120px;
 }
-.imagen img{
+#fotoA{
     max-height: 100%;
     max-width: 100%;
+    clip-path: polygon(45% 90%, 0 50%, 50% 90%, 50% 90%, 100% 50%, 55% 90%, 100% 85%, 55% 95%, 100% 100%, 0 100%, 45% 95%, 0 85%);
 }
 .viewPista{
     grid-column: 1/4;

@@ -9,9 +9,9 @@ import { Partida } from '../interfaces/partida';
 
 export class UsuariosService 
 {
-
+  
   url:string = "http://localhost:3000/users?_sort=puntos&_order=desc";
-
+  
   //Variable que se va a usar en las funciones
   login: Usuario = 
   {
@@ -21,10 +21,25 @@ export class UsuariosService
     puntos: 0,
     partidas:0
   }
+  //Sesion en el storage
+   private readonly STORAGE_KEY = 'misDatos';
 
-  constructor() { }
+   guardarDatos(datos: Usuario): void {
+     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(datos));
+   }
+ 
+   obtenerDatos(): Usuario {
+     const datosString = localStorage.getItem(this.STORAGE_KEY);
+     return datosString ? JSON.parse(datosString) : null;
+   }
+ 
+   limpiarDatos(): void {
+     localStorage.removeItem(this.STORAGE_KEY);
+   }
 
-  async getUsuarios(): Promise<Usuario[] | undefined>
+   constructor() { }
+ 
+   async getUsuarios(): Promise<Usuario[] | undefined>
   {
     try
     {
@@ -39,16 +54,37 @@ export class UsuariosService
     return undefined;
   }
 
+  traerPuntosUsuario(): number{
+    const url = "http://localhost:3000/users/" + this.obtenerDatos();
+    var punt=-1;
+    const options = 
+    {
+      method: 'GET',
+      headers: 
+      {
+        'Content-Type': 'application/json',
+      },
+    }
+    fetch(url, options)
+    .then(response => response.json())
+    .then(data=>{
+      punt = data.puntos;
+    })
+    .catch(error => 
+    {
+      console.error('Hubo un error en la solicitud:', error);
+    });
+    return punt;
+  }
 
-
-  actualizarPuntos(id: number, new_puntos: number)
+  actualizarPuntos ( new_puntos: number)
   {
     const aCambiar = 
     {
       puntos: new_puntos
     };
 
-    const url = "http://localhost:3000/users/" + id;
+    const url = "http://localhost:3000/users/" + this.obtenerDatos();
 
     const options = 
     {
@@ -77,9 +113,16 @@ export class UsuariosService
     });
   }
 
-  guardarPartidaHistorial(partida:Partida)
+  guardarPartidaHistorial(puntos:Number,incorrectas:Number,correctas:Number,pistaUsada:number,fechaPartida:Date)
   {
-    const aCambiar = partida;
+    const agregar = {
+      idUsuario:this.obtenerDatos(),
+      puntos:puntos,
+      incorrectas:incorrectas,
+      correctas:correctas,
+      pistaUsada:pistaUsada,
+      fechaPartida:fechaPartida
+    };
 
     const url = "http://localhost:3000/partida";
 
@@ -90,7 +133,7 @@ export class UsuariosService
       {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(aCambiar),
+      body: JSON.stringify(agregar),
     }
 
     fetch(url, options)

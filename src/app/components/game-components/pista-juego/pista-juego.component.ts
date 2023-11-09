@@ -36,7 +36,7 @@ export class PistaJuegoComponent implements OnInit
   terminar: boolean = true;
 
   //carga los puntos del usuario en sesion
-  puntaje: number = this.usuariosService.login.puntos;
+  puntaje: number = this.usuariosService.obtenerDatos().puntos;
 
   //controlador de inicio y fin
   empezar: boolean = false;
@@ -62,28 +62,20 @@ export class PistaJuegoComponent implements OnInit
   {
   }
   ngOnInit(){
-      this.precargarImagenes();
       this.chequeoCosto();
   };
-  
+
 
   iniciarPartida(){
     this.cartelInicio=false;
     this.empezar=true;
     /* this.mostrarYocultar("fotoB",false); */
     this.mostrarYocultar("fotoA",true);
+    this.generarValoresAleatoriosImagen();
   }
 
   finalizarPartida(){
-    var partida:Partida={
-      idUsuario : this.usuariosService.login.id,
-      puntos: this.puntaje,
-      incorrectas:this.incorrectas,
-      correctas:this.correctas,
-      pistaUsada:this.pistaUsos,
-      fechaPartida: new Date(),
-    }
-    this.usuariosService.guardarPartidaHistorial(partida);
+    this.usuariosService.guardarPartidaHistorial(this.puntaje,this.incorrectas,this.correctas,this.pistaUsos,new Date());
     this.cartelFinal=false;
     this.enviarDatos('finalizar');
   }
@@ -122,18 +114,19 @@ export class PistaJuegoComponent implements OnInit
       this.contJuego=this.contJuego+1;
     }else
     {
-      this.contJuego = 0;
-      while(!this.juegos[this.contJuego].visible && this.contJuego < this.juegos.length)
+      if(this.juegos.length == this.correctas + this.incorrectas)
       {
-        this.contJuego=this.contJuego+1;
+        this.terminar = false;
+        this.contJuego=0;
+      }else{
+        this.contJuego = 0;
+        while(!this.juegos[this.contJuego].visible && this.contJuego < this.juegos.length)
+        {
+          this.contJuego=this.contJuego+1;
+        }
       }
     }
 
-    if(this.juegos.length == this.correctas + this.incorrectas)
-    {
-      this.terminar = false;
-      this.contJuego=0;
-    }
   }
 
   reset()
@@ -169,7 +162,7 @@ export class PistaJuegoComponent implements OnInit
   sumarPuntos(puntos: number)
   {
     this.puntaje=this.puntaje+puntos;
-    this.usuariosService.actualizarPuntos(this.usuariosService.login.id, this.puntaje);
+    this.usuariosService.actualizarPuntos(this.puntaje);
     this.chequeoCosto(); 
   }
 
@@ -179,7 +172,7 @@ export class PistaJuegoComponent implements OnInit
     {
       this.puntaje=this.puntaje-puntos;
     }
-    this.usuariosService.actualizarPuntos(this.usuariosService.login.id, this.puntaje);
+    this.usuariosService.actualizarPuntos(this.puntaje);
     this.chequeoCosto(); 
   }
 
@@ -283,7 +276,7 @@ export class PistaJuegoComponent implements OnInit
   generarValoresAleatoriosImagen()
   {
     var clipPathValue=""
-    switch(Math.floor(Math.random()*10)){
+    switch(Math.floor(Math.random()*11)){
       case 0 :
         clipPathValue = "polygon(100% 0, 90% 0, 100% 100%, 100% 10%, 0 100%, 10% 100%, 0 0, 0 90%)";
       break;
@@ -427,21 +420,17 @@ export class PistaJuegoComponent implements OnInit
       }
     }
   }
-  
+  //suma usos de pistas
   usoPista(){
     this.pistaUsos=this.pistaUsos+1;
   }
+
   // recibindo datos desde componente temporizador y actualiza los puntos totales en el servidor
   recibindoDatosDesdeTemporizador(mensaje: string)
   {
     this.puntaje= this.puntaje + Number(mensaje) * valores.tiempoSobrante;
     this.cartelFinal = true;
-    this.usuariosService.actualizarPuntos(this.usuariosService.login.id, this.puntaje);
+    this.usuariosService.actualizarPuntos(this.puntaje);
   }
-  precargarImagenes(){
-    this.juegos.forEach(element => {
-      var img = new Image();
-      img.src = element.foto;
-    });
-  }
+
 }

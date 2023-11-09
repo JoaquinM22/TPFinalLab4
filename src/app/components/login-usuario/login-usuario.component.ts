@@ -47,15 +47,15 @@ export class LoginUsuarioComponent implements OnInit
         if(validado)
         {
           console.log(this.usuarioLogueado);
-          this.usuariosService.login = this.usuarioLogueado;
-          
+          this.usuariosService.guardarDatos(this.usuarioLogueado);
+          console.log("Usuario Logueado" + this.usuariosService.obtenerDatos());
           this.router.navigate(['/menu']);
         }else
         {
           var mensaje = document.getElementById("txt_login");
           if(mensaje)
           {
-            mensaje.innerHTML = "Password incorrecto"
+            mensaje.innerHTML = "Nombre o password incorrecto"
           }
         }
 

@@ -4,37 +4,43 @@
       "id": 1,
       "usuario": "Franco",
       "password": "Gitana06",
-      "puntos": 9356
+      "puntos": 200,
+      "partidas": 0
     },
     {
       "id": 2,
       "usuario": "Joaquin",
       "password": "Unpassword03",
-      "puntos": 100
+      "puntos": 200,
+      "partidas": 0
     },
     {
       "id": 3,
       "usuario": "Emanuel",
       "password": "Otropassword_2",
-      "puntos": 200
+      "puntos": 200,
+      "partidas": 0
     },
     {
       "id": 4,
       "usuario": "Geronimo",
       "password": "Gero123",
-      "puntos": 175
+      "puntos": 200,
+      "partidas": 0
     },
     {
       "id": 7,
       "usuario": "Pepe",
       "password": "Messi",
-      "puntos": 13533
+      "puntos": 200,
+      "partidas": 0
     },
     {
       "id": 6,
       "usuario": "Carlos",
       "password": "Hola",
-      "puntos": 200
+      "puntos": 200,
+      "partidas": 0
     }
   ],
   "partida": [
@@ -46,15 +52,6 @@
       "pistaUsada": 0,
       "fechaPartida": "2023-11-09T11:59:46.720Z",
       "id": 1
-    },
-    {
-      "idUsuario": 0,
-      "puntos": 140,
-      "incorrectas": 10,
-      "correctas": 0,
-      "pistaUsada": 0,
-      "fechaPartida": "2023-11-09T12:10:03.921Z",
-      "id": 2
     }
   ]
 }

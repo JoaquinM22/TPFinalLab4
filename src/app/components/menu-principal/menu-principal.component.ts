@@ -37,16 +37,7 @@ export class MenuPrincipalComponent
 
   cerrarSesion()
   {
-    this.usuariosService.login = {
-      id: 0,
-      usuario: "",
-      password: "",
-      puntos: 0,
-      partidas:0,
-    }
-
+    this.usuariosService.limpiarDatos();
     this.router.navigate(['/landing']);
   }
-
-
 }
