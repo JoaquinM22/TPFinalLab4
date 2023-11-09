@@ -19,11 +19,6 @@
   
 .cartel
 {
-    /*background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;*/
-
     background-color: #0073ff;
     color: white;
 
@@ -78,6 +73,10 @@
     margin: 7px;
     height: 555px;
     width: 1120px;
+    background-color: #272424f0;
+    border: 1px solid;
+    border-color: white;
+
 }
 .imagen img{
     max-height: 100%;

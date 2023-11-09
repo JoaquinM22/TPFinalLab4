@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
   templateUrl: './login-usuario.component.html',
   styleUrls: ['./login-usuario.component.css']
 })
+
 export class LoginUsuarioComponent implements OnInit
 {
 
@@ -23,7 +24,8 @@ export class LoginUsuarioComponent implements OnInit
 
   initFormLogin(): FormGroup 
   {
-    return this.fb.group({
+    return this.fb.group
+    ({
       Usuario: ['', Validators.required,],
       Password: ['', Validators.required,]
     })
@@ -42,8 +44,8 @@ export class LoginUsuarioComponent implements OnInit
     id: 0,
     usuario: "",
     password: "",
-    puntos:0,
-    partidas:0
+    puntos: 0,
+    partidas: 0
   };
 
   //Funcion de guardar los datos de usuario
@@ -68,7 +70,11 @@ export class LoginUsuarioComponent implements OnInit
         {
           console.log(this.usuarioLogueado);
           this.usuariosService.guardarDatos(this.usuarioLogueado);
-          console.log("Usuario Logueado" + this.usuariosService.obtenerDatos());
+
+          //Datos del Usuario recien logueado
+          let logueadoRecien = this.usuariosService.obtenerDatos();
+          console.log("Usuario Logueado", logueadoRecien);
+
           this.router.navigate(['/menu']);
         }else
         {
@@ -122,6 +128,7 @@ export class LoginUsuarioComponent implements OnInit
               puntos:0,
               partidas: 0
             };
+
             if(mensaje)
             {
               mensaje.innerHTML = "Usuario ya existente";
@@ -131,9 +138,8 @@ export class LoginUsuarioComponent implements OnInit
             //Aca sube los datos al server
             await this.cargarUsuario(nombreCre, passCre);
 
-            console.log("Tercero consoleLog", this.usuarioLogueado);
+            console.log("Tercer consoleLog", this.usuarioLogueado);
             this.usuariosService.login = this.usuarioLogueado;
-
             this.router.navigate(['/menu']);
           }
         }else
@@ -153,7 +159,7 @@ export class LoginUsuarioComponent implements OnInit
   {
     
     let idnuevo = await this.usuariosService.getUltimoID();
-    idnuevo = idnuevo +1; 
+    idnuevo = idnuevo + 1; 
 
     const update: Usuario = 
     {
@@ -178,14 +184,14 @@ export class LoginUsuarioComponent implements OnInit
     .then(data => data)
     .then(update =>
     {
-      console.log("Segundo consoleLog", update)
+      console.log("Segundo console log", update)
     })
     .catch(e =>
     {
       console.log(e);
     });
 
-    this.usuarioLogueado = update;
+    this.usuarioLogueado = update; 
 
   }
 
@@ -211,7 +217,8 @@ export class LoginUsuarioComponent implements OnInit
               id: datos.id,
               usuario: nombre,
               password: "",
-              puntos: datos.puntos
+              puntos: datos.puntos,
+              partidas: datos.partidas
             };
 
             validacion = true;

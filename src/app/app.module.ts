@@ -15,7 +15,8 @@ import { LoadingComponent } from './components/pantallas/loading/loading.compone
 import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuario.component';
 import { HistorialComponent } from './components/historial/historial.component';
 
-@NgModule({
+@NgModule
+({
   declarations: [
     AppComponent,
     PistaJuegoComponent,
@@ -39,5 +40,7 @@ import { HistorialComponent } from './components/historial/historial.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+
+export class AppModule
+{ 
 }
