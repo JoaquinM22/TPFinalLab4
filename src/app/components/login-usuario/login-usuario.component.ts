@@ -211,7 +211,8 @@ export class LoginUsuarioComponent implements OnInit
               id: datos.id,
               usuario: nombre,
               password: "",
-              puntos: datos.puntos
+              puntos: datos.puntos,
+              partidas: datos.partidas
             };
 
             validacion = true;

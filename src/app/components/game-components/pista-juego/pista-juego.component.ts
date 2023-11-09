@@ -76,6 +76,7 @@ export class PistaJuegoComponent implements OnInit
 
   finalizarPartida(){
     this.usuariosService.guardarPartidaHistorial(this.puntaje,this.incorrectas,this.correctas,this.pistaUsos,new Date());
+    this.mostrarYocultar("fotoA",false);
     this.cartelFinal=false;
     this.enviarDatos('finalizar');
   }
@@ -110,8 +111,10 @@ export class PistaJuegoComponent implements OnInit
   moverPorArreglo()
   {
     if(this.contJuego<this.juegos.length-1)
-    {
-      this.contJuego=this.contJuego+1;
+    { 
+      if(this.juegos.length > this.correctas + this.incorrectas){
+        this.contJuego=this.contJuego+1;
+      }
     }else
     {
       if(this.juegos.length == this.correctas + this.incorrectas)
@@ -126,7 +129,6 @@ export class PistaJuegoComponent implements OnInit
         }
       }
     }
-
   }
 
   reset()
