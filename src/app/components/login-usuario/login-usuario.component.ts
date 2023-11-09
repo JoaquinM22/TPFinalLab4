@@ -3,12 +3,14 @@ import { Router } from '@angular/router';
 import { Usuario } from '../../interfaces/usuario';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
-@Component({
+@Component
+({
   selector: 'app-login-usuario',
   templateUrl: './login-usuario.component.html',
   styleUrls: ['./login-usuario.component.css']
 })
-export class LoginUsuarioComponent implements OnInit{
+export class LoginUsuarioComponent implements OnInit
+{
   
   constructor(private router: Router, private usuariosService: UsuariosService)
   {
@@ -60,7 +62,6 @@ export class LoginUsuarioComponent implements OnInit{
     }
   }
 
-
   async creacion_Usuario()
   {
     const botonCrearCuenta = document.querySelector("#crear");
@@ -92,7 +93,8 @@ export class LoginUsuarioComponent implements OnInit{
           {
             //Si el usuario ya existe crea un mensaje
             var mensaje = document.getElementById("texto");
-            this.usuarioLogueado = { 
+            this.usuarioLogueado =
+            { 
               id: 0,
               usuario: "",
               password: "",
@@ -148,10 +150,12 @@ export class LoginUsuarioComponent implements OnInit{
 
     fetch("http://localhost:3000/users", options)
     .then(data => data)
-    .then(update => {
+    .then(update =>
+    {
       console.log(update)
     })
-    .catch(e => {
+    .catch(e =>
+    {
       console.log(e);
     });
 
@@ -159,18 +163,23 @@ export class LoginUsuarioComponent implements OnInit{
 
   }
 
-  async validarUsuario(nombre: string, contra: string) {
+  async validarUsuario(nombre: string, contra: string)
+  {
     var validacion: boolean = false;
 
     const servidor = "http://localhost:3000/users";
   
-    try {
+    try
+    {
       const response = await fetch(servidor);
       const json = await response.json();
   
-      for (const datos of json) {
-        if (datos.usuario === nombre) {
-          if (datos.password === contra) {
+      for(const datos of json)
+      {
+        if(datos.usuario === nombre)
+        {
+          if(datos.password === contra)
+          {
             this.usuarioLogueado = 
             { 
               id: datos.id,
@@ -183,14 +192,14 @@ export class LoginUsuarioComponent implements OnInit{
           }
         }
       }
-    } catch (error) {
+    }catch(error)
+    {
       console.error("Error al obtener datos del servidor", error);
     }
   
     return validacion;
   }
   
-
   ngOnInit()
   {
     this.logueo_Usuario();
