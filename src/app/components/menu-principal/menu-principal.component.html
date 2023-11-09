@@ -5,7 +5,7 @@
     <!-- <button class="botonNuevo" routerLink="/perfil">Ver Perfil</button> -->
     <button class="botonNuevo" (click)="desabilitarTodosLosComponentes();perfil=true">Ver Perfil</button>
     <button class="botonNuevo" >Opciones</button>
-    <button class="botonNuevo" >Historial</button>
+    <button class="botonNuevo" (click)="desabilitarTodosLosComponentes();historial=true">Historial</button>
     <button class="botonNuevo" (click)="cerrarSesion()">Cerrar Sesion</button>
 
 </section>
@@ -19,5 +19,8 @@
 
 <div *ngIf="perfil">
     <app-perfil-usuario></app-perfil-usuario>
+</div>
+<div *ngIf="historial">
+    <app-historial></app-historial>
 </div>
 

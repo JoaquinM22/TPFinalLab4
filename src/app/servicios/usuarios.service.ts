@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../interfaces/usuario';
+import { Partida } from '../interfaces/partida';
 
 @Injectable
 ({
@@ -8,21 +9,37 @@ import { Usuario } from '../interfaces/usuario';
 
 export class UsuariosService 
 {
-
+  
   url:string = "http://localhost:3000/users?_sort=puntos&_order=desc";
-
+  
   //Variable que se va a usar en las funciones
   login: Usuario = 
   {
     id: 0,
     usuario: "",
     password: "",
-    puntos: 0
+    puntos: 0,
+    partidas:0
   }
+  //Sesion en el storage
+   private readonly STORAGE_KEY = 'misDatos';
 
-  constructor() { }
+   guardarDatos(datos: Usuario): void {
+     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(datos));
+   }
+ 
+   obtenerDatos(): Usuario {
+     const datosString = localStorage.getItem(this.STORAGE_KEY);
+     return datosString ? JSON.parse(datosString) : null;
+   }
+ 
+   limpiarDatos(): void {
+     localStorage.removeItem(this.STORAGE_KEY);
+   }
 
-  async getUsuarios(): Promise<Usuario[] | undefined>
+   constructor() { }
+ 
+   async getUsuarios(): Promise<Usuario[] | undefined>
   {
     try
     {
@@ -38,15 +55,14 @@ export class UsuariosService
   }
 
 
-
-  actualizarPuntos(id: number, new_puntos: number)
+  actualizarPuntos ( new_puntos: number)
   {
     const aCambiar = 
     {
       puntos: new_puntos
     };
 
-    const url = "http://localhost:3000/users/" + id;
+    const url = "http://localhost:3000/users/" + this.obtenerDatos();
 
     const options = 
     {
@@ -75,5 +91,93 @@ export class UsuariosService
     });
   }
 
+  getUltimoID(): Promise<any>
+  {
+    return new Promise((resolve, reject) =>
+    {
+      fetch("http://localhost:3000/users")
+      .then(res => res.json())
+      .then(data =>
+      {
+        const pos = data.length - 1;
+        console.log("Posicion de getUltimoID", data[pos]);
+        resolve(data[pos].id);
+      })
+      .catch(error =>
+      {
+
+        console.error("Error en getUltimoID", error);
+        reject(error);
+      })
+    });
+    
+  }
+  guardarPartidaHistorial(puntos:Number,incorrectas:Number,correctas:Number,pistaUsada:number,fechaPartida:Date)
+  {
+    const agregar = {
+      idUsuario:this.obtenerDatos(),
+      puntos:puntos,
+      incorrectas:incorrectas,
+      correctas:correctas,
+      pistaUsada:pistaUsada,
+      fechaPartida:fechaPartida
+    };
+
+    const url = "http://localhost:3000/partida";
+
+    const options = 
+    {
+      method: 'POST',
+      headers: 
+      {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(agregar),
+    }
+
+    fetch(url, options)
+    .then(response => 
+    {
+      if (response.ok) 
+      {
+        console.log('Partida guardada con éxito.');
+      }else 
+      {
+        console.error('Error al guardar partida.');
+      }
+    })
+    .catch(error => 
+    {
+      console.error('Hubo un error en la solicitud:', error);
+    });
+  }
+
+  traerPartidasUsuario(){
+    var partidas:Partida[]=[];
+    const url = "http://localhost:3000/partida";
+
+    const options = 
+    {
+      method: 'GET',
+      headers: 
+      {
+        'Content-Type': 'application/json',
+      },
+    }
+    fetch(url, options)
+    .then(response => response.json())
+    .then(data=>{
+      for(const ele of data){
+        if(ele.idUsuario===this.obtenerDatos().id){
+          partidas.push(ele);
+        }
+      }
+    })
+    .catch(error => 
+    {
+      console.error('Hubo un error en la solicitud:', error);
+    });
+    return partidas;
+  }
 
 }
