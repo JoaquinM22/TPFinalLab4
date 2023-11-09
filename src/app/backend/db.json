@@ -32,13 +32,27 @@
       "id": 5,
       "usuario": "Pepe",
       "password": "Messi",
-      "puntos": 200,
+      "puntos": 1827,
       "partidas": 0
     },
     {
       "id": 6,
       "usuario": "Carlos",
       "password": "Hola",
+      "puntos": 200,
+      "partidas": 0
+    },
+    {
+      "id": 7,
+      "usuario": "El_Pepe",
+      "password": "Messi123",
+      "puntos": 200,
+      "partidas": 0
+    },
+    {
+      "id": 8,
+      "usuario": "ElMesias10",
+      "password": "Messi4545",
       "puntos": 200,
       "partidas": 0
     }
@@ -58,6 +72,132 @@
       "pistaUsada": 0,
       "fechaPartida": "2023-11-09T14:37:38.034Z",
       "id": 1
+    },
+    {
+      "idUsuario": {
+        "id": 5,
+        "usuario": "Pepe",
+        "password": "",
+        "puntos": 200,
+        "partidas": 0
+      },
+      "puntos": 1117,
+      "incorrectas": 5,
+      "correctas": 6,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-09T17:32:33.399Z",
+      "id": 2
+    },
+    {
+      "idUsuario": {
+        "id": 5,
+        "usuario": "Pepe",
+        "password": "",
+        "puntos": 200,
+        "partidas": 0
+      },
+      "puntos": 597,
+      "incorrectas": 7,
+      "correctas": 3,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-09T17:53:33.093Z",
+      "id": 3
+    },
+    {
+      "idUsuario": {
+        "id": 5,
+        "usuario": "Pepe",
+        "password": "",
+        "puntos": 200,
+        "partidas": 0
+      },
+      "puntos": 421,
+      "incorrectas": 8,
+      "correctas": 2,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-09T18:03:20.525Z",
+      "id": 4
+    },
+    {
+      "idUsuario": {
+        "id": 5,
+        "usuario": "Pepe",
+        "password": "",
+        "puntos": 421,
+        "partidas": 0
+      },
+      "puntos": 656,
+      "incorrectas": 8,
+      "correctas": 2,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-09T18:07:01.939Z",
+      "id": 5
+    },
+    {
+      "idUsuario": {
+        "id": 5,
+        "usuario": "Pepe",
+        "password": "",
+        "puntos": 656,
+        "partidas": 0
+      },
+      "puntos": 889,
+      "incorrectas": 8,
+      "correctas": 2,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-09T18:16:02.107Z",
+      "id": 6
+    },
+    {
+      "idUsuario": {
+        "id": 5,
+        "usuario": "Pepe",
+        "password": "",
+        "puntos": 889,
+        "partidas": 0
+      },
+      "puntos": 952,
+      "incorrectas": 9,
+      "correctas": 1,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-09T18:20:27.925Z",
+      "id": 7
+    },
+    {
+      "idUsuario": 5,
+      "puntos": 1193,
+      "incorrectas": 8,
+      "correctas": 2,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-09T18:42:43.102Z",
+      "id": 8
+    },
+    {
+      "idUsuario": 5,
+      "puntos": 1607,
+      "incorrectas": 7,
+      "correctas": 3,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-09T19:35:54.635Z",
+      "id": 9
+    },
+    {
+      "idUsuario": 5,
+      "puntos": 1493,
+      "incorrectas": 10,
+      "correctas": 0,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-09T19:56:15.181Z",
+      "id": 10
+    },
+    {
+      "idUsuario": 5,
+      "puntos": 1827,
+      "incorrectas": 7,
+      "correctas": 3,
+      "pistaUsada": 7,
+      "fechaPartida": "2023-11-09T20:02:41.822Z",
+      "id": 11
     }
   ]
 }
