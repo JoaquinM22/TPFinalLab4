@@ -131,6 +131,9 @@ export class MostrarFotoComponent
       
       //Cargo esa URL random valida en nuevaFoto
       const nuevaFoto: string = nuevasFotos[posRandom];
+      //Precarga la foto
+      var img = new Image();
+      img.src = nuevasFotos[posRandom];
 
       //Carga la fecha del juego
       const nuevaFecha: string = juego.released;

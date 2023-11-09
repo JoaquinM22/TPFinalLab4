@@ -22,6 +22,7 @@ export class MenuPrincipalComponent
   crearPartida:boolean=false;
   ranking:boolean=false;
   perfil:boolean=false;
+  historial:boolean=false;
   recibiendoDatosDesdeCreadorPartida(mensaje : string){
     if(mensaje=='false'){
       this.crearPartida= false;
@@ -33,19 +34,12 @@ export class MenuPrincipalComponent
     this.crearPartida=false;
     this.ranking=false;
     this.perfil = false;
+    this.historial = false;
   }
 
   cerrarSesion()
   {
-    this.usuariosService.login = {
-      id: 0,
-      usuario: "",
-      password: "",
-      puntos: 0
-    }
-
+    this.usuariosService.limpiarDatos();
     this.router.navigate(['/landing']);
   }
-
-
 }

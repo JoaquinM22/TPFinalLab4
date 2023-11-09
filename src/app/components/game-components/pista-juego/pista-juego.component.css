@@ -82,9 +82,19 @@
 .imagen img{
     max-height: 100%;
     max-width: 100%;
-    clip-path: inset(3% 5% 47% 48%);
 }
 .viewPista{
+    grid-column: 1/4;
+    grid-row: 2;
+    height: 100%;   
+    width: 100%;
+    color: #ffff;
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    grid-template-rows: 3;
+    font-family: Arial;
+}
+/* .viewPista{
     grid-column: 1/4;
     grid-row: 2;
     height: 100%;   
@@ -92,22 +102,36 @@
     display: grid;
     grid-template-columns: 20% 60% 20%;
     grid-template-rows: 3;
-}
+} */
 #VP1{
     grid-column: 2;
     grid-row: 1;
 }
-#VP2{
+/* #VP2{
+    grid-column: 2;
+    grid-row: 2;
+} */
+#VP3{
     grid-column: 2;
     grid-row: 2;
 }
-#VP3{
+#VP4{
     grid-column: 2;
     grid-row: 3;
 }
-#VP4{
-    grid-column: 2;
-    grid-row: 4;
+.parrafo{
+    height: 50px;
+    background: #00fff7;  
+    
+    border-radius: 25px;
+    text-decoration: none;
+    color: rgb(235, 6, 6);
+    font-family: Arial;
+    font-weight: bold;
+    border: 3px solid;
+    padding: 15px 35px;
+    font-size: 11px;
+    box-shadow: 0 0 2px black; 
 }
 #blockPuntaje{
     grid-column: 1;
@@ -184,7 +208,7 @@
     display: grid ;
     gap: 5px;
     grid-template-columns: repeat(2, 50%);
-    grid-template-rows: 2;
+    grid-template-rows: 3;
     
 }
 #rigth{
@@ -193,7 +217,7 @@
     display: grid ;
     gap: 5px;
     grid-template-columns: repeat(2, 50%);
-    grid-template-rows: 2;
+    grid-template-rows: 3;
     align-items: center;
 }
 
@@ -254,3 +278,26 @@
     justify-content: center;
 }
 
+.centrarImagen
+{
+    text-align: center;
+} 
+
+
+
+
+
+.parrafito
+{
+    margin: auto;
+    border-radius: 25px;
+    text-decoration: none;
+    color: white;
+    background-color:#7300ff96;
+    font-family: Arial;
+    font-weight: bold;
+    border: 3px solid;
+    padding: 15px 35px;
+    font-size: 15px;
+    box-shadow: 0 0 2px black;
+}
