@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from '../../interfaces/usuario';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 
 @Component
 ({
@@ -11,10 +12,29 @@ import { UsuariosService } from 'src/app/servicios/usuarios.service';
 })
 export class LoginUsuarioComponent implements OnInit
 {
+
+  login!: FormGroup; 
+  creacion!: FormGroup;
   
-  constructor(private router: Router, private usuariosService: UsuariosService)
+  constructor(private router: Router, private usuariosService: UsuariosService, private readonly fb: FormBuilder)
   {
 
+  }
+
+  initFormLogin(): FormGroup 
+  {
+    return this.fb.group({
+      Usuario: ['', Validators.required,],
+      Password: ['', Validators.required,]
+    })
+  }
+
+  initFormCreacion(): FormGroup 
+  {
+    return this.fb.group({
+      UsuarioNuevo: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
+      PasswordNuevo: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]]
+    })
   }
 
   usuarioLogueado: Usuario = 
@@ -204,6 +224,8 @@ export class LoginUsuarioComponent implements OnInit
   {
     this.logueo_Usuario();
     this.creacion_Usuario();
+    this.login = this.initFormLogin();
+    this.creacion = this.initFormCreacion();
   }
   
 }
