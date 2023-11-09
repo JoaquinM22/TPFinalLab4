@@ -169,6 +169,8 @@ export class PistaJuegoComponent implements OnInit
   sumarPuntos(puntos: number)
   {
     this.puntaje=this.puntaje+puntos;
+    ///VER
+    //this.usuariosService.login.puntos = this.puntaje;
     this.usuariosService.actualizarPuntos(this.puntaje);
     this.chequeoCosto(); 
   }
@@ -179,6 +181,8 @@ export class PistaJuegoComponent implements OnInit
     {
       this.puntaje=this.puntaje-puntos;
     }
+    ///VER
+    //this.usuariosService.login.puntos = this.puntaje;
     this.usuariosService.actualizarPuntos(this.puntaje);
     this.chequeoCosto(); 
   }
