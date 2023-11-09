@@ -4,11 +4,13 @@
     <section class="formulario">
         <form action="" class="form_login" [formGroup]="login">
             <h3>Iniciar Sesión</h3>
+            
             <input class="control" type="text" value="" name="usuario" id="Usuario" placeholder="Nombre de Usuario" formControlName="Usuario">
             <div *ngIf="login.get('Usuario')?.touched && login.get('Usuario')?.errors?.['required']">Este campo es Requerido</div>
             
-
             <input class="control" type="password" value="" name="password" id="Password" placeholder="Password" formControlName="Password">
+            <div *ngIf="login.get('Password')?.touched && login.get('Password')?.errors?.['required']">Este campo es Requerido</div>
+
             <button class="botones" id="ingresar">Ingresar</button>
         
             <p id="txt_login"></p>
