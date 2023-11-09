@@ -75,5 +75,25 @@ export class UsuariosService
     });
   }
 
+  getUltimoID(): Promise<any>
+  {
+    return new Promise((resolve, reject) =>
+    {
+      fetch("http://localhost:3000/users")
+      .then(res => res.json())
+      .then(data =>
+      {
+        const pos = data.length - 1;
+        console.log("Posicion de getUltimoID", data[pos]);
+        resolve(data[pos].id);
+      })
+      .catch(error =>
+      {
 
+        console.error("Error en getUltimoID", error);
+        reject(error);
+      })
+    });
+    
+  }
 }

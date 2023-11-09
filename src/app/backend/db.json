@@ -25,7 +25,7 @@
       "puntos": 175
     },
     {
-      "id": 7,
+      "id": 5,
       "usuario": "Pepe",
       "password": "Messi",
       "puntos": 2100
@@ -34,6 +34,18 @@
       "id": 6,
       "usuario": "Carlos",
       "password": "Hola",
+      "puntos": 200
+    },
+    {
+      "id": 7,
+      "usuario": "messigoat",
+      "password": "thegoat",
+      "puntos": 200
+    },
+    {
+      "id": 8,
+      "usuario": "Ronaldito",
+      "password": "12345",
       "puntos": 200
     }
   ]
