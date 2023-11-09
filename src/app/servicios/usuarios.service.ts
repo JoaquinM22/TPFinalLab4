@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../interfaces/usuario';
+import { Partida } from '../interfaces/partida';
 
 @Injectable
 ({
@@ -17,7 +18,8 @@ export class UsuariosService
     id: 0,
     usuario: "",
     password: "",
-    puntos: 0
+    puntos: 0,
+    partidas:0
   }
 
   constructor() { }
@@ -67,6 +69,39 @@ export class UsuariosService
       }else 
       {
         console.error('Error al actualizar los puntos del usuario.');
+      }
+    })
+    .catch(error => 
+    {
+      console.error('Hubo un error en la solicitud:', error);
+    });
+  }
+
+  guardarPartidaHistorial(partida:Partida)
+  {
+    const aCambiar = partida;
+
+    const url = "http://localhost:3000/partida";
+
+    const options = 
+    {
+      method: 'POST',
+      headers: 
+      {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(aCambiar),
+    }
+
+    fetch(url, options)
+    .then(response => 
+    {
+      if (response.ok) 
+      {
+        console.log('Partida guardada con éxito.');
+      }else 
+      {
+        console.error('Error al guardar partida.');
       }
     })
     .catch(error => 

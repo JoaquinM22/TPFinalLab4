@@ -4,7 +4,7 @@
       "id": 1,
       "usuario": "Franco",
       "password": "Gitana06",
-      "puntos": 4130
+      "puntos": 9356
     },
     {
       "id": 2,
@@ -35,6 +35,26 @@
       "usuario": "Carlos",
       "password": "Hola",
       "puntos": 200
+    }
+  ],
+  "partida": [
+    {
+      "idUsuario": 1,
+      "puntos": 9356,
+      "incorrectas": 7,
+      "correctas": 3,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-09T11:59:46.720Z",
+      "id": 1
+    },
+    {
+      "idUsuario": 0,
+      "puntos": 140,
+      "incorrectas": 10,
+      "correctas": 0,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-09T12:10:03.921Z",
+      "id": 2
     }
   ]
 }

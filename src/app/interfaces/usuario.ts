@@ -3,5 +3,6 @@ export interface Usuario
     id:number,
     usuario:string,
     password:string,
-    puntos: number
+    puntos: number,
+    partidas: number
 }

@@ -41,7 +41,8 @@ export class MenuPrincipalComponent
       id: 0,
       usuario: "",
       password: "",
-      puntos: 0
+      puntos: 0,
+      partidas:0,
     }
 
     this.router.navigate(['/landing']);

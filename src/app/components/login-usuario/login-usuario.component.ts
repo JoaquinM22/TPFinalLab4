@@ -22,7 +22,8 @@ export class LoginUsuarioComponent implements OnInit
     id: 0,
     usuario: "",
     password: "",
-    puntos:0
+    puntos:0,
+    partidas:0
   };
 
   //Funcion de guardar los datos de usuario
@@ -98,7 +99,8 @@ export class LoginUsuarioComponent implements OnInit
               id: 0,
               usuario: "",
               password: "",
-              puntos:0
+              puntos:0,
+              partidas: 0
             };
             if(mensaje)
             {
@@ -136,6 +138,7 @@ export class LoginUsuarioComponent implements OnInit
       usuario: nombre,
       password: password,
       puntos: 200,
+      partidas:0
     };
 
     const options = 
@@ -185,7 +188,8 @@ export class LoginUsuarioComponent implements OnInit
               id: datos.id,
               usuario: nombre,
               password: contra,
-              puntos: datos.puntos
+              puntos: datos.puntos,
+              partidas: datos.partidas
             };
 
             validacion = true;
