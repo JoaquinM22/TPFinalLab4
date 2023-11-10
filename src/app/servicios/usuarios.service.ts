@@ -48,6 +48,15 @@ export class UsuariosService
       this.guardarDatos(datosActuales);
     }
   }
+  modificarPrtidasJugadas(): void {
+    const datosActuales = this.obtenerDatos();
+
+    if (datosActuales) {
+      datosActuales.partidas = datosActuales.partidas + 1 ;
+      this.guardarDatos(datosActuales);
+    }
+  }
+
   constructor() { 
    }
  
@@ -64,6 +73,43 @@ export class UsuariosService
     }
 
     return undefined;
+  }
+
+  async actualizarPartidasJugaas ()
+  {
+    this.modificarPrtidasJugadas()
+    const cambiar = 
+    {
+      partidas: this.obtenerDatos().partidas + 1 
+    };
+
+    const url = "http://localhost:3000/users/" + this.obtenerDatos().id;
+
+    const options = 
+    {
+      method: 'PATCH',
+      headers: 
+      {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(cambiar),
+    }
+    fetch(url, options)
+    .then(response => 
+    {
+      console.log("response user:", response);
+      if(response.ok) 
+      {
+        console.log('las partidas del usuario han sido actualizados con éxito.');
+      }else 
+      {
+        console.error('Error al actualizar las partidas del usuario.');
+      }
+    })
+    .catch(error => 
+    {
+      console.error('Hubo un error en la solicitud:', error);
+    });
   }
 
   actualizarPuntos ( nuevosPuntos: number)
@@ -86,8 +132,6 @@ export class UsuariosService
       body: JSON.stringify(aCambiar),
     }
 
-    //EJEMPLO
-    this.login.puntos = new_puntos;
 
     fetch(url, options)
     .then(response => 
@@ -106,6 +150,8 @@ export class UsuariosService
       console.error('Hubo un error en la solicitud:', error);
     });
   }
+
+
 
   getUltimoID(): Promise<any>
   {

@@ -436,11 +436,13 @@ export class PistaJuegoComponent implements OnInit
   }
 
   // recibindo datos desde componente temporizador y actualiza los puntos totales en el servidor
-  recibindoDatosDesdeTemporizador(mensaje: string)
+  async recibindoDatosDesdeTemporizador(mensaje: string)
   {
     this.puntaje= this.puntaje + Number(mensaje) * valores.tiempoSobrante;
     this.cartelFinal = true;
+    await this.usuariosService.actualizarPartidasJugaas();
     this.usuariosService.actualizarPuntos(this.puntaje);
+    
   }
 
 }
