@@ -4,7 +4,7 @@
       "id": 1,
       "usuario": "Franco",
       "password": "Gitana06",
-      "puntos": 1332,
+      "puntos": 2200,
       "partidas": 0
     },
     {
@@ -359,6 +359,15 @@
       "pistaUsada": 0,
       "fechaPartida": "2023-11-09T22:19:02.267Z",
       "id": 17
+    },
+    {
+      "idUsuario": 1,
+      "puntos": 2200,
+      "incorrectas": 4,
+      "correctas": 6,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-10T01:27:21.025Z",
+      "id": 18
     }
   ]
 }
