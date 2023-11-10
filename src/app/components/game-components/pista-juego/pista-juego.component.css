@@ -19,11 +19,6 @@
   
 .cartel
 {
-    /*background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;*/
-
     background-color: #0073ff;
     color: white;
 
@@ -78,6 +73,10 @@
     margin: 7px;
     height: 555px;
     width: 1120px;
+    background-color: #272424f0;
+    border: 1px solid;
+    border-color: white;
+
 }
 .imagen img{
     max-height: 100%;
@@ -92,6 +91,7 @@
     display: grid;
     grid-template-columns: 20% 60% 20%;
     grid-template-rows: 3;
+    font-family: Arial;
 }
 /* .viewPista{
     grid-column: 1/4;
@@ -277,3 +277,26 @@
     justify-content: center;
 }
 
+.centrarImagen
+{
+    text-align: center;
+} 
+
+
+
+
+
+.parrafito
+{
+    margin: auto;
+    border-radius: 25px;
+    text-decoration: none;
+    color: white;
+    background-color:#7300ff96;
+    font-family: Arial;
+    font-weight: bold;
+    border: 3px solid;
+    padding: 15px 35px;
+    font-size: 15px;
+    box-shadow: 0 0 2px black;
+}

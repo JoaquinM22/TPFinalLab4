@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Usuario } from 'src/app/interfaces/usuario';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
 @Component
@@ -10,13 +11,13 @@ import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
 export class PerfilUsuarioComponent
 {
-  puntaje: number = this.usuariosService.login.puntos;
-  nombre: string = this.usuariosService.login.usuario;
-
+  puntaje: number = this.usuariosService.obtenerDatos().puntos
+  nombre: string = this.usuariosService.obtenerDatos().usuario;
 
   constructor(private usuariosService: UsuariosService)
   {
   }
 
+ 
 
 }

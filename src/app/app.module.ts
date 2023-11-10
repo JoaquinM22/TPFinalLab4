@@ -10,12 +10,13 @@ import { TemporizadorComponent } from './components/game-components/temporizador
 import { LoginUsuarioComponent } from './components/login-usuario/login-usuario.component';
 import { MenuInicioComponent } from './components/menu-inicio/menu-inicio.component';
 import { MenuPrincipalComponent } from './components/menu-principal/menu-principal.component';
-import { RankingComponent } from './ranking/ranking.component';
-import { PasarDatosAPIService } from './servicios/pasar-datos-api.service';
+import { RankingComponent } from './components/ranking/ranking.component';
 import { LoadingComponent } from './components/pantallas/loading/loading.component';
 import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuario.component';
+import { HistorialComponent } from './components/historial/historial.component';
 
-@NgModule({
+@NgModule
+({
   declarations: [
     AppComponent,
     PistaJuegoComponent,
@@ -26,7 +27,8 @@ import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuar
     MenuPrincipalComponent,
     RankingComponent,
     LoadingComponent,
-    PerfilUsuarioComponent
+    PerfilUsuarioComponent,
+    HistorialComponent
   ],
   imports: [
     BrowserModule,
@@ -35,8 +37,10 @@ import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuar
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [PasarDatosAPIService],
+  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+
+export class AppModule
+{ 
 }

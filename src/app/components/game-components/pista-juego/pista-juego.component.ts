@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { JuegoInt } from '../../../interfaces/juegoInt';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
-
+import { Partida } from 'src/app/interfaces/partida';
 
 enum valores
 {
@@ -27,6 +27,7 @@ enum valores
 export class PistaJuegoComponent implements OnInit
 {
 
+
   //envia a componente mostrar foto
   @Output() mensajeEnviado: EventEmitter<string> = new EventEmitter<string>();
   // recibe de mostrar foto
@@ -35,7 +36,7 @@ export class PistaJuegoComponent implements OnInit
   terminar: boolean = true;
 
   //carga los puntos del usuario en sesion
-  puntaje: number = this.usuariosService.login.puntos +5000;
+  puntaje: number = this.usuariosService.obtenerDatos().puntos;
 
   //controlador de inicio y fin
   empezar: boolean = false;
@@ -57,32 +58,41 @@ export class PistaJuegoComponent implements OnInit
   genero: boolean=false;
   fecha: boolean=false;
 
-  constructor(private usuariosService: UsuariosService)
+  constructor(private usuariosService: UsuariosService,)
   {
   }
-  ngOnInit(): void {
-    this.chequeoCosto();
-    this.generarValoresAleatoriosImagen();
-  }
 
-  iniciarPartida(){
+  ngOnInit()
+  {
+    this.chequeoCosto();
+  };
+
+
+  iniciarPartida()
+  {
     this.cartelInicio=false;
     this.empezar=true;
     /* this.mostrarYocultar("fotoB",false); */
     this.mostrarYocultar("fotoA",true);
+    this.generarValoresAleatoriosImagen();
   }
 
-  finalizarPartida(){
+  finalizarPartida()
+  {
+    this.usuariosService.guardarPartidaHistorial(this.puntaje,this.incorrectas,this.correctas,this.pistaUsos,new Date());
+    this.mostrarYocultar("fotoA",false);
     this.cartelFinal=false;
     this.enviarDatos('finalizar');
   }
 
-  empezarOtra(){
+  empezarOtra()
+  {
     this.cartelFinal=false;
     this.enviarDatos('otra');
   }
   // envia al componente padre
-  enviarDatos(mensaje : string) {
+  enviarDatos(mensaje : string)
+  {
     this.mensajeEnviado.emit(mensaje);
   }
   
@@ -103,25 +113,29 @@ export class PistaJuegoComponent implements OnInit
     }
     this.moverPorArreglo();   
   }
+
   // recorre el arreglo
   moverPorArreglo()
   {
     if(this.contJuego<this.juegos.length-1)
-    {
-      this.contJuego=this.contJuego+1;
-    }else
-    {
-      this.contJuego = 0;
-      while(!this.juegos[this.contJuego].visible && this.contJuego < this.juegos.length)
-      {
+    { 
+      if(this.juegos.length > this.correctas + this.incorrectas){
         this.contJuego=this.contJuego+1;
       }
-    }
-
-    if(this.juegos.length == this.correctas + this.incorrectas)
+    }else
     {
-      this.terminar = false;
-      this.contJuego=0;
+      if(this.juegos.length == this.correctas + this.incorrectas)
+      {
+        this.terminar = false;
+        this.contJuego = 0;
+      }else
+      {
+        this.contJuego = 0;
+        while(!this.juegos[this.contJuego].visible && this.contJuego < this.juegos.length)
+        {
+          this.contJuego = this.contJuego+1;
+        }
+      }
     }
   }
 
@@ -158,7 +172,9 @@ export class PistaJuegoComponent implements OnInit
   sumarPuntos(puntos: number)
   {
     this.puntaje=this.puntaje+puntos;
-    this.usuariosService.actualizarPuntos(this.usuariosService.login.id, this.puntaje);
+    ///VER
+    //this.usuariosService.login.puntos = this.puntaje;
+    this.usuariosService.actualizarPuntos(this.puntaje);
     this.chequeoCosto(); 
   }
 
@@ -168,7 +184,9 @@ export class PistaJuegoComponent implements OnInit
     {
       this.puntaje=this.puntaje-puntos;
     }
-    this.usuariosService.actualizarPuntos(this.usuariosService.login.id, this.puntaje);
+    ///VER
+    //this.usuariosService.login.puntos = this.puntaje;
+    this.usuariosService.actualizarPuntos(this.puntaje);
     this.chequeoCosto(); 
   }
 
@@ -272,7 +290,7 @@ export class PistaJuegoComponent implements OnInit
   generarValoresAleatoriosImagen()
   {
     var clipPathValue=""
-    switch(Math.floor(Math.random()*10)){
+    switch(Math.floor(Math.random()*11)){
       case 0 :
         clipPathValue = "polygon(100% 0, 90% 0, 100% 100%, 100% 10%, 0 100%, 10% 100%, 0 0, 0 90%)";
       break;
@@ -403,6 +421,7 @@ export class PistaJuegoComponent implements OnInit
     }
     this.restarPuntos(coste);
   }
+
   mostrarYocultar(id:string,estado:boolean)
   {
     const pista = document.getElementById(id);
@@ -415,26 +434,17 @@ export class PistaJuegoComponent implements OnInit
       }
     }
   }
-  
+  //suma usos de pistas
   usoPista(){
     this.pistaUsos=this.pistaUsos+1;
   }
+
   // recibindo datos desde componente temporizador y actualiza los puntos totales en el servidor
   recibindoDatosDesdeTemporizador(mensaje: string)
   {
     this.puntaje= this.puntaje + Number(mensaje) * valores.tiempoSobrante;
     this.cartelFinal = true;
-    this.usuariosService.actualizarPuntos(this.usuariosService.login.id, this.puntaje);
+    this.usuariosService.actualizarPuntos(this.puntaje);
   }
- /*  precargarImagenes(){
-    const div=document.getElementById('cargaImagenes');
-    if(div){
-      for (const foto of this.juegos) {
-        const img = new Image();
-        img.src = foto.foto;
-        img.style.display = 'none';
-        div.appendChild(img);
-      }
-    }
-  } */
+
 }
