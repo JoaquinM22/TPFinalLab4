@@ -69,6 +69,13 @@
       "password": "121212",
       "puntos": 428,
       "partidas": 0
+    },
+    {
+      "id": 11,
+      "usuario": "Pepe19",
+      "password": "Messi1212",
+      "puntos": 877,
+      "partidas": 0
     }
   ],
   "partida": [
@@ -359,6 +366,15 @@
       "pistaUsada": 0,
       "fechaPartida": "2023-11-09T22:19:02.267Z",
       "id": 17
+    },
+    {
+      "idUsuario": 11,
+      "puntos": 877,
+      "incorrectas": 7,
+      "correctas": 3,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-10T01:27:27.323Z",
+      "id": 18
     }
   ]
 }
