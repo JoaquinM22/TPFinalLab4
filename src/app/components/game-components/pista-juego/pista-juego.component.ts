@@ -77,9 +77,9 @@ export class PistaJuegoComponent implements OnInit
     this.generarValoresAleatoriosImagen();
   }
 
-  finalizarPartida()
+  async finalizarPartida()
   {
-    this.usuariosService.guardarPartidaHistorial(this.puntaje,this.incorrectas,this.correctas,this.pistaUsos,new Date());
+    await this.usuariosService.guardarPartidaHistorial(this.puntaje,this.incorrectas,this.correctas,this.pistaUsos,new Date());
     this.mostrarYocultar("fotoA",false);
     this.cartelFinal=false;
     this.enviarDatos('finalizar');
@@ -117,21 +117,22 @@ export class PistaJuegoComponent implements OnInit
   // recorre el arreglo
   moverPorArreglo()
   {
-    if(this.contJuego<this.juegos.length-1)
+
+    if(this.juegos.length > this.correctas + this.incorrectas)
     { 
-      if(this.juegos.length > this.correctas + this.incorrectas){
+      if(this.contJuego < this.juegos.length-1){
         this.contJuego=this.contJuego+1;
+      }else{
+        this.contJuego=0
       }
     }else
     {
       if(this.juegos.length == this.correctas + this.incorrectas)
       {
         this.terminar = false;
-        this.contJuego = 0;
       }else
       {
-        this.contJuego = 0;
-        while(!this.juegos[this.contJuego].visible && this.contJuego < this.juegos.length)
+        while(this.contJuego < this.juegos.length && !this.juegos[this.contJuego].visible)
         {
           this.contJuego = this.contJuego+1;
         }
@@ -169,10 +170,9 @@ export class PistaJuegoComponent implements OnInit
 
   }
 
-  sumarPuntos(puntos: number)
+   sumarPuntos(puntos: number)
   {
     this.puntaje=this.puntaje+puntos;
-    this.usuariosService.actualizarPuntos(this.puntaje);
     this.chequeoCosto(); 
   }
 
@@ -182,7 +182,6 @@ export class PistaJuegoComponent implements OnInit
     {
       this.puntaje=this.puntaje-puntos;
     }
-    this.usuariosService.actualizarPuntos(this.puntaje);
     this.chequeoCosto(); 
   }
 
@@ -441,7 +440,7 @@ export class PistaJuegoComponent implements OnInit
     this.puntaje= this.puntaje + Number(mensaje) * valores.tiempoSobrante;
     this.cartelFinal = true;
     await this.usuariosService.actualizarPartidasJugaas();
-    this.usuariosService.actualizarPuntos(this.puntaje);
+    await this.usuariosService.actualizarPuntos(this.puntaje);
     
   }
 
