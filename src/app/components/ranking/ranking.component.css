@@ -13,9 +13,8 @@
 
     text-align: center;
 }
-
-.bordeColor
-{
-    border: 1px solid rgb(178, 253, 64);
+th{
+    border : 1px solid rgb(178, 253, 64);
 }
+
 
