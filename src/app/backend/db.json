@@ -32,7 +32,7 @@
       "id": 5,
       "usuario": "Pepe",
       "password": "Messi",
-      "puntos": 200,
+      "puntos": 615,
       "partidas": 0
     },
     {
@@ -57,6 +57,5 @@
       "partidas": 0
     }
   ],
-  "partida": [
-  ]
+  "partida": []
 }
