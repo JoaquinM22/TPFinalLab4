@@ -13,7 +13,7 @@
 {
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 50% 50%;
+    grid-template-rows: auto auto auto auto;
     place-items: center;
 }
 
@@ -21,18 +21,43 @@
 {
     font-family: 'Century Gothic', sans-serif;
     font-size: 500%;
-    color: #f9f3f4;
+    color: rgba(172, 255, 47, 0.784);
     text-shadow: 0 0 300px black;
+}
+
+.content p
+{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 200%;
+    color: rgba(172, 255, 47, 0.784);
+    text-align: center;
 }
 
 .buttons 
 {
+    width: 100px;
+    height: 20px;
+
+    margin: 15px;
+    padding: 5px 10px;
+
+    border: 3px solid;
     border-radius: 9px;
+
+    text-align: center;
     text-decoration: none;
-    color: #f9f3f4;
+
+    background-color:  rgba(172, 255, 47, 0.784);
+    border-color: rgba(51, 255, 0, 0.709);
+
+    color: #070707;
+
     font-family: 'Century Gothic', sans-serif;
     font-weight: bold;
-    border: 3px solid;
-    padding: 5px 10px;
-    margin: 15px;
+}
+
+.foto
+{
+    width: 600px;
+    height: 450px;
 }
