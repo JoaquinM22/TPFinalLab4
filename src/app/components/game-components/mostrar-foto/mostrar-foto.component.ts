@@ -129,7 +129,6 @@ export class MostrarFotoComponent
       //seleciono dentro del arreglo
       let posRandom = Math.floor(Math.random() * nuevasFotos.length);
       
-
       //Cargo esa URL random valida en nuevaFoto
       const nuevaFoto: string = nuevasFotos[posRandom];
       //Precarga la foto

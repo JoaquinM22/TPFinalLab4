@@ -1,60 +1,66 @@
 import { Component } from '@angular/core';
+import { Partida } from 'src/app/interfaces/partida';
 
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
-@Component({
+@Component
+({
   selector: 'app-historial',
   templateUrl: './historial.component.html',
   styleUrls: ['./historial.component.css']
 })
-export class HistorialComponent {
-  constructor(private usuariosService: UsuariosService) {}
+
+export class HistorialComponent
+{
+  constructor(private usuariosService: UsuariosService){}
 
   ngOnInit(): void {
-    this.mostrarHistorial();
+   this.mostrarHistorial();
   }
 
-   mostrarHistorial()
+  listaPartidas: Partida[] | undefined = [] ;
+
+ async mostrarHistorial()
   {
     const tabla = document.getElementById("cuerpo");
-    var listapartidas = this.usuariosService.traerPartidasUsuario();
+    this.listaPartidas = await this.usuariosService.getPartidaUsuario()
+    console.log(this.listaPartidas)
     var puntAnterior: number=0;
-    if(listapartidas)
+    if(this.listaPartidas)
     {
-      for(const datos of listapartidas)
-      {
-        const fila = document.createElement("tr");
+      if(tabla){
+        this.listaPartidas.forEach(datos => {
+          const fila = document.createElement("tr");
+          fila.style.border = '1px solid rgb(178, 253, 64)';
 
         const puntos = document.createElement("td");
-        puntos.className="cuadro";
+        puntos.style.border = '1px solid rgb(178, 253, 64)';
         puntos.textContent = String(datos.puntos-puntAnterior);
         puntAnterior=datos.puntos;
         fila.appendChild(puntos);
 
         const incorrectas = document.createElement("td");
-        incorrectas.className="cuadro";
+        incorrectas.style.border = '1px solid rgb(178, 253, 64)';
         incorrectas.textContent =  String(datos.incorrectas);
         fila.appendChild(incorrectas);
 
         const correctas = document.createElement("td");
-        correctas.className="cuadro";
+        correctas.style.border = '1px solid rgb(178, 253, 64)';
         correctas.textContent = String(datos.correctas);
         fila.appendChild(correctas);
 
         const pistaUsada = document.createElement("td");
-        pistaUsada.className = "cuadro";
+        pistaUsada.style.border = '1px solid rgb(178, 253, 64)';
         pistaUsada.textContent = String(datos.pistaUsada);
         fila.appendChild(pistaUsada);
-
+          
         const fecha = document.createElement("td");
-        fecha.className = "cuadro";
+        fecha.style.border = '1px solid rgb(178, 253, 64)';
         fecha.textContent = String(datos.fechaPartida);
         fila.appendChild(fecha);
 
-        if(tabla)
-        {
-          tabla.appendChild(fila);
-        }
+        tabla.appendChild(fila);
+        });
       }
     }
   }

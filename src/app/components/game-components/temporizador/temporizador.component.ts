@@ -49,7 +49,7 @@ export class TemporizadorComponent
       this.segundosString = segundos < 10 ? '0' + segundos : segundos.toString();
 
       // Actualiza el elemento DOM
-      console.log(this.minutosString + ":" + this.segundosString);
+      //console.log(this.minutosString + ":" + this.segundosString);
 
       // Si el tiempo es 0, detiene el temporizador
       if((minutos === 0 && segundos === 0) || !this.terminar)

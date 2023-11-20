@@ -10,12 +10,13 @@ import { TemporizadorComponent } from './components/game-components/temporizador
 import { LoginUsuarioComponent } from './components/login-usuario/login-usuario.component';
 import { MenuInicioComponent } from './components/menu-inicio/menu-inicio.component';
 import { MenuPrincipalComponent } from './components/menu-principal/menu-principal.component';
-import { RankingComponent } from './ranking/ranking.component';
+import { RankingComponent } from './components/ranking/ranking.component';
 import { LoadingComponent } from './components/pantallas/loading/loading.component';
 import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuario.component';
 import { HistorialComponent } from './components/historial/historial.component';
 
-@NgModule({
+@NgModule
+({
   declarations: [
     AppComponent,
     PistaJuegoComponent,
@@ -39,5 +40,7 @@ import { HistorialComponent } from './components/historial/historial.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+
+export class AppModule
+{ 
 }

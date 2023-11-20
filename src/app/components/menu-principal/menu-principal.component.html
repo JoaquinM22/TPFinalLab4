@@ -2,9 +2,7 @@
  
     <button class="botonNuevo" (click)="desabilitarTodosLosComponentes();menu=false;crearPartida=true">Crear Partida</button>
     <button class="botonNuevo" (click)="desabilitarTodosLosComponentes();ranking=true">Ranking</button>
-    <!-- <button class="botonNuevo" routerLink="/perfil">Ver Perfil</button> -->
     <button class="botonNuevo" (click)="desabilitarTodosLosComponentes();perfil=true">Ver Perfil</button>
-    <button class="botonNuevo" >Opciones</button>
     <button class="botonNuevo" (click)="desabilitarTodosLosComponentes();historial=true">Historial</button>
     <button class="botonNuevo" (click)="cerrarSesion()">Cerrar Sesion</button>
 
@@ -13,6 +11,7 @@
 <div *ngIf="crearPartida">
     <app-mostrar-foto (mensajeEnviado)="recibiendoDatosDesdeCreadorPartida($event)"></app-mostrar-foto>
 </div>
+
 <div *ngIf="ranking">
     <app-ranking></app-ranking>
 </div>
@@ -20,6 +19,7 @@
 <div *ngIf="perfil">
     <app-perfil-usuario></app-perfil-usuario>
 </div>
+
 <div *ngIf="historial">
     <app-historial></app-historial>
 </div>

@@ -9,9 +9,8 @@ import { Partida } from '../interfaces/partida';
 
 export class UsuariosService 
 {
-  
   url:string = "http://localhost:3000/users?_sort=puntos&_order=desc";
-  
+  urlPartida:string = "http://localhost:3000/partida";
   //Variable que se va a usar en las funciones
   login: Usuario = 
   {
@@ -19,27 +18,49 @@ export class UsuariosService
     usuario: "",
     password: "",
     puntos: 0,
-    partidas:0
+    partidas: 0
   }
+
   //Sesion en el storage
-   private readonly STORAGE_KEY = 'misDatos';
+  private readonly STORAGE_KEY = 'misDatos';
 
-   guardarDatos(datos: Usuario): void {
-     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(datos));
-   }
- 
-   obtenerDatos(): Usuario {
-     const datosString = localStorage.getItem(this.STORAGE_KEY);
-     return datosString ? JSON.parse(datosString) : null;
-   }
- 
-   limpiarDatos(): void {
-     localStorage.removeItem(this.STORAGE_KEY);
-   }
+  guardarDatos(datos: Usuario): void
+  {
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(datos));
+  }
 
-   constructor() { }
+  obtenerDatos(): Usuario
+  {
+    const datosString = localStorage.getItem(this.STORAGE_KEY);
+    return datosString ? JSON.parse(datosString) : null;
+  }
+
+  limpiarDatos(): void
+  {
+    localStorage.removeItem(this.STORAGE_KEY);
+  }
+
+   modificarDatoPuntos(nuevoDato: number): void {
+    const datosActuales = this.obtenerDatos();
+
+    if (datosActuales) {
+      datosActuales.puntos = nuevoDato;
+      this.guardarDatos(datosActuales);
+    }
+  }
+  modificarPrtidasJugadas(): void {
+    const datosActuales = this.obtenerDatos();
+
+    if (datosActuales) {
+      datosActuales.partidas = datosActuales.partidas + 1 ;
+      this.guardarDatos(datosActuales);
+    }
+  }
+
+  constructor() { 
+   }
  
-   async getUsuarios(): Promise<Usuario[] | undefined>
+  async getUsuarios(): Promise<Usuario[] | undefined>
   {
     try
     {
@@ -54,15 +75,52 @@ export class UsuariosService
     return undefined;
   }
 
-
-  actualizarPuntos ( new_puntos: number)
+  async actualizarPartidasJugaas ()
   {
-    const aCambiar = 
+    this.modificarPrtidasJugadas()
+    const cambiar = 
     {
-      puntos: new_puntos
+      partidas: this.obtenerDatos().partidas + 1 
     };
 
-    const url = "http://localhost:3000/users/" + this.obtenerDatos();
+    const url = "http://localhost:3000/users/" + this.obtenerDatos().id;
+
+    const options = 
+    {
+      method: 'PATCH',
+      headers: 
+      {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(cambiar),
+    }
+    fetch(url, options)
+    .then(response => 
+    {
+      console.log("response user:", response);
+      if(response.ok) 
+      {
+        console.log('las partidas del usuario han sido actualizados con éxito.');
+      }else 
+      {
+        console.error('Error al actualizar las partidas del usuario.');
+      }
+    })
+    .catch(error => 
+    {
+      console.error('Hubo un error en la solicitud:', error);
+    });
+  }
+
+  actualizarPuntos ( nuevosPuntos: number)
+  {
+    this.modificarDatoPuntos(nuevosPuntos)
+    const aCambiar = 
+    {
+      puntos: nuevosPuntos
+    };
+
+    const url = "http://localhost:3000/users/" + this.obtenerDatos().id;
 
     const options = 
     {
@@ -74,10 +132,12 @@ export class UsuariosService
       body: JSON.stringify(aCambiar),
     }
 
+
     fetch(url, options)
     .then(response => 
     {
-      if (response.ok) 
+      console.log("response user:", response);
+      if(response.ok) 
       {
         console.log('Los puntos del usuario han sido actualizados con éxito.');
       }else 
@@ -90,6 +150,8 @@ export class UsuariosService
       console.error('Hubo un error en la solicitud:', error);
     });
   }
+
+
 
   getUltimoID(): Promise<any>
   {
@@ -112,10 +174,11 @@ export class UsuariosService
     });
     
   }
-  guardarPartidaHistorial(puntos:Number,incorrectas:Number,correctas:Number,pistaUsada:number,fechaPartida:Date)
+
+  guardarPartidaHistorial(puntos: number, incorrectas: number, correctas: number, pistaUsada: number, fechaPartida: Date)
   {
     const agregar = {
-      idUsuario:this.obtenerDatos(),
+      idUsuario:this.obtenerDatos().id,
       puntos:puntos,
       incorrectas:incorrectas,
       correctas:correctas,
@@ -152,32 +215,25 @@ export class UsuariosService
     });
   }
 
-  traerPartidasUsuario(){
-    var partidas:Partida[]=[];
-    const url = "http://localhost:3000/partida";
-
-    const options = 
+  async getPartidaUsuario(): Promise<Partida[] | undefined>
+  {
+    var partidass:Partida[]=[];
+    try
     {
-      method: 'GET',
-      headers: 
-      {
-        'Content-Type': 'application/json',
-      },
-    }
-    fetch(url, options)
-    .then(response => response.json())
-    .then(data=>{
-      for(const ele of data){
+      const resultado = await fetch(this.urlPartida);
+      const partidas = resultado.json(); 
+      for(const ele of await partidas){
         if(ele.idUsuario===this.obtenerDatos().id){
-          partidas.push(ele);
+          partidass.push(ele);
         }
       }
-    })
-    .catch(error => 
+      return partidass;
+    }catch(error) 
     {
-      console.error('Hubo un error en la solicitud:', error);
-    });
-    return partidas;
+      console.log(error);  
+    }
+
+    return undefined;
   }
 
 }
