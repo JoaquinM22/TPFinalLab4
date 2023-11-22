@@ -48,6 +48,7 @@ export class UsuariosService
       this.guardarDatos(datosActuales);
     }
   }
+
   modificarPrtidasJugadas(): void {
     const datosActuales = this.obtenerDatos();
 
@@ -75,7 +76,7 @@ export class UsuariosService
     return undefined;
   }
 
-  async actualizarPartidasJugaas ()
+  async actualizarPartidasJugadas ()
   {
     const cambiar = 
     {
@@ -114,7 +115,7 @@ export class UsuariosService
 
   async actualizarPuntos ( nuevosPuntos: number)
   {
-    this.modificarDatoPuntos(nuevosPuntos)
+    this.modificarDatoPuntos(nuevosPuntos);
     const aCambiar = 
     {
       puntos: nuevosPuntos
@@ -131,8 +132,6 @@ export class UsuariosService
       },
       body: JSON.stringify(aCambiar),
     }
-
-
     fetch(url, options)
     .then(response => 
     {
