@@ -27,26 +27,27 @@ export class RankingComponent implements OnInit
       for(const datos of this.listaUsuarios)
       {
         const fila = document.createElement("tr");
+        fila.style.border = '1px solid rgb(178, 253, 64)';
 
         const usuario = document.createElement("td");
-        usuario.className="cuadro";
+        usuario.style.border = '1px solid rgb(178, 253, 64)';
         usuario.textContent = datos.usuario;
         fila.appendChild(usuario);
 
         const puntaje = document.createElement("td");
-        puntaje.className="cuadro";
+        puntaje.style.border = '1px solid rgb(178, 253, 64)';
         puntaje.textContent =  String(datos.puntos);
         fila.appendChild(puntaje);
 
         const partidas = document.createElement("td");
-        partidas.className="cuadro";
+        partidas.style.border = '1px solid rgb(178, 253, 64)';
         partidas.textContent = String(datos.partidas);
         fila.appendChild(partidas);
 
         const promedio = document.createElement("td");
-        promedio.className = "cuadro";
+        promedio.style.border = '1px solid rgb(178, 253, 64)';
         if(datos.partidas){
-          promedio.textContent =  String(datos.puntos/datos.partidas);
+          promedio.textContent =  String(Math.round(datos.puntos/datos.partidas));
         }else{
           promedio.textContent =  String(0);
         }

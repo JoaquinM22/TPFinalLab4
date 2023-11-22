@@ -77,11 +77,11 @@ export class UsuariosService
 
   async actualizarPartidasJugaas ()
   {
-    this.modificarPrtidasJugadas()
     const cambiar = 
     {
       partidas: this.obtenerDatos().partidas + 1 
     };
+    this.modificarPrtidasJugadas()
 
     const url = "http://localhost:3000/users/" + this.obtenerDatos().id;
 
@@ -112,7 +112,7 @@ export class UsuariosService
     });
   }
 
-  actualizarPuntos ( nuevosPuntos: number)
+  async actualizarPuntos ( nuevosPuntos: number)
   {
     this.modificarDatoPuntos(nuevosPuntos)
     const aCambiar = 
@@ -175,7 +175,7 @@ export class UsuariosService
     
   }
 
-  guardarPartidaHistorial(puntos: number, incorrectas: number, correctas: number, pistaUsada: number, fechaPartida: Date)
+  async guardarPartidaHistorial(puntos: number, incorrectas: number, correctas: number, pistaUsada: number, fechaPartida: Date)
   {
     const agregar = {
       idUsuario:this.obtenerDatos().id,
