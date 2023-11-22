@@ -9,6 +9,7 @@ export class LlamadaApiService {
   nombresJuegos: string[] = [];
 
   constructor() { }
+
   getNombresJuegosAPI(i: number, genero: string): Promise<void>
   {
     return new Promise((resolve, reject) =>
@@ -226,8 +227,6 @@ export class LlamadaApiService {
   {
     return new Promise((resolve, reject) =>
     {
-      console.log("Entre a GetJuegos");
-  
       // Primero, espera a que se carguen los nombres
       this.getNombresJuegosAPI(i, genero)
       .then(() =>
@@ -267,7 +266,6 @@ export class LlamadaApiService {
   }
 
   //Llama a getJuegos cargando el arreglo "datosJuegos"
-
   async crearPartida(genero: string, dificultad:string)
   {
     try

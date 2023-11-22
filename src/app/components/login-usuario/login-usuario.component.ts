@@ -63,18 +63,14 @@ export class LoginUsuarioComponent implements OnInit
         const usuarioL = (<HTMLInputElement>document.getElementById("Usuario")).value;
         const pass = (<HTMLInputElement>document.getElementById("Password")).value;
 
-        //Falta agregar la funcion que lo compare con los registros
-
         const validado = await this.validarUsuario(usuarioL, pass, 1);
 
         if(validado)
         {
-          console.log(this.usuarioLogueado);
           this.usuariosService.guardarDatos(this.usuarioLogueado);
 
           //Datos del Usuario recien logueado
           let logueadoRecien = this.usuariosService.obtenerDatos();
-          console.log("Usuario Logueado", logueadoRecien);
 
           this.router.navigate(['/menu']);
         }else
@@ -137,10 +133,8 @@ export class LoginUsuarioComponent implements OnInit
           }else
           {
             //Aca sube los datos al server
-            console.log("Cargo user nuevo");
             await this.cargarUsuario(nombreCre, passCre);
 
-            console.log("Tercer consoleLog", this.usuarioLogueado);
             //NUEVO AL CREAR
             this.usuariosService.guardarDatos(this.usuarioLogueado);
             this.usuariosService.login = this.usuarioLogueado;
@@ -188,7 +182,7 @@ export class LoginUsuarioComponent implements OnInit
     .then(data => data)
     .then(update =>
     {
-      console.log("Segundo console log", update)
+      console.log("Usuario Cargado correctamente")
     })
     .catch(e =>
     {

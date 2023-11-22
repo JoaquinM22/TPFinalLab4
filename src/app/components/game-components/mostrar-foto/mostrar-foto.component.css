@@ -1,7 +1,10 @@
-#iniciar{
+#iniciar
+{
     text-align: center;
 }
-.contenedorJuego{
+
+.contenedorJuego
+{
     height: 850px;
     width: 1120px;
     margin: 0% 20%; 

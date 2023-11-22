@@ -27,7 +27,8 @@ export class MostrarFotoComponent
   {
   }
 
-  async traerDatosApi(){
+  async traerDatosApi()
+  {
     this.cartelInicio=false;
     this.loading=true;
     await this.llamadaApi.crearPartida(this.generoSeleccionado,this.modoSeleccionado);

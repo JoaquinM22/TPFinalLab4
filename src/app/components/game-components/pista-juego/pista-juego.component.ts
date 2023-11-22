@@ -93,6 +93,7 @@ export class PistaJuegoComponent implements OnInit
     this.cartelFinal=false;
     this.enviarDatos('otra');
   }
+
   // envia al componente padre
   enviarDatos(mensaje : string)
   {
@@ -104,7 +105,6 @@ export class PistaJuegoComponent implements OnInit
   {
     let resp:boolean;
     this.reset();
-    console.log("Selecionando opcion"+this.juegos.length);
     if(optionText == this.juegos[this.contJuego].nombre)
     {
       this.correctas.push(this.juegos[this.contJuego]);
@@ -121,7 +121,6 @@ export class PistaJuegoComponent implements OnInit
     setTimeout(() => {
       if(this.juegos.length > 1)
         {
-          console.log("Entrando al mover arreglo"+this.juegos.length);
           this.juegos.splice(this.contJuego,1);
           this.moverPorArreglo();        
         }else{
@@ -133,9 +132,11 @@ export class PistaJuegoComponent implements OnInit
   // recorre el arreglo
   moverPorArreglo()
   {
-    if(this.contJuego>=this.juegos.length-1){
+    if(this.contJuego>=this.juegos.length-1)
+    {
       this.contJuego=0;
-    }else{
+    }else
+    {
       this.contJuego=this.contJuego+1;
     }
     this.generarValoresAleatoriosImagen();
@@ -172,7 +173,7 @@ export class PistaJuegoComponent implements OnInit
 
   }
 
-   sumarPuntos(puntos: number)
+  sumarPuntos(puntos: number)
   {
     this.puntaje=this.puntaje+puntos;
     this.chequeoCosto(); 
@@ -286,22 +287,23 @@ export class PistaJuegoComponent implements OnInit
   //funciones de imagen
   generarValoresAleatoriosImagen()
   {
-    var clipPathValue=""
-    switch(Math.floor(Math.random()*11)){
+    var clipPathValue="";
+    let num = Math.floor(Math.random()*11);
+    switch(num){
       case 0 :
         clipPathValue = "polygon(100% 0, 90% 0, 100% 100%, 100% 10%, 0 100%, 10% 100%, 0 0, 0 90%)";
       break;
       case 1 :
-        clipPathValue = "polygon(0 35%, 90% 0, 0 100%, 100% 65%, 10% 100%, 100% 0);";
+        clipPathValue = "polygon(0 35%, 90% 0, 0 100%, 100% 65%, 10% 100%, 100% 0)";
       break;
       case 2 :
-        clipPathValue = "circle(20.0% at 21% 21%);";
+        clipPathValue = "circle(20.0% at 21% 21%)";
       break;
       case 3 :
         clipPathValue = "polygon(5% 0, 0 5%, 45% 50%, 0 95%, 5% 100%, 50% 55%, 95% 100%, 100% 95%, 55% 50%, 100% 5%, 95% 0, 50% 45%)";
       break;
       case 4 :
-        clipPathValue = "polygon(50% 85%, 100% 0, 50% 100%, 0 0);";
+        clipPathValue = "polygon(50% 85%, 100% 0, 50% 100%, 0 0)";
       break;
       case 5 :
         clipPathValue = "polygon(50% 0%, 55% 45%, 98% 35%, 55% 55%, 79% 91%, 50% 60%, 21% 91%, 45% 55%, 2% 35%, 45% 45%)";
@@ -323,14 +325,16 @@ export class PistaJuegoComponent implements OnInit
       break;
     }
   
-      const foto = document.getElementById('fotoA');
-      if(foto)
-      {
-        foto.style.clipPath = clipPathValue; 
-      }
+    //clipPathValue = "polygon(50% 85%, 100% 0, 50% 100%, 0 0);";
+
+    const foto = document.getElementById('fotoA');
+    if(foto)
+    {
+      foto.style.clipPath = clipPathValue; 
+    }
   }
       
-  //funciones de las pistas
+  /* ----------- Funciones de las pistas -----------*/
 
   // maneja los botones de las pistas de texto
   handlePistaButtonClick(buttonText: string): void
@@ -427,11 +431,15 @@ export class PistaJuegoComponent implements OnInit
       }
     }
   }
+
   //suma usos de pistas
-  usoPista(){
+  usoPista()
+  {
     this.pistaUsos=this.pistaUsos+1;
   }
-  memeRespuesta(resp:boolean){
+
+  memeRespuesta(resp:boolean)
+  {
     const foto = document.getElementById('fotoA');
     if(foto)
     {
@@ -439,11 +447,12 @@ export class PistaJuegoComponent implements OnInit
     }
 
     if(resp==false){
-      this.src="assets/GifDicaproMordiendoMano.gif"
+      this.src="assets/DicaprioIncorrectaGIF.gif"
     }else{
-      this.src="assets/GifDicaprioAplaudiendo.gif";
+      this.src="assets/DicaprioCorrectaGIF.gif";
     }
   }
+  
   // recibindo datos desde componente temporizador y actualiza los puntos totales en el servidor
   async recibindoDatosDesdeTemporizador(mensaje: string)
   {
