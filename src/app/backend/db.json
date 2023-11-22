@@ -32,8 +32,8 @@
       "id": 5,
       "usuario": "Pepe",
       "password": "Messi",
-      "puntos": 2989,
-      "partidas": 4
+      "puntos": 5103,
+      "partidas": 11
     },
     {
       "id": 6,
@@ -262,6 +262,51 @@
       "pistaUsada": 6,
       "fechaPartida": "2023-11-10T16:06:08.798Z",
       "id": 22
+    },
+    {
+      "idUsuario": 5,
+      "puntos": 3402,
+      "incorrectas": 7,
+      "correctas": 3,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-22T17:41:00.437Z",
+      "id": 23
+    },
+    {
+      "idUsuario": 5,
+      "puntos": 4402,
+      "incorrectas": 7,
+      "correctas": 3,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-22T17:41:54.048Z",
+      "id": 24
+    },
+    {
+      "idUsuario": 5,
+      "puntos": 4465,
+      "incorrectas": 9,
+      "correctas": 1,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-22T17:43:29.554Z",
+      "id": 25
+    },
+    {
+      "idUsuario": 5,
+      "puntos": 5292,
+      "incorrectas": 6,
+      "correctas": 4,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-22T17:44:31.658Z",
+      "id": 26
+    },
+    {
+      "idUsuario": 5,
+      "puntos": 5103,
+      "incorrectas": 10,
+      "correctas": 0,
+      "pistaUsada": 2,
+      "fechaPartida": "2023-11-22T17:53:57.196Z",
+      "id": 27
     }
   ]
 }
