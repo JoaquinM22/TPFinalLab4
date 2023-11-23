@@ -21,7 +21,6 @@ export class RankingComponent implements OnInit
   {
     const tabla = document.getElementById("cuerpo");
     this.listaUsuarios = await this.usuariosService.getUsuarios();
-    console.log(this.listaUsuarios)
     if(this.listaUsuarios)
     {
       for(const datos of this.listaUsuarios)

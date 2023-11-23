@@ -23,8 +23,7 @@ export class HistorialComponent
   async mostrarHistorial()
   {
     const tabla = document.getElementById("cuerpo");
-    this.listaPartidas = await this.usuariosService.getPartidaUsuario()
-    console.log(this.listaPartidas)
+    this.listaPartidas = await this.usuariosService.getPartidaUsuario();
     var puntAnterior: number=0;
     if(this.listaPartidas)
     {

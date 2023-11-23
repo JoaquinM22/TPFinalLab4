@@ -12,10 +12,5 @@ export class AppComponent
 
   constructor(){}
 
- /*  @ViewChild('miComponente') miComponente: MostrarFotoComponent;
 
-  iniciarMiComponente() {
-    // Llama al método iniciarComponente del componente hijo
-    this.miComponente.iniciarComponente();
-  } */
 }

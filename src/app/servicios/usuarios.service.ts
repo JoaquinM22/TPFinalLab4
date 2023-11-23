@@ -40,14 +40,17 @@ export class UsuariosService
     localStorage.removeItem(this.STORAGE_KEY);
   }
 
-   modificarDatoPuntos(nuevoDato: number): void {
+  modificarDatoPuntos(nuevoDato: number): void
+  {
     const datosActuales = this.obtenerDatos();
 
-    if (datosActuales) {
+    if (datosActuales)
+    {
       datosActuales.puntos = nuevoDato;
       this.guardarDatos(datosActuales);
     }
   }
+
   modificarPrtidasJugadas(): void {
     const datosActuales = this.obtenerDatos();
 
@@ -57,8 +60,9 @@ export class UsuariosService
     }
   }
 
-  constructor() { 
-   }
+  constructor()
+  { 
+  }
  
   async getUsuarios(): Promise<Usuario[] | undefined>
   {
@@ -75,7 +79,7 @@ export class UsuariosService
     return undefined;
   }
 
-  async actualizarPartidasJugaas ()
+  async actualizarPartidasJugadas ()
   {
     const cambiar = 
     {
@@ -114,7 +118,7 @@ export class UsuariosService
 
   async actualizarPuntos ( nuevosPuntos: number)
   {
-    this.modificarDatoPuntos(nuevosPuntos)
+    this.modificarDatoPuntos(nuevosPuntos);
     const aCambiar = 
     {
       puntos: nuevosPuntos
@@ -131,12 +135,9 @@ export class UsuariosService
       },
       body: JSON.stringify(aCambiar),
     }
-
-
     fetch(url, options)
     .then(response => 
     {
-      console.log("response user:", response);
       if(response.ok) 
       {
         console.log('Los puntos del usuario han sido actualizados con éxito.');
@@ -162,7 +163,6 @@ export class UsuariosService
       .then(data =>
       {
         const pos = data.length - 1;
-        console.log("Posicion de getUltimoID", data[pos]);
         resolve(data[pos].id);
       })
       .catch(error =>

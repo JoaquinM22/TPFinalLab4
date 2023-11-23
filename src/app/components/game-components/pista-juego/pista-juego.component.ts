@@ -438,9 +438,10 @@ export class PistaJuegoComponent implements OnInit
   async recibindoDatosDesdeTemporizador(mensaje: string)
   {
     this.puntaje= this.puntaje + Number(mensaje) * valores.tiempoSobrante;
+    this.cartelFinal = true;
     await this.usuariosService.actualizarPartidasJugaas();
     await this.usuariosService.actualizarPuntos(this.puntaje);
-    this.cartelFinal = true;
+    
   }
 
 }
