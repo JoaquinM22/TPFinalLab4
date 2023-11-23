@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+html
+{
+
+    background-image: url('../src/12804207_5073414.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.page_title
+{
+    text-align: center;
+
+    color: greenyellow;
+
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 70px;
+}

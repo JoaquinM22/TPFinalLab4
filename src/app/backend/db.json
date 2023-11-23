@@ -1,0 +1,267 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "usuario": "Franco",
+      "password": "Gitana06",
+      "puntos": 2391,
+      "partidas": 7
+    },
+    {
+      "id": 2,
+      "usuario": "Joaquin",
+      "password": "Unpassword03",
+      "puntos": 200,
+      "partidas": 0
+    },
+    {
+      "id": 3,
+      "usuario": "Emanuel",
+      "password": "Otropassword_2",
+      "puntos": 200,
+      "partidas": 0
+    },
+    {
+      "id": 4,
+      "usuario": "Geronimo",
+      "password": "Gero123",
+      "puntos": 1735,
+      "partidas": 12
+    },
+    {
+      "id": 5,
+      "usuario": "Pepe",
+      "password": "Messi",
+      "puntos": 2989,
+      "partidas": 4
+    },
+    {
+      "id": 6,
+      "usuario": "Carlos",
+      "password": "Hola",
+      "puntos": 200,
+      "partidas": 0
+    },
+    {
+      "id": 7,
+      "usuario": "El_Pepe",
+      "password": "Messi123",
+      "puntos": 200,
+      "partidas": 0
+    },
+    {
+      "id": 8,
+      "usuario": "ElMesias10",
+      "password": "Messi4545",
+      "puntos": 200,
+      "partidas": 0
+    },
+    {
+      "id": 9,
+      "usuario": "pepe",
+      "password": "123",
+      "puntos": 52,
+      "partidas": 2
+    }
+  ],
+  "partida": [
+    {
+      "idUsuario": 5,
+      "puntos": 1552,
+      "incorrectas": 1,
+      "correctas": 9,
+      "pistaUsada": 1,
+      "fechaPartida": "2023-11-10T12:04:36.709Z",
+      "id": 1
+    },
+    {
+      "idUsuario": 5,
+      "puntos": 2149,
+      "incorrectas": 6,
+      "correctas": 4,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-10T12:05:00.537Z",
+      "id": 2
+    },
+    {
+      "idUsuario": 5,
+      "puntos": 2520,
+      "incorrectas": 9,
+      "correctas": 3,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-10T12:05:39.409Z",
+      "id": 3
+    },
+    {
+      "idUsuario": 5,
+      "puntos": 2989,
+      "incorrectas": 8,
+      "correctas": 4,
+      "pistaUsada": 2,
+      "fechaPartida": "2023-11-10T12:06:02.165Z",
+      "id": 4
+    },
+    {
+      "idUsuario": 1,
+      "puntos": 769,
+      "incorrectas": 7,
+      "correctas": 4,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-10T12:14:09.091Z",
+      "id": 5
+    },
+    {
+      "idUsuario": 1,
+      "puntos": 1015,
+      "incorrectas": 8,
+      "correctas": 2,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-10T12:14:25.929Z",
+      "id": 6
+    },
+    {
+      "idUsuario": 1,
+      "puntos": 1409,
+      "incorrectas": 8,
+      "correctas": 3,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-10T12:14:42.137Z",
+      "id": 7
+    },
+    {
+      "idUsuario": 4,
+      "puntos": 451,
+      "incorrectas": 7,
+      "correctas": 2,
+      "pistaUsada": 1,
+      "fechaPartida": "2023-11-10T12:25:00.590Z",
+      "id": 8
+    },
+    {
+      "idUsuario": 4,
+      "puntos": 715,
+      "incorrectas": 7,
+      "correctas": 2,
+      "pistaUsada": 1,
+      "fechaPartida": "2023-11-10T12:25:57.496Z",
+      "id": 9
+    },
+    {
+      "idUsuario": 4,
+      "puntos": 838,
+      "incorrectas": 1,
+      "correctas": 0,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-10T12:31:51.056Z",
+      "id": 10
+    },
+    {
+      "idUsuario": 4,
+      "puntos": 937,
+      "incorrectas": 2,
+      "correctas": 0,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-10T12:33:33.019Z",
+      "id": 11
+    },
+    {
+      "idUsuario": 1,
+      "puntos": 1652,
+      "incorrectas": 8,
+      "correctas": 2,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-10T12:35:06.460Z",
+      "id": 12
+    },
+    {
+      "idUsuario": 1,
+      "puntos": 1755,
+      "incorrectas": 7,
+      "correctas": 1,
+      "pistaUsada": 2,
+      "fechaPartida": "2023-11-10T12:35:25.754Z",
+      "id": 13
+    },
+    {
+      "idUsuario": 4,
+      "puntos": 1455,
+      "incorrectas": 8,
+      "correctas": 2,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-10T12:53:10.454Z",
+      "id": 14
+    },
+    {
+      "idUsuario": 4,
+      "puntos": 1516,
+      "incorrectas": 9,
+      "correctas": 1,
+      "pistaUsada": 1,
+      "fechaPartida": "2023-11-10T12:55:31.722Z",
+      "id": 15
+    },
+    {
+      "idUsuario": 4,
+      "puntos": 1523,
+      "incorrectas": 8,
+      "correctas": 2,
+      "pistaUsada": 0,
+      "fechaPartida": "2023-11-10T12:57:51.214Z",
+      "id": 16
+    },
+    {
+      "idUsuario": 4,
+      "puntos": 1409,
+      "incorrectas": 10,
+      "correctas": 0,
+      "pistaUsada": 1,
+      "fechaPartida": "2023-11-10T12:58:10.693Z",
+      "id": 17
+    },
+    {
+      "idUsuario": 4,
+      "puntos": 1643,
+      "incorrectas": 8,
+      "correctas": 2,
+      "pistaUsada": 1,
+      "fechaPartida": "2023-11-10T12:58:32.574Z",
+      "id": 18
+    },
+    {
+      "idUsuario": 4,
+      "puntos": 1735,
+      "incorrectas": 7,
+      "correctas": 3,
+      "pistaUsada": 31,
+      "fechaPartida": "2023-11-10T12:59:12.654Z",
+      "id": 19
+    },
+    {
+      "idUsuario": 9,
+      "puntos": 595,
+      "incorrectas": 2,
+      "correctas": 4,
+      "pistaUsada": 5,
+      "fechaPartida": "2023-11-10T13:04:53.244Z",
+      "id": 20
+    },
+    {
+      "idUsuario": 9,
+      "puntos": 52,
+      "incorrectas": 10,
+      "correctas": 1,
+      "pistaUsada": 81,
+      "fechaPartida": "2023-11-10T13:07:38.677Z",
+      "id": 21
+    },
+    {
+      "idUsuario": 1,
+      "puntos": 2391,
+      "incorrectas": 7,
+      "correctas": 3,
+      "pistaUsada": 6,
+      "fechaPartida": "2023-11-10T16:06:08.798Z",
+      "id": 22
+    }
+  ]
+}

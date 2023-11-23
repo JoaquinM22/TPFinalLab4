@@ -1,0 +1,93 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.formularios
+{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto;
+}
+
+.form_login
+{
+    width: 400px;
+    height: 340px;
+    background: #4e4d4d;
+    margin: auto;
+    margin-top: 180px;
+    box-shadow: 7px 13px 37px #000;
+    border-top: 4px solid #017bab;
+    padding: 20px 30px;
+    color:white;
+    font-family: arial;
+}
+
+.form_create
+{
+    width: 400px;
+    height: 380px;
+    background: #4e4d4d;
+    margin: auto;
+    margin-top: 180px;
+    box-shadow: 7px 13px 37px #000;
+    border-top: 4px solid #017bab;
+    padding: 20px 30px;
+    color:white;
+    font-family: arial;
+}
+
+.form_login h3, .form_create h3
+{
+    margin: 0;
+    text-align: center;
+    height: 40px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid;
+    font-size: 20px;
+}
+
+.control
+{
+    width: 100%;
+    border: 1px solid #017bab;
+    margin-bottom: 15px;
+    padding: 11px 10px;
+    background: #252323;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+}
+
+.botones
+{
+    width: 100%;
+    height: 40px;
+    background: #017bab;
+    border: none;
+    color: white;
+    margin-bottom: 16px;
+}
+
+.botones:hover
+{
+    background: #017bab9a;
+}
+
+.form_login p, .form_create p
+{
+    height: 40px;
+    text-align: center;
+    border-bottom: 1px solid;
+}
+
+.form_login #txt_login
+{
+    text-decoration: none;
+    font-size: 12px;
+    color: white;
+}
+
