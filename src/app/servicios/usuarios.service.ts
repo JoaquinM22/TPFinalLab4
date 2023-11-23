@@ -11,6 +11,7 @@ export class UsuariosService
 {
   url:string = "http://localhost:3000/users?_sort=puntos&_order=desc";
   urlPartida:string = "http://localhost:3000/partida";
+
   //Variable que se va a usar en las funciones
   login: Usuario = 
   {
@@ -79,13 +80,13 @@ export class UsuariosService
     return undefined;
   }
 
-  async actualizarPartidasJugadas ()
+  async actualizarPartidasJugadas()
   {
     const cambiar = 
     {
       partidas: this.obtenerDatos().partidas + 1 
     };
-    this.modificarPrtidasJugadas()
+    this.modificarPrtidasJugadas();
 
     const url = "http://localhost:3000/users/" + this.obtenerDatos().id;
 
@@ -101,7 +102,6 @@ export class UsuariosService
     fetch(url, options)
     .then(response => 
     {
-      console.log("response user:", response);
       if(response.ok) 
       {
         console.log('las partidas del usuario han sido actualizados con éxito.');
@@ -116,7 +116,7 @@ export class UsuariosService
     });
   }
 
-  async actualizarPuntos ( nuevosPuntos: number)
+  async actualizarPuntos( nuevosPuntos: number)
   {
     this.modificarDatoPuntos(nuevosPuntos);
     const aCambiar = 
@@ -151,8 +151,6 @@ export class UsuariosService
       console.error('Hubo un error en la solicitud:', error);
     });
   }
-
-
 
   getUltimoID(): Promise<any>
   {

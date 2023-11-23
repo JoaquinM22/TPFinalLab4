@@ -25,7 +25,6 @@ export class RankingComponent implements OnInit
     {
       for(const datos of this.listaUsuarios)
       {
-        console.log("Datos de user: ", datos);
         const fila = document.createElement("tr");
         fila.style.border = '1px solid rgb(178, 253, 64)';
 
