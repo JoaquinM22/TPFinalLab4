@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
 }
+
 #iniciar
 {
     justify-content: center;
@@ -56,8 +57,25 @@
     font-weight: bold;
 }
 
+.buttons:hover
+{
+    color: #ffffff;
+    background-color: rgba(51, 0, 255, 0.784);
+}
+
 .foto
 {
     width: 600px;
     height: 450px;
+}
+
+.miFooter
+{
+    color: greenyellow; 
+    font-family: Arial;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
 }

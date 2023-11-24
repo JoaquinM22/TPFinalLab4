@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { JuegoInt } from '../../../interfaces/juegoInt';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { Partida } from 'src/app/interfaces/partida';
+import { timeout } from 'rxjs';
 
 enum valores
 {
@@ -47,8 +48,8 @@ export class PistaJuegoComponent implements OnInit
   //contador del arreglo de juegos
   contJuego: number = 0;
   //respuestas correctas y incorrectas
-  correctas: number=0;
-  incorrectas: number=0;
+  correctas: JuegoInt[] = [];
+  incorrectas: JuegoInt[] = [];
   // uso de pistas
   pistaUsos: number = 0;
   //control estados de las pistas
@@ -57,6 +58,8 @@ export class PistaJuegoComponent implements OnInit
   consola: boolean=false;
   genero: boolean=false;
   fecha: boolean=false;
+  // Link a la imagen
+  src: string = "";
 
   constructor(private usuariosService: UsuariosService,)
   {
@@ -72,24 +75,26 @@ export class PistaJuegoComponent implements OnInit
   {
     this.cartelInicio=false;
     this.empezar=true;
-    /* this.mostrarYocultar("fotoB",false); */
+    this.src=this.juegos[this.contJuego].foto;
     this.mostrarYocultar("fotoA",true);
     this.generarValoresAleatoriosImagen();
   }
 
   async finalizarPartida()
   {
-    await this.usuariosService.guardarPartidaHistorial(this.puntaje,this.incorrectas,this.correctas,this.pistaUsos,new Date());
+    await this.usuariosService.guardarPartidaHistorial(this.puntaje,this.incorrectas.length,this.correctas.length,this.pistaUsos,new Date());
     this.mostrarYocultar("fotoA",false);
     this.cartelFinal=false;
     this.enviarDatos('finalizar');
   }
 
-  empezarOtra()
+  async empezarOtra()
   {
+    await this.usuariosService.guardarPartidaHistorial(this.puntaje,this.incorrectas.length,this.correctas.length,this.pistaUsos,new Date());
     this.cartelFinal=false;
     this.enviarDatos('otra');
   }
+
   // envia al componente padre
   enviarDatos(mensaje : string)
   {
@@ -99,45 +104,44 @@ export class PistaJuegoComponent implements OnInit
   // manejo de respuestas
   handleOptionButtonClick(optionText: string): void
   {
-    this.juegos[this.contJuego].visible = false;
+    let resp:boolean;
     this.reset();
     if(optionText == this.juegos[this.contJuego].nombre)
     {
-      this.correctas=this.correctas + 1;
-
+      this.correctas.push(this.juegos[this.contJuego]);
       this.sumarPuntos(valores.acierto);
+      resp=true
     }else
     {
-      this.incorrectas = this.incorrectas + 1;
+      this.incorrectas.push(this.juegos[this.contJuego]);
       this.restarPuntos(valores.fallo);
+      resp=false;
     }
-    this.moverPorArreglo();   
-  }
 
+    this.memeRespuesta(resp);
+    setTimeout(() => {
+      if(this.juegos.length > 1)
+        {
+          this.juegos.splice(this.contJuego,1);
+          this.moverPorArreglo();        
+        }else{
+          this.terminar = false;
+        }
+    }, 2000);
+  }
+  
   // recorre el arreglo
   moverPorArreglo()
   {
-
-    if(this.juegos.length > this.correctas + this.incorrectas)
-    { 
-      if(this.contJuego < this.juegos.length-1){
-        this.contJuego=this.contJuego+1;
-      }else{
-        this.contJuego=0
-      }
+    if(this.contJuego>=this.juegos.length-1)
+    {
+      this.contJuego=0;
     }else
     {
-      if(this.juegos.length == this.correctas + this.incorrectas)
-      {
-        this.terminar = false;
-      }else
-      {
-        while(this.contJuego < this.juegos.length && !this.juegos[this.contJuego].visible)
-        {
-          this.contJuego = this.contJuego+1;
-        }
-      }
+      this.contJuego=this.contJuego+1;
     }
+    this.generarValoresAleatoriosImagen();
+    this.src=this.juegos[this.contJuego].foto;
   }
 
   reset()
@@ -170,7 +174,7 @@ export class PistaJuegoComponent implements OnInit
 
   }
 
-   sumarPuntos(puntos: number)
+  sumarPuntos(puntos: number)
   {
     this.puntaje=this.puntaje+puntos;
     this.chequeoCosto(); 
@@ -284,22 +288,23 @@ export class PistaJuegoComponent implements OnInit
   //funciones de imagen
   generarValoresAleatoriosImagen()
   {
-    var clipPathValue=""
-    switch(Math.floor(Math.random()*11)){
+    var clipPathValue="";
+    let num = Math.floor(Math.random()*11);
+    switch(num){
       case 0 :
         clipPathValue = "polygon(100% 0, 90% 0, 100% 100%, 100% 10%, 0 100%, 10% 100%, 0 0, 0 90%)";
       break;
       case 1 :
-        clipPathValue = "polygon(0 35%, 90% 0, 0 100%, 100% 65%, 10% 100%, 100% 0);";
+        clipPathValue = "polygon(0 35%, 90% 0, 0 100%, 100% 65%, 10% 100%, 100% 0)";
       break;
       case 2 :
-        clipPathValue = "circle(20.0% at 21% 21%);";
+        clipPathValue = "circle(20.0% at 21% 21%)";
       break;
       case 3 :
         clipPathValue = "polygon(5% 0, 0 5%, 45% 50%, 0 95%, 5% 100%, 50% 55%, 95% 100%, 100% 95%, 55% 50%, 100% 5%, 95% 0, 50% 45%)";
       break;
       case 4 :
-        clipPathValue = "polygon(50% 85%, 100% 0, 50% 100%, 0 0);";
+        clipPathValue = "polygon(50% 85%, 100% 0, 50% 100%, 0 0)";
       break;
       case 5 :
         clipPathValue = "polygon(50% 0%, 55% 45%, 98% 35%, 55% 55%, 79% 91%, 50% 60%, 21% 91%, 45% 55%, 2% 35%, 45% 45%)";
@@ -320,6 +325,7 @@ export class PistaJuegoComponent implements OnInit
         clipPathValue = "ellipse(10% 20% at 50% 25%)";
       break;
     }
+
     const foto = document.getElementById('fotoA');
     if(foto)
     {
@@ -327,7 +333,7 @@ export class PistaJuegoComponent implements OnInit
     }
   }
       
-  //funciones de las pistas
+  /* ----------- Funciones de las pistas -----------*/
 
   // maneja los botones de las pistas de texto
   handlePistaButtonClick(buttonText: string): void
@@ -338,11 +344,6 @@ export class PistaJuegoComponent implements OnInit
         this.consola=true;
         this.mostrarPista('VP1',valores.consola);
         break;
-     
-/*       case 'creadores':
-        this.mostrarPista('VP2',valores.creadores);
-        break;
-       */
       case 'fecha':
         this.fecha=true;
         this.mostrarPista('VP3',valores.fecha);
@@ -380,7 +381,7 @@ export class PistaJuegoComponent implements OnInit
     const foto = document.getElementById('fotoA');
     if(foto)
     {
-      foto.style.clipPath = 'none';
+      foto.style.clipPath = "none";
     }
     this.imgP=true;
     this.restarPuntos(valores.imgP);
@@ -429,19 +430,35 @@ export class PistaJuegoComponent implements OnInit
       }
     }
   }
+
   //suma usos de pistas
-  usoPista(){
+  usoPista()
+  {
     this.pistaUsos=this.pistaUsos+1;
   }
 
+  memeRespuesta(resp:boolean)
+  {
+    const foto = document.getElementById('fotoA');
+    if(foto)
+    {
+      foto.style.clipPath = "none";
+    }
+
+    if(resp==false){
+      this.src="assets/DicaprioIncorrectaGIF.gif"
+    }else{
+      this.src="assets/DicaprioCorrectaGIF.gif";
+    }
+  }
+  
   // recibindo datos desde componente temporizador y actualiza los puntos totales en el servidor
   async recibindoDatosDesdeTemporizador(mensaje: string)
   {
     this.puntaje= this.puntaje + Number(mensaje) * valores.tiempoSobrante;
-    this.cartelFinal = true;
-    await this.usuariosService.actualizarPartidasJugaas();
+    await this.usuariosService.actualizarPartidasJugadas();
     await this.usuariosService.actualizarPuntos(this.puntaje);
-    
+    this.cartelFinal = true;
   }
 
 }
