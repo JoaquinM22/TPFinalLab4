@@ -284,22 +284,23 @@ export class PistaJuegoComponent implements OnInit
   //funciones de imagen
   generarValoresAleatoriosImagen()
   {
-    var clipPathValue=""
-    switch(Math.floor(Math.random()*11)){
+    var clipPathValue="";
+    let numRand = Math.floor(Math.random()*11);
+    switch(numRand){
       case 0 :
         clipPathValue = "polygon(100% 0, 90% 0, 100% 100%, 100% 10%, 0 100%, 10% 100%, 0 0, 0 90%)";
       break;
       case 1 :
-        clipPathValue = "polygon(0 35%, 90% 0, 0 100%, 100% 65%, 10% 100%, 100% 0);";
+        clipPathValue = "polygon(0 35%, 90% 0, 0 100%, 100% 65%, 10% 100%, 100% 0)";
       break;
       case 2 :
-        clipPathValue = "circle(20.0% at 21% 21%);";
+        clipPathValue = "circle(20.0% at 21% 21%)";
       break;
       case 3 :
         clipPathValue = "polygon(5% 0, 0 5%, 45% 50%, 0 95%, 5% 100%, 50% 55%, 95% 100%, 100% 95%, 55% 50%, 100% 5%, 95% 0, 50% 45%)";
       break;
       case 4 :
-        clipPathValue = "polygon(50% 85%, 100% 0, 50% 100%, 0 0);";
+        clipPathValue = "polygon(50% 85%, 100% 0, 50% 100%, 0 0)";
       break;
       case 5 :
         clipPathValue = "polygon(50% 0%, 55% 45%, 98% 35%, 55% 55%, 79% 91%, 50% 60%, 21% 91%, 45% 55%, 2% 35%, 45% 45%)";
@@ -438,10 +439,9 @@ export class PistaJuegoComponent implements OnInit
   async recibindoDatosDesdeTemporizador(mensaje: string)
   {
     this.puntaje= this.puntaje + Number(mensaje) * valores.tiempoSobrante;
-    this.cartelFinal = true;
     await this.usuariosService.actualizarPartidasJugaas();
     await this.usuariosService.actualizarPuntos(this.puntaje);
-    
+    this.cartelFinal = true;
   }
 
 }
