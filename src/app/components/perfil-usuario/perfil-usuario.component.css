@@ -10,7 +10,7 @@
 
 .subtitulo
 {
-    /* text-align:left; */
+    
 
     color: greenyellow;
 
@@ -22,7 +22,7 @@
 
 .texto
 {
-    /* text-align:left; */
+    
 
     color: greenyellow;
 
@@ -33,8 +33,8 @@
 
 .subtitulo, .texto
 {
-    display: inline; /* También puedes usar "inline-block" según tus necesidades */
-    margin-right: 10px; /* Esto agrega un espacio entre las etiquetas si es necesario */
+    display: inline; 
+    margin-right: 10px; 
 }
 
 .contenedorUser

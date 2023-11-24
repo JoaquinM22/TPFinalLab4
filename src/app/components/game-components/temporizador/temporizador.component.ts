@@ -1,14 +1,19 @@
 import { Component,Input,Output,EventEmitter, OnInit } from '@angular/core';
 
-enum valores{
+//Le asigno el timepo que quiero que tenga el temporizador
+enum valores
+{
   minutos = 2,
   segundos = 30
 }
-@Component({
+
+@Component
+({
   selector: 'app-temporizador',
   templateUrl: './temporizador.component.html',
   styleUrls: ['./temporizador.component.css']
 })
+
 export class TemporizadorComponent
 {
   
@@ -27,13 +32,13 @@ export class TemporizadorComponent
     this.mensajeEnviado.emit(mensaje);
   }
 
-  // Crea una función que inicializa el temporizador
+  // Función que inicializa el temporizador
   iniciarTemporizador(minutos: number, segundos: number)
   {
-    // Asigna los minutos y los segundos al temporizador
+    // Asigna los minutos y los segundos
     let tiempoTotal = minutos * 60000 + segundos * 1000;
 
-    // Crea una función que se ejecutará cada segundo
+    // Esta función se ejecutará cada segundo
     const actualizarTemporizador = () =>
     {
 
@@ -48,14 +53,10 @@ export class TemporizadorComponent
       this.minutosString = minutos < 10 ? '0' + minutos : minutos.toString();
       this.segundosString = segundos < 10 ? '0' + segundos : segundos.toString();
 
-      // Actualiza el elemento DOM
-      //console.log(this.minutosString + ":" + this.segundosString);
-
       // Si el tiempo es 0, detiene el temporizador
       if((minutos === 0 && segundos === 0) || !this.terminar)
       {
-        this.enviarDatos(String(Number(this.minutosString)*60+Number(this.segundosString)))
-        console.log("Ya termino el Temporizador");
+        this.enviarDatos(String(Number(this.minutosString)*60+Number(this.segundosString)));
         clearInterval(intervalId);
       }
     }

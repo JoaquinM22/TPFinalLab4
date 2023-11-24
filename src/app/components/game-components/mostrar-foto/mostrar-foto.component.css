@@ -1,12 +1,12 @@
-#iniciar{
+#iniciar
+{
     text-align: center;
 }
-.contenedorJuego{
+
+.contenedorJuego
+{
     height: 850px;
     width: 1120px;
-    /* background-image: url(src\assets\Recuadro.jpg);
-    background-repeat: no-repeat;
-    background-size: cover; */
     margin: 0% 20%; 
 }
 
@@ -25,12 +25,6 @@
   
 .cartel
 {
-    /*
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    */
     background-color: #0073ff;
     color: white;
 
@@ -48,24 +42,6 @@
     box-shadow: 10px 10px 5px black;
     margin: 10px auto;
 }
-/*
-.boton
-{
-    width: 100px;
-    height: 15px;
-
-    margin: 10px;
-    padding: 15px;
-
-    border: 5px solid rgb(115, 165, 0);
-    border-radius: 15px;
-
-    background-color: greenyellow;
-    color: black;
-
-    text-align: center;
-    text-decoration: none;
-}*/
 
 .botonOpciones
 {
@@ -85,8 +61,9 @@
     box-shadow: 10px 10px 5px black;
     margin: auto;  
 
-    width: 250px;
+    width: 400px;
     height: 75px;
+    text-align: center;
 }
 
 .botonOpciones:hover
@@ -95,34 +72,3 @@
     background-color: rgba(51, 0, 255, 0.784);
 } 
 
-.botonNuevo
-{
-    color: black;
-    background-color: rgba(172, 255, 47, 0.784);
-
-    font-size: 25px;
-    font-weight: bold;
-    font-family: Arial;
-    text-decoration: none;
-
-    border: 5px solid;
-    border-radius: 20px;
-    border-color: rgba(51, 255, 0, 0.709);
-
-    padding: 15px 35px;
-    box-shadow: 10px 10px 5px black;
-    margin: 10px auto;  
-
-    width: 250px;
-    height: 75px;
-}
-
-.botonNuevo:hover
-{
-    color: #ffffff;
-    background-color: rgba(51, 0, 255, 0.784);
-
-    font-size: 35px;
-    width: 300px;
-    height: 115px;
-} 
