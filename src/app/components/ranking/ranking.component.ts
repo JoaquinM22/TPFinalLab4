@@ -30,7 +30,7 @@ export class RankingComponent implements OnInit
         fila.style.border = '1px solid rgb(178, 253, 64)';
 
         const usuario = document.createElement("td");
-        usuario.className="cuadro";
+        usuario.style.border = '1px solid rgb(178, 253, 64)';
         usuario.textContent = datos.usuario;
         fila.appendChild(usuario);
 
@@ -47,7 +47,7 @@ export class RankingComponent implements OnInit
         const promedio = document.createElement("td");
         promedio.style.border = '1px solid rgb(178, 253, 64)';
         if(datos.partidas){
-          promedio.textContent =  String(datos.puntos/datos.partidas);
+          promedio.textContent =  String(Math.round(datos.puntos/datos.partidas));
         }else{
           promedio.textContent =  String(0);
         }
