@@ -14,6 +14,7 @@ import { RankingComponent } from './components/ranking/ranking.component';
 import { LoadingComponent } from './components/pantallas/loading/loading.component';
 import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuario.component';
 import { HistorialComponent } from './components/historial/historial.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule
 ({
@@ -28,7 +29,8 @@ import { HistorialComponent } from './components/historial/historial.component';
     RankingComponent,
     LoadingComponent,
     PerfilUsuarioComponent,
-    HistorialComponent
+    HistorialComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

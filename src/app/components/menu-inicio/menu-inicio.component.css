@@ -69,13 +69,3 @@
     height: 450px;
 }
 
-.miFooter
-{
-    color: greenyellow; 
-    font-family: Arial;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0px;
-    width: 100%;
-}
