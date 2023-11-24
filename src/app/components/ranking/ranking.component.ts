@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from '../../servicios/usuarios.service';
 import { Usuario } from '../../interfaces/usuario';
+import { usuarioRanking } from 'src/app/interfaces/usuarioRanking';
 
 @Component({
   selector: 'app-ranking',
@@ -11,7 +12,7 @@ export class RankingComponent implements OnInit
 {
   constructor(private usuariosService: UsuariosService) {}
 
-  listaUsuarios: Usuario[] |undefined = [];
+  listaUsuarios: usuarioRanking[] | undefined = [];
 
   ngOnInit(): void {
     this.mostrarRanking();
@@ -20,7 +21,7 @@ export class RankingComponent implements OnInit
   async mostrarRanking()
   {
     const tabla = document.getElementById("cuerpo");
-    this.listaUsuarios = await this.usuariosService.getUsuarios();
+    this.listaUsuarios = await this.ordenarParaRanking();
     if(this.listaUsuarios)
     {
       for(const datos of this.listaUsuarios)
@@ -30,12 +31,12 @@ export class RankingComponent implements OnInit
 
         const usuario = document.createElement("td");
         usuario.style.border = '1px solid rgb(178, 253, 64)';
-        usuario.textContent = datos.usuario;
+        usuario.textContent = datos.nombre;
         fila.appendChild(usuario);
 
         const puntaje = document.createElement("td");
         puntaje.style.border = '1px solid rgb(178, 253, 64)';
-        puntaje.textContent =  String(datos.puntos);
+        puntaje.textContent =  String(datos.puntaje);
         fila.appendChild(puntaje);
 
         const partidas = document.createElement("td");
@@ -46,7 +47,7 @@ export class RankingComponent implements OnInit
         const promedio = document.createElement("td");
         promedio.style.border = '1px solid rgb(178, 253, 64)';
         if(datos.partidas){
-          promedio.textContent =  String(Math.round(datos.puntos/datos.partidas));
+          promedio.textContent =  String(datos.promedio);
         }else{
           promedio.textContent =  String(0);
         }
@@ -59,4 +60,43 @@ export class RankingComponent implements OnInit
       }
     }
   }
+
+  async ordenarParaRanking()
+  {
+    let dato: usuarioRanking = {
+      nombre: "",
+      puntaje: 0,
+      partidas: 0,
+      promedio: 0
+    }
+
+    let arreglo: usuarioRanking[] = [];
+
+    const usuarios = await this.usuariosService.getUsuarios();
+
+    if(usuarios)
+    {
+      for(let elemento of usuarios)
+      {
+        let prom: number = 0;
+        if(elemento.partidas)
+        {
+          prom = (Math.round(elemento.puntos / elemento.partidas))
+        }
+        let nuevo: usuarioRanking = {
+          nombre: elemento.usuario, 
+          puntaje: elemento.puntos, 
+          partidas: elemento.partidas, 
+          promedio: prom
+        }
+
+        arreglo.push(nuevo);
+      }
+
+      arreglo.sort((a, b) => b.promedio - a.promedio);
+    }
+
+    return arreglo;
+  }
+
 }
