@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { JuegoInt } from '../../../interfaces/juegoInt';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
-import { Partida } from 'src/app/interfaces/partida';
-import { timeout } from 'rxjs';
 
 enum valores
 {
@@ -119,7 +117,9 @@ export class PistaJuegoComponent implements OnInit
     }
 
     this.memeRespuesta(resp);
+    this.desabilitarYhablitarAllBoton(true);
     setTimeout(() => {
+      this.desabilitarYhablitarAllBoton(false);
       if(this.juegos.length > 1)
         {
           this.juegos.splice(this.contJuego,1);
@@ -127,7 +127,7 @@ export class PistaJuegoComponent implements OnInit
         }else{
           this.terminar = false;
         }
-    }, 2000);
+    }, 1500);
   }
   
   // recorre el arreglo
@@ -189,6 +189,14 @@ export class PistaJuegoComponent implements OnInit
     this.chequeoCosto(); 
   }
 
+  desabilitarYhablitarAllBoton(estado:boolean){
+    const elementos = document.querySelectorAll('.bloquear');
+    elementos.forEach((elemento) =>
+    {
+      (elemento as HTMLButtonElement).disabled = estado;
+    });
+  }
+  
   desabilitarYhablitarBoton(boton:string,estado:boolean)
   {
     const miBoton = document.getElementById(boton) as HTMLButtonElement;
@@ -460,5 +468,7 @@ export class PistaJuegoComponent implements OnInit
     await this.usuariosService.actualizarPuntos(this.puntaje);
     this.cartelFinal = true;
   }
+
+
 
 }
