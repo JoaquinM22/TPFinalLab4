@@ -37,6 +37,8 @@ export class PistaJuegoComponent implements OnInit
   //carga los puntos del usuario en sesion
   puntaje: number = this.usuariosService.obtenerDatos().puntos;
 
+  puntosExtra: number = 0;
+
   //controlador de inicio y fin
   empezar: boolean = false;
   //controlador de inicio, fin y advertencia
@@ -453,9 +455,17 @@ export class PistaJuegoComponent implements OnInit
       foto.style.clipPath = "none";
     }
 
-    if(resp==false){
-      this.src="assets/DicaprioIncorrectaGIF.gif"
-    }else{
+    if(resp==false)
+    {
+      if(this.puntaje<25)
+      {
+        this.src="assets/DiCaprioIncorrectaSinPuntos.gif"
+      }else
+      {
+        this.src="assets/DicaprioIncorrectaGIF.gif"
+      }
+    }else
+    {
       this.src="assets/DicaprioCorrectaGIF.gif";
     }
   }
@@ -463,7 +473,9 @@ export class PistaJuegoComponent implements OnInit
   // recibindo datos desde componente temporizador y actualiza los puntos totales en el servidor
   async recibindoDatosDesdeTemporizador(mensaje: string)
   {
-    this.puntaje= this.puntaje + Number(mensaje) * valores.tiempoSobrante;
+    this.puntosExtra = Number(mensaje) * valores.tiempoSobrante;
+    this.puntaje= this.puntaje + this.puntosExtra;
+    //this.puntaje= this.puntaje + Number(mensaje) * valores.tiempoSobrante;
     await this.usuariosService.actualizarPartidasJugadas();
     await this.usuariosService.actualizarPuntos(this.puntaje);
     this.cartelFinal = true;

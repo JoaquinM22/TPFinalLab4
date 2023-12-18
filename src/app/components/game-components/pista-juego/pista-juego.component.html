@@ -1,7 +1,7 @@
 <div *ngIf="cartelInicio" class="cartelContenedor">
     <div class="cartel">
       <h2>Bienvenido</h2>
-      <p>Presiona "Empezar" para iniciar el temporizador</p>
+      <p>Presiona "Empezar" para iniciar la partida</p>
       <button class="botonEmpezar" (click)="iniciarPartida()">Empezar</button>
     </div>
 </div>
@@ -60,7 +60,8 @@
 
 <div *ngIf="cartelFinal" class="cartelContenedor">
     <div class="cartel">
-      <h2>Felicidades tus puntos son : {{puntaje}}</h2>
+      <h2>Felicidades tus puntos son: {{puntaje}}</h2>
+      <p>Puntos extra por tiempo: +{{puntosExtra}}</p>
       <p>Presiona "Volver" para volver al menu principal</p>
       <p>Presiona "Jugar otra" para empezar otra partida</p>
       <button class="botonEmpezar" (click)="finalizarPartida()">Volver</button>
