@@ -16,13 +16,17 @@
 {
     width: 400px;
     height: 340px;
-    background: #4e4d4d;
+    font-weight: bold;
+    /*background: #4e4d4d;*/
+    background: rgb(143, 232, 10);
     margin: auto;
     margin-top: 180px;
     box-shadow: 7px 13px 37px #000;
-    border-top: 4px solid #017bab;
+    /*border-top: 4px solid #017bab;*/
+    border-top: 8px solid rgb(51, 0, 255);
     padding: 20px 30px;
-    color:white;
+    /*color:white;*/
+    color:black;
     font-family: arial;
 }
 
@@ -30,51 +34,70 @@
 {
     width: 400px;
     height: 380px;
-    background: #4e4d4d;
+    font-weight: bold;
+    /*background: #4e4d4d;*/
+    background: rgb(143, 232, 10);
     margin: auto;
     margin-top: 180px;
     box-shadow: 7px 13px 37px #000;
-    border-top: 4px solid #017bab;
+    /*border-top: 4px solid #017bab;*/
+    border-top: 8px solid rgb(51, 0, 255);
     padding: 20px 30px;
-    color:white;
+    /*color:white;*/
+    color:black;
     font-family: arial;
 }
 
 .form_login h3, .form_create h3
 {
     margin: 0;
+    font-weight: bold;
     text-align: center;
     height: 40px;
     margin-bottom: 30px;
     border-bottom: 1px solid;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 .control
 {
     width: 100%;
-    border: 1px solid #017bab;
+    /*border: 1px solid #017bab;*/
+    border: 1px solid rgb(51, 0, 255);
     margin-bottom: 15px;
     padding: 11px 10px;
     background: #252323;
     font-size: 14px;
     font-weight: bold;
-    color: white;
+    /*color: white;*/
+    color:black;
 }
 
 .botones
 {
     width: 100%;
     height: 40px;
-    background: #017bab;
-    border: none;
-    color: white;
+    /*background: #017bab;*/
+
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 15px;
+    background-color: rgb(172, 255, 47);
+    background: rgb(51, 0, 255);
+
+    
+    border-color: rgb(51, 255, 0);
+    /*border: none;*/
+
+    /*color: white;*/
     margin-bottom: 16px;
 }
 
 .botones:hover
 {
-    background: #017bab9a;
+    /*background: #017bab9a;*/
+    color: #ffffff;
+    background-color: rgb(86, 53, 220);
 }
 
 .form_login p, .form_create p
@@ -84,10 +107,24 @@
     border-bottom: 1px solid;
 }
 
-.form_login #txt_login
+.form_login, #txt_login
 {
     text-decoration: none;
-    font-size: 12px;
+    font-weight: bold;
+    font-size: 15px;
+    /*color: white;*/
+    color: black;
+}
+
+#Password, #Usuario, #UsuarioNuevo, #PasswordNuevo, #PasswordConfirm
+{
     color: white;
+}
+
+#txt_login
+{
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
 }
 

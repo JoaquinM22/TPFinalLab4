@@ -35,8 +35,8 @@ export class LoginUsuarioComponent implements OnInit
   initFormCreacion(): FormGroup 
   {
     return this.fb.group({
-      UsuarioNuevo: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-      PasswordNuevo: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]]
+      UsuarioNuevo: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
+      PasswordNuevo: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(25)]]
     })
   }
 
@@ -100,45 +100,124 @@ export class LoginUsuarioComponent implements OnInit
         const passCre = (<HTMLInputElement>document.getElementById("PasswordNuevo")).value;
         const confPassword = (<HTMLInputElement>document.getElementById("PasswordConfirm")).value;
 
+        if(nombreCre.length >= 3 && nombreCre.length <= 15)
+        {
+          if((passCre.length >= 3 && passCre.length <= 25) && (confPassword.length >= 3 && confPassword.length <= 25))
+          {
+            if(passCre !== confPassword)
+            {
+              let mensaje = document.getElementById("texto");
+              if(mensaje)
+              {
+                mensaje.innerHTML = "Los passwords no coinciden";
+              }
+            }else if(passCre === confPassword)
+            {
+              let validacion = await this.validarUsuario(nombreCre, passCre, 0);
+
+              if(validacion)
+              {
+                //Si el usuario ya existe crea un mensaje
+                var mensaje = document.getElementById("texto");
+                this.usuarioLogueado =
+                { 
+                  id: 0,
+                  usuario: "",
+                  password: "",
+                  puntos:0,
+                  partidas: 0
+                };
+
+                if(mensaje)
+                {
+                  mensaje.innerHTML = "Nombre de Usuario ya en uso";
+                }
+              }else
+              {
+                //Aca sube los datos al server
+                await this.cargarUsuario(nombreCre, passCre);
+
+                //NUEVO AL CREAR
+                this.usuariosService.guardarDatos(this.usuarioLogueado);
+                this.usuariosService.login = this.usuarioLogueado;
+                this.router.navigate(['/menu']);
+              }
+            }else
+            {
+              var mensaje = document.getElementById("texto");
+              if(mensaje)
+              {
+                mensaje.innerHTML = "ERROR";
+              }
+            }
+          }else
+          {
+            let mensaje = document.getElementById("texto");
+            if(mensaje)
+            {
+              mensaje.innerHTML = "Las password deben tener entre 3 y 25 caracteres";
+            }
+          }
+        }else
+        {
+          let mensaje = document.getElementById("texto");
+          if(mensaje)
+          {
+            mensaje.innerHTML = "Nombre de Usuario debe tener entre 3 y 15 caracteres";
+          }
+        }
+
         //Confirmacion de password
-        if(passCre !== confPassword)
+
+        /*
+        if(passCre !== confPassword) //No coinciden las password
         {
           var mensaje = document.getElementById("texto");
           if(mensaje)
           {
             mensaje.innerHTML = "Los passwords no coinciden";
           }
-        }else if(passCre === confPassword)
+        }else if(passCre === confPassword) //SI coinciden las password
         {
           //Crea el usuario y lo manda a la funcion que lo carga en el server
           var validacion = await this.validarUsuario(nombreCre, passCre, 0);
 
-          if(validacion)
+          if(passCre.length >= 8 && confPassword.length >= 8 && nombreCre.length >= 8) //Verifica que la password tenga 8 caracteres
           {
-            //Si el usuario ya existe crea un mensaje
-            var mensaje = document.getElementById("texto");
-            this.usuarioLogueado =
-            { 
-              id: 0,
-              usuario: "",
-              password: "",
-              puntos:0,
-              partidas: 0
-            };
-
-            if(mensaje)
+            if(validacion)
             {
-              mensaje.innerHTML = "Usuario ya existente";
+              //Si el usuario ya existe crea un mensaje
+              var mensaje = document.getElementById("texto");
+              this.usuarioLogueado =
+              { 
+                id: 0,
+                usuario: "",
+                password: "",
+                puntos:0,
+                partidas: 0
+              };
+
+              if(mensaje)
+              {
+                mensaje.innerHTML = "Nombre de Usuario ya en uso";
+              }
+            }else
+            {
+              //Aca sube los datos al server
+              await this.cargarUsuario(nombreCre, passCre);
+
+              //NUEVO AL CREAR
+              this.usuariosService.guardarDatos(this.usuarioLogueado);
+              this.usuariosService.login = this.usuarioLogueado;
+              this.router.navigate(['/menu']);
             }
           }else
           {
-            //Aca sube los datos al server
-            await this.cargarUsuario(nombreCre, passCre);
-
-            //NUEVO AL CREAR
-            this.usuariosService.guardarDatos(this.usuarioLogueado);
-            this.usuariosService.login = this.usuarioLogueado;
-            this.router.navigate(['/menu']);
+            let mensaje = document.getElementById("texto");
+            if(mensaje)
+            {
+              mensaje.innerHTML = "El password debe tener minimo 8 caracteres";
+            }
           }
         }else
         {
@@ -148,6 +227,7 @@ export class LoginUsuarioComponent implements OnInit
             mensaje.innerHTML = "ERROR";
           }
         }
+        */
 
       });
     }

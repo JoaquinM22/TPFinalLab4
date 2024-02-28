@@ -32,8 +32,8 @@
       "id": 5,
       "usuario": "Pepe",
       "password": "Messi",
-      "puntos": 16329,
-      "partidas": 61
+      "puntos": 18090,
+      "partidas": 70
     },
     {
       "id": 6,
@@ -717,6 +717,87 @@
       "pistaUsada": 2,
       "fechaPartida": "2023-12-18T19:01:56.027Z",
       "id": 71
+    },
+    {
+      "idUsuario": 5,
+      "puntos": 16558,
+      "incorrectas": 8,
+      "correctas": 2,
+      "pistaUsada": 0,
+      "fechaPartida": "2024-02-28T15:10:27.091Z",
+      "id": 72
+    },
+    {
+      "idUsuario": 5,
+      "puntos": 16323,
+      "incorrectas": 9,
+      "correctas": 1,
+      "pistaUsada": 10,
+      "fechaPartida": "2024-02-28T15:13:52.426Z",
+      "id": 73
+    },
+    {
+      "idUsuario": 5,
+      "puntos": 16462,
+      "incorrectas": 7,
+      "correctas": 3,
+      "pistaUsada": 10,
+      "fechaPartida": "2024-02-28T15:15:18.578Z",
+      "id": 74
+    },
+    {
+      "idUsuario": 5,
+      "puntos": 16938,
+      "incorrectas": 6,
+      "correctas": 4,
+      "pistaUsada": 5,
+      "fechaPartida": "2024-02-28T15:20:24.172Z",
+      "id": 75
+    },
+    {
+      "idUsuario": 5,
+      "puntos": 17168,
+      "incorrectas": 8,
+      "correctas": 2,
+      "pistaUsada": 0,
+      "fechaPartida": "2024-02-28T15:20:53.984Z",
+      "id": 76
+    },
+    {
+      "idUsuario": 5,
+      "puntos": 17892,
+      "incorrectas": 5,
+      "correctas": 5,
+      "pistaUsada": 1,
+      "fechaPartida": "2024-02-28T15:31:08.263Z",
+      "id": 77
+    },
+    {
+      "idUsuario": 5,
+      "puntos": 17849,
+      "incorrectas": 8,
+      "correctas": 2,
+      "pistaUsada": 14,
+      "fechaPartida": "2024-02-28T15:38:54.914Z",
+      "id": 78
+    },
+    {
+      "idUsuario": 5,
+      "puntos": 17758,
+      "incorrectas": 8,
+      "correctas": 2,
+      "pistaUsada": 11,
+      "fechaPartida": "2024-02-28T15:49:05.472Z",
+      "id": 79
+    },
+    {
+      "idUsuario": 5,
+      "puntos": 18090,
+      "incorrectas": 6,
+      "correctas": 4,
+      "pistaUsada": 12,
+      "fechaPartida": "2024-02-28T15:50:45.014Z",
+      "id": 80
     }
   ]
 }

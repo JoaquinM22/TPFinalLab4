@@ -15,15 +15,17 @@ export class LlamadaApiService {
     return new Promise((resolve, reject) =>
     {
       let arregloDeNombres: string[] = [];
-    
+
       let nombresURL;
-      if(genero == 'porDefecto')
+      switch(genero)
       {
-        nombresURL =
-      "https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page_size=40&page=" + i;
-      }else
-      {
-        nombresURL = "https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page_size=40&page=" + i + "&genres=" + genero;
+        case "porDefecto":
+          nombresURL = "https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page_size=40&page=" + i;
+        break;
+
+        default:
+          nombresURL = "https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page_size=40&page=" + i + "&genres=" + genero;
+        break;
       }
 
       fetch(nombresURL)
@@ -104,64 +106,75 @@ export class LlamadaApiService {
       const nuevosGeneros: string[] = [];
       for(const unGenero of juego.genres)
       {
-        if(unGenero.name == 'Action')
+        let nuevoGenero;
+        switch(unGenero.name)
         {
-          nuevosGeneros.push('Accion');
-        }else if(unGenero.name == 'Indie')
-        {
-          nuevosGeneros.push(unGenero.name);
-        }else if(unGenero.name == 'Adventure')
-        {
-          nuevosGeneros.push('Aventura');
-        }else if(unGenero.name == 'RPG')
-        {
-          nuevosGeneros.push(unGenero.name);
-        }else if(unGenero.name == 'Strategy')
-        {
-          nuevosGeneros.push('Estrategia');
-        }else if(unGenero.name == 'Shooter')
-        {
-          nuevosGeneros.push(unGenero.name);
-        }else if(unGenero.name == 'Casual')
-        {
-          nuevosGeneros.push(unGenero.name);
-        }else if(unGenero.name == 'Simulation')
-        {
-          nuevosGeneros.push('Simulacion');
-        }else if(unGenero.name == 'Puzzle')
-        {
-          nuevosGeneros.push(unGenero.name);
-        }else if(unGenero.name == 'Arcade')
-        {
-          nuevosGeneros.push(unGenero.name);
-        }else if(unGenero.name == 'Platformer')
-        {
-          nuevosGeneros.push('Plataformas');
-        }else if(unGenero.name == 'Massively Multiplayer')
-        {
-          nuevosGeneros.push('Multijugador masivo');
-        }else if(unGenero.name == 'Racing')
-        {
-          nuevosGeneros.push('Carreras');
-        }else if(unGenero.name == 'Sports')
-        {
-          nuevosGeneros.push('Deportes');
-        }else if(unGenero.name == 'Fighting')
-        {
-          nuevosGeneros.push('Lucha');
-        }else if(unGenero.name == 'Family')
-        {
-          nuevosGeneros.push('Familiar');
-        }else if(unGenero.name == 'Board Games')
-        {
-          nuevosGeneros.push('Juegos de Mesa');
-        }else if(unGenero.name == 'Educational')
-        {
-          nuevosGeneros.push('Educativos');
-        }else if(unGenero.name == 'Card')
-        {
-          nuevosGeneros.push('De Cartas');
+          case 'Action':
+            nuevoGenero = 'Accion';
+          break;
+
+          case 'Indie':
+          case 'RPG':
+          case 'Shooter':
+          case 'Casual':
+          case 'Puzzle':
+          case 'Arcade':
+            nuevoGenero = unGenero.name;
+          break;
+
+          case 'Adventure':
+            nuevoGenero = 'Aventura';
+          break;
+
+          case 'Strategy':
+            nuevoGenero = 'Estrategia';
+          break;
+
+          case 'Simulation':
+            nuevoGenero = 'Simulacion';
+          break;
+
+          case 'Platformer':
+            nuevoGenero = 'Plataformas';
+          break;
+
+          case 'Massively Multiplayer':
+            nuevoGenero = 'Multijugador masivo';
+          break;
+
+          case 'Racing':
+            nuevoGenero = 'Carreras';
+          break;
+
+          case 'Sports':
+            nuevoGenero = 'Deportes';
+          break;
+
+          case 'Fighting':
+            nuevoGenero = 'Lucha';
+          break;
+
+          case 'Family':
+            nuevoGenero = 'Familiar';
+          break;
+
+          case 'Board Games':
+            nuevoGenero = 'Juegos de Mesa';
+          break;
+
+          case 'Educational':
+            nuevoGenero = 'Educativos';
+          break;
+
+          case 'Card':
+            nuevoGenero = 'De Cartas';
+          break;
+
+          default:
+            nuevoGenero = unGenero.name;
+          break;
         }
+        nuevosGeneros.push(nuevoGenero);
       }
 
       //Carga las plataformas del juego, evita cargar plataformas repetidas
@@ -227,19 +240,21 @@ export class LlamadaApiService {
   {
     return new Promise((resolve, reject) =>
     {
-      // Primero, espera a que se carguen los nombres
+      //Primero, espera a que se carguen los nombres
       this.getNombresJuegosAPI(i, genero)
       .then(() =>
       {
-        // Ahora que los nombres están disponibles, carga los juegos
+        //Ahora que los nombres están disponibles, carga los juegos
         let API_Juegos;
-        if(genero == 'porDefecto')
+        switch (genero)
         {
-          API_Juegos =
-        "https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page_size=10&page=" + i;
-        }else
-        {
-          API_Juegos = "https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page_size=10&page=" + i + "&genres=" + genero;
+          case 'porDefecto':
+            API_Juegos = "https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page_size=10&page=" + i;
+          break;
+
+          default:
+            API_Juegos = "https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page_size=10&page=" + i + "&genres=" + genero;
+          break;
         }
         
         fetch(API_Juegos)
@@ -248,7 +263,7 @@ export class LlamadaApiService {
         {
           let arregloDeJuegos: any[] = [];
           arregloDeJuegos = this.cargarArregloJuegos(data);
-          // Resuelve la promesa con el arreglo de juegos cargados
+          //Resuelve la promesa con el arreglo de juegos cargados
           resolve(arregloDeJuegos);
         })
         .catch(error =>
@@ -271,18 +286,22 @@ export class LlamadaApiService {
     try
     {
       let numeroRandom: number;
-      if(dificultad == 'modoNormal')
+      switch(dificultad)
       {
-        numeroRandom = Math.floor(Math.random() * 25) + 1;
-      }else if(dificultad == 'modoMedio')
-      {
-        numeroRandom = Math.floor(Math.random() * 50) + 1;
-      }else
-      {
-        numeroRandom = Math.floor(Math.random() * 200) + 1;
+        case 'modoNormal':
+          numeroRandom = Math.floor(Math.random() * 25) + 1;
+        break;
+
+        case 'modoMedio':
+          numeroRandom = Math.floor(Math.random() * 50) + 1;
+        break;
+
+        default:
+          numeroRandom = Math.floor(Math.random() * 200) + 1;
+        break;
       }
 
-      // Obtiene los juegos
+      //Obtiene los juegos
       this.datosJuegos = await this.getJuegosAPI(numeroRandom, genero); 
       
     }catch(error)

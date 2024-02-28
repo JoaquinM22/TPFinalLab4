@@ -12,53 +12,27 @@ import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
 export class HistorialComponent
 {
+
+  tipoOrden: string = 'descendente';
+
   constructor(private usuariosService: UsuariosService){}
 
-  ngOnInit(): void {
-   this.mostrarHistorial();
+  ngOnInit(): void
+  {
+    this.mostrarPorOrdenElegido();
   }
 
   listaPartidas: Partida[] | undefined = [] ;
 
-  async mostrarHistorial()
+  insertarDatosPartidas()
   {
-    /* const fechita = new Date();
-    console.log('Fecha entera: ', fechita);
-
-    // Extraer día
-    const dia = fechita.getDate();
-    const diaString = String(dia);
-    console.log('Dia: ', diaString);
-
-    // Extraer mes (ten en cuenta que los meses comienzan desde 0, por lo que debes sumar 1)
-    const mes = fechita.getMonth() + 1;
-    const mesString = String(mes);
-    console.log('Mes: ', mesString);
-
-    // Extraer año
-    const anio = fechita.getFullYear();
-    const anioString = String(anio);
-    console.log('Anio: ', anioString);
-
-    // Extraer hora
-    const hora = fechita.getHours();
-    const horaString = String(hora);
-    console.log('Hora: ', horaString);
-
-    // Extraer minuto
-    const minuto = fechita.getMinutes();
-    const minutoString = String(minuto);
-    console.log('Minuto: ', minutoString);
-
-    // Extraer segundo
-    const segundo = fechita.getSeconds();
-    const segundoString = String(segundo);
-    console.log('Segundo: ', segundoString); */
-    
-
     const tabla = document.getElementById("cuerpo");
-    this.listaPartidas = await this.usuariosService.getPartidaUsuario();
     var puntAnterior: number=0;
+    if(tabla)
+    {
+      tabla.innerHTML = "";
+    }
+
     if(this.listaPartidas)
     {
       if(tabla)
@@ -128,5 +102,34 @@ export class HistorialComponent
         });
       }
     }
+  }
+
+  async mostrarPorOrdenElegido()
+  {
+    // console.log("Ordenado Ascendente: ", this.listaPartidas);
+    // this.listaPartidas = await this.usuariosService.getPartidaUsuario();
+    // this.listaPartidas?.reverse();
+    // console.log("Orden descendente: ", this.listaPartidas);
+
+
+    switch(this.tipoOrden)
+    {
+      case 'descendente':
+        this.listaPartidas = await this.usuariosService.getPartidaUsuario();
+        this.listaPartidas?.reverse();
+        this.insertarDatosPartidas();
+      break;
+
+      case 'ascendente':
+        this.listaPartidas = await this.usuariosService.getPartidaUsuario();
+        this.insertarDatosPartidas();
+      break;
+
+      default:
+        console.log("Error en mostrarPorOrdenElegido()")
+      break;
+    }
+
+    
   }
 }
