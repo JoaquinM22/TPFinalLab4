@@ -2,6 +2,7 @@
     <div *ngIf="cartelInicio" class="cartelContenedor">
         <div class="cartel">
           <h2>Bienvenido</h2>
+          <p>Elige la dificultad y el género de los juegos</p>
           <p>Presiona "Empezar" para continuar</p>
           <p>Presiona "Cancelar" para salir</p>
           <select class="botonOpciones" [(ngModel)]="modoSeleccionado" id="modoJuego" name="opcionJuego">
@@ -32,7 +33,7 @@
               <option value="card">De Cartas</option>
           </select>
           <br>
-          <button class="botonOpciones" (click)="crearPartida()">Empezar</button>
+          <button class="botonOpciones" (click)="traerDatosApi()">Empezar</button>
           <button class="botonOpciones" (click)="enviarDatos('false')">Cancelar</button>
         </div>
     </div>
