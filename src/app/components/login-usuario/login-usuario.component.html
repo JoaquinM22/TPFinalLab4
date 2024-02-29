@@ -2,7 +2,9 @@
 <h1 class="page_title">INICIO DE SESION</h1>
 
 <section class="formularios">
-    <section class="formulario">
+
+
+    <section *ngIf="iniciarSesionCuenta" class="formulario">
         <form action="" class="form_login" [formGroup]="login">
             <h3>Iniciar Sesión</h3>
             
@@ -19,9 +21,10 @@
             <p id="txt_login"></p>
         </form>
     </section>
+
     
     
-    <section class="formulario">
+    <section *ngIf="crearCuentaSesion" class="formulario">
         <form action="" class="form_create" [formGroup]="creacion">
             <h3>Crear Cuenta</h3>
 
@@ -42,6 +45,19 @@
             <p id="texto"></p>
         </form>
     </section>
+
+
 </section>
+
+<section *ngIf="noTienesCuenta">
+    <p class="texto">¿No tienes cuenta? Crea una!</p>
+    <button id="botonDeCrearCuenta" (click)="cambiarDeModoInicio()">Crear Cuenta</button>
+</section>
+
+<section *ngIf="volverAIniciar">
+    <p class="texto">¿Ya Tienes Cuenta? Inicia Sesion</p>
+    <button id="botonDeIniciarSesion" (click)="cambiarDeModoInicio()">Iniciar Sesion</button>
+</section>
+
 <br>
 <app-footer></app-footer>

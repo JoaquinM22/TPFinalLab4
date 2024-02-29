@@ -7,9 +7,15 @@
 
 .formularios
 {
-    display: grid;
+    /* display: flex;
     grid-template-columns: auto auto;
-    grid-template-rows: auto;
+    grid-template-rows: auto; */
+    display: flex;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
 }
 
 
@@ -30,6 +36,8 @@
     /*color:white;*/
     color:white;
     font-family: arial;
+
+    
 }
 
 .form_create
@@ -48,6 +56,8 @@
     /*color:white;*/
     color:white;
     font-family: arial;
+
+    
 }
 
 .form_login h3, .form_create h3
@@ -130,3 +140,55 @@
     color: white;
 }
 
+.texto
+{
+    width: 1000px;
+    height: 75px;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 16px;
+
+    display: flex;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+#botonDeCrearCuenta, #botonDeIniciarSesion
+{
+    color: white;
+    background-color: rgb(51, 0, 255);
+
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Arial;
+    text-decoration: none;
+
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: white;
+
+    padding: 15px 35px;
+    box-shadow: 10px 10px 5px black;
+    display: flex;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto;
+    margin: auto;
+    justify-content: center;
+    align-items: center; 
+
+    width: 230px;
+    height: 55px;
+
+}
+
+#botonDeCrearCuenta:hover, #botonDeIniciarSesion:hover
+{
+    color: #ffffff;
+    background-color: rgba(168, 4, 227, 0.784);
+    border-color: #ffffff;
+}

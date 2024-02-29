@@ -14,6 +14,12 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 export class LoginUsuarioComponent implements OnInit
 {
 
+  iniciarSesionCuenta: boolean = true;
+  noTienesCuenta: boolean = true;
+
+  crearCuentaSesion: boolean = false;
+  volverAIniciar: boolean = false;
+
   login!: FormGroup; 
   creacion!: FormGroup;
   
@@ -22,6 +28,24 @@ export class LoginUsuarioComponent implements OnInit
 
   }
 
+  cambiarDeModoInicio()
+  {
+    if(this.iniciarSesionCuenta)
+    {
+      this.iniciarSesionCuenta = false;
+      this.noTienesCuenta = false;
+
+      this.crearCuentaSesion = true;
+      this.volverAIniciar = true;
+    }else
+    {
+      this.iniciarSesionCuenta = true;
+      this.noTienesCuenta = true;
+
+      this.crearCuentaSesion = false;
+      this.volverAIniciar = false;
+    }
+  }
   
   initFormLogin(): FormGroup 
   {
@@ -331,6 +355,8 @@ export class LoginUsuarioComponent implements OnInit
     await this.creacion_Usuario();
     this.login = this.initFormLogin();
     this.creacion = this.initFormCreacion();
+
+  
   }
   
 }
