@@ -76,8 +76,6 @@ export class LoginUsuarioComponent implements OnInit
   //Funcion de guardar los datos de usuario
   async logueo_Usuario()
   {
-    console.log("Entre al click");
-
     const usuarioL = (<HTMLInputElement>document.getElementById("Usuario")).value;
     const pass = (<HTMLInputElement>document.getElementById("Password")).value;
 

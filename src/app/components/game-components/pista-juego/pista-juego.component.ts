@@ -147,6 +147,17 @@ export class PistaJuegoComponent implements OnInit
   // manejo de respuestas
   async handleOptionButtonClick(optionText: string): Promise<void>
   { 
+    //console.log("Ult pos: ", this.juegos[9]);
+    if(this.contBloqueoPistaSaltar === 9) 
+    {
+      const boton = document.getElementById("jump");
+      if(boton)
+      {
+        (boton as HTMLButtonElement).disabled = true;
+        boton.style.background = 'red';
+      }
+    }
+
     let resp:boolean;
     this.reset();
     if(optionText == this.juegos[this.contJuego].nombre)
@@ -160,15 +171,27 @@ export class PistaJuegoComponent implements OnInit
       this.restarPuntos(valores.fallo);
       resp=false;
     }
-    console.log("contadorJiren: ", this.contBloqueoPistaSaltar);
     this.memeRespuesta(resp);
-    this.desabilitarYhablitarAllBoton(true); 
+    this.contBloqueoPistaSaltar++;
+    console.log("Contador: ", this.contBloqueoPistaSaltar);
 
+    if(this.contBloqueoPistaSaltar === 10) 
+    {
+      const boton = document.getElementById("jump");
+      if(boton)
+      {
+        (boton as HTMLButtonElement).disabled = true;
+        boton.style.background = 'rgba(172, 255, 47, 0.784)';
+      }
+    }
+
+    this.desabilitarYhablitarAllBoton(true);  
+  
     await new Promise<void>((resolve) => setTimeout(() =>
     {
-      if(this.contBloqueoPistaSaltar == 9)
+      
+      if(this.contBloqueoPistaSaltar === 10)
       {
-        console.log("Se termino la partida"); 
         this.terminar = false;
       }else
       {
@@ -176,26 +199,6 @@ export class PistaJuegoComponent implements OnInit
         this.juegos.splice(this.contJuego, 1);
         this.moverPorArreglo();
       } 
-
-      /* this.desabilitarYhablitarAllBoton(false);
-      if(this.juegos.length > 1)
-      {
-        this.juegos.splice(this.contJuego, 1);
-        if(this.juegos.length === 1)
-        {
-          const boton = document.getElementById("jump");
-          if(boton)
-          {
-            (boton as HTMLButtonElement).disabled = true;
-            boton.style.background = 'red';
-          }
-        }
-        this.moverPorArreglo();
-      }else if(this.juegos.length === 0)
-      {
-        console.log("Se termino la partida"); 
-        this.terminar = false;
-      } */
 
       resolve(); // Resolve la promesa para continuar la ejecución
 
@@ -206,21 +209,6 @@ export class PistaJuegoComponent implements OnInit
   // recorre el arreglo
   moverPorArreglo()
   {
-    console.log("juegos:", this.juegos.length);
-    this.contBloqueoPistaSaltar++;
-    
-    console.log("contJuegos: ", this.contJuego);
-
-    /* if(this.contBloqueoPistaSaltar == 9)
-    {
-      let boton = document.getElementById("jump");
-      if(boton)
-      {
-        (boton as HTMLButtonElement).disabled = true;
-        boton.style.background ='red';
-      }
-    } */
-
     if(this.contJuego>=this.juegos.length-1)
     {
       this.contJuego=0;
@@ -284,6 +272,17 @@ export class PistaJuegoComponent implements OnInit
     {
       (elemento as HTMLButtonElement).disabled = estado;
     });
+
+    if(this.contBloqueoPistaSaltar === 9) 
+    {
+      const boton = document.getElementById("jump");
+      if(boton)
+      {
+        (boton as HTMLButtonElement).disabled = true;
+        boton.style.background = 'red';
+        
+      }
+    }
   }
   
   desabilitarYhablitarBoton(boton:string,estado:boolean)
@@ -341,7 +340,18 @@ export class PistaJuegoComponent implements OnInit
           }
           break;
         case 'jump':
-          if(this.puntaje < valores.jump){
+
+          if(this.contBloqueoPistaSaltar === 9)
+          {
+            let boton = document.getElementById("jump");
+            if(boton)
+            {
+              (boton as HTMLButtonElement).disabled = true;
+              boton.style.background = 'red';
+            }
+
+          }else if(this.puntaje < valores.jump)
+          {
 
             this.desabilitarYhablitarBoton(elemento.id,true);
           }
@@ -543,7 +553,6 @@ export class PistaJuegoComponent implements OnInit
 
   saltarFoto()
   {
-    this.contBloqueoPistaSaltar--;
     if(this.verificarPistas('.pista') && this.puntaje>=5)
     {
       this.pausaTemporizadorAux();
@@ -551,6 +560,7 @@ export class PistaJuegoComponent implements OnInit
     }
     else
     {
+      
       this.moverPorArreglo();
       this.generarValoresAleatoriosImagen();
       this.restarPuntos(valores.jump);

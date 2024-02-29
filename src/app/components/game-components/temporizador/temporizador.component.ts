@@ -76,7 +76,6 @@ export class TemporizadorComponent
         clearInterval(this.intervalId);
         this.tiempoActual = 0;
         this.tiempoInicio = 0;
-        console.log("Llego a 0 o termino la partida");
       }
     }
 
@@ -89,26 +88,20 @@ export class TemporizadorComponent
   // Función que pausa el temporizador
   pausaTemporizador()
   {
-    console.log("Funcion pausaTemporizador()");
     // Borra el intervalo
     clearInterval(this.intervalId);
-    console.log("Hice el clear");
   }
 
   // Función que le da play de nuevo
   playTemporizador()
   {
-    console.log("Funcion playTemporizador()");
     // Inicia un nuevo intervalo desde donde quedo
-    this.continuarTiempo(this.tiempoActual);
-
-    
+    this.continuarTiempo(this.tiempoActual);  
   }
 
   // Función que lo reinicia para que se pueda volver a usar
   reiniciarTempo()
   {
-    console.log("Funcion reiniciarTempo()");
     clearInterval(this.intervalId);
     this.tiempoActual = 0;
     this.tiempoInicio = 0; 
