@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from '../../interfaces/usuario';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component
 ({
@@ -76,6 +76,32 @@ export class LoginUsuarioComponent implements OnInit
   //Funcion de guardar los datos de usuario
   async logueo_Usuario()
   {
+    console.log("Entre al click");
+
+    const usuarioL = (<HTMLInputElement>document.getElementById("Usuario")).value;
+    const pass = (<HTMLInputElement>document.getElementById("Password")).value;
+
+    const validado = await this.validarUsuario(usuarioL, pass, 1);
+
+    if(validado)
+    {
+      this.usuariosService.guardarDatos(this.usuarioLogueado);
+
+      //Datos del Usuario recien logueado
+      let logueadoRecien = this.usuariosService.obtenerDatos();
+
+      this.router.navigate(['/menu']);
+    }else
+    {
+      var mensaje = document.getElementById("txt_login");
+      if(mensaje)
+      {
+        mensaje.innerHTML = "Nombre o password incorrecto"
+      }
+    }
+
+    /*
+
     const botonInicioSesion = document.querySelector("#ingresar");
 
     if(botonInicioSesion)
@@ -108,10 +134,88 @@ export class LoginUsuarioComponent implements OnInit
 
       });
     }
+
+    */
+    
+  
+  
   }
 
+  //Funcion de Crear User nuevo y guardar los datos
   async creacion_Usuario()
   {
+    const nombreCre = (<HTMLInputElement>document.getElementById("UsuarioNuevo")).value;
+    const passCre = (<HTMLInputElement>document.getElementById("PasswordNuevo")).value;
+    const confPassword = (<HTMLInputElement>document.getElementById("PasswordConfirm")).value;
+
+    if(nombreCre.length >= 3 && nombreCre.length <= 15)
+    {
+      if((passCre.length >= 3 && passCre.length <= 25) && (confPassword.length >= 3 && confPassword.length <= 25))
+      {
+        if(passCre !== confPassword)
+        {
+          let mensaje = document.getElementById("texto");
+          if(mensaje)
+          {
+            mensaje.innerHTML = "Los passwords no coinciden";
+          }
+        }else if(passCre === confPassword)
+        {
+          let validacion = await this.validarUsuario(nombreCre, passCre, 0);
+
+          if(validacion)
+          {
+            //Si el usuario ya existe crea un mensaje
+            var mensaje = document.getElementById("texto");
+            this.usuarioLogueado =
+            { 
+              id: 0,
+              usuario: "",
+              password: "",
+              puntos:0,
+              partidas: 0
+            };
+
+            if(mensaje)
+            {
+              mensaje.innerHTML = "Nombre de Usuario ya en uso";
+            }
+          }else
+          {
+            //Aca sube los datos al server
+            await this.cargarUsuario(nombreCre, passCre);
+
+            //NUEVO AL CREAR
+            this.usuariosService.guardarDatos(this.usuarioLogueado);
+            this.usuariosService.login = this.usuarioLogueado;
+            this.router.navigate(['/menu']);
+          }
+        }else
+        {
+          var mensaje = document.getElementById("texto");
+          if(mensaje)
+          {
+            mensaje.innerHTML = "ERROR";
+          }
+        }
+      }else
+      {
+        let mensaje = document.getElementById("texto");
+        if(mensaje)
+        {
+          mensaje.innerHTML = "Las password deben tener entre 3 y 25 caracteres";
+        }
+      }
+    }else
+    {
+      let mensaje = document.getElementById("texto");
+      if(mensaje)
+      {
+        mensaje.innerHTML = "Nombre de Usuario debe tener entre 3 y 15 caracteres";
+      }
+    }
+    
+    /*
     const botonCrearCuenta = document.querySelector("#crear");
 
     if(botonCrearCuenta)
@@ -191,9 +295,8 @@ export class LoginUsuarioComponent implements OnInit
           }
         }
 
-        //Confirmacion de password
+        //Confirmacion de password (FROMA VIEJA)
 
-        /*
         if(passCre !== confPassword) //No coinciden las password
         {
           var mensaje = document.getElementById("texto");
@@ -251,10 +354,13 @@ export class LoginUsuarioComponent implements OnInit
             mensaje.innerHTML = "ERROR";
           }
         }
-        */
+        
 
       });
     }
+
+    */
+
   }
 
   async cargarUsuario(nombre: string, password: string)
@@ -349,14 +455,12 @@ export class LoginUsuarioComponent implements OnInit
     return validacion;
   }
   
-  async ngOnInit()
+  ngOnInit()
   {
-    this.logueo_Usuario();
-    await this.creacion_Usuario();
+    //this.logueo_Usuario();
+    //await this.creacion_Usuario();
     this.login = this.initFormLogin();
     this.creacion = this.initFormCreacion();
-
-  
   }
   
 }

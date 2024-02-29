@@ -32,8 +32,8 @@
       "id": 5,
       "usuario": "Pepe",
       "password": "Messi",
-      "puntos": 21231,
-      "partidas": 86
+      "puntos": 22495,
+      "partidas": 89
     },
     {
       "id": 6,
@@ -83,6 +83,27 @@
       "password": "ssj12345",
       "puntos": 598,
       "partidas": 1
+    },
+    {
+      "id": 13,
+      "usuario": "Gohan223",
+      "password": "gohan223",
+      "puntos": 200,
+      "partidas": 0
+    },
+    {
+      "id": 14,
+      "usuario": "Vegeta675",
+      "password": "dragonite77",
+      "puntos": 200,
+      "partidas": 0
+    },
+    {
+      "id": 15,
+      "usuario": "Men",
+      "password": "men12",
+      "puntos": 200,
+      "partidas": 0
     }
   ],
   "partida": [
@@ -949,6 +970,33 @@
       "pistaUsada": 3,
       "fechaPartida": "2024-02-29T05:50:16.346Z",
       "id": 96
+    },
+    {
+      "idUsuario": 5,
+      "puntos": 21796,
+      "incorrectas": 6,
+      "correctas": 4,
+      "pistaUsada": 1,
+      "fechaPartida": "2024-02-29T13:59:00.883Z",
+      "id": 97
+    },
+    {
+      "idUsuario": 5,
+      "puntos": 22196,
+      "incorrectas": 7,
+      "correctas": 3,
+      "pistaUsada": 0,
+      "fechaPartida": "2024-02-29T14:01:53.757Z",
+      "id": 98
+    },
+    {
+      "idUsuario": 5,
+      "puntos": 22495,
+      "incorrectas": 7,
+      "correctas": 3,
+      "pistaUsada": 4,
+      "fechaPartida": "2024-02-29T14:02:35.254Z",
+      "id": 99
     }
   ]
 }
