@@ -1,6 +1,9 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, ViewChild } from '@angular/core';
 import { JuegoInt } from '../../../interfaces/juegoInt';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
+
+import { TemporizadorComponent } from '../temporizador/temporizador.component';
+import { MenuPrincipalComponent } from '../../menu-principal/menu-principal.component';
 
 enum valores
 {
@@ -26,6 +29,40 @@ enum valores
 export class PistaJuegoComponent implements OnInit
 {
 
+  @ViewChild(TemporizadorComponent) temporizador!: TemporizadorComponent
+  @ViewChild(MenuPrincipalComponent) menuPrincipal!: MenuPrincipalComponent
+
+  cartelAdvertenciaNuevito: boolean = false;
+
+  async abandonarPartida()
+  {
+    if(this.temporizador)
+    {
+      await this.usuariosService.actualizarPuntos(this.puntaje);
+      this.temporizador.reiniciarTempo();
+      this.mostrarYocultar("fotoA",false);
+      this.cartelFinal = false;
+      this.enviarDatos('finalizar');
+    }
+  }
+
+  // Función de Abandonar Partida que llama a la función pausaTemporizador() del componente Temporizador
+  pausaTemporizadorAux()
+  {
+    if(this.temporizador)
+    {
+      this.temporizador.pausaTemporizador();
+    }
+  }
+
+  //Funcion que llama a playTemporizador() del componente temporizador
+  playTemporizadorAux()
+  {
+    if(this.temporizador)
+    {
+      this.temporizador.playTemporizador();
+    }
+  }
 
   //envia a componente mostrar foto
   @Output() mensajeEnviado: EventEmitter<string> = new EventEmitter<string>();
@@ -38,6 +75,8 @@ export class PistaJuegoComponent implements OnInit
   puntaje: number = this.usuariosService.obtenerDatos().puntos;
 
   puntosExtra: number = 0;
+
+  contBloqueoPistaSaltar: number = 0;
 
   //controlador de inicio y fin
   empezar: boolean = false;
@@ -61,6 +100,8 @@ export class PistaJuegoComponent implements OnInit
   // Link a la imagen
   src: string = "";
 
+
+
   constructor(private usuariosService: UsuariosService,)
   {
   }
@@ -78,6 +119,9 @@ export class PistaJuegoComponent implements OnInit
     this.src=this.juegos[this.contJuego].foto;
     this.mostrarYocultar("fotoA",true);
     this.generarValoresAleatoriosImagen();
+    console.log("Dimension de las 10 fotos: ", this.juegos.length); 
+    //Va de 0 a 9. La pos 8 es la ante ultima, en esa se debe bloquear la pista 
+    //de saltear imagen
   }
 
   async finalizarPartida()
@@ -106,7 +150,7 @@ export class PistaJuegoComponent implements OnInit
   {
     let resp:boolean;
     this.reset();
-    if(optionText == this.juegos[this.contJuego].nombre)
+    if(optionText == this.juegos[this.contJuego].nombre) 
     {
       this.correctas.push(this.juegos[this.contJuego]);
       this.sumarPuntos(valores.acierto);
@@ -135,6 +179,21 @@ export class PistaJuegoComponent implements OnInit
   // recorre el arreglo
   moverPorArreglo()
   {
+
+    this.contBloqueoPistaSaltar++;
+    console.log("contador: ", this.contBloqueoPistaSaltar);
+
+    if(this.contBloqueoPistaSaltar == 9)
+    {
+      let boton = document.getElementById("jump");
+      if(boton)
+      {
+        (boton as HTMLButtonElement).disabled = true;
+        boton.style.background ='red';
+      }
+
+      this.contBloqueoPistaSaltar = 0;
+    }
     if(this.contJuego>=this.juegos.length-1)
     {
       this.contJuego=0;
@@ -300,7 +359,9 @@ export class PistaJuegoComponent implements OnInit
   {
     var clipPathValue="";
     let num = Math.floor(Math.random()*11);
-    switch(num){
+
+    switch(num)
+    {
       case 0 :
         clipPathValue = "polygon(100% 0, 90% 0, 100% 100%, 100% 10%, 0 100%, 10% 100%, 0 0, 0 90%)";
       break;
@@ -336,12 +397,70 @@ export class PistaJuegoComponent implements OnInit
       break;
     }
 
+    //clipPathValue = this.generarPoligono();
     const foto = document.getElementById('fotoA');
     if(foto)
     {
       foto.style.clipPath = clipPathValue; 
     }
   }
+
+  
+  /*
+
+  generarPoligonoPrueba()
+  {
+
+    //FROMA UNO
+    let porcentajes = [];
+    for(let i = 0; i < 16; i++)
+    {
+      let unPorcentaje = Math.round(Math.random() * 100);
+      porcentajes.push("unPorcentaje");
+    }
+
+    let clip = 'polygon(' + porcentajes[0] + '% ' + porcentajes[1] + '%, ' +
+    porcentajes[2] + '% ' + porcentajes[3] + '%, ' +
+    porcentajes[4] + '% ' + porcentajes[5] + '%, ' +
+    porcentajes[6] + '% ' + porcentajes[7] + '%, ' +
+    porcentajes[8] + '% ' + porcentajes[9] + '%, ' +
+    porcentajes[10] + '% ' + porcentajes[11] + '%, ' +
+    porcentajes[12] + '% ' + porcentajes[13] + '%, ' +
+    porcentajes[14] + '% ' + porcentajes[15] + '%)';
+
+    return clip;
+    
+
+    
+    //FROMA DOS
+    const numVertices = Math.floor(Math.random() * 4) + 3; // Entre 3 y 6 vértices
+    const vertices = [];
+  
+    for(let i = 0; i < numVertices; i++)
+    {
+      const x = Math.round(Math.random() * 100); // X entre 0 y 100
+      const y = Math.round(Math.random() * 100); // Y entre 0 y 100
+      vertices.push(`${x}% ${y}%`);
+    }
+  
+    // Opcional: Agregar un 50% de probabilidad de generar un círculo o elipse
+    if(Math.random() < 0.5)
+    {
+      const radioX = Math.round(Math.random() * 50); // Radio X entre 0 y 50
+      const radioY = Math.round(Math.random() * 50); // Radio Y entre 0 y 50
+      const centroX = Math.round(Math.random() * 100); // Centro X entre 0 y 100
+      const centroY = Math.round(Math.random() * 100); // Centro Y entre 0 y 100
+      const forma = Math.random() < 0.5 ? "circle" : "ellipse";
+      const clipPathValue = `${forma}(${radioX}% ${radioY}% at ${centroX}% ${centroY}%)`;
+      return clipPathValue;
+    }else
+    {
+      const clipPathValue = `polygon(${vertices.join(", ")})`;
+      return clipPathValue;
+    } 
+  }
+
+  */
       
   /* ----------- Funciones de las pistas -----------*/
 
@@ -399,12 +518,13 @@ export class PistaJuegoComponent implements OnInit
 
   saltarFoto()
   {
-    if(this.verificarPistas('.pista') && this.puntaje>=50)
+    if(this.verificarPistas('.pista') && this.puntaje>=5)
     {
       this.cartelAdvertencia=true;
     }
     else
     {
+      this.contBloqueoPistaSaltar--;
       this.moverPorArreglo();
       this.generarValoresAleatoriosImagen();
       this.restarPuntos(valores.jump);
@@ -412,7 +532,7 @@ export class PistaJuegoComponent implements OnInit
   }
   
   saltarFotoPerdiendoPuntos(){
-    this.reset();
+    this.reset(); 
     this.moverPorArreglo();
     this.cartelAdvertencia=false
     this.restarPuntos(valores.jump);

@@ -40,31 +40,31 @@ export class HistorialComponent
         this.listaPartidas.forEach(datos =>
         {
           const fila = document.createElement("tr");
-          fila.style.border = '1px solid rgb(178, 253, 64)';
+          fila.style.border = '1px solid rgb(255, 255, 255)';
 
           const puntos = document.createElement("td");
-          puntos.style.border = '1px solid rgb(178, 253, 64)';
+          puntos.style.border = '1px solid rgb(255, 255, 255)';
           puntos.textContent = String(datos.puntos-puntAnterior);
           puntAnterior=datos.puntos;
           fila.appendChild(puntos);
 
           const incorrectas = document.createElement("td");
-          incorrectas.style.border = '1px solid rgb(178, 253, 64)';
+          incorrectas.style.border = '1px solid rgb(255, 255, 255)';
           incorrectas.textContent =  String(datos.incorrectas);
           fila.appendChild(incorrectas);
 
           const correctas = document.createElement("td");
-          correctas.style.border = '1px solid rgb(178, 253, 64)';
+          correctas.style.border = '1px solid rgb(255, 255, 255)';
           correctas.textContent = String(datos.correctas);
           fila.appendChild(correctas);
 
           const pistaUsada = document.createElement("td");
-          pistaUsada.style.border = '1px solid rgb(178, 253, 64)';
+          pistaUsada.style.border = '1px solid rgb(255, 255, 255)';
           pistaUsada.textContent = String(datos.pistaUsada);
           fila.appendChild(pistaUsada);
             
           const fecha = document.createElement("td");
-          fecha.style.border = '1px solid rgb(178, 253, 64)';
+          fecha.style.border = '1px solid rgb(255, 255, 255)';
           
           const fechaISO = datos.fechaPartida;
           const fechaCompleta: Date = new Date(fechaISO);
@@ -130,6 +130,5 @@ export class HistorialComponent
       break;
     }
 
-    
   }
 }

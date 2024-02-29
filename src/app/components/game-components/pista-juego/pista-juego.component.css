@@ -19,7 +19,7 @@
   
 .cartel
 {
-    background-color: #0073ff;
+    background-color: rgb(32, 32, 32);
     color: white;
 
     font-size: 25px;
@@ -30,7 +30,7 @@
 
     border: 5px solid;
     border-radius: 20px;
-    border-color: #0022ff;
+    border-color: white;
 
     padding: 15px 35px;
     box-shadow: 10px 10px 5px black;
@@ -39,8 +39,8 @@
 
 .botonEmpezar
 {
-    color: black;
-    background-color: rgba(0, 221, 255, 0.671);
+    color: white;
+    background-color: rgba(51, 0, 255, 0.784);
 
     font-size: 25px;
     font-weight: bold;
@@ -49,7 +49,7 @@
 
     border: 5px solid;
     border-radius: 20px;
-    border-color: #1100ff;
+    border-color: white;
 
     padding: 15px 35px;
     box-shadow: 10px 10px 5px black;
@@ -62,7 +62,8 @@
 .botonEmpezar:hover
 {
     color: #ffffff;
-    background-color: rgba(51, 0, 255, 0.784);
+    background-color: rgba(168, 4, 227, 0.784);
+    border-color: white;
 } 
 
 
@@ -280,4 +281,139 @@
     font-size: 15px;
     box-shadow: 0 0 2px black;
 }
+
+.texto
+{
+
+    border-radius: 9px;
+    text-decoration: none;
+    color: #ffff;
+    
+    font-family: Arial;
+    font-weight: bold;
+
+    margin: 0;
+    padding: 0;
+    
+    
+    font-size: 25px;
+
+    align-items: center;
+    justify-content: center;
+
+    height: 50px;
+
+}
+
+#blockPuntaje, #blockTempo
+{
+    margin: 0;
+    padding: 0;
+}
+  
+
+
+.botonVolverContenido
+{
+    color: white;
+    background-color: rgb(32, 32, 32);
+
+    font-size: 25px;
+    font-weight: bold;
+    font-family: Arial;
+    text-decoration: none;
+
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: rgb(51, 0, 255);
+
+    padding: 15px 35px;
+    box-shadow: 10px 10px 5px black;
+    margin: auto;  
+
+    width: 315px;
+    height: 75px;
+
+}
+
+.botonVolverContenido:hover
+{
+    background-color: rgb(168, 4, 227);
+}
+
+
+.cartelContenedorNuevito
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+.cartelNuevito
+{
+    background-color: rgba(32, 32, 32);
+    color: white;
+
+    font-size: 25px;
+    font-weight: bold;
+    font-family: Arial;
+    text-decoration: none;
+    text-align: center;
+
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: white;
+
+    padding: 15px 35px;
+    box-shadow: 10px 10px 5px black;
+    margin: auto;
+}
+
+.botonNuevo
+{
+    color: white;
+    background-color: rgb(51, 0, 255);
+
+    font-size: 25px;
+    font-weight: bold;
+    font-family: Arial;
+    text-decoration: none;
+
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: white;
+
+    padding: 15px 35px;
+    box-shadow: 10px 10px 5px black;
+    margin: auto;  
+
+    width: 250px;
+    height: 75px;
+}
+
+.botonNuevo:hover
+{
+    color: #ffffff;
+    background-color: rgba(168, 4, 227, 0.784);
+    border-color: #ffffff;
+} 
+
+#botonIzq, #volverInicio
+{
+    margin-right: 10px;
+}
+
+#botonDer, #jugarOtra
+{
+    margin-left: 10px;
+}
+
+
 

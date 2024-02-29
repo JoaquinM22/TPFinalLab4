@@ -30,7 +30,8 @@ import { FooterComponent } from './components/footer/footer.component';
     LoadingComponent,
     PerfilUsuarioComponent,
     HistorialComponent,
-    FooterComponent
+    FooterComponent,
+
   ],
   imports: [
     BrowserModule,

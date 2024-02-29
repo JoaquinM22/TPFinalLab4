@@ -15,7 +15,7 @@
   
 .cartel
 {
-    background-color: #0073ff;
+    background-color: rgb(32, 32, 32);
     color: white;
 
     font-size: 25px;
@@ -26,7 +26,7 @@
 
     border: 5px solid;
     border-radius: 20px;
-    border-color: #0022ff;
+    border-color: white;
 
     padding: 15px 35px;
     box-shadow: 10px 10px 5px black;

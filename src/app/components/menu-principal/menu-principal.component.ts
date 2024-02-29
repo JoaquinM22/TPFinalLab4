@@ -12,25 +12,33 @@ import { UsuariosService } from 'src/app/servicios/usuarios.service';
 export class MenuPrincipalComponent
 {
 
+  cartelAdvertencia: boolean = false;
+
   constructor(private router: Router, private usuariosService: UsuariosService){}
 
   /*Llama al componente "Mostrar Foto" que lo que contiene en
   su html es el boton de elegir genero y modo de dificultad, y el
   boton que llama al componente "mostrarPista" que es el que empieza 
   la partida*/
+  titulo:boolean=true;
   menu:boolean=true;
   crearPartida:boolean=false;
   ranking:boolean=false;
   perfil:boolean=false;
   historial:boolean=false;
-  recibiendoDatosDesdeCreadorPartida(mensaje : string){
+ 
+
+  recibiendoDatosDesdeCreadorPartida(mensaje : string)
+  {
     if(mensaje=='false'){
       this.crearPartida= false;
       this.menu=true;
+      this.titulo = true;
     }
   }
 
-  desabilitarTodosLosComponentes(){
+  desabilitarTodosLosComponentes()
+  {
     this.crearPartida=false;
     this.ranking=false;
     this.perfil = false;
@@ -42,4 +50,5 @@ export class MenuPrincipalComponent
     this.usuariosService.limpiarDatos();
     this.router.navigate(['/landing']);
   }
+
 }

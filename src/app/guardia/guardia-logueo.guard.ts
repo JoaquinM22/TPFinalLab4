@@ -26,6 +26,7 @@ export class GuardiaLogueoGuard implements CanActivate
     }else
     {
       //Mensaje de que no esta logueado
+      console.log("");
       alert("Necesita loguearse para usar esta funcion");
       this.router.navigate(['/']); //Redirecciona al inicio
       return false;
