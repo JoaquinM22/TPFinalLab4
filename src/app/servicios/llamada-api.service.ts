@@ -236,7 +236,7 @@ export class LlamadaApiService {
   }
   
   //Llama a la API y retorna el arreglo de juegos
-  getJuegosAPI(i: number, genero: string): Promise<any[]>
+  getJuegosAPI(i: number, genero: string, cantFotos: number): Promise<any[]>
   {
     return new Promise((resolve, reject) =>
     {
@@ -249,11 +249,11 @@ export class LlamadaApiService {
         switch (genero)
         {
           case 'porDefecto':
-            API_Juegos = "https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page_size=10&page=" + i;
+            API_Juegos = "https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page_size=" + cantFotos + "&page=" + i;
           break;
 
           default:
-            API_Juegos = "https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page_size=10&page=" + i + "&genres=" + genero;
+            API_Juegos = "https://api.rawg.io/api/games?key=9c7f75a955784bf9aa646f60ad51102b&page_size=" + cantFotos + "&page=" + i + "&genres=" + genero;
           break;
         }
         
@@ -281,7 +281,7 @@ export class LlamadaApiService {
   }
 
   //Llama a getJuegos cargando el arreglo "datosJuegos"
-  async crearPartida(genero: string, dificultad:string)
+  async crearPartida(genero: string, dificultad:string, cantFotos: number)
   {
     try
     {
@@ -297,12 +297,13 @@ export class LlamadaApiService {
         break;
 
         default:
-          numeroRandom = Math.floor(Math.random() * 200) + 1;
+          //numeroRandom = Math.floor(Math.random() * 200) + 1;
+          numeroRandom = Math.floor(Math.random() * (200 - 50 + 1)) + 50;
         break;
       }
 
       //Obtiene los juegos
-      this.datosJuegos = await this.getJuegosAPI(numeroRandom, genero); 
+      this.datosJuegos = await this.getJuegosAPI(numeroRandom, genero, cantFotos); 
       
     }catch(error)
     {

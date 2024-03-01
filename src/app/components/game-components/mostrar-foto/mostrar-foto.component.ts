@@ -1,15 +1,19 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { LlamadaApiService } from 'src/app/servicios/llamada-api.service';
 
+import { MinutosTempoService } from 'src/app/servicios/minutos-tempo.service';
+import { TopeFotosService } from 'src/app/servicios/tope-fotos.service';
+
 @Component
 ({
   selector: 'app-mostrar-foto',
   templateUrl: './mostrar-foto.component.html',
   styleUrls: ['./mostrar-foto.component.css']
-})
+}) 
 
 export class MostrarFotoComponent
 {
+
   // Envia al componente de menu
   @Output() mensajeEnviado: EventEmitter<string> = new EventEmitter<string>();
   // Controladores de carteles
@@ -22,8 +26,11 @@ export class MostrarFotoComponent
   // Modalidades del juego
   modoSeleccionado: string = 'modoNormal';
   generoSeleccionado: string = 'porDefecto';
+  tiempoSeleccionado: string = 'tresMinutos';
+  cantFotosSeleccionado: string = 'diezFotos';
 
-  constructor(private llamadaApi: LlamadaApiService)
+
+  constructor(private llamadaApi: LlamadaApiService, private minutosService: MinutosTempoService, private topeFotoService: TopeFotosService)
   {
   }
 
@@ -31,11 +38,55 @@ export class MostrarFotoComponent
   {
     this.cartelInicio=false;
     this.loading=true;
-    await this.llamadaApi.crearPartida(this.generoSeleccionado,this.modoSeleccionado);
+    this.establecerTiempo();
+    //let cantDeFotos = this.establecerCantFotos();
+    await this.llamadaApi.crearPartida(this.generoSeleccionado,this.modoSeleccionado, this.establecerCantFotos());
     this.datosJuegos=this.llamadaApi.datosJuegos;
     this.loading=false;
     this.empezar=true;
   }
+
+  establecerTiempo()
+  {
+    switch(this.tiempoSeleccionado)
+    {
+      case 'tresMinutos':
+        this.minutosService.minutos = 3;
+        this.minutosService.segundos = 1;
+      break;
+
+      case 'dosMinutos':
+        this.minutosService.minutos = 2;
+        this.minutosService.segundos = 1;
+      break;
+
+      default:
+        this.minutosService.minutos = 1;
+        this.minutosService.segundos = 1;
+      break;
+    }
+  } 
+
+  establecerCantFotos(): number
+  {
+    switch(this.cantFotosSeleccionado)
+    {
+      case 'diezFotos':
+        this.topeFotoService.topeFotos = 10;
+        return 10;
+      break;
+
+      case 'veinteFotos':
+        this.topeFotoService.topeFotos = 20;
+        return 20;
+      break;
+
+      default:
+        this.topeFotoService.topeFotos = 30;
+        return 30;
+      break;
+    }
+  } 
 
   enviarDatos(mensaje : string)
   {

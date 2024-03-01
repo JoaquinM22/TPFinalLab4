@@ -3,6 +3,7 @@
     grid-template-columns: repeat(3, 33.3%);
     grid-template-rows: 3;
     gap: 5px;
+
 }
 
 .cartelContenedor {
@@ -65,25 +66,6 @@
     background-color: rgba(168, 4, 227, 0.784);
     border-color: white;
 } 
-
-
-.imagen{
-    grid-column: 1/4;
-    grid-row: 1;
-    align-items: center;
-    margin: 7px;
-    height: 555px;
-    width: 1120px;
-    background-color: #272424f0;
-    border: 1px solid;
-    border-color: white;
-
-}
-
-.imagen img{
-    max-height: 100%;
-    max-width: 100%;   
-}
 
 .viewPista{
     grid-column: 1/4;
@@ -173,9 +155,20 @@
     margin: auto;
 
 }
+
+/* .options button 
+{
+     text-decoration: none;
+    color: white;
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 35px;    
+     
+} */
+
 .options button
 {
-    height: 50px;
+    /*height: 50px;*/
     background: #0073ff;  
     
     border-radius: 25px;
@@ -185,8 +178,9 @@
     font-weight: bold;
     border: 3px solid;
     padding: 15px 35px;
-    font-size: 11px;
-    box-shadow: 0 0 2px black;            
+    box-shadow: 0 0 2px black;          
+
+    font-size: 15px;
 }
 .options button:hover   
 {
@@ -262,10 +256,45 @@
     justify-content: center;
 }
 
+
+
+/*
+//////////// CSS IMAGEN/////////////
+*/
 .centrarImagen
 {
     text-align: center;
+    margin-top: 12px;
 } 
+
+.imagen
+{
+    /* grid-column: 1/4;
+    grid-row: 1;
+    align-items: center;
+    margin: 7px; */
+
+    text-align: center;
+    justify-content: center;
+    margin: 7px;
+
+    height: 555px;
+    width: 1120px;
+    background-color: #272424f0;
+    border: 1px solid;
+    border-color: white;
+
+}
+
+.imagen img
+{
+    max-height: 100%;
+    max-width: 100%;   
+}
+
+
+
+
 
 .parrafito
 {
@@ -305,42 +334,11 @@
 
 }
 
-#blockPuntaje, #blockTempo
+#blockPuntaje, #blockTempo, #contadorFotos
 {
     margin: 0;
     padding: 0;
 }
-  
-
-
-.botonVolverContenido
-{
-    color: white;
-    background-color: rgb(32, 32, 32);
-
-    font-size: 25px;
-    font-weight: bold;
-    font-family: Arial;
-    text-decoration: none;
-
-    border: 5px solid;
-    border-radius: 20px;
-    border-color: rgb(51, 0, 255);
-
-    padding: 15px 35px;
-    box-shadow: 10px 10px 5px black;
-    margin: auto;  
-
-    width: 315px;
-    height: 75px;
-
-}
-
-.botonVolverContenido:hover
-{
-    background-color: rgb(168, 4, 227);
-}
-
 
 .cartelContenedorNuevito
 {
@@ -416,4 +414,69 @@
 }
 
 
+
+
+/*
+//////////// CSS BOTONES VOLVER Y CONTADOR/////////////
+*/
+
+.botonVolverYcontador
+{
+    display: flex;
+    align-items: center; 
+}
+
+.botonVolverContenido
+{
+    color: white;
+    background-color: rgb(32, 32, 32);
+
+    font-size: 25px;
+    font-weight: bold;
+    font-family: Arial;
+    text-decoration: none;
+
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: rgb(51, 0, 255);
+
+    box-shadow: 10px 10px 5px black;
+
+    width: 315px;
+    height: 75px;
+}
+
+.botonVolverContenido:hover
+{
+    background-color: rgb(168, 4, 227);
+}
+
+.botonContadorFotos
+{
+    color: white;
+    background-color: rgb(51, 0, 255);
+
+    font-size: 35px;
+    font-weight: bold;
+    font-family: Arial;
+    text-decoration: none;
+
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: white;
+
+    box-shadow: 10px 10px 5px black;
+    
+    width: 150px;
+    height: 100px;
+
+    margin-left: 10px;
+}
+
+.flex-container
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 

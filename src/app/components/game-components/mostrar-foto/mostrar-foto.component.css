@@ -80,10 +80,15 @@
     margin-bottom: 10px;
 }
 
-#generoJuego, #cancelarLaPartida
+#generoJuego, #cancelarLaPartida, #opcionCantFotos, #tiempoJuego
 {
     margin-left: 10px;
     margin-top: 10px;
+}
+
+#tiempoJuego
+{
+    margin-right: 10px;
 }
 
 

@@ -1,7 +1,9 @@
-import { Component,Input,Output,EventEmitter, OnInit } from '@angular/core';
+import { Component,Input,Output,EventEmitter } from '@angular/core';
+
+import { MinutosTempoService } from 'src/app/servicios/minutos-tempo.service';
 
 
-//Le asigno el timepo que quiero que tenga el temporizador
+//Le asigno el tiempo que quiero que tenga el temporizador
 enum valores
 {
   minutos = 2,
@@ -21,17 +23,21 @@ export class TemporizadorComponent
   @Output() mensajeEnviado: EventEmitter<string> = new EventEmitter<string>();
   @Input() terminar: boolean = true;
 
+  minutos: number = this.minutosService.minutos;
+  segundos: number = this.minutosService.segundos;
+
   minutosString: String = '00';
   segundosString: String = '00';
   intervalId: any;
 
   tiempoActual: number = 0;
   tiempoInicio: number = 0;
+
   
   
-  constructor()
+  constructor(private minutosService: MinutosTempoService)
   {  
-    this.iniciarTemporizador(valores.minutos, valores.segundos);
+    this.iniciarTemporizador(this.minutos, this.segundos); 
   }
 
   enviarDatos(mensaje : string)
@@ -47,7 +53,6 @@ export class TemporizadorComponent
     let tiempoTotal = this.tiempoInicio;
 
     this.continuarTiempo(tiempoTotal);
-
   }
 
   continuarTiempo(tiempo: number)
@@ -83,7 +88,7 @@ export class TemporizadorComponent
     //const intervalId = setInterval(actualizarTemporizador, 1000);
     this.intervalId = setInterval(actualizarTemporizador, 1000);
   }
-
+ 
   
   // Función que pausa el temporizador
   pausaTemporizador()

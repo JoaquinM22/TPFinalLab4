@@ -32,6 +32,17 @@
               <option value="educational">Educativos</option>
               <option value="card">De Cartas</option>
           </select>
+          
+          <select class="botonOpciones" [(ngModel)]="tiempoSeleccionado" id="tiempoJuego" name="opcionTiempo">
+            <option value="tresMinutos">03:00 min</option>
+            <option value="dosMinutos">02:00 min</option>
+            <option value="unMinuto">01:00 min</option>
+          </select>
+          <select class="botonOpciones" [(ngModel)]="cantFotosSeleccionado" id="cantFotosJuego" name="opcionCantFotos">
+            <option value="diezFotos">10 Fotos</option>
+            <option value="veinteFotos">20 Fotos</option>
+            <option value="treintaFotos">30 Fotos</option>
+          </select>
           <br>
           <button id="empezarLaPartida" class="botonOpciones" (click)="traerDatosApi()">Empezar</button>
           <button id="cancelarLaPartida" class="botonOpciones" (click)="enviarDatos('false')">Cancelar</button>

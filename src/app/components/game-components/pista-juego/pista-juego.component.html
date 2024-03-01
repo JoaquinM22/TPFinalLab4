@@ -1,35 +1,47 @@
 
 
-<section class="botonVolver">
-    <button class="botonVolverContenido" (click)="cartelAdvertenciaNuevito = true; pausaTemporizadorAux()">Abandonar Partida</button>
-</section>
+
+<section class="botonVolverYcontador"> 
+
+    <button class="botonVolverContenido" (click)="cartelAdvertenciaNuevito = true; pausaTemporizadorAux()">
+        Abandonar Partida
+    </button>
+
+    <button class="botonContadorFotos">
+        Fotos
+        {{contBloqueoPistaSaltar}}/{{topeFotos}}
+    </button> 
+
+</section>   
 
 <div *ngIf="cartelAdvertenciaNuevito" class="cartelContenedorNuevito">
     <div class="cartelNuevito">
-      <h2>Estas seguro de que quieres abandonar la partida?</h2>
-      <h2>Perderas todos los puntos que hayas usado</h2>
-      <button class="botonNuevo" id="botonIzq" (click)="abandonarPartida()">Abandonar</button>
-      <button class="botonNuevo" id="botonDer" (click)="cartelAdvertenciaNuevito = false; playTemporizadorAux()">Cancelar</button>
+    <h2>Estas seguro de que quieres abandonar la partida?</h2>
+    <h2>Perderas todos los puntos que hayas usado</h2>
+    <button class="botonNuevo" id="botonIzq" (click)="abandonarPartida()">Abandonar</button>
+    <button class="botonNuevo" id="botonDer" (click)="cartelAdvertenciaNuevito = false; playTemporizadorAux()">Cancelar</button>
     </div>
 </div>
-
-
 
 <div *ngIf="cartelInicio" class="cartelContenedor">
     <div class="cartel">
-      <h2>Bienvenido</h2>
-      <p>Presiona "Empezar" para iniciar la partida</p>
-      <button class="botonEmpezar" (click)="iniciarPartida()">Empezar</button>
+    <h2>Bienvenido</h2>
+    <p>Presiona "Empezar" para iniciar la partida</p>
+    <button class="botonEmpezar" (click)="iniciarPartida()">Empezar</button>
     </div>
 </div>
 
-<section id="cuerpoEntero">
-    <div id="tablero" class="contenedor">
-        <div class="centrarImagen">
-            <div class="imagen">
-                <img id="fotoA" class="foto" src="{{src}}" alt="Foto Juego" style="visibility: hidden;"> 
-            </div>
+<section id="cuerpoEntero"> 
+
+    <div class="centrarImagen">
+
+        <div class="imagen">
+            <img id="fotoA"  src="{{src}}" alt="Foto Juego" style="visibility: hidden;"> 
         </div>
+
+    </div>
+
+    <div id="tablero" class="contenedor">
 
         <div class="viewPista">
 
@@ -51,33 +63,47 @@
         </div>
 
         <div id="left" class="pistas">
+
             <p class="parrafito">50% =></p>
             <button id="eliminaOp" class="pista bloquear" (click)="pistaEliminaOp();usoPista()">50 Puntos</button>
             <p class="parrafito">Agrandar Imagen =></p>
             <button id="imgP" class="pista bloquear" (click)="fotoCompleta();usoPista()">25 Puntos</button>
             <p class="parrafito">Saltear imagen =></p> 
             <button id="jump" class="pista bloquear" (click)="saltarFoto();usoPista() ">5 Puntos</button>
+        
         </div>
 
         <div class="options">
-            <button id="opcion0" class="option bloquear" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[0])">{{juegos[contJuego].nombresOpciones[0]}}</button>
-            <button id="opcion1" class="option bloquear" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[1])">{{juegos[contJuego].nombresOpciones[1]}}</button>
-            <button id="opcion2" class="option bloquear" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[2])">{{juegos[contJuego].nombresOpciones[2]}}</button>
-            <button id="opcion3" class="option bloquear" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[3])">{{juegos[contJuego].nombresOpciones[3]}}</button>
+
+            <button id="opcion0" class="option bloquear" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[0])">
+                {{juegos[contJuego].nombresOpciones[0]}}
+            </button>
+            <button id="opcion1" class="option bloquear" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[1])">
+                {{juegos[contJuego].nombresOpciones[1]}}
+            </button>
+            <button id="opcion2" class="option bloquear" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[2])">
+                {{juegos[contJuego].nombresOpciones[2]}} 
+            </button>
+            <button id="opcion3" class="option bloquear" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[3])">
+                {{juegos[contJuego].nombresOpciones[3]}}
+            </button>
+        
         </div>
 
         <div id="rigth" class="pistas">
+
             <p class="parrafito">Mostrar consola => </p>
             <button id="consola" class="pista bloquear" (click)="handlePistaButtonClick('consola');usoPista()">10 Puntos</button>
             <p class="parrafito">Mostrar fecha =></p>
             <button id="fecha" class="pista bloquear" (click)="handlePistaButtonClick('fecha');usoPista()">5 Puntos</button>
             <p class="parrafito">Mostrar genero =></p>
             <button id="genero" class="pista bloquear" (click)="handlePistaButtonClick('genero');usoPista()">15 Puntos</button>
+        
         </div>
         
     </div>
 
-  
+
 
     <div *ngIf="cartelFinal" class="cartelContenedor">
         <div class="cartel">
@@ -97,7 +123,10 @@
         <button class="botonEmpezar" (click)="cartelAdvertencia=false; playTemporizadorAux()">Cancelar</button>
         </div>
     </div>
+
 </section>
+
+
 
 
 

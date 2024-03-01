@@ -6,6 +6,8 @@ import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { TemporizadorComponent } from '../temporizador/temporizador.component';
 import { MenuPrincipalComponent } from '../../menu-principal/menu-principal.component';
 
+import { TopeFotosService } from 'src/app/servicios/tope-fotos.service';
+
 enum valores
 {
   eliminaOp = 50,
@@ -30,12 +32,13 @@ enum valores
 export class PistaJuegoComponent implements OnInit
 {
 
-  @ViewChild(TemporizadorComponent) temporizador!: TemporizadorComponent
-  @ViewChild(MenuPrincipalComponent) menuPrincipal!: MenuPrincipalComponent
+  @ViewChild(TemporizadorComponent) temporizador!: TemporizadorComponent;
+  @ViewChild(MenuPrincipalComponent) menuPrincipal!: MenuPrincipalComponent;
 
   cartelAdvertenciaNuevito: boolean = false;
 
   contBloqueoPistaSaltar: number = 0;
+  topeFotos: number = this.topeFotoService.topeFotos;
 
 
   async abandonarPartida()
@@ -103,7 +106,7 @@ export class PistaJuegoComponent implements OnInit
   // Link a la imagen
   src: string = "";
 
-  constructor(private usuariosService: UsuariosService,)
+  constructor(private usuariosService: UsuariosService, private topeFotoService: TopeFotosService)
   {
   }
 
@@ -148,7 +151,7 @@ export class PistaJuegoComponent implements OnInit
   async handleOptionButtonClick(optionText: string): Promise<void>
   { 
     //console.log("Ult pos: ", this.juegos[9]);
-    if(this.contBloqueoPistaSaltar === 9) 
+    if(this.contBloqueoPistaSaltar === (this.topeFotos -1)) 
     {
       const boton = document.getElementById("jump");
       if(boton)
@@ -175,7 +178,7 @@ export class PistaJuegoComponent implements OnInit
     this.contBloqueoPistaSaltar++;
     console.log("Contador: ", this.contBloqueoPistaSaltar);
 
-    if(this.contBloqueoPistaSaltar === 10) 
+    if(this.contBloqueoPistaSaltar === this.topeFotos) 
     {
       const boton = document.getElementById("jump");
       if(boton)
@@ -190,7 +193,7 @@ export class PistaJuegoComponent implements OnInit
     await new Promise<void>((resolve) => setTimeout(() =>
     {
       
-      if(this.contBloqueoPistaSaltar === 10)
+      if(this.contBloqueoPistaSaltar === this.topeFotos)
       {
         this.terminar = false;
       }else
@@ -273,14 +276,13 @@ export class PistaJuegoComponent implements OnInit
       (elemento as HTMLButtonElement).disabled = estado;
     });
 
-    if(this.contBloqueoPistaSaltar === 9) 
+    if(this.contBloqueoPistaSaltar === (this.topeFotos - 1)) 
     {
       const boton = document.getElementById("jump");
       if(boton)
       {
         (boton as HTMLButtonElement).disabled = true;
-        boton.style.background = 'red';
-        
+        boton.style.background = 'red'; 
       }
     }
   }
@@ -341,7 +343,7 @@ export class PistaJuegoComponent implements OnInit
           break;
         case 'jump':
 
-          if(this.contBloqueoPistaSaltar === 9)
+          if(this.contBloqueoPistaSaltar === (this.topeFotos - 1))
           {
             let boton = document.getElementById("jump");
             if(boton)
@@ -560,7 +562,6 @@ export class PistaJuegoComponent implements OnInit
     }
     else
     {
-      
       this.moverPorArreglo();
       this.generarValoresAleatoriosImagen();
       this.restarPuntos(valores.jump);
@@ -636,8 +637,6 @@ export class PistaJuegoComponent implements OnInit
     await this.usuariosService.actualizarPuntos(this.puntaje);
     this.cartelFinal = true;
   }
-
-
 
 }
 
