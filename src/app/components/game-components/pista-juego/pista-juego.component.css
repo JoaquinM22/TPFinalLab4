@@ -153,18 +153,33 @@
     flex-direction: column;
     width: 80%;
     margin: auto;
+    justify-content: center;
+    align-items: center;
 
 }
 
-/* .options button 
+.contenedorOpciones
 {
-     text-decoration: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.botonOpcion
+{
+    border-radius: 25px;
+    text-decoration: none;
     color: white;
+    background-color: #0073ff;
     font-family: Arial;
     font-weight: bold;
-    font-size: 35px;    
-     
-} */
+    border: 3px solid;
+    padding: 15px 35px;
+    font-size: 25px;
+    box-shadow: 0 0 2px black;
+
+    align-items: center;
+    justify-content: center;
+}
 
 .options button
 {
@@ -180,7 +195,7 @@
     padding: 15px 35px;
     box-shadow: 0 0 2px black;          
 
-    font-size: 15px;
+    font-size: 25px;
 }
 .options button:hover   
 {

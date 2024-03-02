@@ -75,18 +75,29 @@
 
         <div class="options">
 
-            <button id="opcion0" class="option bloquear" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[0])">
-                {{juegos[contJuego].nombresOpciones[0]}}
-            </button>
-            <button id="opcion1" class="option bloquear" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[1])">
-                {{juegos[contJuego].nombresOpciones[1]}}
-            </button>
-            <button id="opcion2" class="option bloquear" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[2])">
-                {{juegos[contJuego].nombresOpciones[2]}} 
-            </button>
-            <button id="opcion3" class="option bloquear" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[3])">
-                {{juegos[contJuego].nombresOpciones[3]}}
-            </button>
+            <div class="contenedorOpciones">
+                <button id="opcion0" class="botonOpcion" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[0])">
+                    {{juegos[contJuego].nombresOpciones[0]}}
+                </button>
+            </div>
+
+            <div class="contenedorOpciones">
+                <button id="opcion0" class="botonOpcion" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[1])">
+                    {{juegos[contJuego].nombresOpciones[1]}}
+                </button>
+            </div>
+
+            <div class="contenedorOpciones">
+                <button id="opcion0" class="botonOpcion" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[2])">
+                    {{juegos[contJuego].nombresOpciones[2]}}
+                </button>
+            </div>
+
+            <div class="contenedorOpciones">
+                <button id="opcion0" class="botonOpcion" (click)="handleOptionButtonClick(juegos[contJuego].nombresOpciones[3])">
+                    {{juegos[contJuego].nombresOpciones[3]}}
+                </button>
+            </div>
         
         </div>
 
@@ -100,7 +111,7 @@
             <button id="genero" class="pista bloquear" (click)="handlePistaButtonClick('genero');usoPista()">15 Puntos</button>
         
         </div>
-        
+         
     </div>
 
 

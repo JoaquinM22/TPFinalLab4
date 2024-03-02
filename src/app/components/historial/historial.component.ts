@@ -71,11 +71,11 @@ export class HistorialComponent
 
           //Extraer día
           const dia = fechaCompleta.getDate();
-          const diaString = String(dia);
+          const diaString = dia < 10 ? '0' + dia : dia.toString();
 
           //Extraer mes
           const mes = fechaCompleta.getMonth() + 1;
-          const mesString = String(mes);
+          const mesString = mes < 10 ? '0' + mes : mes.toString();
 
           // Extraer año
           const anio = fechaCompleta.getFullYear();
