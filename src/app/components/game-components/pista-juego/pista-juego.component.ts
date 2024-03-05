@@ -163,6 +163,7 @@ export class PistaJuegoComponent implements OnInit
 
     let resp:boolean;
     this.reset();
+
     if(optionText == this.juegos[this.contJuego].nombre)
     {
       this.correctas.push(this.juegos[this.contJuego]);
@@ -176,7 +177,6 @@ export class PistaJuegoComponent implements OnInit
     }
     this.memeRespuesta(resp);
     this.contBloqueoPistaSaltar++;
-    console.log("Contador: ", this.contBloqueoPistaSaltar);
 
     if(this.contBloqueoPistaSaltar === this.topeFotos) 
     {
@@ -236,7 +236,7 @@ export class PistaJuegoComponent implements OnInit
     });
 
     //habilito los botones de opciones devuelta
-    const elementosConClase2 = document.querySelectorAll('.option');
+    const elementosConClase2 = document.querySelectorAll('.botonOpcion');
     elementosConClase2.forEach((elemento) =>
     {
       (elemento as HTMLButtonElement).disabled = false;
@@ -287,15 +287,17 @@ export class PistaJuegoComponent implements OnInit
     }
   }
   
-  desabilitarYhablitarBoton(boton:string,estado:boolean)
+  desabilitarYhablitarBoton(boton: string, estado: boolean)
   {
     const miBoton = document.getElementById(boton) as HTMLButtonElement;
     if(miBoton)
     {
       miBoton.disabled = estado;
-      if(estado){
+      if(estado)
+      {
         miBoton.style.background ='red';
-      }else{
+      }else
+      {
         miBoton.style.background ='rgba(172, 255, 47, 0.784)';
       }
     }
@@ -525,11 +527,13 @@ export class PistaJuegoComponent implements OnInit
   pistaEliminaOp()
   {
     let i:number=0;
+    let np: number = 0;
     while(i<2)
     {
-      let np: number = Math.floor(Math.random() * 4);
+      np = Math.floor(Math.random() * 4);
       if(this.juegos[this.contJuego].nombresOpciones[np]!=this.juegos[this.contJuego].nombre)
       {
+        
         const miBoton = document.getElementById('opcion' + np) as HTMLButtonElement;
         if(miBoton && !miBoton.disabled)
         {

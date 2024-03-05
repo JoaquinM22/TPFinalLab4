@@ -32,8 +32,8 @@
       "id": 5,
       "usuario": "Pepe",
       "password": "Messi",
-      "puntos": 29631,
-      "partidas": 114
+      "puntos": 29107,
+      "partidas": 115
     },
     {
       "id": 6,
@@ -1211,6 +1211,15 @@
       "pistaUsada": 0,
       "fechaPartida": "2024-03-02T14:42:55.326Z",
       "id": 122
+    },
+    {
+      "idUsuario": 5,
+      "puntos": 29107,
+      "incorrectas": 10,
+      "correctas": 0,
+      "pistaUsada": 4,
+      "fechaPartida": "2024-03-05T22:26:34.091Z",
+      "id": 123
     }
   ]
 }
